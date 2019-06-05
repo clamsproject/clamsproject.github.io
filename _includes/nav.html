@@ -8,9 +8,11 @@
         <span class="icon-bar"></span>
       </button>
       {% if site.title-img %}
-        <a class="navbar-brand navbar-brand-logo" href="{{ site.url }}"><img src="{{ site.title-img }}"/></a>
+        <a class="navbar-brand navbar-brand-logo" href="{{ site.url }}">
+          &emsp;
+          <img src="{{ site.title-img }}"/></a>
       {% else %}
-        <a class="navbar-brand" href="{{ site.url }}">{{ site.title }}</a>
+        <a class="navbar-brand" href="{{ site.url }}">&emsp;{{ site.title }}</a>
       {% endif %}
     </div>
 
@@ -34,6 +36,7 @@
           </li>
         {% endif %}
         {% endfor %}
+        <li>&emsp;</li>
       </ul>
     </div>
 
