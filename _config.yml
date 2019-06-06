@@ -29,7 +29,7 @@ navbar-links:
     - Quick Start: "appliance"
     # - CLAMS Book: "https://book.clams.ai/"
     - MMIF: "mmif"
-    - Python SDK: "sdk"
+    - SDK: "sdk"
     - Citing CLAMS: "cite"
   Events: "events"
   # Blog: "blog"
