@@ -52,7 +52,12 @@
 	<div class="avatar-container">
 	  <div class="avatar-img-border">
 	    <a href="{{ site.url }}">
+
+        {% if site.avatar contains 'http' %}
+	      <img class="avatar-img" src="{{ site.avatar }}" />
+        {% else %}
 	      <img class="avatar-img" src="{{ site.avatar | prepend: site.baseurl | replace: '//', '/' }}" />
+        {% endif %}
 		</a>
 	  </div>
 	</div>
