@@ -28,7 +28,7 @@ navbar-links:
   Documentation:
     - Quick Start: "appliance"
     # - CLAMS Book: "https://book.clams.ai/"
-    - MMIF: "mmif"
+    - MMIF: "https://mmif.clams.ai"
     - SDK: "sdk"
     - Citing CLAMS: "cite"
   Events: "events"
