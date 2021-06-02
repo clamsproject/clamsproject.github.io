@@ -25,6 +25,7 @@ navbar-links:
     - MMIF: "mmif"
     - SDK: "sdk"
     - Citing CLAMS: "cite"
+  Applications: "applications"
   Events: "events"
   # Blog: "blog"
 
