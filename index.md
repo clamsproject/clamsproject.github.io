@@ -4,7 +4,7 @@ title: CLAMS
 subtitle: Computational Linguistics Applications for Multimedia Services
 ---
 
-The CLAMS project aims at providing archivists and media researchers with an open platform to access and explorer archival audiovisual material to extract insightful metadata as well as computer scientists and developers of content analysis tools with an interoperable platform to integrate their tools for custom workflows and pipelines. 
+The CLAMS project is funded by the Andrew W. Mellon Foundation. Its goal is to develop an open platform with state-of-the-art AI tools for archivists and media researchers  to improve access, search, and exploration of archival audiovisual material. CLAMS tools aim to generate  metadata and knowledge from A/V material, that may be hidden or invisible to archivists and database indexes.  CLAMS is also designed to be used by  computer scientists and developers of content analysis tools within an interoperable platform  for custom workflows and pipelines. 
 
 The project is under active development. Contact us for any concerns or suggestions at [admin@clams.ai](mailto:admin@clams.ai). 
 
