@@ -10,7 +10,7 @@ The project is under active development. Contact us for any concerns or suggesti
 
 Primary components of the CLAMS are:
 
-1. MMIF, an interchange format for multimodal - text, audio, and image/video - annotations
+1. [MMIF](https://mmif.clams.ai/0.3.1/), an interchange format for multimodal - text, audio, and image/video - annotations
 1. An easy-to-adapt workflow engine with a toolshed of CLAMS-compatible apps 
 1. A Software Development Kit for app developers
 
