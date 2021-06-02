@@ -10,6 +10,8 @@ subtitle: Upcoming and past events
 ### FantasticFutures 2019
 2019-12-05: We will present the CLAMS at [a workshop at FantasticFuture 2019 conference](https://library.stanford.edu/projects/fantastic-futures/workshops)!
 
+In addition to the workshop, we presented a [lightning talk](https://www.youtube.com/watch?v=3lREJYBLRnY) about CLAMS and the American Archive of Public Broadcasting.
+
 ### JTS 2019
 2019-10-5: We will present at [a workshop at JTS 2019 conference](http://jts2019.com/session-programme/)!
 
