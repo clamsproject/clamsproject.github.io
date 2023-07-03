@@ -2,6 +2,7 @@
 layout: home
 title: CLAMS
 subtitle: Computational Linguistics Applications for Multimedia Services
+author_profile: true
 permalink: /
 ---
 
