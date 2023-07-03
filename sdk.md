@@ -1,5 +1,6 @@
 ---
 layout: single
+classes: wide
 title: CLAMS SDK
 subtitle: Software Development Kit for CLAMS
 permalink: /sdk/

@@ -1,5 +1,6 @@
 ---
 layout: single
+classes: wide
 title: Events
 subtitle: Upcoming and past events 
 permalink: /events/
