@@ -1,7 +1,8 @@
 ---
-layout: page
+layout: single
 title: CLAMS SDK
 subtitle: Software Development Kit for CLAMS
+permalink: /sdk/
 ---
 
 Currently, CLAMS SDK for python is under development.

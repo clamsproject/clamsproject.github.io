@@ -1,6 +1,7 @@
 ---
-layout: page
+layout: single
 title: Team CLAMS
+permalink: /team/
 ---
 
 The CLAMS Team is part of the [Brandeis Lab for Linguistics and Computation](https://brandeis-llc.github.io/) in the Computer Science Department at Brandeis University. 

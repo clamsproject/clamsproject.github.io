@@ -1,7 +1,8 @@
 ---
-layout: page
+layout: single
 title: Events
 subtitle: Upcoming and past events 
+permalink: /events/
 ---
 ### IIIF 2021
 2021-06-23: We present the CLAMS on [how we are using IIIF for visualizing MMIF](https://whova.com/embedded/session/annua8_202106/1646960/?view=) at [IIIF 2021 conference](https://iiif.io/event/2021/annual_conference/)!

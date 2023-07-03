@@ -1,6 +1,7 @@
 ---
-layout: page
+layout: single
 title: Citing CLAMS
+permalink: /cite/
 ---
 
 Please cite us when you use the CLAMS platform or it component(s) for your academic work. 
