@@ -20,7 +20,7 @@ navbar-links:
   HOME: "/"
   Team: "team"
   Documentation:
-    - Quick Start: "appliance"
+    - Quick Start: "https://appliance.clams.ai"
     # - CLAMS Book: "https://book.clams.ai/"
     - MMIF: "mmif"
     - SDK: "sdk"
