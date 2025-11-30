@@ -1,0 +1,22 @@
+# Dependencies for building the "home" documentation site for CLAMS projects.
+# The source files for the "home" site are located in the current reportory, `documentation` directory (following standard Sphinx structure).
+
+# Core Sphinx
+sphinx>=7.0.0
+
+# Theme (for visual consistency across all CLAMS projects)
+furo
+
+# Extensions
+sphinx-copybutton          # Copy button on code blocks
+sphinx-design              # Cards, grids, tabs UI components
+sphinxcontrib-mermaid      # Diagram support
+
+# Autodoc enhancements
+sphinx-autodoc-typehints   # Better type hint rendering
+
+# Markdown support (if needed for gradual migration)
+myst-parser                # Markdown parser for Sphinx
+
+# Hub landing page generation
+Jinja2>=3.0                # Template engine for hub index.html

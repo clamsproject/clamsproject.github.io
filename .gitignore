@@ -1,0 +1,12 @@
+# IDE and OS files
+.idea/
+.DS_Store
+
+# Sphinx build artifacts
+*.pyc
+__pycache__/
+
+# Python virtual environment
+venv/
+env/
+.venv/
