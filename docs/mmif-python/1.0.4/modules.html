@@ -1,0 +1,618 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="mmif.serialize module" href="autodoc/mmif.serialize.html"><link rel="prev" title="Target MMIF Versions" href="target-versions.html">
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2025.09.25 -->
+        <title>mmif package - mmif-python-1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+<!-- CLAMS Hub Version Header - Injected -->
+<style>
+.clams-version-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 8px 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+@media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) .clams-version-header {
+        background: #1a1a1a;
+        border-bottom-color: #333;
+    }
+    body:not([data-theme="light"]) .clams-version-header a {
+        color: #6cb6ff;
+    }
+    body:not([data-theme="light"]) .clams-version-header select {
+        background: #2d2d2d;
+        color: #e0e0e0;
+        border-color: #444;
+    }
+    body:not([data-theme="light"]) .clams-version-header .nav-link.active {
+        background: #333;
+    }
+}
+body[data-theme="dark"] .clams-version-header {
+    background: #1a1a1a;
+    border-bottom-color: #333;
+}
+body[data-theme="dark"] .clams-version-header a {
+    color: #6cb6ff;
+}
+body[data-theme="dark"] .clams-version-header select {
+    background: #2d2d2d;
+    color: #e0e0e0;
+    border-color: #444;
+}
+body[data-theme="dark"] .clams-version-header .nav-link.active {
+    background: #333;
+}
+.clams-version-header a {
+    color: #008AFF;
+    text-decoration: none;
+}
+.clams-version-header a:hover {
+    text-decoration: underline;
+}
+.clams-version-header .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.clams-version-header .logo {
+    height: 28px;
+    width: auto;
+}
+.clams-version-header .project-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.clams-version-header .nav-link {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+.clams-version-header .nav-link:hover {
+    background: #e9ecef;
+    text-decoration: none;
+}
+.clams-version-header .nav-link.active {
+    background: #e9ecef;
+    font-weight: 600;
+}
+.clams-version-header .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.clams-version-header select {
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    font-size: 13px;
+}
+</style>
+<div class="clams-version-header">
+    <div class="header-left">
+        <a href="https://clams.ai/" title="CLAMS Documentation Hub">
+            <img src="https://clams.ai/home/_static/clams-logo.png" alt="CLAMS" class="logo">
+        </a>
+        <nav class="project-nav">
+            <a href="https://clams.ai/home/" class="nav-link">home</a>
+            <a href="https://clams.ai/mmif-python/latest/" class="nav-link active">mmif-python</a>
+        </nav>
+    </div>
+    <div class="header-right">
+        <select onchange="if(this.value) window.location.href=this.value;">
+            <option value="">Switch version...</option>
+            <option value="https://clams.ai/mmif-python/latest/">latest (development)</option>
+            <option value="https://clams.ai/mmif-python/1.2.1/">1.2.1</option>
+            <option value="https://clams.ai/mmif-python/1.2.0/">1.2.0</option>
+            <option value="https://clams.ai/mmif-python/1.1.2/">1.1.2</option>
+            <option value="https://clams.ai/mmif-python/1.1.1/">1.1.1</option>
+            <option value="https://clams.ai/mmif-python/1.1.0/">1.1.0</option>
+            <option value="https://clams.ai/mmif-python/1.0.19/">1.0.19</option>
+            <option value="https://clams.ai/mmif-python/1.0.18/">1.0.18</option>
+            <option value="https://clams.ai/mmif-python/1.0.17/">1.0.17</option>
+            <option value="https://clams.ai/mmif-python/1.0.16/">1.0.16</option>
+            <option value="https://clams.ai/mmif-python/1.0.15/">1.0.15</option>
+            <option value="https://clams.ai/mmif-python/1.0.14/">1.0.14</option>
+            <option value="https://clams.ai/mmif-python/1.0.13/">1.0.13</option>
+            <option value="https://clams.ai/mmif-python/1.0.12/">1.0.12</option>
+            <option value="https://clams.ai/mmif-python/1.0.11/">1.0.11</option>
+            <option value="https://clams.ai/mmif-python/1.0.10/">1.0.10</option>
+            <option value="https://clams.ai/mmif-python/1.0.9/">1.0.9</option>
+            <option value="https://clams.ai/mmif-python/1.0.8/">1.0.8</option>
+            <option value="https://clams.ai/mmif-python/1.0.7/">1.0.7</option>
+            <option value="https://clams.ai/mmif-python/1.0.6/">1.0.6</option>
+            <option value="https://clams.ai/mmif-python/1.0.5/">1.0.5</option>
+            <option value="" disabled selected>1.0.4 (current)</option>
+            <option value="https://clams.ai/mmif-python/1.0.3/">1.0.3</option>
+            <option value="https://clams.ai/mmif-python/1.0.2/">1.0.2</option>
+            <option value="https://clams.ai/mmif-python/1.0.1/">1.0.1</option>
+            <option value="https://clams.ai/mmif-python/1.0.0/">1.0.0</option>
+        </select>
+    </div>
+</div>
+<!-- End CLAMS Hub Version Header -->
+
+
+
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">mmif-python-1.0.4  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">mmif-python-1.0.4  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Developing plugins for MMIF Python SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="target-versions.html">Target MMIF Versions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">mmif package</a><input aria-label="Toggle navigation of mmif package" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/mmif.serialize.html">mmif.serialize module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/mmif.vocabulary.html">mmif.vocabulary module</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="mmif-package">
+<span id="apidoc"></span><h1>mmif package<a class="headerlink" href="#mmif-package" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="autodoc/mmif.serialize.html">mmif.serialize module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/mmif.serialize.html#module-mmif.serialize.model">mmif.serialize.model module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.DataDict"><code class="docutils literal notranslate"><span class="pre">DataDict</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.DataDict.empty"><code class="docutils literal notranslate"><span class="pre">DataDict.empty()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.DataDict.get"><code class="docutils literal notranslate"><span class="pre">DataDict.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.DataDict.items"><code class="docutils literal notranslate"><span class="pre">DataDict.items()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.DataDict.keys"><code class="docutils literal notranslate"><span class="pre">DataDict.keys()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.DataDict.update"><code class="docutils literal notranslate"><span class="pre">DataDict.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.DataDict.values"><code class="docutils literal notranslate"><span class="pre">DataDict.values()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.DataList"><code class="docutils literal notranslate"><span class="pre">DataList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.DataList.append"><code class="docutils literal notranslate"><span class="pre">DataList.append()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.DataList.deserialize"><code class="docutils literal notranslate"><span class="pre">DataList.deserialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.DataList.empty"><code class="docutils literal notranslate"><span class="pre">DataList.empty()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.DataList.get"><code class="docutils literal notranslate"><span class="pre">DataList.get()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.MmifObject"><code class="docutils literal notranslate"><span class="pre">MmifObject</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.MmifObject.deserialize"><code class="docutils literal notranslate"><span class="pre">MmifObject.deserialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.MmifObject.disallow_additional_properties"><code class="docutils literal notranslate"><span class="pre">MmifObject.disallow_additional_properties()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.MmifObject.is_empty"><code class="docutils literal notranslate"><span class="pre">MmifObject.is_empty()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.MmifObject.reserved_names"><code class="docutils literal notranslate"><span class="pre">MmifObject.reserved_names</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.MmifObject.serialize"><code class="docutils literal notranslate"><span class="pre">MmifObject.serialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.MmifObject.set_additional_property"><code class="docutils literal notranslate"><span class="pre">MmifObject.set_additional_property()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.MmifObjectEncoder"><code class="docutils literal notranslate"><span class="pre">MmifObjectEncoder</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.model.MmifObjectEncoder.default"><code class="docutils literal notranslate"><span class="pre">MmifObjectEncoder.default()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/mmif.serialize.html#module-mmif.serialize.mmif">mmif.serialize.mmif module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif"><code class="docutils literal notranslate"><span class="pre">Mmif</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.add_document"><code class="docutils literal notranslate"><span class="pre">Mmif.add_document()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.add_view"><code class="docutils literal notranslate"><span class="pre">Mmif.add_view()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.generate_capital_annotations"><code class="docutils literal notranslate"><span class="pre">Mmif.generate_capital_annotations()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.get_alignments"><code class="docutils literal notranslate"><span class="pre">Mmif.get_alignments()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.get_all_views_contain"><code class="docutils literal notranslate"><span class="pre">Mmif.get_all_views_contain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.get_document_by_id"><code class="docutils literal notranslate"><span class="pre">Mmif.get_document_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.get_document_location"><code class="docutils literal notranslate"><span class="pre">Mmif.get_document_location()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.get_documents_by_app"><code class="docutils literal notranslate"><span class="pre">Mmif.get_documents_by_app()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.get_documents_by_property"><code class="docutils literal notranslate"><span class="pre">Mmif.get_documents_by_property()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.get_documents_by_type"><code class="docutils literal notranslate"><span class="pre">Mmif.get_documents_by_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.get_documents_in_view"><code class="docutils literal notranslate"><span class="pre">Mmif.get_documents_in_view()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.get_documents_locations"><code class="docutils literal notranslate"><span class="pre">Mmif.get_documents_locations()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.get_view_by_id"><code class="docutils literal notranslate"><span class="pre">Mmif.get_view_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.get_view_contains"><code class="docutils literal notranslate"><span class="pre">Mmif.get_view_contains()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.get_views_contain"><code class="docutils literal notranslate"><span class="pre">Mmif.get_views_contain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.get_views_for_document"><code class="docutils literal notranslate"><span class="pre">Mmif.get_views_for_document()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.id_delimiter"><code class="docutils literal notranslate"><span class="pre">Mmif.id_delimiter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.new_view"><code class="docutils literal notranslate"><span class="pre">Mmif.new_view()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.new_view_id"><code class="docutils literal notranslate"><span class="pre">Mmif.new_view_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.sanitize"><code class="docutils literal notranslate"><span class="pre">Mmif.sanitize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.serialize"><code class="docutils literal notranslate"><span class="pre">Mmif.serialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.validate"><code class="docutils literal notranslate"><span class="pre">Mmif.validate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.mmif.Mmif.view_prefix"><code class="docutils literal notranslate"><span class="pre">Mmif.view_prefix</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/mmif.serialize.html#module-mmif.serialize.view">mmif.serialize.view module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.Contain"><code class="docutils literal notranslate"><span class="pre">Contain</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.View"><code class="docutils literal notranslate"><span class="pre">View</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.View.add_annotation"><code class="docutils literal notranslate"><span class="pre">View.add_annotation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.View.add_document"><code class="docutils literal notranslate"><span class="pre">View.add_document()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.View.get_annotation_by_id"><code class="docutils literal notranslate"><span class="pre">View.get_annotation_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.View.get_annotations"><code class="docutils literal notranslate"><span class="pre">View.get_annotations()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.View.get_document_by_id"><code class="docutils literal notranslate"><span class="pre">View.get_document_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.View.get_documents"><code class="docutils literal notranslate"><span class="pre">View.get_documents()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.View.new_annotation"><code class="docutils literal notranslate"><span class="pre">View.new_annotation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.View.new_contain"><code class="docutils literal notranslate"><span class="pre">View.new_contain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.View.new_textdocument"><code class="docutils literal notranslate"><span class="pre">View.new_textdocument()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.View.set_error"><code class="docutils literal notranslate"><span class="pre">View.set_error()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.ViewMetadata"><code class="docutils literal notranslate"><span class="pre">ViewMetadata</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.ViewMetadata.add_contain"><code class="docutils literal notranslate"><span class="pre">ViewMetadata.add_contain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.ViewMetadata.add_parameter"><code class="docutils literal notranslate"><span class="pre">ViewMetadata.add_parameter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.ViewMetadata.add_parameters"><code class="docutils literal notranslate"><span class="pre">ViewMetadata.add_parameters()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.ViewMetadata.add_warnings"><code class="docutils literal notranslate"><span class="pre">ViewMetadata.add_warnings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.ViewMetadata.emtpy_warnings"><code class="docutils literal notranslate"><span class="pre">ViewMetadata.emtpy_warnings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.ViewMetadata.get_parameter"><code class="docutils literal notranslate"><span class="pre">ViewMetadata.get_parameter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.ViewMetadata.new_contain"><code class="docutils literal notranslate"><span class="pre">ViewMetadata.new_contain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.view.ViewMetadata.set_error"><code class="docutils literal notranslate"><span class="pre">ViewMetadata.set_error()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/mmif.serialize.html#module-mmif.serialize.annotation">mmif.serialize.annotation module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Annotation"><code class="docutils literal notranslate"><span class="pre">Annotation</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Annotation.add_property"><code class="docutils literal notranslate"><span class="pre">Annotation.add_property()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Annotation.at_type"><code class="docutils literal notranslate"><span class="pre">Annotation.at_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Annotation.check_prop_value_is_simple_enough"><code class="docutils literal notranslate"><span class="pre">Annotation.check_prop_value_is_simple_enough()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Annotation.get"><code class="docutils literal notranslate"><span class="pre">Annotation.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Annotation.get_property"><code class="docutils literal notranslate"><span class="pre">Annotation.get_property()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Annotation.id"><code class="docutils literal notranslate"><span class="pre">Annotation.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Annotation.is_document"><code class="docutils literal notranslate"><span class="pre">Annotation.is_document()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Annotation.is_type"><code class="docutils literal notranslate"><span class="pre">Annotation.is_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Annotation.parent"><code class="docutils literal notranslate"><span class="pre">Annotation.parent</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.AnnotationProperties"><code class="docutils literal notranslate"><span class="pre">AnnotationProperties</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Document"><code class="docutils literal notranslate"><span class="pre">Document</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Document.add_property"><code class="docutils literal notranslate"><span class="pre">Document.add_property()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Document.get"><code class="docutils literal notranslate"><span class="pre">Document.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Document.get_property"><code class="docutils literal notranslate"><span class="pre">Document.get_property()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Document.location"><code class="docutils literal notranslate"><span class="pre">Document.location</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Document.location_address"><code class="docutils literal notranslate"><span class="pre">Document.location_address()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Document.location_path"><code class="docutils literal notranslate"><span class="pre">Document.location_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Document.location_scheme"><code class="docutils literal notranslate"><span class="pre">Document.location_scheme()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Document.text_language"><code class="docutils literal notranslate"><span class="pre">Document.text_language</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Document.text_value"><code class="docutils literal notranslate"><span class="pre">Document.text_value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.DocumentProperties"><code class="docutils literal notranslate"><span class="pre">DocumentProperties</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.DocumentProperties.location"><code class="docutils literal notranslate"><span class="pre">DocumentProperties.location</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.DocumentProperties.location_address"><code class="docutils literal notranslate"><span class="pre">DocumentProperties.location_address()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.DocumentProperties.location_path"><code class="docutils literal notranslate"><span class="pre">DocumentProperties.location_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.DocumentProperties.location_path_literal"><code class="docutils literal notranslate"><span class="pre">DocumentProperties.location_path_literal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.DocumentProperties.location_path_resolved"><code class="docutils literal notranslate"><span class="pre">DocumentProperties.location_path_resolved()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.DocumentProperties.location_scheme"><code class="docutils literal notranslate"><span class="pre">DocumentProperties.location_scheme()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.DocumentProperties.text_language"><code class="docutils literal notranslate"><span class="pre">DocumentProperties.text_language</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.DocumentProperties.text_value"><code class="docutils literal notranslate"><span class="pre">DocumentProperties.text_value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Text"><code class="docutils literal notranslate"><span class="pre">Text</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Text.lang"><code class="docutils literal notranslate"><span class="pre">Text.lang</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.serialize.html#mmif.serialize.annotation.Text.value"><code class="docutils literal notranslate"><span class="pre">Text.value</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autodoc/mmif.vocabulary.html">mmif.vocabulary module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/mmif.vocabulary.html#module-mmif.vocabulary.annotation_types">mmif.vocabulary.annotation_types module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.Alignment"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.Alignment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.Annotation"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.Annotation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.BoundingBox"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.BoundingBox</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.Chapter"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.Chapter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.Interval"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.Interval</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.NamedEntity"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.NamedEntity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.NounChunk"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.NounChunk</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.Paragraph"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.Paragraph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.Polygon"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.Polygon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.Region"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.Region</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.Relation"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.Relation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.Sentence"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.Sentence</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.Span"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.Span</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.TimeFrame"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.TimeFrame</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.TimePoint"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.TimePoint</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.Token"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.Token</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.VerbChunk"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.VerbChunk</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.VideoObject"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.VideoObject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.annotation_types.AnnotationTypes.typevers"><code class="docutils literal notranslate"><span class="pre">AnnotationTypes.typevers</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/mmif.vocabulary.html#module-mmif.vocabulary.document_types">mmif.vocabulary.document_types module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.document_types.DocumentTypes"><code class="docutils literal notranslate"><span class="pre">DocumentTypes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.document_types.DocumentTypes.AudioDocument"><code class="docutils literal notranslate"><span class="pre">DocumentTypes.AudioDocument</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.document_types.DocumentTypes.Document"><code class="docutils literal notranslate"><span class="pre">DocumentTypes.Document</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.document_types.DocumentTypes.ImageDocument"><code class="docutils literal notranslate"><span class="pre">DocumentTypes.ImageDocument</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.document_types.DocumentTypes.TextDocument"><code class="docutils literal notranslate"><span class="pre">DocumentTypes.TextDocument</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.document_types.DocumentTypes.VideoDocument"><code class="docutils literal notranslate"><span class="pre">DocumentTypes.VideoDocument</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/mmif.vocabulary.html#mmif.vocabulary.document_types.DocumentTypes.typevers"><code class="docutils literal notranslate"><span class="pre">DocumentTypes.typevers</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="autodoc/mmif.serialize.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">mmif.serialize module</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="target-versions.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Target MMIF Versions</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, Brandeis LLC
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>
