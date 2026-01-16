@@ -14,9 +14,13 @@ Usage:
 
 import argparse
 import re
+import shutil
 import sys
 from pathlib import Path
 
+
+# canonical base URL for the documentation hub
+DEFAULT_BASE_URL = 'https://clams.ai'
 
 # Header template with embedded CSS
 # Supports both light and dark modes (Furo theme compatibility)
@@ -320,12 +324,7 @@ def generate_project_nav_links(projects, current_project, base_url):
     for project in 'home mmif mmif-python clams-python aapb-annotations aapn-evaluations'.split():
         if project not in projects:
             continue
-        info = projects[project]
-        # Use absolute URLs based on base_url
-        if info['is_versioned']:
-            url = f"{base_url}/{project}/latest/"
-        else:
-            url = f"{base_url}/{project}/"
+        url = f"{base_url}/{project}/"
 
         active_class = ' active' if project == current_project else ''
         links.append(
@@ -435,9 +434,9 @@ def inject_header_into_file(file_path, header_html):
         print(f"  Error reading {file_path}: {e}", file=sys.stderr)
         return False
 
-    # Remove existing injected header if present
+    # Remove existing injected header if present (including leading newline)
     content = re.sub(
-        r'<!-- CLAMS Hub Version Header - Injected -->.*?'
+        r'\n?<!-- CLAMS Hub Version Header - Injected -->.*?'
         r'<!-- End CLAMS Hub Version Header -->\n?',
         '',
         content,
@@ -498,8 +497,8 @@ def main():
     )
     parser.add_argument(
         '--base-url',
-        default='https://clams.ai',
-        help='Base URL for documentation hub (default: https://clams.ai/docs)'
+        default=DEFAULT_BASE_URL,
+        help=f'Base URL for documentation hub (default: {DEFAULT_BASE_URL})'
     )
     parser.add_argument(
         '--project-name',
@@ -549,14 +548,24 @@ def main():
         # Versioned project: process each version directory
         print(f"Found {len(versions)} versions: {', '.join(versions)}")
 
+        # Remove legacy 'latest' directory if it exists
+        latest_dir = project_dir / 'latest'
+        if latest_dir.exists() and latest_dir.is_dir():
+            if args.dry_run:
+                print(f"Would remove legacy latest/ directory")
+            else:
+                try:
+                    shutil.rmtree(latest_dir)
+                    print(f"Removed legacy latest/ directory")
+                except Exception as e:
+                    print(f"Warning: Could not remove latest/ directory: {e}", file=sys.stderr)
+
         for version in versions:
-            # Skip 'latest' if it's just a redirect (only has index.html)
+            # Skip 'latest' directory (we create redirect at root instead)
             version_dir = project_dir / version
             if version == 'latest':
-                files = list(version_dir.iterdir())
-                if len(files) == 1 and files[0].name == 'index.html':
-                    print(f"Skipping {version}/ (redirect only)")
-                    continue
+                print(f"Skipping {version}/ (redirect created at root)")
+                continue
 
             # Generate header for this specific version
             header_html = generate_header(
@@ -579,29 +588,30 @@ def main():
                 total_success += success
                 total_files += total
 
-        # Generate latest redirect if 'latest' doesn't exist as a real version
-        if 'latest' not in versions and versions:
-            highest_version = versions[0]
-            latest_dir = project_dir / 'latest'
+        # Generate root index.html redirect to latest version
+        if versions:
+            # Filter out 'latest' to get actual version numbers
+            version_numbers = [v for v in versions if v != 'latest']
+            if version_numbers:
+                highest_version = version_numbers[0]
 
-            if args.dry_run:
-                print(f"  Would create latest/ redirect to {highest_version}")
-            else:
-                latest_dir.mkdir(exist_ok=True)
-                redirect_html = f'''<!DOCTYPE html>
+                if args.dry_run:
+                    print(f"  Would create index.html redirect to {highest_version}")
+                else:
+                    redirect_html = f'''<!DOCTYPE html>
 <html>
 <head>
     <title>Redirecting to latest version...</title>
-    <meta http-equiv="refresh" content="0;url=../{highest_version}/" />
-    <link rel="canonical" href="../{highest_version}/" />
+    <meta http-equiv="refresh" content="0;url={highest_version}/" />
+    <link rel="canonical" href="{highest_version}/" />
 </head>
 <body>
-    <p>Redirecting to <a href="../{highest_version}/">version {highest_version}</a>.</p>
+    <p>Redirecting to <a href="{highest_version}/">version {highest_version}</a>.</p>
 </body>
 </html>
 '''
-                (latest_dir / 'index.html').write_text(redirect_html)
-                print(f"  Created latest/ redirect to {highest_version}")
+                    (project_dir / 'index.html').write_text(redirect_html)
+                    print(f"  Created index.html redirect to {highest_version}")
     else:
         # Non-versioned project: process the directory itself
         print("No version directories found - treating as non-versioned project")
