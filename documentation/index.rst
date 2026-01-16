@@ -70,8 +70,8 @@ Publications
 
 If you use CLAMS in your research, please cite the following publications:
 
-*   **CLAMS: A Python Library for Multimodal Annotation and Processing** (Conference paper, `doi:10.1007/978-3-031-93160-4_12 <https://doi.org/10.1007/978-3-031-93160-4_12>`_)
+*   **A Platform for AI-Assisted Archival Metadata Generation** (Platform updates paper, `doi:10.1007/978-3-031-93160-4_12 <https://doi.org/10.1007/978-3-031-93160-4_12>`_, accepted manuscript `PDF <_static/CLAMS_HCII_CNC_2025.pdf>`_ )
 
-*   **CLAMS: A Multimodal Annotation and Processing Framework for CLARIAH Media Resources** (Original framework paper, `doi:10.18653/v1/W19-2512 <https://doi.org/10.18653/v1/W19-2512>`_)
+*   **Computational Linguistics Applications for Multimedia Services** (Original framework paper, `doi:10.18653/v1/W19-2512 <https://doi.org/10.18653/v1/W19-2512>`_)
 
 
