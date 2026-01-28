@@ -1,0 +1,135 @@
+:orphan:
+
+TimeFrame (v2)
+==============
+
+.. warning::
+   This is not the latest version. The latest version is :doc:`v6 <../v6/index>`.
+
+**Previous Version:** :doc:`v1 <../v1/index>`
+
+**URI:** `http://clams.ai/vocabulary/type/TimeFrame/v2 <http://clams.ai/vocabulary/type/TimeFrame/v2>`_
+
+**Shortname:** ``TimeFrame``
+
+**Inherits from:** :doc:`Interval_v1 <../../Interval/v1/index>`
+
+**Included in vocabulary versions:** :doc:`1.0.1 <../../../1.0.1/index>`
+
+Also Known As
+-------------
+
+This type is also accessible at the following legacy URLs for backward
+compatibility:
+
+- `http://mmif.clams.ai/vocabulary/TimeFrame/v2 <http://mmif.clams.ai/vocabulary/TimeFrame/v2>`_
+
+
+Description
+-----------
+
+A temporal interval in an audio or video stream. This is similar to the term segment used in audio processing, but that term has a different meaning in the image and video community.
+
+
+Properties
+----------
+
+
+document
+~~~~~~~~
+
+- **Type:** *string*
+- **Description:** The identifier of the document that the annotation is over.
+- **Required:** No
+- **Inherited from:** *Interval_v1*
+
+
+timeUnit
+~~~~~~~~
+
+- **Type:** *string*
+- **Description:** Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
+- **Required:** No
+- **Inherited from:** *Interval_v1*
+
+
+start
+~~~~~
+
+- **Type:** *integer*
+- **Description:** The starting offset in the primary data. This point is inclusive. For time intervals, the unit is determined by the *timeUnit* metadata key. For text intervals, the unit is Unicode code point.
+- **Required:** No
+- **Inherited from:** *Interval_v1*
+
+
+end
+~~~
+
+- **Type:** *integer*
+- **Description:** The ending offset in the primary data. This point is exclusive. For time intervals, the unit is determined by the *timeUnit* metadata key. For text intervals, the unit is Unicode code point.
+- **Required:** No
+- **Inherited from:** *Interval_v1*
+
+
+targets
+~~~~~~~
+
+- **Type:** *array of string*
+- **Description:** IDs of a sequence of annotations covering the region of primary data referred to by this annotation. Used as an alternative to *start* and *end* to point to component annotations (for example a token sequence) rather than directly into primary data, or to link two or more annotations (for example in a coreference annotation).
+- **Required:** No
+- **Inherited from:** *Interval_v1*
+
+
+frameType
+~~~~~~~~~
+
+- **Type:** *string*
+- **Description:** The type of TimeFrame. Possible values include, but are not limited to, bars, tones, bars-and-tones, speech, noise, music, slate, chyron, lower-third, credits, and other.
+- **Required:** No
+
+
+JSON Schema
+-----------
+
+.. code-block:: json
+
+   {
+     "additionalProperties": true,
+     "properties": {
+       "id": {
+         "description": "A unique identifier for the annotation or document. Uniqueness is relative to the view the annotation is in or the list of documents at the top level of a MMIF file.",
+         "type": "string"
+       },
+       "document": {
+         "type": "string",
+         "description": "The identifier of the document that the annotation is over."
+       },
+       "timeUnit": {
+         "type": "string",
+         "description": "Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*."
+       },
+       "start": {
+         "type": "integer",
+         "description": "The starting offset in the primary data. This point is inclusive. For time intervals, the unit is determined by the *timeUnit* metadata key. For text intervals, the unit is Unicode code point."
+       },
+       "end": {
+         "type": "integer",
+         "description": "The ending offset in the primary data. This point is exclusive. For time intervals, the unit is determined by the *timeUnit* metadata key. For text intervals, the unit is Unicode code point."
+       },
+       "targets": {
+         "items": {
+           "type": "string"
+         },
+         "type": "array",
+         "description": "IDs of a sequence of annotations covering the region of primary data referred to by this annotation. Used as an alternative to *start* and *end* to point to component annotations (for example a token sequence) rather than directly into primary data, or to link two or more annotations (for example in a coreference annotation)."
+       },
+       "frameType": {
+         "type": "string",
+         "description": "The type of TimeFrame. Possible values include, but are not limited to, bars, tones, bars-and-tones, speech, noise, music, slate, chyron, lower-third, credits, and other."
+       }
+     },
+     "required": [
+       "id"
+     ],
+     "type": "object"
+   }

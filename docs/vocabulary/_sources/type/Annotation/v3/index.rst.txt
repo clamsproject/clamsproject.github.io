@@ -1,0 +1,121 @@
+:orphan:
+
+Annotation (v3)
+===============
+
+.. warning::
+   This is not the latest version. The latest version is :doc:`v6 <../v6/index>`.
+
+**Previous Version:** :doc:`v2 <../v2/index>`
+
+**URI:** `http://clams.ai/vocabulary/type/Annotation/v3 <http://clams.ai/vocabulary/type/Annotation/v3>`_
+
+**Shortname:** ``Annotation``
+
+**Inherits from:** :doc:`Thing_v1 <../../Thing/v1/index>`
+
+**Included in vocabulary versions:** :doc:`1.0.2 <../../../1.0.2/index>`
+
+Also Known As
+-------------
+
+This type is also accessible at the following legacy URLs for backward
+compatibility:
+
+- `http://mmif.clams.ai/vocabulary/Annotation/v3 <http://mmif.clams.ai/vocabulary/Annotation/v3>`_
+
+
+Description
+-----------
+
+Any kind of information added to a document. If an annotation is specific to a region over the primary data or a relation over such regions, specific sub-types should be used instead of this high-level type.
+
+
+Properties
+----------
+
+
+document
+~~~~~~~~
+
+- **Type:** *string*
+- **Description:** The identifier of the document that the annotation is over.
+- **Required:** No
+
+
+labelset
+~~~~~~~~
+
+- **Type:** *array of string*
+- **Description:** When an annotation object contains results of a classification task, this metadata is used to specify the label values used in classification. Individual annotations then must have <code>label</code> property that is one of the values in this list. <br><br> [Note] Annotations from a classifier app must have this metadata or <code> labelsetUri </code> metadata. <br><br> [Note] Not all of labels specified in the <code>labelset</code> must occur in the output annotations. For example, a <code>labelset</code> can contain a <i>catch-all</i> negative label, but if the negative label can be not interesting enough to keep in the output annotation.
+- **Required:** No
+
+
+labelsetUri
+~~~~~~~~~~~
+
+- **Type:** *string*
+- **Description:** A URI to an externally defined labelset. Since the <code>labelset</code> metadata is a list of simple strings, this URI can be used to point to a more detailed definition of the labelset. This can be a JSON-LD document or a SKOS concept scheme, for example. <br><br> [Note] Annotations from a classifier app must have this metadata or <code> labelset </code> metadata.
+- **Required:** No
+
+
+label
+~~~~~
+
+- **Type:** *string*
+- **Description:** A label given to this object by a classifier. The value must be a simple string value of the label and must be one of the values defined in the <code>labelset</code> or <code>labelsetUri</code> annotation metadata. <br><br> [Note] Annotations from a classifier app must have this property.
+- **Required:** No
+
+
+classifications
+~~~~~~~~~~~~~~~
+
+- **Type:** *object*
+- **Description:** A map from label values to their "score" numbers provided by a classifier. The score can be probability, similarity, confidence, or any other real number that was used to determine the label value. <br><br> [Optional] on top of the <code>label</code> property. However when this property is used, the <code>label</code> property must be one of the keys and the keys must match to the values defined in the <code>labelset</code> or <code>labelsetUri</code> annotation metadata.
+- **Required:** No
+
+
+JSON Schema
+-----------
+
+.. code-block:: json
+
+   {
+     "additionalProperties": true,
+     "properties": {
+       "id": {
+         "description": "A unique identifier for the annotation or document. Uniqueness is relative to the view the annotation is in or the list of documents at the top level of a MMIF file.",
+         "type": "string"
+       },
+       "document": {
+         "type": "string",
+         "description": "The identifier of the document that the annotation is over."
+       },
+       "labelset": {
+         "items": {
+           "type": "string"
+         },
+         "type": "array",
+         "description": "When an annotation object contains results of a classification task, this metadata is used to specify the label values used in classification. Individual annotations then must have <code>label</code> property that is one of the values in this list. <br><br> [Note] Annotations from a classifier app must have this metadata or <code> labelsetUri </code> metadata. <br><br> [Note] Not all of labels specified in the <code>labelset</code> must occur in the output annotations. For example, a <code>labelset</code> can contain a <i>catch-all</i> negative label, but if the negative label can be not interesting enough to keep in the output annotation."
+       },
+       "labelsetUri": {
+         "type": "string",
+         "description": "A URI to an externally defined labelset. Since the <code>labelset</code> metadata is a list of simple strings, this URI can be used to point to a more detailed definition of the labelset. This can be a JSON-LD document or a SKOS concept scheme, for example. <br><br> [Note] Annotations from a classifier app must have this metadata or <code> labelset </code> metadata."
+       },
+       "label": {
+         "type": "string",
+         "description": "A label given to this object by a classifier. The value must be a simple string value of the label and must be one of the values defined in the <code>labelset</code> or <code>labelsetUri</code> annotation metadata. <br><br> [Note] Annotations from a classifier app must have this property."
+       },
+       "classifications": {
+         "additionalProperties": {
+           "type": "number"
+         },
+         "type": "object",
+         "description": "A map from label values to their \"score\" numbers provided by a classifier. The score can be probability, similarity, confidence, or any other real number that was used to determine the label value. <br><br> [Optional] on top of the <code>label</code> property. However when this property is used, the <code>label</code> property must be one of the keys and the keys must match to the values defined in the <code>labelset</code> or <code>labelsetUri</code> annotation metadata."
+       }
+     },
+     "required": [
+       "id"
+     ],
+     "type": "object"
+   }

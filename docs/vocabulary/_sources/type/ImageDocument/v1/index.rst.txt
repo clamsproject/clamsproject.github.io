@@ -1,0 +1,84 @@
+:orphan:
+
+ImageDocument (v1)
+==================
+
+.. note::
+   This is the **latest version** of this type.
+
+**Previous Version:** none *(this is the oldest version)*
+
+**URI:** `http://clams.ai/vocabulary/type/ImageDocument/v1 <http://clams.ai/vocabulary/type/ImageDocument/v1>`_
+
+**Shortname:** ``ImageDocument``
+
+**Inherits from:** :doc:`Document_v1 <../../Document/v1/index>`
+
+**Included in vocabulary versions:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`, :doc:`1.0.2 <../../../1.0.2/index>`, :doc:`1.0.3 <../../../1.0.3/index>`, :doc:`1.0.4 <../../../1.0.4/index>`, :doc:`1.1.0 <../../../1.1.0/index>`
+
+Also Known As
+-------------
+
+This type is also accessible at the following legacy URLs for backward
+compatibility:
+
+- `http://mmif.clams.ai/vocabulary/ImageDocument/v1 <http://mmif.clams.ai/vocabulary/ImageDocument/v1>`_
+- `http://mmif.clams.ai/0.4.0/vocabulary/ImageDocument/ <http://mmif.clams.ai/0.4.0/vocabulary/ImageDocument/>`_
+- `http://mmif.clams.ai/0.4.1/vocabulary/ImageDocument/ <http://mmif.clams.ai/0.4.1/vocabulary/ImageDocument/>`_
+- `http://mmif.clams.ai/0.4.2/vocabulary/ImageDocument/ <http://mmif.clams.ai/0.4.2/vocabulary/ImageDocument/>`_
+
+
+Description
+-----------
+
+An image document.
+
+
+Properties
+----------
+
+
+location
+~~~~~~~~
+
+- **Type:** *string*
+- **Description:** The location of an external file.
+- **Required:** No
+- **Inherited from:** *Document_v1*
+
+
+mime
+~~~~
+
+- **Type:** *string*
+- **Description:** The MIME type of the document, only used when the *location* property is used.
+- **Required:** No
+- **Inherited from:** *Document_v1*
+
+
+JSON Schema
+-----------
+
+.. code-block:: json
+
+   {
+     "additionalProperties": true,
+     "properties": {
+       "id": {
+         "description": "A unique identifier for the annotation or document. Uniqueness is relative to the view the annotation is in or the list of documents at the top level of a MMIF file.",
+         "type": "string"
+       },
+       "location": {
+         "type": "string",
+         "description": "The location of an external file."
+       },
+       "mime": {
+         "type": "string",
+         "description": "The MIME type of the document, only used when the *location* property is used."
+       }
+     },
+     "required": [
+       "id"
+     ],
+     "type": "object"
+   }

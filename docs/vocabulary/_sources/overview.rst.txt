@@ -1,0 +1,73 @@
+Overview
+========
+
+Introduction
+------------
+
+The CLAMS Vocabulary defines the type system used in the CLAMS project, notably
+used for annotating and describing multimedia content in Multi-Media Interchange
+Format (MMIF) serialization. It provides:
+
+* **Type Definitions** - Pydantic-based models for annotation and document
+  types
+* **Runtime Validation** - Automatic validation of serialized Annotation objects
+  against type schemas
+* **Versioning** - Independent versioning of vocabulary types separate from
+  the MMIF specification
+* **Machine-Readable** - JSON Schema generation and IDE support through
+  Pydantic
+
+Purpose
+-------
+
+MMIF is a JSON-LD based format for representing multi-modal annotations
+on multimedia content. The CLAMS Vocabulary serves as the controlled
+vocabulary layer for "Annotation" objects in the MMIF serialization, defining:
+
+1. **Annotation Types** - How to represent linguistic, visual, and audio
+   annotations
+2. **Document Types** - How to represent source documents (text, video,
+   audio, images)
+3. (planned) **Controlled Vocabularies** - Enumerated value sets for constrained
+   properties
+4. (planned) **Task Types** - Definitions for processing content analysis tasks 
+   (NLP, CV, etc) and their general input/output relationships
+
+Architecture
+------------
+
+Pure Python Implementation
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Earlier versions of the CLAMS Vocabulary were published as part of the MMIF
+specification in YAML format. The new implementation (as of 2026) uses pure
+Python with Pydantic models. Benefits include:
+
+* Single source of truth for types and validation
+* No separate schema generation step
+* IDE autocomplete and type checking
+* Runtime validation with clear error messages
+
+Versioning Strategy
+~~~~~~~~~~~~~~~~~~~
+
+Each vocabulary type maintains independent versions:
+
+* **Archetype** - The current/desired state (human-edited)
+* **Snapshots** - Immutable historical versions (auto-generated)
+
+When a type changes, the build system generates a new version snapshot,
+ensuring backward compatibility with older MMIF files.
+
+Using the Vocabulary
+--------------------
+
+For detailed usage instructions including import patterns, type resolution,
+comparison behavior, and property aliases, see the :doc:`usage` guide.
+
+Integration with mmif-python SDK
+--------------------------------
+
+The vocabulary integrates with mmif-python for MMIF serialization and
+deserialization. For integration details and migration guides, see
+the `mmif-python documentation <https://clams.ai/mmif-python/>`_.

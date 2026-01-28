@@ -1,0 +1,71 @@
+:orphan:
+
+Relation (v1)
+=============
+
+.. warning::
+   This is not the latest version. The latest version is :doc:`v5 <../v5/index>`.
+
+**Previous Version:** none *(this is the oldest version)*
+
+**URI:** `http://clams.ai/vocabulary/type/Relation/v1 <http://clams.ai/vocabulary/type/Relation/v1>`_
+
+**Shortname:** ``Relation``
+
+**Inherits from:** :doc:`Annotation_v2 <../../Annotation/v2/index>`
+
+**Included in vocabulary versions:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`
+
+Also Known As
+-------------
+
+This type is also accessible at the following legacy URLs for backward
+compatibility:
+
+- `http://mmif.clams.ai/vocabulary/Relation/v1 <http://mmif.clams.ai/vocabulary/Relation/v1>`_
+- `http://mmif.clams.ai/0.4.0/vocabulary/Relation/ <http://mmif.clams.ai/0.4.0/vocabulary/Relation/>`_
+- `http://mmif.clams.ai/0.4.1/vocabulary/Relation/ <http://mmif.clams.ai/0.4.1/vocabulary/Relation/>`_
+- `http://mmif.clams.ai/0.4.2/vocabulary/Relation/ <http://mmif.clams.ai/0.4.2/vocabulary/Relation/>`_
+
+
+Description
+-----------
+
+Any relationship between two or more annotation types. For texts could be a grammatical relation such as subject-object, a semantic relation between meanings or roles, or a temporal relation indicating the simultaneity or ordering in time of events or states. For image regions and video objects this could involve spatial relations or part-whole relations.
+
+
+Properties
+----------
+
+
+document
+~~~~~~~~
+
+- **Type:** *string*
+- **Description:** The identifier of the document that the annotation is over.
+- **Required:** No
+- **Inherited from:** *Annotation_v2*
+
+
+JSON Schema
+-----------
+
+.. code-block:: json
+
+   {
+     "additionalProperties": true,
+     "properties": {
+       "id": {
+         "description": "A unique identifier for the annotation or document. Uniqueness is relative to the view the annotation is in or the list of documents at the top level of a MMIF file.",
+         "type": "string"
+       },
+       "document": {
+         "type": "string",
+         "description": "The identifier of the document that the annotation is over."
+       }
+     },
+     "required": [
+       "id"
+     ],
+     "type": "object"
+   }

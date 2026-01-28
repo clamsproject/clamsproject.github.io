@@ -1,0 +1,117 @@
+Naming Conventions
+==================
+
+This document outlines the naming rules for vocabulary types, fields, and
+enumerated values.
+
+Type Names
+----------
+
+The following conventions are based on PEP8 Python Naming Conventions
+(https://peps.python.org/pep-0008/#class-names), with an exception for field
+names which follow camelCase as per JavaScript conventions, to maintain format
+consistency in JSON representations when used in MMIF serializations.
+
+Annotation and Document Types
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Use **PascalCase** (CapitalizedWords)
+* Names should be descriptive nouns or noun phrases
+* Avoid abbreviations unless widely understood
+
+Examples:
+
+* ``TimeFrame``
+* ``VideoDocument``
+* ``BoundingBox``
+* ``NamedEntity``
+
+Directory Names (Python/Pydantic Module Naming)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Type module directories use **snake_case** (lowercase with underscores) based
+on the type class name:
+
+* ``TimePoint`` → ``time_point/``
+* ``TimeFrame`` → ``time_frame/``
+* ``BoundingBox`` → ``bounding_box/``
+* ``VideoObject`` → ``video_object/``
+
+The build system automatically converts between PascalCase class names and
+snake_case directory names.
+
+Field Names
+-----------
+
+Property Naming
+~~~~~~~~~~~~~~~
+
+* Use **camelCase** (lowercase first word, capitalized subsequent words)
+* Names should be descriptive and unambiguous
+* Boolean fields should use ``is``/``has`` prefixes when appropriate
+
+Examples:
+
+* ``timeUnit``
+* ``startTime``
+* ``endTime``
+* ``isNegated``
+
+Reserved Names
+~~~~~~~~~~~~~~
+
+The following field names are reserved for system use:
+
+* ``uri`` - Type URI (injected by build system)
+* ``version`` - Version string (injected by build system)
+* ``shortname`` - Human-readable type name
+* ``description`` - Type documentation
+
+Controlled Vocabularies (Enums)
+--------------------------------
+
+Enum Class Names
+~~~~~~~~~~~~~~~~
+
+* Use **PascalCase**
+* Name should describe the category of values
+
+Examples:
+
+* ``TimeUnit``
+* ``FrameType``
+* ``AnnotationLabel``
+
+Enum Value Names
+~~~~~~~~~~~~~~~~
+
+* Use **SCREAMING_SNAKE_CASE** for constant names
+* Use lowercase strings for actual values
+
+Example::
+
+    class TimeUnit(VocabEnum):
+        MILLISECONDS = "milliseconds"
+        SECONDS = "seconds"
+        FRAMES = "frames"
+
+Version Numbers
+---------------
+
+* Version numbers are integers: ``v1``, ``v2``, ``v3``
+* Versioned class names append version: ``TimeFrame_v1``, ``TimeFrame_v2``
+
+  * When used in Python code, the versioned class name should only be used to
+    "pin" a specific version of a type or enum. As our general practice is not
+    to allow "breaking" changes in vocab types, most code should simply use the
+    unversioned class name (e.g., ``TimeFrame``) to refer to the latest version.
+
+* URIs include version: ``http://mmif.clams.ai/vocabulary/TimeFrame/v1``
+
+General Guidelines for Naming New Types and Fields
+--------------------------------------------------
+
+1. **Be Consistent** - Follow existing patterns in the vocabulary
+2. **Be Descriptive** - Clarity over brevity
+3. **Avoid Redundancy** - Don't repeat the type name in field names
+4. **Use Standard Terms** - Prefer established terminology from the domain

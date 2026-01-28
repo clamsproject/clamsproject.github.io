@@ -1,0 +1,83 @@
+:orphan:
+
+Region (v1)
+===========
+
+.. warning::
+   This is not the latest version. The latest version is :doc:`v5 <../v5/index>`.
+
+**Previous Version:** none *(this is the oldest version)*
+
+**URI:** `http://clams.ai/vocabulary/type/Region/v1 <http://clams.ai/vocabulary/type/Region/v1>`_
+
+**Shortname:** ``Region``
+
+**Inherits from:** :doc:`Annotation_v2 <../../Annotation/v2/index>`
+
+**Included in vocabulary versions:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`
+
+Also Known As
+-------------
+
+This type is also accessible at the following legacy URLs for backward
+compatibility:
+
+- `http://mmif.clams.ai/vocabulary/Region/v1 <http://mmif.clams.ai/vocabulary/Region/v1>`_
+- `http://mmif.clams.ai/0.4.0/vocabulary/Region/ <http://mmif.clams.ai/0.4.0/vocabulary/Region/>`_
+- `http://mmif.clams.ai/0.4.1/vocabulary/Region/ <http://mmif.clams.ai/0.4.1/vocabulary/Region/>`_
+- `http://mmif.clams.ai/0.4.2/vocabulary/Region/ <http://mmif.clams.ai/0.4.2/vocabulary/Region/>`_
+
+
+Description
+-----------
+
+An annotation over a region in primary data where primary data can be a text, an image, an audio stream or a video streem. Typically one of the sub types of this will be used.
+
+
+Properties
+----------
+
+
+document
+~~~~~~~~
+
+- **Type:** *string*
+- **Description:** The identifier of the document that the annotation is over.
+- **Required:** No
+- **Inherited from:** *Annotation_v2*
+
+
+timeUnit
+~~~~~~~~
+
+- **Type:** *string*
+- **Description:** Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
+- **Required:** No
+
+
+JSON Schema
+-----------
+
+.. code-block:: json
+
+   {
+     "additionalProperties": true,
+     "properties": {
+       "id": {
+         "description": "A unique identifier for the annotation or document. Uniqueness is relative to the view the annotation is in or the list of documents at the top level of a MMIF file.",
+         "type": "string"
+       },
+       "document": {
+         "type": "string",
+         "description": "The identifier of the document that the annotation is over."
+       },
+       "timeUnit": {
+         "type": "string",
+         "description": "Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*."
+       }
+     },
+     "required": [
+       "id"
+     ],
+     "type": "object"
+   }

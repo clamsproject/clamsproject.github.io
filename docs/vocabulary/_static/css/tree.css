@@ -1,0 +1,52 @@
+/* Hierarchy table styles */
+table.h, .h tr, .h td {
+    border: none;
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+}
+
+.h .space {
+    width: 20px;
+}
+
+.h .bar {
+    background-color: #666;
+    width: 1px;
+}
+
+.h .tc {
+    text-indent: -21px;
+    padding-left: 21px;
+}
+
+.h .version {
+    color: #666;
+    font-style: italic;
+    font-size: 90%;
+}
+
+.h .properties {
+    color: #666;
+    font-size: 90%;
+}
+
+/* Dark mode support */
+body[data-theme="dark"] .h .bar {
+    background-color: #999;
+}
+
+body[data-theme="dark"] .h .version,
+body[data-theme="dark"] .h .properties {
+    color: #999;
+}
+
+@media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) .h .bar {
+        background-color: #999;
+    }
+    body:not([data-theme="light"]) .h .version,
+    body:not([data-theme="light"]) .h .properties {
+        color: #999;
+    }
+}

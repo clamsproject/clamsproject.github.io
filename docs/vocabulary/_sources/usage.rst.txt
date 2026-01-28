@@ -1,0 +1,301 @@
+Usage Guide
+===========
+
+This guide covers how to use CLAMS Vocabulary types in your Python code.
+
+Importing Types
+---------------
+
+Basic Import Patterns
+~~~~~~~~~~~~~~~~~~~~~
+
+Import specific types directly::
+
+    from clams_vocabulary import TimeFrame, TextDocument, Annotation
+
+Import namespace classes for type discovery::
+
+    from clams_vocabulary import AnnotationTypes, DocumentTypes
+
+Import base classes for type checking::
+
+    from clams_vocabulary import ClamsTypesBase, AnnotationTypesBase
+
+Namespace Classes
+-----------------
+
+The vocabulary provides two namespace classes for convenient access to all types:
+
+AnnotationTypes
+~~~~~~~~~~~~~~~
+
+Contains all annotation types as class attributes::
+
+    from clams_vocabulary import AnnotationTypes
+
+    # Access latest version of each type
+    tf = AnnotationTypes.TimeFrame
+    span = AnnotationTypes.Span
+    bbox = AnnotationTypes.BoundingBox
+
+DocumentTypes
+~~~~~~~~~~~~~
+
+Contains all document types as class attributes::
+
+    from clams_vocabulary import DocumentTypes
+
+    # Access document types
+    text_doc = DocumentTypes.TextDocument
+    video_doc = DocumentTypes.VideoDocument
+
+Versioned Type Access
+~~~~~~~~~~~~~~~~~~~~~
+
+Access specific versions explicitly if needed::
+
+    from clams_vocabulary import AnnotationTypes
+
+    # Latest version (recommended)
+    tf_latest = AnnotationTypes.TimeFrame
+
+    # Specific version (advanced use)
+    tf_v5 = AnnotationTypes.TimeFrame_v5
+    tf_v6 = AnnotationTypes.TimeFrame_v6
+
+Type Resolution
+---------------
+
+from_str() Method
+~~~~~~~~~~~~~~~~~
+
+Create type instances from URI strings::
+
+    from clams_vocabulary import ClamsTypesBase
+
+    # Parse from full URI
+    uri = "https://clams.ai/vocabulary/type/TimeFrame/v7"
+    type_instance = ClamsTypesBase.from_str(uri)
+
+    # Returns a TimeFrame_v7 instance
+    print(type_instance.shortname)  # "TimeFrame"
+    print(type_instance.version)    # "v7"
+    print(str(type_instance))       # Full URI
+
+Legacy URI Support (alsoKnownAs)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The vocabulary maintains backward compatibility with old URIs via the
+``alsoKnownAs`` mechanism::
+
+    # Old MMIF vocabulary URI
+    old_uri = "http://mmif.clams.ai/vocabulary/TimeFrame/v5"
+    type_instance = ClamsTypesBase.from_str(old_uri)
+
+    # Returns TimeFrame_v5 instance
+    # Preserves original URI in initialized_from attribute
+    print(type_instance.initialized_from)  # Original old_uri
+    print(type_instance.uri)               # Canonical new URI
+
+Round-Trip Fidelity
+~~~~~~~~~~~~~~~~~~~
+
+When deserializing MMIF files, original URIs are preserved::
+
+    # Input MMIF uses old URI format
+    type_instance = ClamsTypesBase.from_str("http://mmif.clams.ai/vocabulary/Span/v3")
+
+    # Serialization preserves original format
+    print(repr(type_instance))  # Uses initialized_from (old URI)
+
+    # Canonical URI available for comparisons
+    print(type_instance.uri)    # Canonical new URI
+
+Type Comparison
+---------------
+
+Class-Level Comparison
+~~~~~~~~~~~~~~~~~~~~~~
+
+Compare types using classes::
+
+    from clams_vocabulary import AnnotationTypes, TimeFrame, TimeFrame_v7
+
+    # Class-to-class comparison
+    if TimeFrame == TimeFrame_v7:
+        print("Fuzzy match!")  # True - unversioned matches versioned
+
+    # Namespace class comparison
+    if TimeFrame == AnnotationTypes.TimeFrame:
+        print("Same type!")  # True
+
+Instance-to-Class Comparison
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Compare type instances with classes::
+
+    from clams_vocabulary import AnnotationTypes, ClamsTypesBase
+
+    # Create instance from URI
+    type_instance = ClamsTypesBase.from_str(
+        "https://clams.ai/vocabulary/type/TimeFrame/v7"
+    )
+
+    # Compare with class
+    if type_instance == AnnotationTypes.TimeFrame:
+        print("Match!")  # True
+
+    # Compare with string URI
+    if type_instance == "https://clams.ai/vocabulary/type/TimeFrame/v7":
+        print("String match!")  # True
+
+Fuzzy Equality
+~~~~~~~~~~~~~~
+
+Versioned vs Unversioned Classes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The vocabulary supports two comparison modes:
+
+**Strict comparison** (versioned classes)::
+
+    from clams_vocabulary import TimeFrame_v5, TimeFrame_v6
+
+    # Strict - versions must match exactly
+    TimeFrame_v5 == TimeFrame_v6  # False
+
+**Fuzzy comparison** (unversioned aliases)::
+
+    from clams_vocabulary import TimeFrame, TimeFrame_v5, TimeFrame_v6
+
+    # Fuzzy - ignores version differences
+    TimeFrame == TimeFrame_v5  # True
+    TimeFrame == TimeFrame_v6  # True
+    TimeFrame_v5 == TimeFrame  # True (symmetric)
+
+Automatic Mode Detection
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Comparison mode is determined by class name:
+
+- ``TimeFrame_v5`` → Strict comparison (has version suffix)
+- ``TimeFrame`` → Fuzzy comparison (no version suffix)
+- If **either** operand uses fuzzy mode, fuzzy comparison is used
+
+Property Aliases
+----------------
+
+Deserialization Aliases
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The vocabulary supports legacy property names via Pydantic field aliases::
+
+    from clams_vocabulary import TimeFrame
+
+    # Modern MMIF uses canonical name
+    data = {"label": "speech-segment"}
+    tf = TimeFrame(**data)
+    print(tf.label)  # "speech-segment"
+
+    # Legacy MMIF uses old name (alias)
+    legacy_data = {"frameType": "speech-segment"}
+    tf = TimeFrame(**legacy_data)
+    print(tf.label)  # "speech-segment" - automatically canonicalized
+
+Serialization Behavior
+~~~~~~~~~~~~~~~~~~~~~~
+
+**Important:** Serialization always uses canonical field names::
+
+    from clams_vocabulary import TimeFrame
+
+    # Input uses legacy name
+    tf = TimeFrame(frameType="speech-segment")
+
+    # Output uses canonical name
+    print(tf.model_dump())  # {"label": "speech-segment"}
+
+This means reading and re-writing MMIF files will canonicalize property names.
+
+URI Registry
+------------
+
+Global Type Registry
+~~~~~~~~~~~~~~~~~~~~
+
+All vocabulary types are registered in a global URI-to-type mapping::
+
+    from clams_vocabulary import URI_TO_TYPE
+
+    # Lookup by canonical URI
+    uri = "https://clams.ai/vocabulary/type/TimeFrame/v7"
+    type_class = URI_TO_TYPE[uri]
+
+    # Lookup by legacy URI (alsoKnownAs)
+    old_uri = "http://mmif.clams.ai/vocabulary/TimeFrame/v7"
+    type_class = URI_TO_TYPE[old_uri]  # Same class
+
+Type Attributes
+---------------
+
+Every type class and instance provides standard attributes:
+
+Class Attributes (ClassVar)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+    from clams_vocabulary import TimeFrame
+
+    print(TimeFrame.shortname)    # "TimeFrame"
+    print(TimeFrame.version)      # "v7"
+    print(TimeFrame.uri)          # Full canonical URI
+    print(TimeFrame.description)  # Human-readable description
+
+Instance Attributes
+~~~~~~~~~~~~~~~~~~~
+
+::
+
+    from clams_vocabulary import ClamsTypesBase
+
+    tf = ClamsTypesBase.from_str("https://clams.ai/vocabulary/type/TimeFrame/v7")
+
+    print(tf.shortname)           # "TimeFrame"
+    print(tf.version)             # "v7"
+    print(str(tf))                # Full URI
+    print(tf.initialized_from)    # Original input URI
+
+Annotation ID Prefixes
+-----------------------
+
+The vocabulary provides automatic prefix generation for annotation IDs::
+
+    from clams_vocabulary import AnnotationTypes
+
+    # Get prefix for annotation ID generation
+    prefix = AnnotationTypes.TimeFrame.get_prefix()
+    print(prefix)  # "tf"
+
+    # Use in annotation ID
+    annotation_id = f"{prefix}_1"  # "tf_1"
+
+Prefixes are auto-generated from type shortnames and guaranteed collision-free.
+
+Best Practices
+--------------
+
+1. **Use Unversioned Types**: Import ``TimeFrame`` not ``TimeFrame_v7`` unless you
+   need to pin a specific version
+
+2. **Use Namespace Classes**: Access types via ``AnnotationTypes.TimeFrame`` for
+   discoverability and IDE support
+
+3. **Canonical Property Names**: Always use canonical field names in new code,
+   aliases are for backward compatibility only
+
+4. **Type Comparison**: Use fuzzy comparison (unversioned types) for flexibility,
+   strict comparison (versioned types) only when version matters
+
+5. **URI Resolution**: Use ``from_str()`` for parsing URIs from MMIF files,
+   direct import for creating new annotations
