@@ -307,9 +307,26 @@ def discover_projects(docs_root):
     return projects
 
 
+# Special navigation links that are external (not from docs subdirs)
+# Format: (display_name, url)
+SPECIAL_LINKS = [
+    ('MMIF', 'https://mmif.clams.ai'),
+    ('apps', 'https://apps.clams.ai'),
+]
+
+# Names reserved by special links (lowercase for comparison)
+SPECIAL_LINK_NAMES = {name.lower() for name, _ in SPECIAL_LINKS}
+
+
 def generate_project_nav_links(projects, current_project, base_url):
     """
     Generate HTML for project navigation links.
+
+    Navigation order:
+    1. home (internal, always first)
+    2. Special external links (MMIF, apps) - open in new tab
+    3. Subdirs with only [a-z] chars, alphabetically
+    4. Remaining subdirs, alphabetically
 
     Args:
         projects: Dict mapping project names to their info
@@ -321,11 +338,55 @@ def generate_project_nav_links(projects, current_project, base_url):
     """
     links = []
 
-    for project in 'home mmif mmif-python clams-python aapb-annotations aapn-evaluations'.split():
-        if project not in projects:
-            continue
-        url = f"{base_url}/{project}/"
+    # 1. Home is always first (if it exists)
+    if 'home' in projects:
+        url = f"{base_url}/home/"
+        active_class = ' active' if current_project == 'home' else ''
+        links.append(
+            f'            <a href="{url}" '
+            f'class="nav-link{active_class}">home</a>'
+        )
 
+    # 2. Special external links (open in new tab)
+    for display_name, ext_url in SPECIAL_LINKS:
+        links.append(
+            f'            <a href="{ext_url}" '
+            f'class="nav-link" target="_blank" rel="noopener">{display_name}</a>'
+        )
+
+    # Separate remaining projects into [a-z]-only and others
+    # Exclude 'home' and names that match special links
+    alpha_only = []
+    others = []
+
+    for project in projects:
+        # Skip home (already added)
+        if project == 'home':
+            continue
+        # Skip projects that match special link names
+        if project.lower() in SPECIAL_LINK_NAMES:
+            print(f"  Warning: Skipping '{project}' subdir - conflicts with special link",
+                  file=sys.stderr)
+            continue
+
+        # Check if name contains only [a-z]
+        if re.match(r'^[a-z]+$', project):
+            alpha_only.append(project)
+        else:
+            others.append(project)
+
+    # 3. Add [a-z]-only subdirs alphabetically
+    for project in sorted(alpha_only):
+        url = f"{base_url}/{project}/"
+        active_class = ' active' if project == current_project else ''
+        links.append(
+            f'            <a href="{url}" '
+            f'class="nav-link{active_class}">{project}</a>'
+        )
+
+    # 4. Add remaining subdirs alphabetically
+    for project in sorted(others):
+        url = f"{base_url}/{project}/"
         active_class = ' active' if project == current_project else ''
         links.append(
             f'            <a href="{url}" '
