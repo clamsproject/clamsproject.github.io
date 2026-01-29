@@ -42,8 +42,10 @@ document
 ~~~~~~~~
 
 - **Type:** *string*
-- **Description:** The identifier of the document that the annotation is over.
 - **Required:** No
+
+The identifier of the document that the annotation is over.
+
 - **Inherited from:** *Polygon_v1*
 
 
@@ -51,8 +53,10 @@ timeUnit
 ~~~~~~~~
 
 - **Type:** *string*
-- **Description:** Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
 - **Required:** No
+
+Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
+
 - **Inherited from:** *Polygon_v1*
 
 
@@ -60,8 +64,10 @@ coordinates
 ~~~~~~~~~~~
 
 - **Type:** *array of array*
-- **Description:** The coordinates of the polygon, taking the top-left of the image as the origin (0,0). Unit used to measure the distance is the number of pixels.
 - **Required:** Yes
+
+The coordinates of the polygon, taking the top-left of the image as the origin (0,0). Unit used to measure the distance is the number of pixels.
+
 - **Inherited from:** *Polygon_v1*
 
 
@@ -69,8 +75,10 @@ timePoint
 ~~~~~~~~~
 
 - **Type:** *integer*
-- **Description:** If on a video stream, the TimePoint that the BoundingBox occurs in.
 - **Required:** No
+
+If on a video stream, the TimePoint that the BoundingBox occurs in.
+
 - **Inherited from:** *Polygon_v1*
 
 
@@ -78,8 +86,10 @@ boxType
 ~~~~~~~
 
 - **Type:** *string*
-- **Description:** The type of BoundingBox. Mostly used for text boxes where we use the value text.
 - **Required:** No
+
+The type of BoundingBox. Mostly used for text boxes where we use the value text.
+
 
 
 JSON Schema

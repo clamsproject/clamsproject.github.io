@@ -42,8 +42,10 @@ document
 ~~~~~~~~
 
 - **Type:** *string*
-- **Description:** The identifier of the document that the annotation is over.
 - **Required:** No
+
+The identifier of the document that the annotation is over.
+
 - **Inherited from:** *Annotation_v2*
 
 

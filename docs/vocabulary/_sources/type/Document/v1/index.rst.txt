@@ -42,16 +42,20 @@ location
 ~~~~~~~~
 
 - **Type:** *string*
-- **Description:** The location of an external file.
 - **Required:** No
+
+The location of an external file.
+
 
 
 mime
 ~~~~
 
 - **Type:** *string*
-- **Description:** The MIME type of the document, only used when the *location* property is used.
 - **Required:** No
+
+The MIME type of the document, only used when the *location* property is used.
+
 
 
 JSON Schema

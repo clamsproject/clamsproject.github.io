@@ -42,32 +42,40 @@ sourceType
 ~~~~~~~~~~
 
 - **Type:** *string*
-- **Description:** The type of sources of the alignment. When an alignment starts from more that two source types, namely sources can be different types, one should not use this metadata.
 - **Required:** No
+
+The type of sources of the alignment. When an alignment starts from more that two source types, namely sources can be different types, one should not use this metadata.
+
 
 
 targetType
 ~~~~~~~~~~
 
 - **Type:** *string*
-- **Description:** The type of targets of the alignment. When an alignment goes to more that two target types, namely targets can be different types, one should not use this metadata.
 - **Required:** No
+
+The type of targets of the alignment. When an alignment goes to more that two target types, namely targets can be different types, one should not use this metadata.
+
 
 
 source
 ~~~~~~
 
 - **Type:** *string*
-- **Description:** The first of the aligned regions or documents.
 - **Required:** Yes
+
+The first of the aligned regions or documents.
+
 
 
 target
 ~~~~~~
 
 - **Type:** *string*
-- **Description:** The second of the aligned regions or documents.
 - **Required:** Yes
+
+The second of the aligned regions or documents.
+
 
 
 JSON Schema

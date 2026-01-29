@@ -277,8 +277,10 @@ compatibility:</p>
 <h3>document<a class="headerlink" href="#document" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
-<li><p><strong>Description:</strong> The identifier of the document that the annotation is over.</p></li>
 <li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>The identifier of the document that the annotation is over.</p>
+<ul class="simple">
 <li><p><strong>Inherited from:</strong> <em>TimeFrame_v5</em></p></li>
 </ul>
 </section>
@@ -286,8 +288,18 @@ compatibility:</p>
 <h3>labelset<a class="headerlink" href="#labelset" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>array of string</em></p></li>
-<li><p><strong>Description:</strong> When an annotation object contains results of a classification task, this metadata is used to specify the label values used in classification. Individual annotations then must have &lt;code&gt;label&lt;/code&gt; property that is one of the values in this list. &lt;br&gt;&lt;br&gt; [Note] Annotations from a classifier app must have this metadata or &lt;code&gt; labelsetUri &lt;/code&gt; metadata. &lt;br&gt;&lt;br&gt; [Note] Not all of labels specified in the &lt;code&gt;labelset&lt;/code&gt; must occur in the output annotations. For example, a &lt;code&gt;labelset&lt;/code&gt; can contain a &lt;i&gt;catch-all&lt;/i&gt; negative label, but if the negative label can be not interesting enough to keep in the output annotation.</p></li>
 <li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>When an annotation object contains results of a classification task, this metadata is used to specify the label values used in classification. Individual annotations then must have <code class="docutils literal notranslate"><span class="pre">label</span></code> property that is one of the values in this list.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Annotations from a classifier app must have this metadata or <code class="docutils literal notranslate"><span class="pre">labelsetUri</span></code> metadata.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Not all of labels specified in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> must occur in the output annotations. For example, a <code class="docutils literal notranslate"><span class="pre">labelset</span></code> can contain a <em>catch-all</em> negative label, but if the negative label can be not interesting enough to keep in the output annotation.</p>
+</div>
+<ul class="simple">
 <li><p><strong>Inherited from:</strong> <em>TimeFrame_v5</em></p></li>
 </ul>
 </section>
@@ -295,8 +307,14 @@ compatibility:</p>
 <h3>labelsetUri<a class="headerlink" href="#labelseturi" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
-<li><p><strong>Description:</strong> A URI to an externally defined labelset. Since the &lt;code&gt;labelset&lt;/code&gt; metadata is a list of simple strings, this URI can be used to point to a more detailed definition of the labelset. This can be a JSON-LD document or a SKOS concept scheme, for example. &lt;br&gt;&lt;br&gt; [Note] Annotations from a classifier app must have this metadata or &lt;code&gt; labelset &lt;/code&gt; metadata.</p></li>
 <li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>A URI to an externally defined labelset. Since the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> metadata is a list of simple strings, this URI can be used to point to a more detailed definition of the labelset. This can be a JSON-LD document or a SKOS concept scheme, for example.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Annotations from a classifier app must have this metadata or <code class="docutils literal notranslate"><span class="pre">labelset</span></code> metadata.</p>
+</div>
+<ul class="simple">
 <li><p><strong>Inherited from:</strong> <em>TimeFrame_v5</em></p></li>
 </ul>
 </section>
@@ -304,8 +322,14 @@ compatibility:</p>
 <h3>label<a class="headerlink" href="#label" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
-<li><p><strong>Description:</strong> A label given to this object by a classifier. The value must be a simple string value of the label and must be one of the values defined in the &lt;code&gt;labelset&lt;/code&gt; or &lt;code&gt;labelsetUri&lt;/code&gt; annotation metadata. &lt;br&gt;&lt;br&gt; [Note] Annotations from a classifier app must have this property.</p></li>
 <li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>A label given to this object by a classifier. The value must be a simple string value of the label and must be one of the values defined in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> or <code class="docutils literal notranslate"><span class="pre">labelsetUri</span></code> annotation metadata.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Annotations from a classifier app must have this property.</p>
+</div>
+<ul class="simple">
 <li><p><strong>Inherited from:</strong> <em>TimeFrame_v5</em></p></li>
 </ul>
 </section>
@@ -313,8 +337,10 @@ compatibility:</p>
 <h3>classifications<a class="headerlink" href="#classifications" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>object</em></p></li>
-<li><p><strong>Description:</strong> Alias for the &lt;code&gt;classification&lt;/code&gt; metadata. Here for historical reasons.</p></li>
 <li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>Alias for the <code class="docutils literal notranslate"><span class="pre">classification</span></code> metadata. Here for historical reasons.</p>
+<ul class="simple">
 <li><p><strong>Inherited from:</strong> <em>TimeFrame_v5</em></p></li>
 </ul>
 </section>
@@ -322,8 +348,11 @@ compatibility:</p>
 <h3>classification<a class="headerlink" href="#classification" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>object</em></p></li>
-<li><p><strong>Description:</strong> A map from label values to their “score” numbers provided by a classifier. The score can be probability, similarity, confidence, or any other real number that was used to determine the label value. &lt;br&gt;&lt;br&gt; [Optional] on top of the &lt;code&gt;label&lt;/code&gt; property. However when this property is used, the &lt;code&gt;label&lt;/code&gt; property must be one of the keys and the keys must match to the values defined in the &lt;code&gt;labelset&lt;/code&gt; or &lt;code&gt;labelsetUri&lt;/code&gt; annotation metadata.</p></li>
 <li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>A map from label values to their “score” numbers provided by a classifier. The score can be probability, similarity, confidence, or any other real number that was used to determine the label value.</p>
+<p><em>Optional</em> on top of the <code class="docutils literal notranslate"><span class="pre">label</span></code> property. However when this property is used, the <code class="docutils literal notranslate"><span class="pre">label</span></code> property must be one of the keys and the keys must match to the values defined in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> or <code class="docutils literal notranslate"><span class="pre">labelsetUri</span></code> annotation metadata.</p>
+<ul class="simple">
 <li><p><strong>Inherited from:</strong> <em>TimeFrame_v5</em></p></li>
 </ul>
 </section>
@@ -331,8 +360,10 @@ compatibility:</p>
 <h3>timeUnit<a class="headerlink" href="#timeunit" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
-<li><p><strong>Description:</strong> Specifies which unit of time the measurement is based. Can be <em>seconds</em> or <em>milliseconds</em>, or in case of annotations on a VideoDocument, <em>frames</em>.</p></li>
 <li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>Specifies which unit of time the measurement is based. Can be <em>seconds</em> or <em>milliseconds</em>, or in case of annotations on a VideoDocument, <em>frames</em>.</p>
+<ul class="simple">
 <li><p><strong>Inherited from:</strong> <em>TimeFrame_v5</em></p></li>
 </ul>
 </section>
@@ -340,8 +371,10 @@ compatibility:</p>
 <h3>start<a class="headerlink" href="#start" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>integer</em></p></li>
-<li><p><strong>Description:</strong> The starting offset in the primary data. This point is inclusive. For time intervals, the unit is determined by the <em>timeUnit</em> metadata key. For text intervals, the unit is Unicode code point.</p></li>
 <li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>The starting offset in the primary data. This point is inclusive. For time intervals, the unit is determined by the <em>timeUnit</em> metadata key. For text intervals, the unit is Unicode code point.</p>
+<ul class="simple">
 <li><p><strong>Inherited from:</strong> <em>TimeFrame_v5</em></p></li>
 </ul>
 </section>
@@ -349,8 +382,10 @@ compatibility:</p>
 <h3>end<a class="headerlink" href="#end" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>integer</em></p></li>
-<li><p><strong>Description:</strong> The ending offset in the primary data. This point is exclusive. For time intervals, the unit is determined by the <em>timeUnit</em> metadata key. For text intervals, the unit is Unicode code point.</p></li>
 <li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>The ending offset in the primary data. This point is exclusive. For time intervals, the unit is determined by the <em>timeUnit</em> metadata key. For text intervals, the unit is Unicode code point.</p>
+<ul class="simple">
 <li><p><strong>Inherited from:</strong> <em>TimeFrame_v5</em></p></li>
 </ul>
 </section>
@@ -358,8 +393,10 @@ compatibility:</p>
 <h3>targets<a class="headerlink" href="#targets" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>array of string</em></p></li>
-<li><p><strong>Description:</strong> IDs of a sequence of annotations covering the region of primary data referred to by this annotation. Used as an alternative to <em>start</em> and <em>end</em> to point to component annotations (for example a token sequence) rather than directly into primary data, or to link two or more annotations (for example in a coreference annotation).</p></li>
 <li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>IDs of a sequence of annotations covering the region of primary data referred to by this annotation. Used as an alternative to <em>start</em> and <em>end</em> to point to component annotations (for example a token sequence) rather than directly into primary data, or to link two or more annotations (for example in a coreference annotation).</p>
+<ul class="simple">
 <li><p><strong>Inherited from:</strong> <em>TimeFrame_v5</em></p></li>
 </ul>
 </section>
@@ -367,8 +404,11 @@ compatibility:</p>
 <h3>frameType<a class="headerlink" href="#frametype" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
-<li><p><strong>Description:</strong> The type of TimeFrame. Possible values include, but are not limited to, bars, tones, bars-and-tones, speech, noise, music, slate, chyron, lower-third, credits, and other. &lt;br&gt;&lt;br&gt; No longer encouraged to use, instead &lt;code&gt;label&lt;/code&gt; property should replace this property.</p></li>
 <li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>The type of TimeFrame. Possible values include, but are not limited to, bars, tones, bars-and-tones, speech, noise, music, slate, chyron, lower-third, credits, and other.</p>
+<p>No longer encouraged to use, instead <code class="docutils literal notranslate"><span class="pre">label</span></code> property should replace this property.</p>
+<ul class="simple">
 <li><p><strong>Inherited from:</strong> <em>TimeFrame_v5</em></p></li>
 </ul>
 </section>
@@ -376,9 +416,9 @@ compatibility:</p>
 <h3>title<a class="headerlink" href="#title" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
-<li><p><strong>Description:</strong> Title of the chapter</p></li>
 <li><p><strong>Required:</strong> No</p></li>
 </ul>
+<p>Title of the chapter</p>
 </section>
 </section>
 <section id="json-schema">
@@ -399,15 +439,15 @@ compatibility:</p>
 <span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
 <span class="w">      </span><span class="p">},</span>
 <span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;When an annotation object contains results of a classification task, this metadata is used to specify the label values used in classification. Individual annotations then must have &lt;code&gt;label&lt;/code&gt; property that is one of the values in this list. &lt;br&gt;&lt;br&gt; [Note] Annotations from a classifier app must have this metadata or &lt;code&gt; labelsetUri &lt;/code&gt; metadata. &lt;br&gt;&lt;br&gt; [Note] Not all of labels specified in the &lt;code&gt;labelset&lt;/code&gt; must occur in the output annotations. For example, a &lt;code&gt;labelset&lt;/code&gt; can contain a &lt;i&gt;catch-all&lt;/i&gt; negative label, but if the negative label can be not interesting enough to keep in the output annotation.&quot;</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;When an annotation object contains results of a classification task, this metadata is used to specify the label values used in classification. Individual annotations then must have &lt;code&gt;label&lt;/code&gt; property that is one of the values in this list. &lt;br&gt;&lt;br&gt; [note] Annotations from a classifier app must have this metadata or &lt;code&gt; labelsetUri &lt;/code&gt; metadata. [/note]&lt;br&gt;&lt;br&gt; [note] Not all of labels specified in the &lt;code&gt;labelset&lt;/code&gt; must occur in the output annotations. For example, a &lt;code&gt;labelset&lt;/code&gt; can contain a &lt;i&gt;catch-all&lt;/i&gt; negative label, but if the negative label can be not interesting enough to keep in the output annotation. [/note]&quot;</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;labelsetUri&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A URI to an externally defined labelset. Since the &lt;code&gt;labelset&lt;/code&gt; metadata is a list of simple strings, this URI can be used to point to a more detailed definition of the labelset. This can be a JSON-LD document or a SKOS concept scheme, for example. &lt;br&gt;&lt;br&gt; [Note] Annotations from a classifier app must have this metadata or &lt;code&gt; labelset &lt;/code&gt; metadata.&quot;</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A URI to an externally defined labelset. Since the &lt;code&gt;labelset&lt;/code&gt; metadata is a list of simple strings, this URI can be used to point to a more detailed definition of the labelset. This can be a JSON-LD document or a SKOS concept scheme, for example. &lt;br&gt;&lt;br&gt; [note] Annotations from a classifier app must have this metadata or &lt;code&gt; labelset &lt;/code&gt; metadata. [/note]&quot;</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A label given to this object by a classifier. The value must be a simple string value of the label and must be one of the values defined in the &lt;code&gt;labelset&lt;/code&gt; or &lt;code&gt;labelsetUri&lt;/code&gt; annotation metadata. &lt;br&gt;&lt;br&gt; [Note] Annotations from a classifier app must have this property.&quot;</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A label given to this object by a classifier. The value must be a simple string value of the label and must be one of the values defined in the &lt;code&gt;labelset&lt;/code&gt; or &lt;code&gt;labelsetUri&lt;/code&gt; annotation metadata. &lt;br&gt;&lt;br&gt; [note] Annotations from a classifier app must have this property. [/note]&quot;</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;classifications&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -421,7 +461,7 @@ compatibility:</p>
 <span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
 <span class="w">      </span><span class="p">},</span>
 <span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A map from label values to their \&quot;score\&quot; numbers provided by a classifier. The score can be probability, similarity, confidence, or any other real number that was used to determine the label value. &lt;br&gt;&lt;br&gt; [Optional] on top of the &lt;code&gt;label&lt;/code&gt; property. However when this property is used, the &lt;code&gt;label&lt;/code&gt; property must be one of the keys and the keys must match to the values defined in the &lt;code&gt;labelset&lt;/code&gt; or &lt;code&gt;labelsetUri&lt;/code&gt; annotation metadata.&quot;</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A map from label values to their \&quot;score\&quot; numbers provided by a classifier. The score can be probability, similarity, confidence, or any other real number that was used to determine the label value. &lt;br&gt;&lt;br&gt; &lt;i&gt;Optional&lt;/i&gt; on top of the &lt;code&gt;label&lt;/code&gt; property. However when this property is used, the &lt;code&gt;label&lt;/code&gt; property must be one of the keys and the keys must match to the values defined in the &lt;code&gt;labelset&lt;/code&gt; or &lt;code&gt;labelsetUri&lt;/code&gt; annotation metadata.&quot;</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;timeUnit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>

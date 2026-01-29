@@ -42,8 +42,10 @@ document
 ~~~~~~~~
 
 - **Type:** *string*
-- **Description:** The identifier of the document that the annotation is over.
 - **Required:** No
+
+The identifier of the document that the annotation is over.
+
 - **Inherited from:** *Region_v1*
 
 
@@ -51,8 +53,10 @@ timeUnit
 ~~~~~~~~
 
 - **Type:** *string*
-- **Description:** Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
 - **Required:** No
+
+Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
+
 - **Inherited from:** *Region_v1*
 
 
@@ -60,8 +64,10 @@ polygons
 ~~~~~~~~
 
 - **Type:** *array of string*
-- **Description:** The Polygons that make up the object.
 - **Required:** Yes
+
+The Polygons that make up the object.
+
 
 
 JSON Schema

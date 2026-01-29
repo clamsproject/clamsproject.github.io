@@ -280,8 +280,10 @@ compatibility:</p>
 <h3>document<a class="headerlink" href="#document" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
-<li><p><strong>Description:</strong> The identifier of the document that the annotation is over.</p></li>
 <li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>The identifier of the document that the annotation is over.</p>
+<ul class="simple">
 <li><p><strong>Inherited from:</strong> <em>Region_v1</em></p></li>
 </ul>
 </section>
@@ -289,8 +291,10 @@ compatibility:</p>
 <h3>timeUnit<a class="headerlink" href="#timeunit" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
-<li><p><strong>Description:</strong> Specifies which unit of time the measurement is based. Can be <em>seconds</em> or <em>milliseconds</em>, or in case of annotations on a VideoDocument, <em>frames</em>.</p></li>
 <li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>Specifies which unit of time the measurement is based. Can be <em>seconds</em> or <em>milliseconds</em>, or in case of annotations on a VideoDocument, <em>frames</em>.</p>
+<ul class="simple">
 <li><p><strong>Inherited from:</strong> <em>Region_v1</em></p></li>
 </ul>
 </section>
@@ -298,25 +302,25 @@ compatibility:</p>
 <h3>start<a class="headerlink" href="#start" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>integer</em></p></li>
-<li><p><strong>Description:</strong> The starting offset in the primary data. This point is inclusive. For time intervals, the unit is determined by the <em>timeUnit</em> metadata key. For text intervals, the unit is Unicode code point.</p></li>
 <li><p><strong>Required:</strong> No</p></li>
 </ul>
+<p>The starting offset in the primary data. This point is inclusive. For time intervals, the unit is determined by the <em>timeUnit</em> metadata key. For text intervals, the unit is Unicode code point.</p>
 </section>
 <section id="end">
 <h3>end<a class="headerlink" href="#end" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>integer</em></p></li>
-<li><p><strong>Description:</strong> The ending offset in the primary data. This point is exclusive. For time intervals, the unit is determined by the <em>timeUnit</em> metadata key. For text intervals, the unit is Unicode code point.</p></li>
 <li><p><strong>Required:</strong> No</p></li>
 </ul>
+<p>The ending offset in the primary data. This point is exclusive. For time intervals, the unit is determined by the <em>timeUnit</em> metadata key. For text intervals, the unit is Unicode code point.</p>
 </section>
 <section id="targets">
 <h3>targets<a class="headerlink" href="#targets" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>array of string</em></p></li>
-<li><p><strong>Description:</strong> IDs of a sequence of annotations covering the region of primary data referred to by this annotation. Used as an alternative to <em>start</em> and <em>end</em> to point to component annotations (for example a token sequence) rather than directly into primary data, or to link two or more annotations (for example in a coreference annotation).</p></li>
 <li><p><strong>Required:</strong> No</p></li>
 </ul>
+<p>IDs of a sequence of annotations covering the region of primary data referred to by this annotation. Used as an alternative to <em>start</em> and <em>end</em> to point to component annotations (for example a token sequence) rather than directly into primary data, or to link two or more annotations (for example in a coreference annotation).</p>
 </section>
 </section>
 <section id="json-schema">

@@ -49,8 +49,10 @@ document
 ~~~~~~~~
 
 - **Type:** *string*
-- **Description:** The identifier of the document that the annotation is over.
 - **Required:** No
+
+The identifier of the document that the annotation is over.
+
 - **Inherited from:** *Interval_v1*
 
 
@@ -58,8 +60,10 @@ timeUnit
 ~~~~~~~~
 
 - **Type:** *string*
-- **Description:** Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
 - **Required:** No
+
+Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
+
 - **Inherited from:** *Interval_v1*
 
 
@@ -67,8 +71,10 @@ start
 ~~~~~
 
 - **Type:** *integer*
-- **Description:** The starting offset in the primary data. This point is inclusive. For time intervals, the unit is determined by the *timeUnit* metadata key. For text intervals, the unit is Unicode code point.
 - **Required:** No
+
+The starting offset in the primary data. This point is inclusive. For time intervals, the unit is determined by the *timeUnit* metadata key. For text intervals, the unit is Unicode code point.
+
 - **Inherited from:** *Interval_v1*
 
 
@@ -76,8 +82,10 @@ end
 ~~~
 
 - **Type:** *integer*
-- **Description:** The ending offset in the primary data. This point is exclusive. For time intervals, the unit is determined by the *timeUnit* metadata key. For text intervals, the unit is Unicode code point.
 - **Required:** No
+
+The ending offset in the primary data. This point is exclusive. For time intervals, the unit is determined by the *timeUnit* metadata key. For text intervals, the unit is Unicode code point.
+
 - **Inherited from:** *Interval_v1*
 
 
@@ -85,8 +93,10 @@ targets
 ~~~~~~~
 
 - **Type:** *array of string*
-- **Description:** IDs of a sequence of annotations covering the region of primary data referred to by this annotation. Used as an alternative to *start* and *end* to point to component annotations (for example a token sequence) rather than directly into primary data, or to link two or more annotations (for example in a coreference annotation).
 - **Required:** No
+
+IDs of a sequence of annotations covering the region of primary data referred to by this annotation. Used as an alternative to *start* and *end* to point to component annotations (for example a token sequence) rather than directly into primary data, or to link two or more annotations (for example in a coreference annotation).
+
 - **Inherited from:** *Interval_v1*
 
 
