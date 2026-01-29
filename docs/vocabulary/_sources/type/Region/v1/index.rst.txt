@@ -12,7 +12,7 @@ Region (v1)
 
 **Shortname:** ``Region``
 
-**Inherits from:** :doc:`Annotation_v2 <../../Annotation/v2/index>`
+**Inherits from:** :doc:`Annotation (v2) <../../Annotation/v2/index>`
 
 **Included in vocabulary versions:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`
 
@@ -38,25 +38,31 @@ Properties
 ----------
 
 
-document
-~~~~~~~~
-
-- **Type:** *string*
-- **Required:** No
-
-The identifier of the document that the annotation is over.
-
-- **Inherited from:** *Annotation_v2*
+Native
+^^^^^^
 
 
 timeUnit
-~~~~~~~~
+""""""""
 
 - **Type:** *string*
 - **Required:** No
 
 Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
 
+
+Inherited from :doc:`Annotation (v2) <../../Annotation/v2/index>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+document
+""""""""
+
+- **Type:** *string*
+- **Required:** No
+
+
+The identifier of the document that the annotation is over.
 
 
 JSON Schema

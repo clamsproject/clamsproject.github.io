@@ -257,7 +257,7 @@
 <p><strong>Previous Version:</strong> none <em>(this is the oldest version)</em></p>
 <p><strong>URI:</strong> <a class="reference external" href="http://clams.ai/vocabulary/type/Paragraph/v1">http://clams.ai/vocabulary/type/Paragraph/v1</a></p>
 <p><strong>Shortname:</strong> <code class="docutils literal notranslate"><span class="pre">Paragraph</span></code></p>
-<p><strong>Inherits from:</strong> <a class="reference internal" href="../../Span/v5/index.html"><span class="doc">Span_v5</span></a></p>
+<p><strong>Inherits from:</strong> <a class="reference internal" href="../../Span/v5/index.html"><span class="doc">Span (v5)</span></a></p>
 <p><strong>Included in vocabulary versions:</strong> <a class="reference internal" href="../../../1.1.0/index.html"><span class="doc">1.1.0</span></a></p>
 <section id="also-known-as">
 <h2>Also Known As<a class="headerlink" href="#also-known-as" title="Link to this heading">¶</a></h2>
@@ -281,19 +281,49 @@ compatibility:</p>
 </section>
 <section id="properties">
 <h2>Properties<a class="headerlink" href="#properties" title="Link to this heading">¶</a></h2>
+<section id="inherited-from-annotation-v6">
+<h3>Inherited from <a class="reference internal" href="../../Annotation/v6/index.html"><span class="doc">Annotation (v6)</span></a><a class="headerlink" href="#inherited-from-annotation-v6" title="Link to this heading">¶</a></h3>
+<section id="classification">
+<h4>classification<a class="headerlink" href="#classification" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Type:</strong> <em>object</em></p></li>
+<li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>A map from label values to their “score” numbers provided by a classifier. The score can be probability, similarity, confidence, or any other real number that was used to determine the label value.</p>
+<p><em>Optional</em> on top of the <code class="docutils literal notranslate"><span class="pre">label</span></code> property. However when this property is used, the <code class="docutils literal notranslate"><span class="pre">label</span></code> property must be one of the keys and the keys must match to the values defined in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> or <code class="docutils literal notranslate"><span class="pre">labelsetUri</span></code> annotation metadata.</p>
+</section>
+<section id="classifications">
+<h4>classifications<a class="headerlink" href="#classifications" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Type:</strong> <em>object</em></p></li>
+<li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>Alias for the <code class="docutils literal notranslate"><span class="pre">classification</span></code> metadata. Here for historical reasons.</p>
+</section>
 <section id="document">
-<h3>document<a class="headerlink" href="#document" title="Link to this heading">¶</a></h3>
+<h4>document<a class="headerlink" href="#document" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
 <li><p><strong>Required:</strong> No</p></li>
 </ul>
 <p>The identifier of the document that the annotation is over.</p>
+</section>
+<section id="label">
+<h4>label<a class="headerlink" href="#label" title="Link to this heading">¶</a></h4>
 <ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Span_v5</em></p></li>
+<li><p><strong>Type:</strong> <em>string</em></p></li>
+<li><p><strong>Required:</strong> No</p></li>
 </ul>
+<p>A label given to this object by classification. The value must be a simple string value of the label and must be one of the values defined in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> or <code class="docutils literal notranslate"><span class="pre">labelsetUri</span></code> annotation metadata.</p>
+<p>For example, for the <code class="docutils literal notranslate"><span class="pre">Sentence</span></code> subtype, this could be used to indicate the type of sentence, such as “declarative”, “interrogative”, “exclamatory”, etc. For <code class="docutils literal notranslate"><span class="pre">NamedEntity</span></code> subtype, this could be used to indicate the type of named entity, such as “PER”, “ORG”, “LOC”, “MISC” (following the CoNLL-2003 labels).</p>
+<p>For non-linguistic annotations, for example for <code class="docutils literal notranslate"><span class="pre">TimeFrame</span></code>, this could be used to indicate the type of the time frame, such as “speech”, “music”, “noise”, “bars-and-tones”, etc, for acoustic classification. Or “slate”, “lower-third”, “credits” for visual classification of video frames.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Annotations from a type of classifier model must have this property.</p>
+</div>
 </section>
 <section id="labelset">
-<h3>labelset<a class="headerlink" href="#labelset" title="Link to this heading">¶</a></h3>
+<h4>labelset<a class="headerlink" href="#labelset" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>array of string</em></p></li>
 <li><p><strong>Required:</strong> No</p></li>
@@ -307,12 +337,9 @@ compatibility:</p>
 <p class="admonition-title">Note</p>
 <p>Not all of labels specified in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> must occur in the output annotations. For example, a <code class="docutils literal notranslate"><span class="pre">labelset</span></code> can contain a <em>catch-all</em> negative label, but if the negative label can be not interesting enough to keep in the output annotation.</p>
 </div>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Span_v5</em></p></li>
-</ul>
 </section>
 <section id="labelseturi">
-<h3>labelsetUri<a class="headerlink" href="#labelseturi" title="Link to this heading">¶</a></h3>
+<h4>labelsetUri<a class="headerlink" href="#labelseturi" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
 <li><p><strong>Required:</strong> No</p></li>
@@ -322,52 +349,39 @@ compatibility:</p>
 <p class="admonition-title">Note</p>
 <p>Annotations from a classifier app must have this metadata or <code class="docutils literal notranslate"><span class="pre">labelset</span></code> metadata.</p>
 </div>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Span_v5</em></p></li>
-</ul>
 </section>
-<section id="label">
-<h3>label<a class="headerlink" href="#label" title="Link to this heading">¶</a></h3>
+</section>
+<section id="inherited-from-interval-v5">
+<h3>Inherited from <a class="reference internal" href="../../Interval/v5/index.html"><span class="doc">Interval (v5)</span></a><a class="headerlink" href="#inherited-from-interval-v5" title="Link to this heading">¶</a></h3>
+<section id="end">
+<h4>end<a class="headerlink" href="#end" title="Link to this heading">¶</a></h4>
 <ul class="simple">
-<li><p><strong>Type:</strong> <em>string</em></p></li>
+<li><p><strong>Type:</strong> <em>integer</em></p></li>
 <li><p><strong>Required:</strong> No</p></li>
 </ul>
-<p>A label given to this object by classification. The value must be a simple string value of the label and must be one of the values defined in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> or <code class="docutils literal notranslate"><span class="pre">labelsetUri</span></code> annotation metadata.</p>
-<p>For example, for the <code class="docutils literal notranslate"><span class="pre">Sentence</span></code> subtype, this could be used to indicate the type of sentence, such as “declarative”, “interrogative”, “exclamatory”, etc. For <code class="docutils literal notranslate"><span class="pre">NamedEntity</span></code> subtype, this could be used to indicate the type of named entity, such as “PER”, “ORG”, “LOC”, “MISC” (following the CoNLL-2003 labels).</p>
-<p>For non-linguistic annotations, for example for <code class="docutils literal notranslate"><span class="pre">TimeFrame</span></code>, this could be used to indicate the type of the time frame, such as “speech”, “music”, “noise”, “bars-and-tones”, etc, for acoustic classification. Or “slate”, “lower-third”, “credits” for visual classification of video frames.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Annotations from a type of classifier model must have this property.</p>
-</div>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Span_v5</em></p></li>
-</ul>
+<p>The ending offset in the primary data. This point is exclusive. For time intervals, the unit is determined by the <em>timeUnit</em> metadata key. For text intervals, the unit is Unicode code point.</p>
 </section>
-<section id="classifications">
-<h3>classifications<a class="headerlink" href="#classifications" title="Link to this heading">¶</a></h3>
+<section id="start">
+<h4>start<a class="headerlink" href="#start" title="Link to this heading">¶</a></h4>
 <ul class="simple">
-<li><p><strong>Type:</strong> <em>object</em></p></li>
+<li><p><strong>Type:</strong> <em>integer</em></p></li>
 <li><p><strong>Required:</strong> No</p></li>
 </ul>
-<p>Alias for the <code class="docutils literal notranslate"><span class="pre">classification</span></code> metadata. Here for historical reasons.</p>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Span_v5</em></p></li>
-</ul>
+<p>The starting offset in the primary data. This point is inclusive. For time intervals, the unit is determined by the <em>timeUnit</em> metadata key. For text intervals, the unit is Unicode code point.</p>
 </section>
-<section id="classification">
-<h3>classification<a class="headerlink" href="#classification" title="Link to this heading">¶</a></h3>
+<section id="targets">
+<h4>targets<a class="headerlink" href="#targets" title="Link to this heading">¶</a></h4>
 <ul class="simple">
-<li><p><strong>Type:</strong> <em>object</em></p></li>
+<li><p><strong>Type:</strong> <em>array of string</em></p></li>
 <li><p><strong>Required:</strong> No</p></li>
 </ul>
-<p>A map from label values to their “score” numbers provided by a classifier. The score can be probability, similarity, confidence, or any other real number that was used to determine the label value.</p>
-<p><em>Optional</em> on top of the <code class="docutils literal notranslate"><span class="pre">label</span></code> property. However when this property is used, the <code class="docutils literal notranslate"><span class="pre">label</span></code> property must be one of the keys and the keys must match to the values defined in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> or <code class="docutils literal notranslate"><span class="pre">labelsetUri</span></code> annotation metadata.</p>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Span_v5</em></p></li>
-</ul>
+<p>IDs of a sequence of annotations covering the region of primary data referred to by this annotation. Used as an alternative to <em>start</em> and <em>end</em> to point to component annotations (for example a token sequence) rather than directly into primary data, or to link two or more annotations (for example in a coreference annotation).</p>
 </section>
+</section>
+<section id="inherited-from-region-v5">
+<h3>Inherited from <a class="reference internal" href="../../Region/v5/index.html"><span class="doc">Region (v5)</span></a><a class="headerlink" href="#inherited-from-region-v5" title="Link to this heading">¶</a></h3>
 <section id="timeunit">
-<h3>timeUnit<a class="headerlink" href="#timeunit" title="Link to this heading">¶</a></h3>
+<h4>timeUnit<a class="headerlink" href="#timeunit" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
 <li><p><strong>Required:</strong> No</p></li>
@@ -377,53 +391,18 @@ compatibility:</p>
 <p class="admonition-title">Note</p>
 <p>This metadata is only relevant for time-based annotations.</p>
 </div>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Span_v5</em></p></li>
-</ul>
 </section>
-<section id="start">
-<h3>start<a class="headerlink" href="#start" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>Type:</strong> <em>integer</em></p></li>
-<li><p><strong>Required:</strong> No</p></li>
-</ul>
-<p>The starting offset in the primary data. This point is inclusive. For time intervals, the unit is determined by the <em>timeUnit</em> metadata key. For text intervals, the unit is Unicode code point.</p>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Span_v5</em></p></li>
-</ul>
 </section>
-<section id="end">
-<h3>end<a class="headerlink" href="#end" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>Type:</strong> <em>integer</em></p></li>
-<li><p><strong>Required:</strong> No</p></li>
-</ul>
-<p>The ending offset in the primary data. This point is exclusive. For time intervals, the unit is determined by the <em>timeUnit</em> metadata key. For text intervals, the unit is Unicode code point.</p>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Span_v5</em></p></li>
-</ul>
-</section>
-<section id="targets">
-<h3>targets<a class="headerlink" href="#targets" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>Type:</strong> <em>array of string</em></p></li>
-<li><p><strong>Required:</strong> No</p></li>
-</ul>
-<p>IDs of a sequence of annotations covering the region of primary data referred to by this annotation. Used as an alternative to <em>start</em> and <em>end</em> to point to component annotations (for example a token sequence) rather than directly into primary data, or to link two or more annotations (for example in a coreference annotation).</p>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Span_v5</em></p></li>
-</ul>
-</section>
+<section id="inherited-from-span-v5">
+<h3>Inherited from <a class="reference internal" href="../../Span/v5/index.html"><span class="doc">Span (v5)</span></a><a class="headerlink" href="#inherited-from-span-v5" title="Link to this heading">¶</a></h3>
 <section id="text">
-<h3>text<a class="headerlink" href="#text" title="Link to this heading">¶</a></h3>
+<h4>text<a class="headerlink" href="#text" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
 <li><p><strong>Required:</strong> No</p></li>
 </ul>
 <p>The surface string in the primary data covered by this span.</p>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Span_v5</em></p></li>
-</ul>
+</section>
 </section>
 </section>
 <section id="json-schema">
@@ -544,17 +523,29 @@ compatibility:</p>
 <li><a class="reference internal" href="#similar-types">Similar Types</a></li>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#properties">Properties</a><ul>
+<li><a class="reference internal" href="#inherited-from-annotation-v6">Inherited from <span class="xref std std-doc">Annotation (v6)</span></a><ul>
+<li><a class="reference internal" href="#classification">classification</a></li>
+<li><a class="reference internal" href="#classifications">classifications</a></li>
 <li><a class="reference internal" href="#document">document</a></li>
+<li><a class="reference internal" href="#label">label</a></li>
 <li><a class="reference internal" href="#labelset">labelset</a></li>
 <li><a class="reference internal" href="#labelseturi">labelsetUri</a></li>
-<li><a class="reference internal" href="#label">label</a></li>
-<li><a class="reference internal" href="#classifications">classifications</a></li>
-<li><a class="reference internal" href="#classification">classification</a></li>
-<li><a class="reference internal" href="#timeunit">timeUnit</a></li>
-<li><a class="reference internal" href="#start">start</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inherited-from-interval-v5">Inherited from <span class="xref std std-doc">Interval (v5)</span></a><ul>
 <li><a class="reference internal" href="#end">end</a></li>
+<li><a class="reference internal" href="#start">start</a></li>
 <li><a class="reference internal" href="#targets">targets</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inherited-from-region-v5">Inherited from <span class="xref std std-doc">Region (v5)</span></a><ul>
+<li><a class="reference internal" href="#timeunit">timeUnit</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inherited-from-span-v5">Inherited from <span class="xref std std-doc">Span (v5)</span></a><ul>
 <li><a class="reference internal" href="#text">text</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#json-schema">JSON Schema</a></li>

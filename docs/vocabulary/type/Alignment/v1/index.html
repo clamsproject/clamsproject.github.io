@@ -257,7 +257,7 @@
 <p><strong>Previous Version:</strong> none <em>(this is the oldest version)</em></p>
 <p><strong>URI:</strong> <a class="reference external" href="http://clams.ai/vocabulary/type/Alignment/v1">http://clams.ai/vocabulary/type/Alignment/v1</a></p>
 <p><strong>Shortname:</strong> <code class="docutils literal notranslate"><span class="pre">Alignment</span></code></p>
-<p><strong>Inherits from:</strong> <a class="reference internal" href="../../Thing/v1/index.html"><span class="doc">Thing_v1</span></a></p>
+<p><strong>Inherits from:</strong> <a class="reference internal" href="../../Thing/v1/index.html"><span class="doc">Thing (v1)</span></a></p>
 <p><strong>Included in vocabulary versions:</strong> <a class="reference internal" href="../../../1.0.0/index.html"><span class="doc">1.0.0</span></a>, <a class="reference internal" href="../../../1.0.1/index.html"><span class="doc">1.0.1</span></a>, <a class="reference internal" href="../../../1.0.2/index.html"><span class="doc">1.0.2</span></a>, <a class="reference internal" href="../../../1.0.3/index.html"><span class="doc">1.0.3</span></a>, <a class="reference internal" href="../../../1.0.4/index.html"><span class="doc">1.0.4</span></a>, <a class="reference internal" href="../../../1.1.0/index.html"><span class="doc">1.1.0</span></a></p>
 <section id="also-known-as">
 <h2>Also Known As<a class="headerlink" href="#also-known-as" title="Link to this heading">¶</a></h2>
@@ -276,24 +276,10 @@ compatibility:</p>
 </section>
 <section id="properties">
 <h2>Properties<a class="headerlink" href="#properties" title="Link to this heading">¶</a></h2>
-<section id="sourcetype">
-<h3>sourceType<a class="headerlink" href="#sourcetype" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>Type:</strong> <em>string</em></p></li>
-<li><p><strong>Required:</strong> No</p></li>
-</ul>
-<p>The type of sources of the alignment. When an alignment starts from more that two source types, namely sources can be different types, one should not use this metadata.</p>
-</section>
-<section id="targettype">
-<h3>targetType<a class="headerlink" href="#targettype" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>Type:</strong> <em>string</em></p></li>
-<li><p><strong>Required:</strong> No</p></li>
-</ul>
-<p>The type of targets of the alignment. When an alignment goes to more that two target types, namely targets can be different types, one should not use this metadata.</p>
-</section>
+<section id="native">
+<h3>Native<a class="headerlink" href="#native" title="Link to this heading">¶</a></h3>
 <section id="source">
-<h3>source<a class="headerlink" href="#source" title="Link to this heading">¶</a></h3>
+<h4>source<a class="headerlink" href="#source" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
 <li><p><strong>Required:</strong> Yes</p></li>
@@ -301,12 +287,29 @@ compatibility:</p>
 <p>The first of the aligned regions or documents.</p>
 </section>
 <section id="target">
-<h3>target<a class="headerlink" href="#target" title="Link to this heading">¶</a></h3>
+<h4>target<a class="headerlink" href="#target" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
 <li><p><strong>Required:</strong> Yes</p></li>
 </ul>
 <p>The second of the aligned regions or documents.</p>
+</section>
+<section id="sourcetype">
+<h4>sourceType<a class="headerlink" href="#sourcetype" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Type:</strong> <em>string</em></p></li>
+<li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>The type of sources of the alignment. When an alignment starts from more that two source types, namely sources can be different types, one should not use this metadata.</p>
+</section>
+<section id="targettype">
+<h4>targetType<a class="headerlink" href="#targettype" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Type:</strong> <em>string</em></p></li>
+<li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>The type of targets of the alignment. When an alignment goes to more that two target types, namely targets can be different types, one should not use this metadata.</p>
+</section>
 </section>
 </section>
 <section id="json-schema">
@@ -388,10 +391,13 @@ compatibility:</p>
 <li><a class="reference internal" href="#also-known-as">Also Known As</a></li>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#properties">Properties</a><ul>
-<li><a class="reference internal" href="#sourcetype">sourceType</a></li>
-<li><a class="reference internal" href="#targettype">targetType</a></li>
+<li><a class="reference internal" href="#native">Native</a><ul>
 <li><a class="reference internal" href="#source">source</a></li>
 <li><a class="reference internal" href="#target">target</a></li>
+<li><a class="reference internal" href="#sourcetype">sourceType</a></li>
+<li><a class="reference internal" href="#targettype">targetType</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#json-schema">JSON Schema</a></li>

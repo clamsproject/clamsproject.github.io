@@ -12,7 +12,7 @@ BoundingBox (v1)
 
 **Shortname:** ``BoundingBox``
 
-**Inherits from:** :doc:`Polygon_v1 <../../Polygon/v1/index>`
+**Inherits from:** :doc:`Polygon (v1) <../../Polygon/v1/index>`
 
 **Included in vocabulary versions:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`
 
@@ -38,58 +38,69 @@ Properties
 ----------
 
 
-document
-~~~~~~~~
-
-- **Type:** *string*
-- **Required:** No
-
-The identifier of the document that the annotation is over.
-
-- **Inherited from:** *Polygon_v1*
-
-
-timeUnit
-~~~~~~~~
-
-- **Type:** *string*
-- **Required:** No
-
-Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
-
-- **Inherited from:** *Polygon_v1*
-
-
-coordinates
-~~~~~~~~~~~
-
-- **Type:** *array of array*
-- **Required:** Yes
-
-The coordinates of the polygon, taking the top-left of the image as the origin (0,0). Unit used to measure the distance is the number of pixels.
-
-- **Inherited from:** *Polygon_v1*
-
-
-timePoint
-~~~~~~~~~
-
-- **Type:** *integer*
-- **Required:** No
-
-If on a video stream, the TimePoint that the BoundingBox occurs in.
-
-- **Inherited from:** *Polygon_v1*
+Native
+^^^^^^
 
 
 boxType
-~~~~~~~
+"""""""
 
 - **Type:** *string*
 - **Required:** No
 
 The type of BoundingBox. Mostly used for text boxes where we use the value text.
 
+
+Inherited from :doc:`Annotation (v2) <../../Annotation/v2/index>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+document
+""""""""
+
+- **Type:** *string*
+- **Required:** No
+
+
+The identifier of the document that the annotation is over.
+
+
+Inherited from :doc:`Polygon (v1) <../../Polygon/v1/index>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+coordinates
+"""""""""""
+
+- **Type:** *array of array*
+- **Required:** Yes
+
+
+The coordinates of the polygon, taking the top-left of the image as the origin (0,0). Unit used to measure the distance is the number of pixels.
+
+
+timePoint
+"""""""""
+
+- **Type:** *integer*
+- **Required:** No
+
+
+If on a video stream, the TimePoint that the BoundingBox occurs in.
+
+
+Inherited from :doc:`Region (v1) <../../Region/v1/index>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+timeUnit
+""""""""
+
+- **Type:** *string*
+- **Required:** No
+
+
+Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
 
 
 JSON Schema

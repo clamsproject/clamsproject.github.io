@@ -15,17 +15,17 @@ Inheritance Tree
 .. inheritance-tree::
 
    └── Thing (v1) | 
-       ├── Alignment (v1) | sourceType, targetType, source, target
-       ├── Annotation (v6) | document, labelset, labelsetUri, label, classifications, classification
+       ├── Alignment (v1) | source, target, sourceType, targetType
+       ├── Annotation (v6) | classification, classifications, document, label, labelset, labelsetUri
        │   ├── Region (v5) | timeUnit
-       │   │   ├── Interval (v5) | start, end, targets
+       │   │   ├── Interval (v5) | end, start, targets
        │   │   │   ├── Span (v5) | text
        │   │   │   │   ├── NamedEntity (v1) | 
        │   │   │   │   ├── NounChunk (v1) | 
        │   │   │   │   ├── Paragraph (v1) | 
        │   │   │   │   ├── Sentence (v1) | 
-       │   │   │   │   ├── Token (v1) | pos, lemma, orth
-       │   │   │   │   └── VerbChunk (v1) | tense, voice, neg
+       │   │   │   │   ├── Token (v1) | lemma, orth, pos
+       │   │   │   │   └── VerbChunk (v1) | neg, tense, voice
        │   │   │   └── TimeFrame (v6) | frameType
        │   │   │       └── Chapter (v6) | title
        │   │   ├── Polygon (v5) | coordinates, timePoint

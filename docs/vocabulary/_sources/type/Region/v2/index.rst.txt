@@ -12,7 +12,7 @@ Region (v2)
 
 **Shortname:** ``Region``
 
-**Inherits from:** :doc:`Annotation_v3 <../../Annotation/v3/index>`
+**Inherits from:** :doc:`Annotation (v3) <../../Annotation/v3/index>`
 
 **Included in vocabulary versions:** :doc:`1.0.2 <../../../1.0.2/index>`
 
@@ -35,22 +35,65 @@ Properties
 ----------
 
 
-document
-~~~~~~~~
+Native
+^^^^^^
+
+
+timeUnit
+""""""""
 
 - **Type:** *string*
 - **Required:** No
 
+Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
+
+
+Inherited from :doc:`Annotation (v3) <../../Annotation/v3/index>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+classifications
+"""""""""""""""
+
+- **Type:** *object*
+- **Required:** No
+
+
+A map from label values to their "score" numbers provided by a classifier. The score can be probability, similarity, confidence, or any other real number that was used to determine the label value.
+
+*Optional* on top of the ``label`` property. However when this property is used, the ``label`` property must be one of the keys and the keys must match to the values defined in the ``labelset`` or ``labelsetUri`` annotation metadata.
+
+
+document
+""""""""
+
+- **Type:** *string*
+- **Required:** No
+
+
 The identifier of the document that the annotation is over.
 
-- **Inherited from:** *Annotation_v3*
+
+label
+"""""
+
+- **Type:** *string*
+- **Required:** No
+
+
+A label given to this object by a classifier. The value must be a simple string value of the label and must be one of the values defined in the ``labelset`` or ``labelsetUri`` annotation metadata.
+
+.. note::
+
+   Annotations from a classifier app must have this property.
 
 
 labelset
-~~~~~~~~
+""""""""
 
 - **Type:** *array of string*
 - **Required:** No
+
 
 When an annotation object contains results of a classification task, this metadata is used to specify the label values used in classification. Individual annotations then must have ``label`` property that is one of the values in this list.
 
@@ -62,60 +105,19 @@ When an annotation object contains results of a classification task, this metada
 
    Not all of labels specified in the ``labelset`` must occur in the output annotations. For example, a ``labelset`` can contain a *catch-all* negative label, but if the negative label can be not interesting enough to keep in the output annotation.
 
-- **Inherited from:** *Annotation_v3*
-
 
 labelsetUri
-~~~~~~~~~~~
+"""""""""""
 
 - **Type:** *string*
 - **Required:** No
+
 
 A URI to an externally defined labelset. Since the ``labelset`` metadata is a list of simple strings, this URI can be used to point to a more detailed definition of the labelset. This can be a JSON-LD document or a SKOS concept scheme, for example.
 
 .. note::
 
    Annotations from a classifier app must have this metadata or ``labelset`` metadata.
-
-- **Inherited from:** *Annotation_v3*
-
-
-label
-~~~~~
-
-- **Type:** *string*
-- **Required:** No
-
-A label given to this object by a classifier. The value must be a simple string value of the label and must be one of the values defined in the ``labelset`` or ``labelsetUri`` annotation metadata.
-
-.. note::
-
-   Annotations from a classifier app must have this property.
-
-- **Inherited from:** *Annotation_v3*
-
-
-classifications
-~~~~~~~~~~~~~~~
-
-- **Type:** *object*
-- **Required:** No
-
-A map from label values to their "score" numbers provided by a classifier. The score can be probability, similarity, confidence, or any other real number that was used to determine the label value.
-
-*Optional* on top of the ``label`` property. However when this property is used, the ``label`` property must be one of the keys and the keys must match to the values defined in the ``labelset`` or ``labelsetUri`` annotation metadata.
-
-- **Inherited from:** *Annotation_v3*
-
-
-timeUnit
-~~~~~~~~
-
-- **Type:** *string*
-- **Required:** No
-
-Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
-
 
 
 JSON Schema

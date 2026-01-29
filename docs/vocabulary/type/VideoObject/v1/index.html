@@ -257,7 +257,7 @@
 <p><strong>Previous Version:</strong> none <em>(this is the oldest version)</em></p>
 <p><strong>URI:</strong> <a class="reference external" href="http://clams.ai/vocabulary/type/VideoObject/v1">http://clams.ai/vocabulary/type/VideoObject/v1</a></p>
 <p><strong>Shortname:</strong> <code class="docutils literal notranslate"><span class="pre">VideoObject</span></code></p>
-<p><strong>Inherits from:</strong> <a class="reference internal" href="../../Region/v1/index.html"><span class="doc">Region_v1</span></a></p>
+<p><strong>Inherits from:</strong> <a class="reference internal" href="../../Region/v1/index.html"><span class="doc">Region (v1)</span></a></p>
 <p><strong>Included in vocabulary versions:</strong> <a class="reference internal" href="../../../1.0.0/index.html"><span class="doc">1.0.0</span></a>, <a class="reference internal" href="../../../1.0.1/index.html"><span class="doc">1.0.1</span></a></p>
 <section id="also-known-as">
 <h2>Also Known As<a class="headerlink" href="#also-known-as" title="Link to this heading">¶</a></h2>
@@ -276,35 +276,38 @@ compatibility:</p>
 </section>
 <section id="properties">
 <h2>Properties<a class="headerlink" href="#properties" title="Link to this heading">¶</a></h2>
-<section id="document">
-<h3>document<a class="headerlink" href="#document" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>Type:</strong> <em>string</em></p></li>
-<li><p><strong>Required:</strong> No</p></li>
-</ul>
-<p>The identifier of the document that the annotation is over.</p>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Region_v1</em></p></li>
-</ul>
-</section>
-<section id="timeunit">
-<h3>timeUnit<a class="headerlink" href="#timeunit" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>Type:</strong> <em>string</em></p></li>
-<li><p><strong>Required:</strong> No</p></li>
-</ul>
-<p>Specifies which unit of time the measurement is based. Can be <em>seconds</em> or <em>milliseconds</em>, or in case of annotations on a VideoDocument, <em>frames</em>.</p>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Region_v1</em></p></li>
-</ul>
-</section>
+<section id="native">
+<h3>Native<a class="headerlink" href="#native" title="Link to this heading">¶</a></h3>
 <section id="polygons">
-<h3>polygons<a class="headerlink" href="#polygons" title="Link to this heading">¶</a></h3>
+<h4>polygons<a class="headerlink" href="#polygons" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>array of string</em></p></li>
 <li><p><strong>Required:</strong> Yes</p></li>
 </ul>
 <p>The Polygons that make up the object.</p>
+</section>
+</section>
+<section id="inherited-from-annotation-v2">
+<h3>Inherited from <a class="reference internal" href="../../Annotation/v2/index.html"><span class="doc">Annotation (v2)</span></a><a class="headerlink" href="#inherited-from-annotation-v2" title="Link to this heading">¶</a></h3>
+<section id="document">
+<h4>document<a class="headerlink" href="#document" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Type:</strong> <em>string</em></p></li>
+<li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>The identifier of the document that the annotation is over.</p>
+</section>
+</section>
+<section id="inherited-from-region-v1">
+<h3>Inherited from <a class="reference internal" href="../../Region/v1/index.html"><span class="doc">Region (v1)</span></a><a class="headerlink" href="#inherited-from-region-v1" title="Link to this heading">¶</a></h3>
+<section id="timeunit">
+<h4>timeUnit<a class="headerlink" href="#timeunit" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Type:</strong> <em>string</em></p></li>
+<li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>Specifies which unit of time the measurement is based. Can be <em>seconds</em> or <em>milliseconds</em>, or in case of annotations on a VideoDocument, <em>frames</em>.</p>
+</section>
 </section>
 </section>
 <section id="json-schema">
@@ -384,9 +387,18 @@ compatibility:</p>
 <li><a class="reference internal" href="#also-known-as">Also Known As</a></li>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#properties">Properties</a><ul>
-<li><a class="reference internal" href="#document">document</a></li>
-<li><a class="reference internal" href="#timeunit">timeUnit</a></li>
+<li><a class="reference internal" href="#native">Native</a><ul>
 <li><a class="reference internal" href="#polygons">polygons</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inherited-from-annotation-v2">Inherited from <span class="xref std std-doc">Annotation (v2)</span></a><ul>
+<li><a class="reference internal" href="#document">document</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inherited-from-region-v1">Inherited from <span class="xref std std-doc">Region (v1)</span></a><ul>
+<li><a class="reference internal" href="#timeunit">timeUnit</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#json-schema">JSON Schema</a></li>

@@ -12,7 +12,7 @@ Alignment (v1)
 
 **Shortname:** ``Alignment``
 
-**Inherits from:** :doc:`Thing_v1 <../../Thing/v1/index>`
+**Inherits from:** :doc:`Thing (v1) <../../Thing/v1/index>`
 
 **Included in vocabulary versions:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`, :doc:`1.0.2 <../../../1.0.2/index>`, :doc:`1.0.3 <../../../1.0.3/index>`, :doc:`1.0.4 <../../../1.0.4/index>`, :doc:`1.1.0 <../../../1.1.0/index>`
 
@@ -38,28 +38,12 @@ Properties
 ----------
 
 
-sourceType
-~~~~~~~~~~
-
-- **Type:** *string*
-- **Required:** No
-
-The type of sources of the alignment. When an alignment starts from more that two source types, namely sources can be different types, one should not use this metadata.
-
-
-
-targetType
-~~~~~~~~~~
-
-- **Type:** *string*
-- **Required:** No
-
-The type of targets of the alignment. When an alignment goes to more that two target types, namely targets can be different types, one should not use this metadata.
-
+Native
+^^^^^^
 
 
 source
-~~~~~~
+""""""
 
 - **Type:** *string*
 - **Required:** Yes
@@ -67,15 +51,31 @@ source
 The first of the aligned regions or documents.
 
 
-
 target
-~~~~~~
+""""""
 
 - **Type:** *string*
 - **Required:** Yes
 
 The second of the aligned regions or documents.
 
+
+sourceType
+""""""""""
+
+- **Type:** *string*
+- **Required:** No
+
+The type of sources of the alignment. When an alignment starts from more that two source types, namely sources can be different types, one should not use this metadata.
+
+
+targetType
+""""""""""
+
+- **Type:** *string*
+- **Required:** No
+
+The type of targets of the alignment. When an alignment goes to more that two target types, namely targets can be different types, one should not use this metadata.
 
 
 JSON Schema

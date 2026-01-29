@@ -12,7 +12,7 @@ Annotation (v2)
 
 **Shortname:** ``Annotation``
 
-**Inherits from:** :doc:`Thing_v1 <../../Thing/v1/index>`
+**Inherits from:** :doc:`Thing (v1) <../../Thing/v1/index>`
 
 **Included in vocabulary versions:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`
 
@@ -36,14 +36,17 @@ Properties
 ----------
 
 
+Native
+^^^^^^
+
+
 document
-~~~~~~~~
+""""""""
 
 - **Type:** *string*
 - **Required:** No
 
 The identifier of the document that the annotation is over.
-
 
 
 JSON Schema

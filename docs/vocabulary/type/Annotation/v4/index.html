@@ -257,7 +257,7 @@
 <p><strong>Previous Version:</strong> <a class="reference internal" href="../v3/index.html"><span class="doc">v3</span></a></p>
 <p><strong>URI:</strong> <a class="reference external" href="http://clams.ai/vocabulary/type/Annotation/v4">http://clams.ai/vocabulary/type/Annotation/v4</a></p>
 <p><strong>Shortname:</strong> <code class="docutils literal notranslate"><span class="pre">Annotation</span></code></p>
-<p><strong>Inherits from:</strong> <a class="reference internal" href="../../Thing/v1/index.html"><span class="doc">Thing_v1</span></a></p>
+<p><strong>Inherits from:</strong> <a class="reference internal" href="../../Thing/v1/index.html"><span class="doc">Thing (v1)</span></a></p>
 <p><strong>Included in vocabulary versions:</strong> <a class="reference internal" href="../../../1.0.3/index.html"><span class="doc">1.0.3</span></a></p>
 <section id="also-known-as">
 <h2>Also Known As<a class="headerlink" href="#also-known-as" title="Link to this heading">¶</a></h2>
@@ -273,16 +273,39 @@ compatibility:</p>
 </section>
 <section id="properties">
 <h2>Properties<a class="headerlink" href="#properties" title="Link to this heading">¶</a></h2>
+<section id="native">
+<h3>Native<a class="headerlink" href="#native" title="Link to this heading">¶</a></h3>
+<section id="classification">
+<h4>classification<a class="headerlink" href="#classification" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Type:</strong> <em>object</em></p></li>
+<li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>A map from label values to their “score” numbers provided by a classifier. The score can be probability, similarity, confidence, or any other real number that was used to determine the label value.</p>
+<p><em>Optional</em> on top of the <code class="docutils literal notranslate"><span class="pre">label</span></code> property. However when this property is used, the <code class="docutils literal notranslate"><span class="pre">label</span></code> property must be one of the keys and the keys must match to the values defined in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> or <code class="docutils literal notranslate"><span class="pre">labelsetUri</span></code> annotation metadata.</p>
+</section>
 <section id="document">
-<h3>document<a class="headerlink" href="#document" title="Link to this heading">¶</a></h3>
+<h4>document<a class="headerlink" href="#document" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
 <li><p><strong>Required:</strong> No</p></li>
 </ul>
 <p>The identifier of the document that the annotation is over.</p>
 </section>
+<section id="label">
+<h4>label<a class="headerlink" href="#label" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Type:</strong> <em>string</em></p></li>
+<li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>A label given to this object by a classifier. The value must be a simple string value of the label and must be one of the values defined in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> or <code class="docutils literal notranslate"><span class="pre">labelsetUri</span></code> annotation metadata.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Annotations from a classifier app must have this property.</p>
+</div>
+</section>
 <section id="labelset">
-<h3>labelset<a class="headerlink" href="#labelset" title="Link to this heading">¶</a></h3>
+<h4>labelset<a class="headerlink" href="#labelset" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>array of string</em></p></li>
 <li><p><strong>Required:</strong> No</p></li>
@@ -298,7 +321,7 @@ compatibility:</p>
 </div>
 </section>
 <section id="labelseturi">
-<h3>labelsetUri<a class="headerlink" href="#labelseturi" title="Link to this heading">¶</a></h3>
+<h4>labelsetUri<a class="headerlink" href="#labelseturi" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
 <li><p><strong>Required:</strong> No</p></li>
@@ -309,26 +332,6 @@ compatibility:</p>
 <p>Annotations from a classifier app must have this metadata or <code class="docutils literal notranslate"><span class="pre">labelset</span></code> metadata.</p>
 </div>
 </section>
-<section id="label">
-<h3>label<a class="headerlink" href="#label" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>Type:</strong> <em>string</em></p></li>
-<li><p><strong>Required:</strong> No</p></li>
-</ul>
-<p>A label given to this object by a classifier. The value must be a simple string value of the label and must be one of the values defined in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> or <code class="docutils literal notranslate"><span class="pre">labelsetUri</span></code> annotation metadata.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Annotations from a classifier app must have this property.</p>
-</div>
-</section>
-<section id="classification">
-<h3>classification<a class="headerlink" href="#classification" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>Type:</strong> <em>object</em></p></li>
-<li><p><strong>Required:</strong> No</p></li>
-</ul>
-<p>A map from label values to their “score” numbers provided by a classifier. The score can be probability, similarity, confidence, or any other real number that was used to determine the label value.</p>
-<p><em>Optional</em> on top of the <code class="docutils literal notranslate"><span class="pre">label</span></code> property. However when this property is used, the <code class="docutils literal notranslate"><span class="pre">label</span></code> property must be one of the keys and the keys must match to the values defined in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> or <code class="docutils literal notranslate"><span class="pre">labelsetUri</span></code> annotation metadata.</p>
 </section>
 </section>
 <section id="json-schema">
@@ -418,11 +421,14 @@ compatibility:</p>
 <li><a class="reference internal" href="#also-known-as">Also Known As</a></li>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#properties">Properties</a><ul>
+<li><a class="reference internal" href="#native">Native</a><ul>
+<li><a class="reference internal" href="#classification">classification</a></li>
 <li><a class="reference internal" href="#document">document</a></li>
+<li><a class="reference internal" href="#label">label</a></li>
 <li><a class="reference internal" href="#labelset">labelset</a></li>
 <li><a class="reference internal" href="#labelseturi">labelsetUri</a></li>
-<li><a class="reference internal" href="#label">label</a></li>
-<li><a class="reference internal" href="#classification">classification</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#json-schema">JSON Schema</a></li>

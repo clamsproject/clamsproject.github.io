@@ -17,10 +17,10 @@ Inheritance Tree
 .. inheritance-tree::
 
    └── Thing (v1) | 
-       ├── Alignment (v1) | sourceType, targetType, source, target
+       ├── Alignment (v1) | source, target, sourceType, targetType
        ├── Annotation (v2) | document
        │   ├── Region (v1) | timeUnit
-       │   │   ├── Interval (v1) | start, end, targets
+       │   │   ├── Interval (v1) | end, start, targets
        │   │   │   ├── Span (v1) | 
        │   │   │   └── TimeFrame (v2) | frameType
        │   │   │       └── Chapter (v2) | title

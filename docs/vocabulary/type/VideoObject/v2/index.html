@@ -257,7 +257,7 @@
 <p><strong>Previous Version:</strong> <a class="reference internal" href="../v1/index.html"><span class="doc">v1</span></a></p>
 <p><strong>URI:</strong> <a class="reference external" href="http://clams.ai/vocabulary/type/VideoObject/v2">http://clams.ai/vocabulary/type/VideoObject/v2</a></p>
 <p><strong>Shortname:</strong> <code class="docutils literal notranslate"><span class="pre">VideoObject</span></code></p>
-<p><strong>Inherits from:</strong> <a class="reference internal" href="../../Region/v2/index.html"><span class="doc">Region_v2</span></a></p>
+<p><strong>Inherits from:</strong> <a class="reference internal" href="../../Region/v2/index.html"><span class="doc">Region (v2)</span></a></p>
 <p><strong>Included in vocabulary versions:</strong> <a class="reference internal" href="../../../1.0.2/index.html"><span class="doc">1.0.2</span></a></p>
 <section id="also-known-as">
 <h2>Also Known As<a class="headerlink" href="#also-known-as" title="Link to this heading">¶</a></h2>
@@ -273,19 +273,50 @@ compatibility:</p>
 </section>
 <section id="properties">
 <h2>Properties<a class="headerlink" href="#properties" title="Link to this heading">¶</a></h2>
+<section id="native">
+<h3>Native<a class="headerlink" href="#native" title="Link to this heading">¶</a></h3>
+<section id="polygons">
+<h4>polygons<a class="headerlink" href="#polygons" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Type:</strong> <em>array of string</em></p></li>
+<li><p><strong>Required:</strong> Yes</p></li>
+</ul>
+<p>The Polygons that make up the object.</p>
+</section>
+</section>
+<section id="inherited-from-annotation-v3">
+<h3>Inherited from <a class="reference internal" href="../../Annotation/v3/index.html"><span class="doc">Annotation (v3)</span></a><a class="headerlink" href="#inherited-from-annotation-v3" title="Link to this heading">¶</a></h3>
+<section id="classifications">
+<h4>classifications<a class="headerlink" href="#classifications" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Type:</strong> <em>object</em></p></li>
+<li><p><strong>Required:</strong> No</p></li>
+</ul>
+<p>A map from label values to their “score” numbers provided by a classifier. The score can be probability, similarity, confidence, or any other real number that was used to determine the label value.</p>
+<p><em>Optional</em> on top of the <code class="docutils literal notranslate"><span class="pre">label</span></code> property. However when this property is used, the <code class="docutils literal notranslate"><span class="pre">label</span></code> property must be one of the keys and the keys must match to the values defined in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> or <code class="docutils literal notranslate"><span class="pre">labelsetUri</span></code> annotation metadata.</p>
+</section>
 <section id="document">
-<h3>document<a class="headerlink" href="#document" title="Link to this heading">¶</a></h3>
+<h4>document<a class="headerlink" href="#document" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
 <li><p><strong>Required:</strong> No</p></li>
 </ul>
 <p>The identifier of the document that the annotation is over.</p>
+</section>
+<section id="label">
+<h4>label<a class="headerlink" href="#label" title="Link to this heading">¶</a></h4>
 <ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Region_v2</em></p></li>
+<li><p><strong>Type:</strong> <em>string</em></p></li>
+<li><p><strong>Required:</strong> No</p></li>
 </ul>
+<p>A label given to this object by a classifier. The value must be a simple string value of the label and must be one of the values defined in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> or <code class="docutils literal notranslate"><span class="pre">labelsetUri</span></code> annotation metadata.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Annotations from a classifier app must have this property.</p>
+</div>
 </section>
 <section id="labelset">
-<h3>labelset<a class="headerlink" href="#labelset" title="Link to this heading">¶</a></h3>
+<h4>labelset<a class="headerlink" href="#labelset" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>array of string</em></p></li>
 <li><p><strong>Required:</strong> No</p></li>
@@ -299,12 +330,9 @@ compatibility:</p>
 <p class="admonition-title">Note</p>
 <p>Not all of labels specified in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> must occur in the output annotations. For example, a <code class="docutils literal notranslate"><span class="pre">labelset</span></code> can contain a <em>catch-all</em> negative label, but if the negative label can be not interesting enough to keep in the output annotation.</p>
 </div>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Region_v2</em></p></li>
-</ul>
 </section>
 <section id="labelseturi">
-<h3>labelsetUri<a class="headerlink" href="#labelseturi" title="Link to this heading">¶</a></h3>
+<h4>labelsetUri<a class="headerlink" href="#labelseturi" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
 <li><p><strong>Required:</strong> No</p></li>
@@ -314,55 +342,18 @@ compatibility:</p>
 <p class="admonition-title">Note</p>
 <p>Annotations from a classifier app must have this metadata or <code class="docutils literal notranslate"><span class="pre">labelset</span></code> metadata.</p>
 </div>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Region_v2</em></p></li>
-</ul>
 </section>
-<section id="label">
-<h3>label<a class="headerlink" href="#label" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>Type:</strong> <em>string</em></p></li>
-<li><p><strong>Required:</strong> No</p></li>
-</ul>
-<p>A label given to this object by a classifier. The value must be a simple string value of the label and must be one of the values defined in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> or <code class="docutils literal notranslate"><span class="pre">labelsetUri</span></code> annotation metadata.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Annotations from a classifier app must have this property.</p>
-</div>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Region_v2</em></p></li>
-</ul>
 </section>
-<section id="classifications">
-<h3>classifications<a class="headerlink" href="#classifications" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>Type:</strong> <em>object</em></p></li>
-<li><p><strong>Required:</strong> No</p></li>
-</ul>
-<p>A map from label values to their “score” numbers provided by a classifier. The score can be probability, similarity, confidence, or any other real number that was used to determine the label value.</p>
-<p><em>Optional</em> on top of the <code class="docutils literal notranslate"><span class="pre">label</span></code> property. However when this property is used, the <code class="docutils literal notranslate"><span class="pre">label</span></code> property must be one of the keys and the keys must match to the values defined in the <code class="docutils literal notranslate"><span class="pre">labelset</span></code> or <code class="docutils literal notranslate"><span class="pre">labelsetUri</span></code> annotation metadata.</p>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Region_v2</em></p></li>
-</ul>
-</section>
+<section id="inherited-from-region-v2">
+<h3>Inherited from <a class="reference internal" href="../../Region/v2/index.html"><span class="doc">Region (v2)</span></a><a class="headerlink" href="#inherited-from-region-v2" title="Link to this heading">¶</a></h3>
 <section id="timeunit">
-<h3>timeUnit<a class="headerlink" href="#timeunit" title="Link to this heading">¶</a></h3>
+<h4>timeUnit<a class="headerlink" href="#timeunit" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Type:</strong> <em>string</em></p></li>
 <li><p><strong>Required:</strong> No</p></li>
 </ul>
 <p>Specifies which unit of time the measurement is based. Can be <em>seconds</em> or <em>milliseconds</em>, or in case of annotations on a VideoDocument, <em>frames</em>.</p>
-<ul class="simple">
-<li><p><strong>Inherited from:</strong> <em>Region_v2</em></p></li>
-</ul>
 </section>
-<section id="polygons">
-<h3>polygons<a class="headerlink" href="#polygons" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>Type:</strong> <em>array of string</em></p></li>
-<li><p><strong>Required:</strong> Yes</p></li>
-</ul>
-<p>The Polygons that make up the object.</p>
 </section>
 </section>
 <section id="json-schema">
@@ -464,13 +455,22 @@ compatibility:</p>
 <li><a class="reference internal" href="#also-known-as">Also Known As</a></li>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#properties">Properties</a><ul>
+<li><a class="reference internal" href="#native">Native</a><ul>
+<li><a class="reference internal" href="#polygons">polygons</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inherited-from-annotation-v3">Inherited from <span class="xref std std-doc">Annotation (v3)</span></a><ul>
+<li><a class="reference internal" href="#classifications">classifications</a></li>
 <li><a class="reference internal" href="#document">document</a></li>
+<li><a class="reference internal" href="#label">label</a></li>
 <li><a class="reference internal" href="#labelset">labelset</a></li>
 <li><a class="reference internal" href="#labelseturi">labelsetUri</a></li>
-<li><a class="reference internal" href="#label">label</a></li>
-<li><a class="reference internal" href="#classifications">classifications</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inherited-from-region-v2">Inherited from <span class="xref std std-doc">Region (v2)</span></a><ul>
 <li><a class="reference internal" href="#timeunit">timeUnit</a></li>
-<li><a class="reference internal" href="#polygons">polygons</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#json-schema">JSON Schema</a></li>

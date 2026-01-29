@@ -12,7 +12,7 @@ Document (v1)
 
 **Shortname:** ``Document``
 
-**Inherits from:** :doc:`Thing_v1 <../../Thing/v1/index>`
+**Inherits from:** :doc:`Thing (v1) <../../Thing/v1/index>`
 
 **Included in vocabulary versions:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`, :doc:`1.0.2 <../../../1.0.2/index>`, :doc:`1.0.3 <../../../1.0.3/index>`, :doc:`1.0.4 <../../../1.0.4/index>`, :doc:`1.1.0 <../../../1.1.0/index>`
 
@@ -38,8 +38,12 @@ Properties
 ----------
 
 
+Native
+^^^^^^
+
+
 location
-~~~~~~~~
+""""""""
 
 - **Type:** *string*
 - **Required:** No
@@ -47,15 +51,13 @@ location
 The location of an external file.
 
 
-
 mime
-~~~~
+""""
 
 - **Type:** *string*
 - **Required:** No
 
 The MIME type of the document, only used when the *location* property is used.
-
 
 
 JSON Schema

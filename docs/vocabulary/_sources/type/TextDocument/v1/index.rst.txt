@@ -12,7 +12,7 @@ TextDocument (v1)
 
 **Shortname:** ``TextDocument``
 
-**Inherits from:** :doc:`Document_v1 <../../Document/v1/index>`
+**Inherits from:** :doc:`Document (v1) <../../Document/v1/index>`
 
 **Included in vocabulary versions:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`, :doc:`1.0.2 <../../../1.0.2/index>`, :doc:`1.0.3 <../../../1.0.3/index>`, :doc:`1.0.4 <../../../1.0.4/index>`, :doc:`1.1.0 <../../../1.1.0/index>`
 
@@ -38,36 +38,41 @@ Properties
 ----------
 
 
-location
-~~~~~~~~
-
-- **Type:** *string*
-- **Required:** No
-
-The location of an external file.
-
-- **Inherited from:** *Document_v1*
-
-
-mime
-~~~~
-
-- **Type:** *string*
-- **Required:** No
-
-The MIME type of the document, only used when the *location* property is used.
-
-- **Inherited from:** *Document_v1*
+Native
+^^^^^^
 
 
 text
-~~~~
+""""
 
 - **Type:** *object*
 - **Required:** No
 
 A JSON-LD value object which has a *@value* and a *@language* property.
 
+
+Inherited from :doc:`Document (v1) <../../Document/v1/index>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+location
+""""""""
+
+- **Type:** *string*
+- **Required:** No
+
+
+The location of an external file.
+
+
+mime
+""""
+
+- **Type:** *string*
+- **Required:** No
+
+
+The MIME type of the document, only used when the *location* property is used.
 
 
 JSON Schema

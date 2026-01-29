@@ -12,7 +12,7 @@ VideoObject (v1)
 
 **Shortname:** ``VideoObject``
 
-**Inherits from:** :doc:`Region_v1 <../../Region/v1/index>`
+**Inherits from:** :doc:`Region (v1) <../../Region/v1/index>`
 
 **Included in vocabulary versions:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`
 
@@ -38,36 +38,45 @@ Properties
 ----------
 
 
-document
-~~~~~~~~
-
-- **Type:** *string*
-- **Required:** No
-
-The identifier of the document that the annotation is over.
-
-- **Inherited from:** *Region_v1*
-
-
-timeUnit
-~~~~~~~~
-
-- **Type:** *string*
-- **Required:** No
-
-Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
-
-- **Inherited from:** *Region_v1*
+Native
+^^^^^^
 
 
 polygons
-~~~~~~~~
+""""""""
 
 - **Type:** *array of string*
 - **Required:** Yes
 
 The Polygons that make up the object.
 
+
+Inherited from :doc:`Annotation (v2) <../../Annotation/v2/index>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+document
+""""""""
+
+- **Type:** *string*
+- **Required:** No
+
+
+The identifier of the document that the annotation is over.
+
+
+Inherited from :doc:`Region (v1) <../../Region/v1/index>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+timeUnit
+""""""""
+
+- **Type:** *string*
+- **Required:** No
+
+
+Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
 
 
 JSON Schema

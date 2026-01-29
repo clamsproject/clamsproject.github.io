@@ -12,7 +12,7 @@ Thing (v1)
 
 **Shortname:** ``Thing``
 
-**Inherits from:** *ClamsTypesBase*
+**Inherits from:** :doc:ClamsTypesBase
 
 **Included in vocabulary versions:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`, :doc:`1.0.2 <../../../1.0.2/index>`, :doc:`1.0.3 <../../../1.0.3/index>`, :doc:`1.0.4 <../../../1.0.4/index>`, :doc:`1.1.0 <../../../1.1.0/index>`
 
