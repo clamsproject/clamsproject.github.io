@@ -5,7 +5,7 @@ Introduction
 ------------
 
 The CLAMS Vocabulary defines the type system used in the CLAMS project, notably
-used for annotating and describing multimedia content in Multi-Media Interchange
+used for annotating and describing multimedia content in a Multi-Media Interchange
 Format (MMIF) serialization. It provides:
 
 * **Type Definitions** - Pydantic-based models for annotation and document

@@ -70,6 +70,8 @@ The following field names are reserved for system use:
 Controlled Vocabularies (Enums)
 --------------------------------
 
+(Note that enumerations are planned and are not part of the vocabulary yet)
+
 Enum Class Names
 ~~~~~~~~~~~~~~~~
 
