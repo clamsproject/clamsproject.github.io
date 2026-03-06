@@ -1,0 +1,132 @@
+:orphan:
+
+Alignment (v1)
+==============
+
+.. warning::
+   This is not the latest version. The latest version is :doc:`v2 <../v2/index>`.
+
+**Previous Version:** none *(this is the oldest version)*
+
+**URI:** `http://clams.ai/vocabulary/type/Alignment/v1 <http://clams.ai/vocabulary/type/Alignment/v1>`_
+
+**Shortname:** ``Alignment``
+
+**Inherits from:** :doc:`Thing (v1) <../../Thing/v1/index>`
+
+
+
+Also Known As
+-------------
+
+This type is also accessible at the following legacy URLs for backward
+compatibility:
+
+- `http://mmif.clams.ai/vocabulary/Alignment/v1 <http://mmif.clams.ai/vocabulary/Alignment/v1>`_
+- `http://mmif.clams.ai/0.4.0/vocabulary/Alignment/ <http://mmif.clams.ai/0.4.0/vocabulary/Alignment/>`_
+- `http://mmif.clams.ai/0.4.1/vocabulary/Alignment/ <http://mmif.clams.ai/0.4.1/vocabulary/Alignment/>`_
+- `http://mmif.clams.ai/0.4.2/vocabulary/Alignment/ <http://mmif.clams.ai/0.4.2/vocabulary/Alignment/>`_
+
+
+Description
+-----------
+
+An alignment between two regions, two documents or a region and a document. Typically one of the regions or documents is a text span or text document and the other an image or audio segment or document. While there is no enforced directionality we tend to consider the text region or document as the target of the alignment.
+
+
+Properties
+----------
+
+Synopsis
+^^^^^^^^
+
+*Properties marked with* **\*** *are required.*
+
+.. list-table::
+   :header-rows: 1
+   :widths: 15 10 15 60
+
+   * - Property
+     - Type
+     - Origin
+     - Description
+   * - ``source`` **\***
+     - string
+     - *native*
+     - The first of the aligned regions or documents. `(more) <#source>`__
+
+   * - ``target`` **\***
+     - string
+     - *native*
+     - The second of the aligned regions or documents. `(more) <#target>`__
+
+   * - ``id`` **\***
+     - string
+     - :doc:`Thing (v1) <../../Thing/v1/index>`
+     - A unique identifier for the annotation or document. Uniqueness is relative to the view the ... `(more) <#id>`__
+
+
+
+Native
+^^^^^^
+
+
+source
+""""""
+
+- type: *string*
+- required: yes
+
+The first of the aligned regions or documents.
+
+
+target
+""""""
+
+- type: *string*
+- required: yes
+
+The second of the aligned regions or documents.
+
+
+Inherited from :doc:`Thing (v1) <../../Thing/v1/index>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+id
+""
+
+- type: *string*
+- required: yes
+
+A unique identifier for the annotation or document. Uniqueness is relative to the view the annotation is in or the list of documents at the top level of a MMIF file.
+
+
+JSON Schema
+-----------
+
+.. code-block:: json
+
+   {
+     "additionalProperties": true,
+     "properties": {
+       "id": {
+         "description": "A unique identifier for the annotation or document. Uniqueness is relative to the view the annotation is in or the list of documents at the top level of a MMIF file.",
+         "type": "string"
+       },
+       "source": {
+         "description": "The first of the aligned regions or documents.",
+         "type": "string"
+       },
+       "target": {
+         "description": "The second of the aligned regions or documents.",
+         "type": "string"
+       }
+     },
+     "required": [
+       "id",
+       "source",
+       "target"
+     ],
+     "type": "object"
+   }
