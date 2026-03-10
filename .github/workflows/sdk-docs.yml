@@ -1,0 +1,117 @@
+name: Build External Documentation
+
+on:
+  workflow_call:
+    inputs:
+      source_repo:
+        description: 'Source repository (e.g., clamsproject/mmif-python)'
+        required: true
+        type: string
+      source_ref:
+        description: 'Git ref to checkout (branch, tag, or SHA)'
+        required: false
+        type: string
+        default: 'main'
+      project_name:
+        description: 'Project name for docs directory (e.g., mmif-python)'
+        required: true
+        type: string
+      version:
+        description: 'Documentation version (e.g., 1.0.0). If empty, docs are placed directly under project_name'
+        required: false
+        type: string
+        default: ''
+      build_command:
+        description: 'Command to build documentation'
+        required: true
+        type: string
+      docs_output_dir:
+        description: 'Directory containing built docs relative to clone-repo (default: docs)'
+        required: false
+        type: string
+        default: 'docs'
+      python_version:
+        description: 'Python version to use'
+        required: false
+        type: string
+        default: '3.11'
+      update_latest:
+        description: 'Update the latest symlink/copy when version is specified'
+        required: false
+        type: boolean
+        default: true
+    secrets:
+      GH_TOKEN:
+        description: 'GitHub token with write access to this repository'
+        required: false
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout documentation hub
+        uses: actions/checkout@v4
+        with:
+          path: hub
+          token: ${{ secrets.GH_TOKEN || github.token }}
+
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.source_repo }}
+          ref: ${{ inputs.source_ref }}
+          path: clone-repo
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python_version }}
+
+      - name: Install hub build tools
+        run: |
+          pip install -r hub/build-tools/requirements.home.txt
+
+      - name: Build documentation
+        working-directory: clone-repo
+        run: ${{ inputs.build_command }}
+
+      - name: Determine target directory
+        id: target
+        run: |
+          if [ -n "${{ inputs.version }}" ]; then
+            echo "dir=docs/${{ inputs.project_name }}/${{ inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            echo "dir=docs/${{ inputs.project_name }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Copy documentation to hub
+        run: |
+          mkdir -p "hub/${{ steps.target.outputs.dir }}"
+          rm -rf "hub/${{ steps.target.outputs.dir }}"/*
+          cp -r clone-repo/${{ inputs.docs_output_dir }}/* "hub/${{ steps.target.outputs.dir }}/"
+
+      - name: Update latest symlink
+        if: inputs.version != '' && inputs.update_latest
+        working-directory: hub
+        run: |
+          cd "docs/${{ inputs.project_name }}"
+          rm -rf latest
+          cp -r "${{ inputs.version }}" latest
+
+      - name: Inject header
+        run: |
+          python hub/build-tools/inject-header.py "hub/docs/${{ inputs.project_name }}" --base-url https://clams.ai
+
+      - name: Commit and push
+        working-directory: hub
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update ${{ inputs.project_name }} documentation${{ inputs.version && format(' ({0})', inputs.version) || '' }}"
+            git push
+          fi
