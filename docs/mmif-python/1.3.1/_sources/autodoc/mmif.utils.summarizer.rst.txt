@@ -1,0 +1,50 @@
+mmif.utils.summarizer package
+=============================
+
+.. automodule:: mmif.utils.summarizer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+mmif.utils.summarizer.config module
+-----------------------------------
+
+.. automodule:: mmif.utils.summarizer.config
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mmif.utils.summarizer.graph module
+----------------------------------
+
+.. automodule:: mmif.utils.summarizer.graph
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mmif.utils.summarizer.nodes module
+----------------------------------
+
+.. automodule:: mmif.utils.summarizer.nodes
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mmif.utils.summarizer.summary module
+------------------------------------
+
+.. automodule:: mmif.utils.summarizer.summary
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mmif.utils.summarizer.utils module
+----------------------------------
+
+.. automodule:: mmif.utils.summarizer.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
