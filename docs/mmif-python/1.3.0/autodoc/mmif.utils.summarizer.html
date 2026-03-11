@@ -1,0 +1,1332 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="mmif.vocabulary package" href="mmif.vocabulary.html"><link rel="prev" title="mmif.utils.cli package" href="mmif.utils.cli.html">
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
+        <title>mmif.utils.summarizer package - mmif-python-1.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #008AFF;
+  --color-brand-content: #0085A1;
+  --color-link: #008AFF;
+  --color-link-hover: #0085A1;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+<!-- CLAMS Hub Version Header - Injected -->
+<style>
+.clams-version-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 8px 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+@media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) .clams-version-header {
+        background: #1a1a1a;
+        border-bottom-color: #333;
+    }
+    body:not([data-theme="light"]) .clams-version-header a {
+        color: #6cb6ff;
+    }
+    body:not([data-theme="light"]) .clams-version-header select {
+        background: #2d2d2d;
+        color: #e0e0e0;
+        border-color: #444;
+    }
+    body:not([data-theme="light"]) .clams-version-header .nav-link.active {
+        background: #333;
+    }
+}
+body[data-theme="dark"] .clams-version-header {
+    background: #1a1a1a;
+    border-bottom-color: #333;
+}
+body[data-theme="dark"] .clams-version-header a {
+    color: #6cb6ff;
+}
+body[data-theme="dark"] .clams-version-header select {
+    background: #2d2d2d;
+    color: #e0e0e0;
+    border-color: #444;
+}
+body[data-theme="dark"] .clams-version-header .nav-link.active {
+    background: #333;
+}
+.clams-version-header a {
+    color: #008AFF;
+    text-decoration: none;
+}
+.clams-version-header a:hover {
+    text-decoration: underline;
+}
+.clams-version-header .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.clams-version-header .logo {
+    height: 28px;
+    width: auto;
+}
+.clams-version-header .project-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.clams-version-header .nav-link {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+.clams-version-header .nav-link:hover {
+    background: #e9ecef;
+    text-decoration: none;
+}
+.clams-version-header .nav-link.active {
+    background: #e9ecef;
+    font-weight: 600;
+}
+.clams-version-header .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.clams-version-header select {
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    font-size: 13px;
+}
+</style>
+<div class="clams-version-header">
+    <div class="header-left">
+        <a href="https://clams.ai/" title="CLAMS Documentation Hub">
+            <img src="https://clams.ai/home/_static/clams-logo.png" alt="CLAMS" class="logo">
+        </a>
+        <nav class="project-nav">
+            <a href="https://clams.ai/home/" class="nav-link">home</a>
+            <a href="https://mmif.clams.ai" class="nav-link" target="_blank" rel="noopener">MMIF</a>
+            <a href="https://apps.clams.ai" class="nav-link" target="_blank" rel="noopener">apps</a>
+            <a href="https://clams.ai/clams-python/" class="nav-link">clams-python</a>
+            <a href="https://clams.ai/mmif-python/" class="nav-link active">mmif-python</a>
+        </nav>
+    </div>
+    <div class="header-right">
+        <select onchange="if(this.value) window.location.href=this.value;">
+            <option value="">Switch version...</option>
+            <option value="https://clams.ai/mmif-python/latest/">latest (development)</option>
+            <option value="" disabled selected>1.3.0 (current)</option>
+            <option value="https://clams.ai/mmif-python/1.2.1/">1.2.1</option>
+            <option value="https://clams.ai/mmif-python/1.2.0/">1.2.0</option>
+            <option value="https://clams.ai/mmif-python/1.1.2/">1.1.2</option>
+            <option value="https://clams.ai/mmif-python/1.1.1/">1.1.1</option>
+            <option value="https://clams.ai/mmif-python/1.1.0/">1.1.0</option>
+            <option value="https://clams.ai/mmif-python/1.0.19/">1.0.19</option>
+            <option value="https://clams.ai/mmif-python/1.0.18/">1.0.18</option>
+            <option value="https://clams.ai/mmif-python/1.0.17/">1.0.17</option>
+            <option value="https://clams.ai/mmif-python/1.0.16/">1.0.16</option>
+            <option value="https://clams.ai/mmif-python/1.0.15/">1.0.15</option>
+            <option value="https://clams.ai/mmif-python/1.0.14/">1.0.14</option>
+            <option value="https://clams.ai/mmif-python/1.0.13/">1.0.13</option>
+            <option value="https://clams.ai/mmif-python/1.0.12/">1.0.12</option>
+            <option value="https://clams.ai/mmif-python/1.0.11/">1.0.11</option>
+            <option value="https://clams.ai/mmif-python/1.0.10/">1.0.10</option>
+            <option value="https://clams.ai/mmif-python/1.0.9/">1.0.9</option>
+            <option value="https://clams.ai/mmif-python/1.0.8/">1.0.8</option>
+            <option value="https://clams.ai/mmif-python/1.0.7/">1.0.7</option>
+            <option value="https://clams.ai/mmif-python/1.0.6/">1.0.6</option>
+            <option value="https://clams.ai/mmif-python/1.0.5/">1.0.5</option>
+            <option value="https://clams.ai/mmif-python/1.0.4/">1.0.4</option>
+            <option value="https://clams.ai/mmif-python/1.0.3/">1.0.3</option>
+            <option value="https://clams.ai/mmif-python/1.0.2/">1.0.2</option>
+            <option value="https://clams.ai/mmif-python/1.0.1/">1.0.1</option>
+            <option value="https://clams.ai/mmif-python/1.0.0/">1.0.0</option>
+        </select>
+    </div>
+</div>
+<!-- End CLAMS Hub Version Header -->
+
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">mmif-python-1.3.0  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <span class="sidebar-brand-text">mmif-python-1.3.0  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">The <code class="docutils literal notranslate"><span class="pre">mmif</span></code> shell command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../summarizer.html">MMIF Summarizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Developing plugins for the MMIF Python SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../target-versions.html">Target MMIF Versions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="mmif.html">mmif package</a><input aria-label="Toggle navigation of mmif package" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="mmif.serialize.html">mmif.serialize package</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="mmif.utils.html">mmif.utils package</a><input aria-label="Toggle navigation of mmif.utils package" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mmif.utils.cli.html">mmif.utils.cli package</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">mmif.utils.summarizer package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mmif.vocabulary.html">mmif.vocabulary package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mmif_docloc_http.html">mmif_docloc_http package</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/clamsproject/mmif-python/blob/main/documentation/autodoc/mmif.utils.summarizer.rst?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/clamsproject/mmif-python/edit/main/documentation/autodoc/mmif.utils.summarizer.rst" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="module-mmif.utils.summarizer">
+<span id="mmif-utils-summarizer-package"></span><h1>mmif.utils.summarizer package<a class="headerlink" href="#module-mmif.utils.summarizer" title="Link to this heading">¶</a></h1>
+<p>Package containing the code to generate a summary from a MMIF file.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.argparser">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.</span></span><span class="sig-name descname"><span class="pre">argparser</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/__init__.py#L11-L15"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.argparser" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.pp_args">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.</span></span><span class="sig-name descname"><span class="pre">pp_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/__init__.py#L18-L20"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.pp_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.main">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/__init__.py#L23-L28"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-mmif.utils.summarizer.config">
+<span id="mmif-utils-summarizer-config-module"></span><h2>mmif.utils.summarizer.config module<a class="headerlink" href="#module-mmif.utils.summarizer.config" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-mmif.utils.summarizer.graph">
+<span id="mmif-utils-summarizer-graph-module"></span><h2>mmif.utils.summarizer.graph module<a class="headerlink" href="#module-mmif.utils.summarizer.graph" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.graph.Graph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.graph.</span></span><span class="sig-name descname"><span class="pre">Graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mmif</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/graph.py#L15-L166"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.graph.Graph" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Graph implementation for a MMIF document. Each node contains an annotation
+or document. Alignments are stored separately. Edges between nodes are created
+from the alignments and added to the Node.targets property. The first edge added
+to Node.targets is the document that the Node points to (if there is one).</p>
+<p>The goal for the graph is to store all useful annotation and to have simple ways
+to trace nodes all the way up to the primary data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mmif</strong> – the MMIF document that we are creating a graph for</p></li>
+<li><p><strong>documents</strong> – list of the top-level documents</p></li>
+<li><p><strong>nodes</strong> – dictionary of nodes, indexed on node identifier</p></li>
+<li><p><strong>alignments</strong> – list of &lt;View, Annotation&gt; pairs</p></li>
+<li><p><strong>token_idx</strong> – an instance of TokenIndex</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.graph.Graph.add_node">
+<span class="sig-name descname"><span class="pre">add_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotation</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/graph.py#L79-L82"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.graph.Graph.add_node" title="Link to this definition">¶</a></dt>
+<dd><p>Add an annotation as a node to the graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.graph.Graph.add_edge">
+<span class="sig-name descname"><span class="pre">add_edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alignment</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/graph.py#L84-L99"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.graph.Graph.add_edge" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.graph.Graph.get_node">
+<span class="sig-name descname"><span class="pre">get_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mmif.utils.summarizer.nodes.Node" title="mmif.utils.summarizer.nodes.Node"><span class="pre">Node</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/graph.py#L101-L103"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.graph.Graph.get_node" title="Link to this definition">¶</a></dt>
+<dd><p>Return the Node instance from the node index.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.graph.Graph.get_nodes">
+<span class="sig-name descname"><span class="pre">get_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">short_at_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/graph.py#L107-L112"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.graph.Graph.get_nodes" title="Link to this definition">¶</a></dt>
+<dd><p>Get all nodes for an annotation type, using the short form. If a view
+identifier is provided then only include nodes from that view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.graph.Graph.statistics">
+<span class="sig-name descname"><span class="pre">statistics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">defaultdict</span></span></span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/graph.py#L114-L121"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.graph.Graph.statistics" title="Link to this definition">¶</a></dt>
+<dd><p>Collect counts for node types in each view.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.graph.TokenIndex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.graph.</span></span><span class="sig-name descname"><span class="pre">TokenIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/graph.py#L169-L231"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.graph.TokenIndex" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The tokens are indexed on the identifier on the TextDocument that they occur
+in and for each text document we have a list of &lt;offsets, Node&gt; pairs</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;v_4:td1&#39;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="o">&lt;</span><span class="n">summarizer</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">Node</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x1039996d0</span><span class="o">&gt;</span><span class="p">),</span>
+    <span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="o">&lt;</span><span class="n">summarizer</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">Node</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x103999850</span><span class="o">&gt;</span><span class="p">),</span>
+    <span class="o">...</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.graph.TokenIndex.get_tokens_for_node">
+<span class="sig-name descname"><span class="pre">get_tokens_for_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mmif.utils.summarizer.nodes.Node" title="mmif.utils.summarizer.nodes.Node"><span class="pre">Node</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/graph.py#L212-L224"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.graph.TokenIndex.get_tokens_for_node" title="Link to this definition">¶</a></dt>
+<dd><p>Return all tokens included in the span of a node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.graph.TokenIndex.pp">
+<span class="sig-name descname"><span class="pre">pp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/graph.py#L226-L231"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.graph.TokenIndex.pp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mmif.utils.summarizer.nodes">
+<span id="mmif-utils-summarizer-nodes-module"></span><h2>mmif.utils.summarizer.nodes module<a class="headerlink" href="#module-mmif.utils.summarizer.nodes" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.Node">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.nodes.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotation</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L9-L194"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.Node" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.Node.add_local_anchors">
+<span class="sig-name descname"><span class="pre">add_local_anchors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L41-L59"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.Node.add_local_anchors" title="Link to this definition">¶</a></dt>
+<dd><p>Get the anchors that you can get from the annotation itself, which 
+includes the start and end offsets, the coordinates, the timePoint of
+a BoundingBox and any annotation with targets.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.Node.add_anchors_from_targets">
+<span class="sig-name descname"><span class="pre">add_anchors_from_targets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L61-L80"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.Node.add_anchors_from_targets" title="Link to this definition">¶</a></dt>
+<dd><p>Get start and end offsets or timePoints from the targets and add them to
+the anchors, but only if there were no anchors on the node already. This has
+two cases: one for TimeFrames and one for text intervals.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.Node.add_anchors_from_alignment">
+<span class="sig-name descname"><span class="pre">add_anchors_from_alignment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L82-L150"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.Node.add_anchors_from_alignment" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.Node.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L172-L175"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.Node.summary" title="Link to this definition">¶</a></dt>
+<dd><p>The default summary is just the identfier, this should typically be
+overriden by sub classes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.Node.has_label">
+<span class="sig-name descname"><span class="pre">has_label</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L177-L179"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.Node.has_label" title="Link to this definition">¶</a></dt>
+<dd><p>Only TimeFrameNodes can have labels so this returns False.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.Node.pp">
+<span class="sig-name descname"><span class="pre">pp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">close</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L181-L194"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.Node.pp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.TimeFrameNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.nodes.</span></span><span class="sig-name descname"><span class="pre">TimeFrameNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotation</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L197-L231"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.TimeFrameNode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mmif.utils.summarizer.nodes.Node" title="mmif.utils.summarizer.nodes.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.TimeFrameNode.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L204-L205"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.TimeFrameNode.start" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.TimeFrameNode.end">
+<span class="sig-name descname"><span class="pre">end</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L207-L208"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.TimeFrameNode.end" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.TimeFrameNode.frame_type">
+<span class="sig-name descname"><span class="pre">frame_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L210-L213"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.TimeFrameNode.frame_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.TimeFrameNode.has_label">
+<span class="sig-name descname"><span class="pre">has_label</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L215-L216"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.TimeFrameNode.has_label" title="Link to this definition">¶</a></dt>
+<dd><p>Only TimeFrameNodes can have labels so this returns False.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.TimeFrameNode.representatives">
+<span class="sig-name descname"><span class="pre">representatives</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L218-L223"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.TimeFrameNode.representatives" title="Link to this definition">¶</a></dt>
+<dd><p>Return a list of the representative TimePoints.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.TimeFrameNode.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L225-L231"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.TimeFrameNode.summary" title="Link to this definition">¶</a></dt>
+<dd><p>The summary of a time frame just contains the identifier, start, end
+and frame type.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.EntityNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.nodes.</span></span><span class="sig-name descname"><span class="pre">EntityNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotation</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L234-L355"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.EntityNode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mmif.utils.summarizer.nodes.Node" title="mmif.utils.summarizer.nodes.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.EntityNode.start_in_video">
+<span class="sig-name descname"><span class="pre">start_in_video</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L251-L257"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.EntityNode.start_in_video" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.EntityNode.end_in_video">
+<span class="sig-name descname"><span class="pre">end_in_video</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L259-L260"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.EntityNode.end_in_video" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.EntityNode.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L276-L296"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.EntityNode.summary" title="Link to this definition">¶</a></dt>
+<dd><p>The summary for entities needs to include where in the video or image
+the entity occurs, it is not enough to just give the text document.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.EntityNode.anchor">
+<span class="sig-name descname"><span class="pre">anchor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L298-L319"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.EntityNode.anchor" title="Link to this definition">¶</a></dt>
+<dd><p>The anchor is the position in the video that the entity is linked to.
+This anchor cannot be found in the document property because that points
+to a text document that was somehow derived from the video document. Some
+graph traversal is needed to get the anchor, but we know that the anchor
+is always a time frame or a bounding box.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.EntityNode.anchor2">
+<span class="sig-name descname"><span class="pre">anchor2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L321-L345"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.EntityNode.anchor2" title="Link to this definition">¶</a></dt>
+<dd><p>The anchor is the position in the video that the entity is linked to.
+This anchor cannot be found in the document property because that points
+to a text document that was somehow derived from the video document. Some
+graph traversal is needed to get the anchor, but we know that the anchor
+is always a time frame or a bounding box.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.EntityNode.find_boundingbox_or_timeframe">
+<span class="sig-name descname"><span class="pre">find_boundingbox_or_timeframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L347-L348"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.EntityNode.find_boundingbox_or_timeframe" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.Nodes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.nodes.</span></span><span class="sig-name descname"><span class="pre">Nodes</span></span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L358-L369"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.Nodes" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Factory class for Node creation. Use Node for creation unless a special
+class was registered for the kind of annotation we have.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.Nodes.node_classes">
+<span class="sig-name descname"><span class="pre">node_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'NamedEntity':</span> <span class="pre">&lt;class</span> <span class="pre">'mmif.utils.summarizer.nodes.EntityNode'&gt;,</span> <span class="pre">'TimeFrame':</span> <span class="pre">&lt;class</span> <span class="pre">'mmif.utils.summarizer.nodes.TimeFrameNode'&gt;}</span></em><a class="headerlink" href="#mmif.utils.summarizer.nodes.Nodes.node_classes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.nodes.Nodes.new">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotation</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/nodes.py#L366-L369"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.nodes.Nodes.new" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mmif.utils.summarizer.summary">
+<span id="mmif-utils-summarizer-summary-module"></span><h2>mmif.utils.summarizer.summary module<a class="headerlink" href="#module-mmif.utils.summarizer.summary" title="Link to this heading">¶</a></h2>
+<p>Main classes for the summarizer.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.SummaryException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.summary.</span></span><span class="sig-name descname"><span class="pre">SummaryException</span></span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L28-L29"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.SummaryException" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Summary">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.summary.</span></span><span class="sig-name descname"><span class="pre">Summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mmif_file</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L32-L115"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Summary" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Implements the summary of a MMIF file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> – name of the input mmif file</p></li>
+<li><p><strong>mmif</strong> – instance of mmif.serialize.Mmif</p></li>
+<li><p><strong>graph</strong> – instance of graph.Graph</p></li>
+<li><p><strong>documents</strong> – instance of Documents</p></li>
+<li><p><strong>views</strong> – instance of Views</p></li>
+<li><p><strong>transcript</strong> – instance of Transcript</p></li>
+<li><p><strong>timeframes</strong> – instance of TimeFrames</p></li>
+<li><p><strong>entities</strong> – instance of Entities</p></li>
+<li><p><strong>captions</strong> – instance of Captions</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Summary.add_warning">
+<span class="sig-name descname"><span class="pre">add_warning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">warning</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L67-L68"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Summary.add_warning" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Summary.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L70-L74"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Summary.validate" title="Link to this definition">¶</a></dt>
+<dd><p>Minimal validation of the input. Mostly a place holder because all it
+does now is to check how many video documents there are.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Summary.video_documents">
+<span class="sig-name descname"><span class="pre">video_documents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L76-L77"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Summary.video_documents" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Summary.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L79-L91"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Summary.to_dict" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Summary.report">
+<span class="sig-name descname"><span class="pre">report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L93-L103"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Summary.report" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Summary.print_warnings">
+<span class="sig-name descname"><span class="pre">print_warnings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L105-L107"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Summary.print_warnings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Summary.pp">
+<span class="sig-name descname"><span class="pre">pp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L109-L115"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Summary.pp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Documents">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.summary.</span></span><span class="sig-name descname"><span class="pre">Documents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mmif.utils.summarizer.summary.Summary" title="mmif.utils.summarizer.summary.Summary"><span class="pre">Summary</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L118-L138"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Documents" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Contains a list of document summaries, which are dictionaries with just
+the id, type and location properties.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Documents.summary">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L129-L133"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Documents.summary" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Documents.pp">
+<span class="sig-name descname"><span class="pre">pp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L135-L138"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Documents.pp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Annotations">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.summary.</span></span><span class="sig-name descname"><span class="pre">Annotations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L141-L159"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Annotations" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Contains a dictionary of Annotation object summaries, indexed on view
+identifiers.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Annotations.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L152-L153"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Annotations.get" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Annotations.get_all_annotations">
+<span class="sig-name descname"><span class="pre">get_all_annotations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L155-L159"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Annotations.get_all_annotations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Document">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.summary.</span></span><span class="sig-name descname"><span class="pre">Document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L162-L184"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Document" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Collects some document-level information, including MMIF version, size of
+the MMIF file and some information from the SWT document annotation.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Views">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.summary.</span></span><span class="sig-name descname"><span class="pre">Views</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L187-L225"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Views" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Contains a list of view summaries, which are dictionaries with just
+the id, app and timestamp properties.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Views.get_view_summary">
+<span class="sig-name descname"><span class="pre">get_view_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L203-L220"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Views.get_view_summary" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Views.pp">
+<span class="sig-name descname"><span class="pre">pp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L222-L225"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Views.pp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Transcript">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.summary.</span></span><span class="sig-name descname"><span class="pre">Transcript</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L228-L288"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Transcript" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The transcript contains the string value from the first text document in the
+last ASR view. It issues a warning if there is more than one text document in
+the view.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Transcript.transcript_size">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transcript_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentences</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L264-L269"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Transcript.transcript_size" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Transcript.collect_targets">
+<span class="sig-name descname"><span class="pre">collect_targets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s_nodes</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L271-L280"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Transcript.collect_targets" title="Link to this definition">¶</a></dt>
+<dd><p>For each node (in this context a sentence node), collect all target nodes
+(which are tokens) and return them as a list of lists, with one list for each
+node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Transcript.create_sentences">
+<span class="sig-name descname"><span class="pre">create_sentences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sentence_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L282-L288"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Transcript.create_sentences" title="Link to this definition">¶</a></dt>
+<dd><p>If there is no sentence structure then we create it just by chopping th
+input into slices of some pre-determined length.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.TranscriptElement">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.summary.</span></span><span class="sig-name descname"><span class="pre">TranscriptElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identifier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sentence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transcript</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mmif.utils.summarizer.utils.CharacterList" title="mmif.utils.summarizer.utils.CharacterList"><span class="pre">CharacterList</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L291-L323"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.TranscriptElement" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Utility class to handle data associated with an element from a transcript,
+which is created from a sentence which is a list of Token Nodes. Initialization
+has the side effect of populating the full transcript which is an instance of
+CharacterList and which is also accessed here.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.TranscriptElement.as_json">
+<span class="sig-name descname"><span class="pre">as_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L316-L323"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.TranscriptElement.as_json" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Nodes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.summary.</span></span><span class="sig-name descname"><span class="pre">Nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L326-L361"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Nodes" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstract class to store instances of subclasses of graph.Node. The
+initialization methods of subclasses of Nodes can guard what nodes will
+be allowed in, for example, as of July 2022 the TimeFrames class only
+allowed time frames that had a frame type (thereby blocking the many
+timeframes from Kaldi).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>summary</strong> – an instance of Summary</p></li>
+<li><p><strong>graph</strong> – an instance of graph.Graph, taken from the summary</p></li>
+<li><p><strong>nodes</strong> – list of instances of subclasses of graph.Node</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Nodes.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L352-L353"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Nodes.add" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Nodes.get_nodes">
+<span class="sig-name descname"><span class="pre">get_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">props</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L355-L361"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Nodes.get_nodes" title="Link to this definition">¶</a></dt>
+<dd><p>Return all the nodes that match the given properties.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.TimeFrames">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.summary.</span></span><span class="sig-name descname"><span class="pre">TimeFrames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L364-L414"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.TimeFrames" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mmif.utils.summarizer.summary.Nodes" title="mmif.utils.summarizer.summary.Nodes"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nodes</span></code></a></p>
+<p>For now, we take only the TimeFrames that have a frame type, which rules out
+all the frames we got from Kaldi.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.TimeFrames.as_json">
+<span class="sig-name descname"><span class="pre">as_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L406-L407"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.TimeFrames.as_json" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.TimeFrames.pp">
+<span class="sig-name descname"><span class="pre">pp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L409-L414"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.TimeFrames.pp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.TimeFrameStats">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.summary.</span></span><span class="sig-name descname"><span class="pre">TimeFrameStats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L417-L462"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.TimeFrameStats" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Entities">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.summary.</span></span><span class="sig-name descname"><span class="pre">Entities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L465-L544"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Entities" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mmif.utils.summarizer.summary.Nodes" title="mmif.utils.summarizer.summary.Nodes"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nodes</span></code></a></p>
+<p>This class collects instances of graph.EntityNode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nodes_idx</strong> – maps entity texts to lists of instances of graph.EntityNode</p></li>
+<li><p><strong>bins</strong> – an instance of Bins</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Entities.as_json">
+<span class="sig-name descname"><span class="pre">as_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L523-L530"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Entities.as_json" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Entities.pp">
+<span class="sig-name descname"><span class="pre">pp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L532-L538"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Entities.pp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Entities.print_groups">
+<span class="sig-name descname"><span class="pre">print_groups</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L540-L544"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Entities.print_groups" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Captions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.summary.</span></span><span class="sig-name descname"><span class="pre">Captions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L547-L581"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Captions" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mmif.utils.summarizer.summary.Nodes" title="mmif.utils.summarizer.summary.Nodes"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nodes</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Captions.as_json">
+<span class="sig-name descname"><span class="pre">as_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L579-L581"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Captions.as_json" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Bins">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.summary.</span></span><span class="sig-name descname"><span class="pre">Bins</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L584-L635"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Bins" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Bins.add_entity">
+<span class="sig-name descname"><span class="pre">add_entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L598-L617"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Bins.add_entity" title="Link to this definition">¶</a></dt>
+<dd><p>Add an entity instance to the appropriate bin.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Bins.mark_entities">
+<span class="sig-name descname"><span class="pre">mark_entities</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L619-L627"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Bins.mark_entities" title="Link to this definition">¶</a></dt>
+<dd><p>Marks all entities with the bin that they occur in. This is done to export
+the grouping done with the bins to the entities and this way the bins never need
+to be touched again.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Bins.print_bins">
+<span class="sig-name descname"><span class="pre">print_bins</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L629-L635"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Bins.print_bins" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Bin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.summary.</span></span><span class="sig-name descname"><span class="pre">Bin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L638-L657"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Bin" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Bin.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L652-L653"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Bin.add" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.summary.Bin.print_nodes">
+<span class="sig-name descname"><span class="pre">print_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/summary.py#L655-L657"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.summary.Bin.print_nodes" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mmif.utils.summarizer.utils">
+<span id="mmif-utils-summarizer-utils-module"></span><h2>mmif.utils.summarizer.utils module<a class="headerlink" href="#module-mmif.utils.summarizer.utils" title="Link to this heading">¶</a></h2>
+<p>Utility methods for the summarizer.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.compose_id">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">compose_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anno_id</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L17-L19"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.compose_id" title="Link to this definition">¶</a></dt>
+<dd><p>Composes the view identifier with the annotation identifier.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.type_name">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">type_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">annotation</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L22-L24"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.type_name" title="Link to this definition">¶</a></dt>
+<dd><p>Return the short name of the type.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.get_transcript_view">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">get_transcript_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L27-L37"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.get_transcript_view" title="Link to this definition">¶</a></dt>
+<dd><p>Return the last Whisper or Kaldi view that is not a warnings view.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.get_captions_view">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">get_captions_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L40-L47"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.get_captions_view" title="Link to this definition">¶</a></dt>
+<dd><p>Return the last view created by the captioner.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.get_last_segmenter_view">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">get_last_segmenter_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L50-L55"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.get_last_segmenter_view" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.get_aligned_tokens">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">get_aligned_tokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L58-L70"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.get_aligned_tokens" title="Link to this definition">¶</a></dt>
+<dd><p>Get a list of tokens from an ASR view where for each token we add a timeframe
+properties which has the start and end points of the aligned timeframe.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.timestamp">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">milliseconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hh:mm:ss'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L73-L93"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.timestamp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.AnnotationsIndex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">AnnotationsIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L97-L120"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.AnnotationsIndex" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Creates an index on the annotations list for a view, where each annotation type
+is indexed on its identifier. Tokens are special and get their own list.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.AnnotationsIndex.get_annotations">
+<span class="sig-name descname"><span class="pre">get_annotations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">at_type</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L119-L120"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.AnnotationsIndex.get_annotations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.CharacterList">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">CharacterList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">char</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L123-L151"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.CharacterList" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserList</span></code></p>
+<p>Auxiliary datastructure to help print a list of tokens. It allows you to
+back-engineer a sentence from the text and character offsets of the tokens.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.CharacterList.set_chars">
+<span class="sig-name descname"><span class="pre">set_chars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L147-L148"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.CharacterList.set_chars" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.CharacterList.getvalue">
+<span class="sig-name descname"><span class="pre">getvalue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L150-L151"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.CharacterList.getvalue" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.xml_tag">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">xml_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subtag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">props</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span>&#160; <span class="pre">'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L154-L161"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.xml_tag" title="Link to this definition">¶</a></dt>
+<dd><p>Return an XML string for a list of instances of subtag, grouped under tag.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.xml_empty_tag">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">xml_empty_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">props</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L164-L174"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.xml_empty_tag" title="Link to this definition">¶</a></dt>
+<dd><p>Return an XML tag to an instance of io.StringIO(). Only properties from obj
+that are in the props tuple are printed.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.write_tag">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">write_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tagname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">props</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L177-L186"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.write_tag" title="Link to this definition">¶</a></dt>
+<dd><p>Write an XML tag to an instance of io.StringIO(). Only properties from obj
+that are in the props tuple are printed.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.xml_attribute">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">xml_attribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L189-L191"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.xml_attribute" title="Link to this definition">¶</a></dt>
+<dd><p>Return attr as an XML attribute.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.xml_data">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">xml_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L194-L196"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.xml_data" title="Link to this definition">¶</a></dt>
+<dd><p>Return text as XML data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.normalize_id">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">normalize_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mmif.serialize.html#mmif.serialize.view.View" title="mmif.serialize.view.View"><span class="pre">View</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mmif.serialize.html#mmif.serialize.annotation.Annotation" title="mmif.serialize.annotation.Annotation"><span class="pre">Annotation</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L199-L243"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.normalize_id" title="Link to this definition">¶</a></dt>
+<dd><p>Change identifiers to include the view identifier if it wasn’t included,
+do nothing otherwise. This applies to the Annotation id, target, source,
+document, targets and representatives properties. Note that timePoint is
+not included because the value is an integer and not an identifier.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.get_annotations_from_view">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">get_annotations_from_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotation_type</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L246-L252"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.get_annotations_from_view" title="Link to this definition">¶</a></dt>
+<dd><p>Return all annotations from a view that match the short name of the
+annotation type.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mmif.utils.summarizer.utils.find_matching_tokens">
+<span class="sig-prename descclassname"><span class="pre">mmif.utils.summarizer.utils.</span></span><span class="sig-name descname"><span class="pre">find_matching_tokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ne</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/1.3.0/mmif/utils/summarizer/utils.py#L255-L266"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mmif.utils.summarizer.utils.find_matching_tokens" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="mmif.vocabulary.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">mmif.vocabulary package</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="mmif.utils.cli.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">mmif.utils.cli package</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Brandeis LLC
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">mmif.utils.summarizer package</a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.argparser"><code class="docutils literal notranslate"><span class="pre">argparser()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.pp_args"><code class="docutils literal notranslate"><span class="pre">pp_args()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-mmif.utils.summarizer.config">mmif.utils.summarizer.config module</a></li>
+<li><a class="reference internal" href="#module-mmif.utils.summarizer.graph">mmif.utils.summarizer.graph module</a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.graph.Graph"><code class="docutils literal notranslate"><span class="pre">Graph</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.graph.Graph.add_node"><code class="docutils literal notranslate"><span class="pre">Graph.add_node()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.graph.Graph.add_edge"><code class="docutils literal notranslate"><span class="pre">Graph.add_edge()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.graph.Graph.get_node"><code class="docutils literal notranslate"><span class="pre">Graph.get_node()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.graph.Graph.get_nodes"><code class="docutils literal notranslate"><span class="pre">Graph.get_nodes()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.graph.Graph.statistics"><code class="docutils literal notranslate"><span class="pre">Graph.statistics()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.graph.TokenIndex"><code class="docutils literal notranslate"><span class="pre">TokenIndex</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.graph.TokenIndex.get_tokens_for_node"><code class="docutils literal notranslate"><span class="pre">TokenIndex.get_tokens_for_node()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.graph.TokenIndex.pp"><code class="docutils literal notranslate"><span class="pre">TokenIndex.pp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-mmif.utils.summarizer.nodes">mmif.utils.summarizer.nodes module</a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.Node.add_local_anchors"><code class="docutils literal notranslate"><span class="pre">Node.add_local_anchors()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.Node.add_anchors_from_targets"><code class="docutils literal notranslate"><span class="pre">Node.add_anchors_from_targets()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.Node.add_anchors_from_alignment"><code class="docutils literal notranslate"><span class="pre">Node.add_anchors_from_alignment()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.Node.summary"><code class="docutils literal notranslate"><span class="pre">Node.summary()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.Node.has_label"><code class="docutils literal notranslate"><span class="pre">Node.has_label()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.Node.pp"><code class="docutils literal notranslate"><span class="pre">Node.pp()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.TimeFrameNode"><code class="docutils literal notranslate"><span class="pre">TimeFrameNode</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.TimeFrameNode.start"><code class="docutils literal notranslate"><span class="pre">TimeFrameNode.start()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.TimeFrameNode.end"><code class="docutils literal notranslate"><span class="pre">TimeFrameNode.end()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.TimeFrameNode.frame_type"><code class="docutils literal notranslate"><span class="pre">TimeFrameNode.frame_type()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.TimeFrameNode.has_label"><code class="docutils literal notranslate"><span class="pre">TimeFrameNode.has_label()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.TimeFrameNode.representatives"><code class="docutils literal notranslate"><span class="pre">TimeFrameNode.representatives()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.TimeFrameNode.summary"><code class="docutils literal notranslate"><span class="pre">TimeFrameNode.summary()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.EntityNode"><code class="docutils literal notranslate"><span class="pre">EntityNode</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.EntityNode.start_in_video"><code class="docutils literal notranslate"><span class="pre">EntityNode.start_in_video()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.EntityNode.end_in_video"><code class="docutils literal notranslate"><span class="pre">EntityNode.end_in_video()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.EntityNode.summary"><code class="docutils literal notranslate"><span class="pre">EntityNode.summary()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.EntityNode.anchor"><code class="docutils literal notranslate"><span class="pre">EntityNode.anchor()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.EntityNode.anchor2"><code class="docutils literal notranslate"><span class="pre">EntityNode.anchor2()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.EntityNode.find_boundingbox_or_timeframe"><code class="docutils literal notranslate"><span class="pre">EntityNode.find_boundingbox_or_timeframe()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.Nodes"><code class="docutils literal notranslate"><span class="pre">Nodes</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.Nodes.node_classes"><code class="docutils literal notranslate"><span class="pre">Nodes.node_classes</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.nodes.Nodes.new"><code class="docutils literal notranslate"><span class="pre">Nodes.new()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-mmif.utils.summarizer.summary">mmif.utils.summarizer.summary module</a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.SummaryException"><code class="docutils literal notranslate"><span class="pre">SummaryException</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Summary"><code class="docutils literal notranslate"><span class="pre">Summary</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Summary.add_warning"><code class="docutils literal notranslate"><span class="pre">Summary.add_warning()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Summary.validate"><code class="docutils literal notranslate"><span class="pre">Summary.validate()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Summary.video_documents"><code class="docutils literal notranslate"><span class="pre">Summary.video_documents()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Summary.to_dict"><code class="docutils literal notranslate"><span class="pre">Summary.to_dict()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Summary.report"><code class="docutils literal notranslate"><span class="pre">Summary.report()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Summary.print_warnings"><code class="docutils literal notranslate"><span class="pre">Summary.print_warnings()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Summary.pp"><code class="docutils literal notranslate"><span class="pre">Summary.pp()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Documents"><code class="docutils literal notranslate"><span class="pre">Documents</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Documents.summary"><code class="docutils literal notranslate"><span class="pre">Documents.summary()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Documents.pp"><code class="docutils literal notranslate"><span class="pre">Documents.pp()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Annotations"><code class="docutils literal notranslate"><span class="pre">Annotations</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Annotations.get"><code class="docutils literal notranslate"><span class="pre">Annotations.get()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Annotations.get_all_annotations"><code class="docutils literal notranslate"><span class="pre">Annotations.get_all_annotations()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Document"><code class="docutils literal notranslate"><span class="pre">Document</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Views"><code class="docutils literal notranslate"><span class="pre">Views</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Views.get_view_summary"><code class="docutils literal notranslate"><span class="pre">Views.get_view_summary()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Views.pp"><code class="docutils literal notranslate"><span class="pre">Views.pp()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Transcript"><code class="docutils literal notranslate"><span class="pre">Transcript</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Transcript.transcript_size"><code class="docutils literal notranslate"><span class="pre">Transcript.transcript_size()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Transcript.collect_targets"><code class="docutils literal notranslate"><span class="pre">Transcript.collect_targets()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Transcript.create_sentences"><code class="docutils literal notranslate"><span class="pre">Transcript.create_sentences()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.TranscriptElement"><code class="docutils literal notranslate"><span class="pre">TranscriptElement</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.TranscriptElement.as_json"><code class="docutils literal notranslate"><span class="pre">TranscriptElement.as_json()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Nodes"><code class="docutils literal notranslate"><span class="pre">Nodes</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Nodes.add"><code class="docutils literal notranslate"><span class="pre">Nodes.add()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Nodes.get_nodes"><code class="docutils literal notranslate"><span class="pre">Nodes.get_nodes()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.TimeFrames"><code class="docutils literal notranslate"><span class="pre">TimeFrames</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.TimeFrames.as_json"><code class="docutils literal notranslate"><span class="pre">TimeFrames.as_json()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.TimeFrames.pp"><code class="docutils literal notranslate"><span class="pre">TimeFrames.pp()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.TimeFrameStats"><code class="docutils literal notranslate"><span class="pre">TimeFrameStats</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Entities"><code class="docutils literal notranslate"><span class="pre">Entities</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Entities.as_json"><code class="docutils literal notranslate"><span class="pre">Entities.as_json()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Entities.pp"><code class="docutils literal notranslate"><span class="pre">Entities.pp()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Entities.print_groups"><code class="docutils literal notranslate"><span class="pre">Entities.print_groups()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Captions"><code class="docutils literal notranslate"><span class="pre">Captions</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Captions.as_json"><code class="docutils literal notranslate"><span class="pre">Captions.as_json()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Bins"><code class="docutils literal notranslate"><span class="pre">Bins</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Bins.add_entity"><code class="docutils literal notranslate"><span class="pre">Bins.add_entity()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Bins.mark_entities"><code class="docutils literal notranslate"><span class="pre">Bins.mark_entities()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Bins.print_bins"><code class="docutils literal notranslate"><span class="pre">Bins.print_bins()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Bin"><code class="docutils literal notranslate"><span class="pre">Bin</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Bin.add"><code class="docutils literal notranslate"><span class="pre">Bin.add()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.summary.Bin.print_nodes"><code class="docutils literal notranslate"><span class="pre">Bin.print_nodes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-mmif.utils.summarizer.utils">mmif.utils.summarizer.utils module</a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.compose_id"><code class="docutils literal notranslate"><span class="pre">compose_id()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.type_name"><code class="docutils literal notranslate"><span class="pre">type_name()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.get_transcript_view"><code class="docutils literal notranslate"><span class="pre">get_transcript_view()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.get_captions_view"><code class="docutils literal notranslate"><span class="pre">get_captions_view()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.get_last_segmenter_view"><code class="docutils literal notranslate"><span class="pre">get_last_segmenter_view()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.get_aligned_tokens"><code class="docutils literal notranslate"><span class="pre">get_aligned_tokens()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.timestamp"><code class="docutils literal notranslate"><span class="pre">timestamp()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.AnnotationsIndex"><code class="docutils literal notranslate"><span class="pre">AnnotationsIndex</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.AnnotationsIndex.get_annotations"><code class="docutils literal notranslate"><span class="pre">AnnotationsIndex.get_annotations()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.CharacterList"><code class="docutils literal notranslate"><span class="pre">CharacterList</span></code></a><ul>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.CharacterList.set_chars"><code class="docutils literal notranslate"><span class="pre">CharacterList.set_chars()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.CharacterList.getvalue"><code class="docutils literal notranslate"><span class="pre">CharacterList.getvalue()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.xml_tag"><code class="docutils literal notranslate"><span class="pre">xml_tag()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.xml_empty_tag"><code class="docutils literal notranslate"><span class="pre">xml_empty_tag()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.write_tag"><code class="docutils literal notranslate"><span class="pre">write_tag()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.xml_attribute"><code class="docutils literal notranslate"><span class="pre">xml_attribute()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.xml_data"><code class="docutils literal notranslate"><span class="pre">xml_data()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.normalize_id"><code class="docutils literal notranslate"><span class="pre">normalize_id()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.get_annotations_from_view"><code class="docutils literal notranslate"><span class="pre">get_annotations_from_view()</span></code></a></li>
+<li><a class="reference internal" href="#mmif.utils.summarizer.utils.find_matching_tokens"><code class="docutils literal notranslate"><span class="pre">find_matching_tokens()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=8a448e45"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>
