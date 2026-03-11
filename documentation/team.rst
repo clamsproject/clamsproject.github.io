@@ -8,7 +8,7 @@ For general contact, please email admin@clams.ai.
 Principal Investigator
 ----------------------
 
-* `James Pustejovsky <http://cs.brandeis.edu/~jamesp>`_
+* `James Pustejovsky <https://scholar.google.com/citations?user=56UT_6IAAAAJ&hl=en&oi=ao>`_
 
 Project Manager
 ---------------
