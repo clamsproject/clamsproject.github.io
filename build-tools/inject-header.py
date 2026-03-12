@@ -609,24 +609,8 @@ def main():
         # Versioned project: process each version directory
         print(f"Found {len(versions)} versions: {', '.join(versions)}")
 
-        # Remove legacy 'latest' directory if it exists
-        latest_dir = project_dir / 'latest'
-        if latest_dir.exists() and latest_dir.is_dir():
-            if args.dry_run:
-                print(f"Would remove legacy latest/ directory")
-            else:
-                try:
-                    shutil.rmtree(latest_dir)
-                    print(f"Removed legacy latest/ directory")
-                except Exception as e:
-                    print(f"Warning: Could not remove latest/ directory: {e}", file=sys.stderr)
-
         for version in versions:
-            # Skip 'latest' directory (we create redirect at root instead)
             version_dir = project_dir / version
-            if version == 'latest':
-                print(f"Skipping {version}/ (redirect created at root)")
-                continue
 
             # Generate header for this specific version
             header_html = generate_header(

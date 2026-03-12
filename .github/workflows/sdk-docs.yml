@@ -35,11 +35,6 @@ on:
         required: false
         type: string
         default: '3.11'
-      update_latest:
-        description: 'Update the latest symlink/copy when version is specified'
-        required: false
-        type: boolean
-        default: true
     secrets:
       GH_CLAMSBOT_TOKEN:
         description: 'GitHub token with write access to organizational public repos'
@@ -87,14 +82,6 @@ jobs:
           mkdir -p "hub/${{ steps.target.outputs.dir }}"
           rm -rf "hub/${{ steps.target.outputs.dir }}"/*
           cp -r clone-repo/${{ inputs.docs_output_dir }}/* "hub/${{ steps.target.outputs.dir }}/"
-
-      - name: Update latest symlink
-        if: inputs.version != '' && inputs.update_latest
-        working-directory: hub
-        run: |
-          cd "docs/${{ inputs.project_name }}"
-          rm -rf latest
-          cp -r "${{ inputs.version }}" latest
 
       - name: Inject header
         run: |
