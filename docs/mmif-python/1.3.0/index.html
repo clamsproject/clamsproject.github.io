@@ -5,10 +5,11 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Getting Started" href="introduction.html">
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
-        <title>mmif-python-1.3.0 documentation</title>
+    <!-- Generated with Sphinx 7.4.7 and Furo 2025.09.25 -->
+        <title>mmif-python documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -150,7 +151,6 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
     <div class="header-right">
         <select onchange="if(this.value) window.location.href=this.value;">
             <option value="">Switch version...</option>
-            <option value="https://clams.ai/mmif-python/latest/">latest (development)</option>
             <option value="https://clams.ai/mmif-python/1.3.1/">1.3.1</option>
             <option value="" disabled selected>1.3.0 (current)</option>
             <option value="https://clams.ai/mmif-python/1.2.1/">1.2.1</option>
@@ -308,7 +308,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">mmif-python-1.3.0  documentation</div></a>
+      <a href="#"><div class="brand">mmif-python  documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -329,7 +329,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   
-  <span class="sidebar-brand-text">mmif-python-1.3.0  documentation</span>
+  <span class="sidebar-brand-text">mmif-python  documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -404,9 +404,31 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <h1>MMIF Python SDK<a class="headerlink" href="#mmif-python-sdk" title="Link to this heading">¶</a></h1>
 <p>This is the documentation for the mmif-python package, a Python implementation for the MultiMedia Interchange Format (MMIF). MMIF is a JSON(-LD)-based data format designed for transferring annotation data between computational analysis applications of the CLAMS project. For descriptions of the CLAMS project and the MMIF format see <a class="reference external" href="https://clams.ai">https://clams.ai</a> and <a class="reference external" href="https://mmif.clams.ai">https://mmif.clams.ai</a>. The GitHub repository for the package is at <a class="reference external" href="https://github.com/clamsproject/mmif-python">https://github.com/clamsproject/mmif-python</a>.</p>
 <hr class="docutils" />
-<section id="nothing-new-in-1-3-0">
-<h2>nothing new in 1.3.0<a class="headerlink" href="#nothing-new-in-1-3-0" title="Link to this heading">¶</a></h2>
-<p>Did you locally build for testing?</p>
+<section id="what-s-new-in-1-3-0">
+<h2>What’s New in 1.3.0<a class="headerlink" href="#what-s-new-in-1-3-0" title="Link to this heading">¶</a></h2>
+<p>(Full changelog available in the <a class="reference external" href="https://github.com/clamsproject/mmif-python/blob/main/CHANGELOG.md">CHANGELOG.md</a>)</p>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h3>
+<p>Minor release adding a new <code class="docutils literal notranslate"><span class="pre">summarize</span></code> CLI, pydantic-based workflow descriptors, and various fixes for video document helpers and timestamp handling.</p>
+</section>
+<section id="additions">
+<h3>Additions<a class="headerlink" href="#additions" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mmif</span> <span class="pre">summarize</span></code> CLI command, adapted from <a class="reference external" href="https://github.com/clamsproject/mmif-summarizer">mmif-summarizer</a> (<a class="reference external" href="https://github.com/clamsproject/mmif-python/pull/350">https://github.com/clamsproject/mmif-python/pull/350</a>)</p></li>
+<li><p>Timepoint selection feature for <code class="docutils literal notranslate"><span class="pre">video_document_helper</span></code> (<a class="reference external" href="https://github.com/clamsproject/mmif-python/pull/373">https://github.com/clamsproject/mmif-python/pull/373</a>)</p></li>
+</ul>
+</section>
+<section id="changes">
+<h3>Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mmif</span> <span class="pre">describe</span></code> output now uses pydantic models for schema validation and auto-generated documentation (<a class="reference external" href="https://github.com/clamsproject/mmif-python/pull/367">https://github.com/clamsproject/mmif-python/pull/367</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mmif</span> <span class="pre">describe</span></code> removed source counts from workflow ID (<a class="reference external" href="https://github.com/clamsproject/mmif-python/pull/358">https://github.com/clamsproject/mmif-python/pull/358</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">summarize</span></code> CLI aligned with other subcommand conventions (positional input, optional <code class="docutils literal notranslate"><span class="pre">-o</span></code>/<code class="docutils literal notranslate"><span class="pre">--output</span></code>, defaults to STDOUT) (<a class="reference external" href="https://github.com/clamsproject/mmif-python/pull/360">https://github.com/clamsproject/mmif-python/pull/360</a>)</p></li>
+<li><p>Timestamps in view metadata now use UTC (<code class="docutils literal notranslate"><span class="pre">Z</span></code> suffix) instead of local time (<a class="reference external" href="https://github.com/clamsproject/mmif-python/pull/372">https://github.com/clamsproject/mmif-python/pull/372</a>)</p></li>
+<li><p>Fixed <code class="docutils literal notranslate"><span class="pre">DocumentTypes</span></code> type hint to use <code class="docutils literal notranslate"><span class="pre">DocumentTypesBase</span></code> (<a class="reference external" href="https://github.com/clamsproject/mmif-python/pull/353">https://github.com/clamsproject/mmif-python/pull/353</a>)</p></li>
+<li><p>Caching for remote URI in video document helper to fix slow <code class="docutils literal notranslate"><span class="pre">get_framerate</span></code> on non-<code class="docutils literal notranslate"><span class="pre">file://</span></code> documents (<a class="reference external" href="https://github.com/clamsproject/mmif-python/pull/357">https://github.com/clamsproject/mmif-python/pull/357</a>)</p></li>
+<li><p>Documentation build migrated to “build-once, stay-forever” model via documentation hub (<a class="reference external" href="https://github.com/clamsproject/mmif-python/pull/344">https://github.com/clamsproject/mmif-python/pull/344</a>)</p></li>
+</ul>
 <hr class="docutils" />
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
@@ -446,13 +468,14 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 </li>
 </ul>
 </div>
+</section>
+</section>
 <section id="indices">
-<h3>Indices<a class="headerlink" href="#indices" title="Link to this heading">¶</a></h3>
+<h2>Indices<a class="headerlink" href="#indices" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 </ul>
-</section>
 </section>
 </section>
 
@@ -502,10 +525,15 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">MMIF Python SDK</a><ul>
-<li><a class="reference internal" href="#nothing-new-in-1-3-0">nothing new in 1.3.0</a><ul>
-<li><a class="reference internal" href="#indices">Indices</a></li>
+<li><a class="reference internal" href="#what-s-new-in-1-3-0">What’s New in 1.3.0</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#additions">Additions</a></li>
+<li><a class="reference internal" href="#changes">Changes</a><ul>
 </ul>
 </li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices">Indices</a></li>
 </ul>
 </li>
 </ul>

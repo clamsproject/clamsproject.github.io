@@ -5,10 +5,11 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="mmif.serialize package" href="mmif.serialize.html"><link rel="prev" title="Target MMIF Versions" href="../target-versions.html">
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
-        <title>mmif package - mmif-python-1.3.1 documentation</title>
+    <!-- Generated with Sphinx 7.4.7 and Furo 2025.09.25 -->
+        <title>mmif package - mmif-python documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -150,7 +151,6 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
     <div class="header-right">
         <select onchange="if(this.value) window.location.href=this.value;">
             <option value="">Switch version...</option>
-            <option value="https://clams.ai/mmif-python/latest/">latest (development)</option>
             <option value="" disabled selected>1.3.1 (current)</option>
             <option value="https://clams.ai/mmif-python/1.3.0/">1.3.0</option>
             <option value="https://clams.ai/mmif-python/1.2.1/">1.2.1</option>
@@ -308,7 +308,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">mmif-python-1.3.1  documentation</div></a>
+      <a href="../index.html"><div class="brand">mmif-python  documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -329,7 +329,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">mmif-python-1.3.1  documentation</span>
+  <span class="sidebar-brand-text">mmif-python  documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -764,73 +764,64 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l3"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.generate_param_hash"><code class="docutils literal notranslate"><span class="pre">generate_param_hash()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.generate_workflow_identifier"><code class="docutils literal notranslate"><span class="pre">generate_workflow_identifier()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifStats"><code class="docutils literal notranslate"><span class="pre">SingleMmifStats</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifStats.model_config"><code class="docutils literal notranslate"><span class="pre">SingleMmifStats.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifStats.annotation_count_by_type"><code class="docutils literal notranslate"><span class="pre">SingleMmifStats.annotation_count_by_type</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifStats.app_count"><code class="docutils literal notranslate"><span class="pre">SingleMmifStats.app_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifStats.empty_views"><code class="docutils literal notranslate"><span class="pre">SingleMmifStats.empty_views</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifStats.error_views"><code class="docutils literal notranslate"><span class="pre">SingleMmifStats.error_views</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifStats.warning_views"><code class="docutils literal notranslate"><span class="pre">SingleMmifStats.warning_views</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifStats.empty_views"><code class="docutils literal notranslate"><span class="pre">SingleMmifStats.empty_views</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifStats.annotation_count_by_type"><code class="docutils literal notranslate"><span class="pre">SingleMmifStats.annotation_count_by_type</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppProfiling"><code class="docutils literal notranslate"><span class="pre">AppProfiling</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppProfiling.model_config"><code class="docutils literal notranslate"><span class="pre">AppProfiling.model_config</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppProfiling.running_time_ms"><code class="docutils literal notranslate"><span class="pre">AppProfiling.running_time_ms</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppExecution"><code class="docutils literal notranslate"><span class="pre">AppExecution</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppExecution.model_config"><code class="docutils literal notranslate"><span class="pre">AppExecution.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppExecution.annotation_count_by_type"><code class="docutils literal notranslate"><span class="pre">AppExecution.annotation_count_by_type</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppExecution.app"><code class="docutils literal notranslate"><span class="pre">AppExecution.app</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppExecution.view_ids"><code class="docutils literal notranslate"><span class="pre">AppExecution.view_ids</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppExecution.app_configuration"><code class="docutils literal notranslate"><span class="pre">AppExecution.app_configuration</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppExecution.app_profiling"><code class="docutils literal notranslate"><span class="pre">AppExecution.app_profiling</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppExecution.annotation_count_by_type"><code class="docutils literal notranslate"><span class="pre">AppExecution.annotation_count_by_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppExecution.view_ids"><code class="docutils literal notranslate"><span class="pre">AppExecution.view_ids</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifDesc"><code class="docutils literal notranslate"><span class="pre">SingleMmifDesc</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifDesc.model_config"><code class="docutils literal notranslate"><span class="pre">SingleMmifDesc.model_config</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifDesc.workflow_id"><code class="docutils literal notranslate"><span class="pre">SingleMmifDesc.workflow_id</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifDesc.stats"><code class="docutils literal notranslate"><span class="pre">SingleMmifDesc.stats</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifDesc.apps"><code class="docutils literal notranslate"><span class="pre">SingleMmifDesc.apps</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifDesc.stats"><code class="docutils literal notranslate"><span class="pre">SingleMmifDesc.stats</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.SingleMmifDesc.workflow_id"><code class="docutils literal notranslate"><span class="pre">SingleMmifDesc.workflow_id</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.describe_single_mmif"><code class="docutils literal notranslate"><span class="pre">describe_single_mmif()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppProfilingStats"><code class="docutils literal notranslate"><span class="pre">AppProfilingStats</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppProfilingStats.model_config"><code class="docutils literal notranslate"><span class="pre">AppProfilingStats.model_config</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppProfilingStats.avg_running_time_ms"><code class="docutils literal notranslate"><span class="pre">AppProfilingStats.avg_running_time_ms</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppProfilingStats.min_running_time_ms"><code class="docutils literal notranslate"><span class="pre">AppProfilingStats.min_running_time_ms</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppProfilingStats.max_running_time_ms"><code class="docutils literal notranslate"><span class="pre">AppProfilingStats.max_running_time_ms</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppProfilingStats.min_running_time_ms"><code class="docutils literal notranslate"><span class="pre">AppProfilingStats.min_running_time_ms</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.AppProfilingStats.stdev_running_time_ms"><code class="docutils literal notranslate"><span class="pre">AppProfilingStats.stdev_running_time_ms</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.WorkflowAppExecution"><code class="docutils literal notranslate"><span class="pre">WorkflowAppExecution</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.WorkflowAppExecution.model_config"><code class="docutils literal notranslate"><span class="pre">WorkflowAppExecution.model_config</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.WorkflowAppExecution.app"><code class="docutils literal notranslate"><span class="pre">WorkflowAppExecution.app</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.WorkflowAppExecution.app_configuration"><code class="docutils literal notranslate"><span class="pre">WorkflowAppExecution.app_configuration</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.WorkflowAppExecution.app_profiling"><code class="docutils literal notranslate"><span class="pre">WorkflowAppExecution.app_profiling</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.WorkflowCollectionEntry"><code class="docutils literal notranslate"><span class="pre">WorkflowCollectionEntry</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.WorkflowCollectionEntry.model_config"><code class="docutils literal notranslate"><span class="pre">WorkflowCollectionEntry.model_config</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.WorkflowCollectionEntry.workflow_id"><code class="docutils literal notranslate"><span class="pre">WorkflowCollectionEntry.workflow_id</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.WorkflowCollectionEntry.mmifs"><code class="docutils literal notranslate"><span class="pre">WorkflowCollectionEntry.mmifs</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.WorkflowCollectionEntry.mmif_count"><code class="docutils literal notranslate"><span class="pre">WorkflowCollectionEntry.mmif_count</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.WorkflowCollectionEntry.apps"><code class="docutils literal notranslate"><span class="pre">WorkflowCollectionEntry.apps</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.WorkflowCollectionEntry.mmif_count"><code class="docutils literal notranslate"><span class="pre">WorkflowCollectionEntry.mmif_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.WorkflowCollectionEntry.mmifs"><code class="docutils literal notranslate"><span class="pre">WorkflowCollectionEntry.mmifs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.WorkflowCollectionEntry.workflow_id"><code class="docutils literal notranslate"><span class="pre">WorkflowCollectionEntry.workflow_id</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.MmifCountByStatus"><code class="docutils literal notranslate"><span class="pre">MmifCountByStatus</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.MmifCountByStatus.model_config"><code class="docutils literal notranslate"><span class="pre">MmifCountByStatus.model_config</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.MmifCountByStatus.total"><code class="docutils literal notranslate"><span class="pre">MmifCountByStatus.total</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.MmifCountByStatus.invalid"><code class="docutils literal notranslate"><span class="pre">MmifCountByStatus.invalid</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.MmifCountByStatus.successful"><code class="docutils literal notranslate"><span class="pre">MmifCountByStatus.successful</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.MmifCountByStatus.total"><code class="docutils literal notranslate"><span class="pre">MmifCountByStatus.total</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.MmifCountByStatus.with_errors"><code class="docutils literal notranslate"><span class="pre">MmifCountByStatus.with_errors</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.MmifCountByStatus.with_warnings"><code class="docutils literal notranslate"><span class="pre">MmifCountByStatus.with_warnings</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.MmifCountByStatus.invalid"><code class="docutils literal notranslate"><span class="pre">MmifCountByStatus.invalid</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.CollectionMmifDesc"><code class="docutils literal notranslate"><span class="pre">CollectionMmifDesc</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.CollectionMmifDesc.model_config"><code class="docutils literal notranslate"><span class="pre">CollectionMmifDesc.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.CollectionMmifDesc.annotation_count_by_type"><code class="docutils literal notranslate"><span class="pre">CollectionMmifDesc.annotation_count_by_type</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.CollectionMmifDesc.mmif_count_by_status"><code class="docutils literal notranslate"><span class="pre">CollectionMmifDesc.mmif_count_by_status</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.CollectionMmifDesc.workflows"><code class="docutils literal notranslate"><span class="pre">CollectionMmifDesc.workflows</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.CollectionMmifDesc.annotation_count_by_type"><code class="docutils literal notranslate"><span class="pre">CollectionMmifDesc.annotation_count_by_type</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mmif.utils.html#mmif.utils.workflow_helper.describe_mmif_collection"><code class="docutils literal notranslate"><span class="pre">describe_mmif_collection()</span></code></a></li>

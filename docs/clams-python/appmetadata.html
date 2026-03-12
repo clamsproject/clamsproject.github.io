@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="CLAMS App Directory" href="appdirectory.html"><link rel="prev" title="GPU Memory Management for CLAMS Apps" href="gpu-apps.html">
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
-        <title>CLAMS App Metadata - clone-repo documentation</title>
+        <title>CLAMS App Metadata - clams-python documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -250,7 +250,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">clone-repo  documentation</div></a>
+      <a href="index.html"><div class="brand">clams-python  documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -271,7 +271,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">clone-repo  documentation</span>
+  <span class="sidebar-brand-text">clams-python  documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -547,7 +547,7 @@ section).</p>
 <p>The schema for app metadata is as follows.
 (You can also download the schema in <a class="reference external" href="https://json-schema.org/">JSON Schema</a> format from <a class="reference external" href="appmetadata.jsonschema">here</a>.)</p>
 <section id="clams-appmetadata">
-<h4>CLAMS AppMetadata<a class="headerlink" href="#clams-appmetadata" title="Link to this heading">¶</a></h4>
+<span id="clams-appmetadata"></span><h4>CLAMS AppMetadata<a class="headerlink" href="#clams-appmetadata" title="Link to this heading">¶</a></h4>
 <p>Data model that describes a CLAMS app.</p>
 <p>Can be initialized by simply passing all required key-value pairs.</p>
 <p>If you have a pre-generated metadata as an external file, you can read in the file as a <code class="docutils literal notranslate"><span class="pre">dict</span></code> and use it as
@@ -727,13 +727,13 @@ SDK.</p>
 </tr>
 <tr class="row-odd"><td rowspan="3"><p>items</p></td>
 <td rowspan="3"><p>anyOf</p></td>
-<td colspan="2"><p><span class="xref std std-ref">#/$defs/Input</span></p></td>
+<td colspan="2"><p><a class="reference internal" href="#clams-input-specification">CLAMS Input Specification</a></p></td>
 </tr>
 <tr class="row-even"><td><p>type</p></td>
 <td><p><em>array</em></p></td>
 </tr>
 <tr class="row-odd"><td><p>items</p></td>
-<td><p><span class="xref std std-ref">#/$defs/Input</span></p></td>
+<td><p><a class="reference internal" href="#clams-input-specification">CLAMS Input Specification</a></p></td>
 </tr>
 <tr class="row-even"><td rowspan="4"><ul class="simple">
 <li><p>output</p></li>
@@ -748,7 +748,7 @@ SDK.</p>
 <td colspan="3"></td>
 </tr>
 <tr class="row-odd"><td><p>items</p></td>
-<td colspan="3"><p><span class="xref std std-ref">#/$defs/Output</span></p></td>
+<td colspan="3"><p><a class="reference internal" href="#clams-output-specification">CLAMS Output Specification</a></p></td>
 </tr>
 <tr class="row-even"><td rowspan="4"><ul class="simple">
 <li><p>parameters</p></li>
@@ -763,7 +763,7 @@ SDK.</p>
 <td colspan="3"></td>
 </tr>
 <tr class="row-odd"><td><p>items</p></td>
-<td colspan="3"><p><span class="xref std std-ref">#/$defs/RuntimeParameter</span></p></td>
+<td colspan="3"><p><a class="reference internal" href="#clams-app-runtime-parameter">CLAMS App Runtime Parameter</a></p></td>
 </tr>
 <tr class="row-even"><td rowspan="5"><ul class="simple">
 <li><p>dependencies</p></li>
@@ -839,7 +839,7 @@ SDK.</p>
 </table>
 </div>
 <section id="clams-input-specification">
-<h5>CLAMS Input Specification<a class="headerlink" href="#clams-input-specification" title="Link to this heading">¶</a></h5>
+<span id="clams-input-specification"></span><h5>CLAMS Input Specification<a class="headerlink" href="#clams-input-specification" title="Link to this heading">¶</a></h5>
 <p>Data model that describes input specification of a CLAMS app.</p>
 <p>CLAMS apps are expected to have at least one input type, and each type must
 be defined by a <code class="docutils literal notranslate"><span class="pre">&#64;type</span></code> URI string. If the type has specific properties and values required by the app,
@@ -924,7 +924,7 @@ verbose description can be provided in the (optional) <code class="docutils lite
 </div>
 </section>
 <section id="clams-output-specification">
-<h5>CLAMS Output Specification<a class="headerlink" href="#clams-output-specification" title="Link to this heading">¶</a></h5>
+<span id="clams-output-specification"></span><h5>CLAMS Output Specification<a class="headerlink" href="#clams-output-specification" title="Link to this heading">¶</a></h5>
 <p>Data model that describes output specification of a CLAMS app.</p>
 <p>CLAMS apps are expected to have at least one output type, and each type must
 be defined by a <code class="docutils literal notranslate"><span class="pre">&#64;type</span></code> URI string. If the type has common properties and values generated by the app,
@@ -994,7 +994,7 @@ specify the property values, developers can use an actual value (for full match)
 </div>
 </section>
 <section id="clams-app-runtime-parameter">
-<h5>CLAMS App Runtime Parameter<a class="headerlink" href="#clams-app-runtime-parameter" title="Link to this heading">¶</a></h5>
+<span id="clams-app-runtime-parameter"></span><h5>CLAMS App Runtime Parameter<a class="headerlink" href="#clams-app-runtime-parameter" title="Link to this heading">¶</a></h5>
 <p>Defines a data model that describes a single runtime configuration of a CLAMS app.
 Usually, an app keeps a list of these configuration specifications in the <code class="docutils literal notranslate"><span class="pre">parameters</span></code> field.
 When initializing a RuntimeParameter object in python the value for the default field must be a string.
