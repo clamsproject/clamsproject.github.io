@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Getting started" href="introduction.html">
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2025.09.25 -->
-        <title>clams-python documentation</title>
+    <!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
+        <title>clone-repo documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -116,8 +116,10 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
         </a>
         <nav class="project-nav">
             <a href="https://clams.ai/home/" class="nav-link">home</a>
-            <a href="https://clams.ai/mmif-python/" class="nav-link">mmif-python</a>
+            <a href="https://mmif.clams.ai" class="nav-link" target="_blank" rel="noopener">MMIF</a>
+            <a href="https://apps.clams.ai" class="nav-link" target="_blank" rel="noopener">apps</a>
             <a href="https://clams.ai/clams-python/" class="nav-link active">clams-python</a>
+            <a href="https://clams.ai/mmif-python/" class="nav-link">mmif-python</a>
         </nav>
     </div>
 </div>
@@ -248,7 +250,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">clams-python  documentation</div></a>
+      <a href="#"><div class="brand">clone-repo  documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -269,7 +271,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   
-  <span class="sidebar-brand-text">clams-python  documentation</span>
+  <span class="sidebar-brand-text">clone-repo  documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -366,39 +368,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li><p><a class="reference external" href="https://clamsproject.github.io/mmif-python">MMIF-specific Python API documentation</a></p></li>
 <li><p><a class="reference external" href="https://clamsproject.github.io/apps">Public CLAMS App Directory</a></p></li>
 </ul>
-</section>
 <hr class="docutils" />
-<section id="what-s-new-in-1-4-0">
-<h2>What’s New in 1.4.0<a class="headerlink" href="#what-s-new-in-1-4-0" title="Link to this heading">¶</a></h2>
-<p>(Full changelog available in the <a class="reference external" href="https://github.com/clamsproject/clams-python/blob/main/CHANGELOG.md">CHANGELOG.md</a>)</p>
-<section id="overview">
-<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h3>
-<p>This release introduces three new fields to the app metadata to improve the orchestration and handling of large models within apps.</p>
-</section>
-<section id="additions">
-<h3>Additions<a class="headerlink" href="#additions" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><cite>analyzer_versions</cite>: A new app metadata field (complementing the existing <cite>analyzer_version</cite>) designed to store version strings for multiple models wrapped in a single CLAMS app (see <a class="reference external" href="https://github.com/clamsproject/clams-python/issues/251#issuecomment-3566771680">https://github.com/clamsproject/clams-python/issues/251#issuecomment-3566771680</a> for discussion).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">est_gpu_mem_min</span></code> and <code class="docutils literal notranslate"><span class="pre">est_gpu_mem_typ</span></code>: New app metadata fields that allow developers to specify estimated GPU memory usage (minimum and typical) for better resource management.</p></li>
-</ul>
-</section>
-<section id="changes">
-<h3>Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>Updated to the latest <code class="docutils literal notranslate"><span class="pre">mmif-python</span></code> SDK (1.2.1)</p></li>
-<li><p>Profiling storage: Runtime profiling results (CPU/CUDA architecture, running time) are now stored under a new <code class="docutils literal notranslate"><span class="pre">appProfiling</span></code> field in the output view metadata (<a class="reference external" href="https://github.com/clamsproject/clams-python/pull/261">https://github.com/clamsproject/clams-python/pull/261</a>).</p>
-<ul>
-<li><p><em>Note: This is an experimental field intended primarily for human inspection; its internal structure may change without notice.</em></p></li>
-</ul>
-</li>
-<li><p>View timestamps: The <code class="docutils literal notranslate"><span class="pre">timestamp</span></code> property of views is now updated based on the time when the <code class="docutils literal notranslate"><span class="pre">_annotate()</span></code> call completes. This ensures all views from a single app execution share a consistent “marker” for easier identification (<a class="reference external" href="https://github.com/clamsproject/clams-python/issues/269">https://github.com/clamsproject/clams-python/issues/269</a>).</p></li>
-<li><p>Running an app that declares an <code class="docutils literal notranslate"><span class="pre">est_gpu_mem_min</span></code> value in production mode (<code class="docutils literal notranslate"><span class="pre">--production</span></code>) will now automatically limit the number of Gunicorn workers spawned to prevent GPU out-of-memory (OOM) errors.</p></li>
-<li><p>VRAM usage record: Apps running on CUDA and <code class="docutils literal notranslate"><span class="pre">torch</span></code> now cache VRAM usage statistics in the local disk cache (typically in <code class="docutils literal notranslate"><span class="pre">$XDG_CACHE_HOME</span></code>) (<a class="reference external" href="https://github.com/clamsproject/clams-python/issues/243">https://github.com/clamsproject/clams-python/issues/243</a>). Currently, this information is for logging only, and we plan to add a retrieval API in the future.</p>
-<ul>
-<li><p>See current <em>private</em> implementation at <a class="reference external" href="https://github.com/clamsproject/clams-python/blob/671560b184a3b73bf417db753d0fa8f1c73d3bda/clams/app/__init__.py#L348-L361">https://github.com/clamsproject/clams-python/blob/671560b184a3b73bf417db753d0fa8f1c73d3bda/clams/app/__init__.py#L348-L361</a></p></li>
-</ul>
-</li>
-</ul>
 <hr class="docutils" />
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
@@ -437,6 +407,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial: Wrapping an NLP Application</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-nlp-tool">The NLP tool</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#wrapping-the-tokenizer">Wrapping the tokenizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#working-with-timeframe-annotations">Working with TimeFrame Annotations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#containerization-with-docker">Containerization with Docker</a></li>
 </ul>
 </li>
@@ -454,7 +425,6 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 </li>
 </ul>
 </div>
-</section>
 </section>
 </section>
 <section id="indices-and-tables">
@@ -485,7 +455,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2025, Brandeis LLC
+                Copyright &#169; 2026, Brandeis LLC
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -517,13 +487,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li><a class="reference internal" href="#start-now-from-getting-started">Start now from Getting Started!</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#for-more">For more …</a></li>
-<li><a class="reference internal" href="#what-s-new-in-1-4-0">What’s New in 1.4.0</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a></li>
-<li><a class="reference internal" href="#additions">Additions</a></li>
-<li><a class="reference internal" href="#changes">Changes</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#for-more">For more …</a><ul>
 </ul>
 </li>
 </ul>

@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="clams package" href="modules.html"><link rel="prev" title="clams shell command" href="cli.html">
 
-    <!-- Generated with Sphinx 7.4.7 and Furo 2025.09.25 -->
-        <title>Tutorial: Wrapping an NLP Application - clams-python documentation</title>
+    <!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
+        <title>Tutorial: Wrapping an NLP Application - clone-repo documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -116,8 +116,10 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
         </a>
         <nav class="project-nav">
             <a href="https://clams.ai/home/" class="nav-link">home</a>
-            <a href="https://clams.ai/mmif-python/" class="nav-link">mmif-python</a>
+            <a href="https://mmif.clams.ai" class="nav-link" target="_blank" rel="noopener">MMIF</a>
+            <a href="https://apps.clams.ai" class="nav-link" target="_blank" rel="noopener">apps</a>
             <a href="https://clams.ai/clams-python/" class="nav-link active">clams-python</a>
+            <a href="https://clams.ai/mmif-python/" class="nav-link">mmif-python</a>
         </nav>
     </div>
 </div>
@@ -248,7 +250,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">clams-python  documentation</div></a>
+      <a href="index.html"><div class="brand">clone-repo  documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -269,7 +271,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">clams-python  documentation</span>
+  <span class="sidebar-brand-text">clone-repo  documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -543,6 +545,26 @@ Also refer to <a class="reference external" href="https://sdk.clams.ai/appmetada
 </section>
 </section>
 </section>
+<section id="working-with-timeframe-annotations">
+<h2>Working with TimeFrame Annotations<a class="headerlink" href="#working-with-timeframe-annotations" title="Link to this heading">¶</a></h2>
+<p>Many CLAMS apps process video by operating on TimeFrame annotations produced by an upstream app (e.g., scene detection, shot segmentation). A TimeFrame can carry structural members (currently called <code class="docutils literal notranslate"><span class="pre">targets</span></code> — a list of TimePoint IDs covering every frame in the segment), a salient subset of those members (currently called <code class="docutils literal notranslate"><span class="pre">representatives</span></code>), or simply <code class="docutils literal notranslate"><span class="pre">start</span></code>/<code class="docutils literal notranslate"><span class="pre">end</span></code> boundaries.</p>
+<blockquote>
+<div><p><strong>Note</strong>
+The property names <code class="docutils literal notranslate"><span class="pre">targets</span></code> and <code class="docutils literal notranslate"><span class="pre">representatives</span></code> are under review and may be renamed in a future MMIF spec version. See <a class="reference external" href="https://github.com/clamsproject/mmif/issues/238">mmif#238</a> for the ongoing discussion. The SDK API will be updated accordingly.</p>
+</div></blockquote>
+<section id="frame-sampling-with-tfsamplingmode">
+<h3>Frame sampling with <code class="docutils literal notranslate"><span class="pre">tfSamplingMode</span></code><a class="headerlink" href="#frame-sampling-with-tfsamplingmode" title="Link to this heading">¶</a></h3>
+<p>When your app receives TimeFrame annotations, the caller can control which frames your app processes by setting the <code class="docutils literal notranslate"><span class="pre">tfSamplingMode</span></code> runtime parameter. This is a <strong>universal parameter</strong> — automatically available on every CLAMS app without any per-app configuration.</p>
+<p>There are three modes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">representatives</span></code> (default) — use the frames listed in the TimeFrame’s <code class="docutils literal notranslate"><span class="pre">representatives</span></code> property. If no representatives exist, the TimeFrame is skipped.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">single</span></code> — pick one frame: the middle representative if available, otherwise the midpoint of the start/end interval.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">all</span></code> — use every frame in <code class="docutils literal notranslate"><span class="pre">targets</span></code> if present, otherwise generate every frame in the start/end interval.</p></li>
+</ul>
+<p>App developers do <strong>not</strong> need to handle this parameter themselves. The SDK intercepts it in <code class="docutils literal notranslate"><span class="pre">annotate()</span></code> and sets a context variable before <code class="docutils literal notranslate"><span class="pre">_annotate()</span></code> runs. Inside <code class="docutils literal notranslate"><span class="pre">_annotate()</span></code>, calls to <code class="docutils literal notranslate"><span class="pre">vdh.extract_frames_by_mode()</span></code> automatically read the active mode and select frames accordingly. The underlying per-mode functions (<code class="docutils literal notranslate"><span class="pre">_sample_representatives()</span></code>, <code class="docutils literal notranslate"><span class="pre">_sample_single()</span></code>, <code class="docutils literal notranslate"><span class="pre">_sample_all()</span></code>) in <code class="docutils literal notranslate"><span class="pre">mmif.utils.video_document_helper</span></code> are also available for apps that need frame numbers without extracting images.</p>
+<p>See the <code class="docutils literal notranslate"><span class="pre">extract_frames_by_mode()</span></code> API documentation for details.</p>
+</section>
+</section>
 <section id="containerization-with-docker">
 <h2>Containerization with Docker<a class="headerlink" href="#containerization-with-docker" title="Link to this heading">¶</a></h2>
 <p>Apps within CLAMS typically run as Flask servers in Docker containers, and after an app is tested as a local Flask application, it should be containerized. In fact, in some cases we don’t even bother running a local Flask server and move straight to the container set up.</p>
@@ -715,7 +737,7 @@ $<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>P
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2025, Brandeis LLC
+                Copyright &#169; 2026, Brandeis LLC
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -754,6 +776,10 @@ $<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>P
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a class="reference internal" href="#working-with-timeframe-annotations">Working with TimeFrame Annotations</a><ul>
+<li><a class="reference internal" href="#frame-sampling-with-tfsamplingmode">Frame sampling with <code class="docutils literal notranslate"><span class="pre">tfSamplingMode</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#containerization-with-docker">Containerization with Docker</a><ul>
