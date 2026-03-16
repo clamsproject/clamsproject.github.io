@@ -25,11 +25,6 @@ on:
         description: 'Command to build documentation'
         required: true
         type: string
-      docs_output_dir:
-        description: 'Directory containing built docs relative to clone-repo (default: docs)'
-        required: false
-        type: string
-        default: 'docs'
       python_version:
         description: 'Python version to use'
         required: false
@@ -81,7 +76,7 @@ jobs:
         run: |
           mkdir -p "hub/${{ steps.target.outputs.dir }}"
           rm -rf "hub/${{ steps.target.outputs.dir }}"/*
-          cp -r clone-repo/${{ inputs.docs_output_dir }}/* "hub/${{ steps.target.outputs.dir }}/"
+          cp -r clone-repo/_docs/* "hub/${{ steps.target.outputs.dir }}/"
 
       - name: Inject header
         run: |
