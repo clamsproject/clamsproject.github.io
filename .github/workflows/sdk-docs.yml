@@ -21,10 +21,6 @@ on:
         required: false
         type: string
         default: ''
-      build_command:
-        description: 'Command to build documentation'
-        required: true
-        type: string
       python_version:
         description: 'Python version to use'
         required: false
@@ -61,7 +57,7 @@ jobs:
 
       - name: Build documentation
         working-directory: clone-repo
-        run: ${{ inputs.build_command }}
+        run: python3 build-tools/docs.py --build-ver ${{ inputs.version }} --output-dir _docs
 
       - name: Determine target directory
         id: target
@@ -78,9 +74,11 @@ jobs:
           rm -rf "hub/${{ steps.target.outputs.dir }}"/*
           cp -r clone-repo/_docs/* "hub/${{ steps.target.outputs.dir }}/"
 
-      - name: Inject header
+      - name: Inject header across all projects
         run: |
-          python hub/build-tools/inject-header.py "hub/docs/${{ inputs.project_name }}" --base-url https://clams.ai
+          for project_dir in hub/docs/*/; do
+            python hub/build-tools/inject-header.py "$project_dir" --base-url https://clams.ai
+          done
 
       - name: Commit and push
         working-directory: hub

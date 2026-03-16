@@ -289,23 +289,23 @@ def discover_projects(docs_root):
             # Skip assets and other non-project directories
             if name in ('assets', '.git', '__pycache__'):
                 continue
-            # Check if it has version subdirectories
-            has_versions = any(
-                subdir.is_dir() and (
-                    subdir.name == 'latest' or
-                    re.match(r'^v?\d+', subdir.name)
-                )
-                for subdir in item.iterdir()
+            has_versions = name in VERSIONED_PROJECTS
+            # Check if it has HTML files or subdirectories
+            has_content = any(
+                (f.suffix == '.html' and f.is_file())
+                or f.is_dir()
+                for f in item.iterdir()
             )
-            # Check if it has HTML files directly (non-versioned)
-            has_html = any(
-                f.suffix == '.html' for f in item.iterdir() if f.is_file()
-            )
-            if has_versions or has_html:
+            if has_content:
                 projects[name] = {'is_versioned': has_versions}
 
     return projects
 
+
+# Projects with versioned documentation deployments (each release gets
+# its own subdirectory on the hub). Projects NOT in this set are treated
+# as unversioned even if they contain numeric subdirectories internally.
+VERSIONED_PROJECTS = {'mmif-python'}
 
 # Special navigation links that are external (not from docs subdirs)
 # Format: (display_name, url)
@@ -589,15 +589,16 @@ def main():
         print("Warning: No projects found in docs/", file=sys.stderr)
         projects = {project_name: {'is_versioned': False}}
 
-    # Discover versions for this project
-    print(f"Scanning {project_dir} for versions...")
-    try:
-        versions = discover_versions(project_dir)
-    except ValueError as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
-
-    is_versioned = len(versions) > 0
+    # Discover versions for this project (only if in VERSIONED_PROJECTS)
+    is_versioned = project_name in VERSIONED_PROJECTS
+    versions = []
+    if is_versioned:
+        print(f"Scanning {project_dir} for versions...")
+        try:
+            versions = discover_versions(project_dir)
+        except ValueError as e:
+            print(f"Error: {e}", file=sys.stderr)
+            sys.exit(1)
 
     if args.dry_run:
         print("\nDry run mode - no changes will be made\n")
