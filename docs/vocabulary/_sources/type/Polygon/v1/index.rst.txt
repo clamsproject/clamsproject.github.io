@@ -1,0 +1,191 @@
+:orphan:
+
+Polygon (v1)
+============
+
+.. warning::
+   This is not the latest version. The latest version is :doc:`v5 <../v5/index>`.
+
+- **Previous Version:** none *(this is the oldest version)*
+- **URI:** `http://clams.ai/vocabulary/type/Polygon/v1 <http://clams.ai/vocabulary/type/Polygon/v1>`_
+- **Shortname:** ``Polygon``
+- **Inherits from:** :doc:`Region (v1) <../../Region/v1/index>`
+- **Included in:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`
+- **Also Known As:** This type is also accessible at the following legacy URLs for backward compatibility:
+
+  - `http://mmif.clams.ai/vocabulary/Polygon/v1 <http://mmif.clams.ai/vocabulary/Polygon/v1>`_
+  - `http://mmif.clams.ai/0.4.0/vocabulary/Polygon/ <http://mmif.clams.ai/0.4.0/vocabulary/Polygon/>`_
+  - `http://mmif.clams.ai/0.4.1/vocabulary/Polygon/ <http://mmif.clams.ai/0.4.1/vocabulary/Polygon/>`_
+  - `http://mmif.clams.ai/0.4.2/vocabulary/Polygon/ <http://mmif.clams.ai/0.4.2/vocabulary/Polygon/>`_
+
+Description
+-----------
+
+A polygon in an image or video. This is a two-dimensional object so if this occurs in a video it will be anchored to a particular frame or time point in the video.
+
+
+Properties
+----------
+
+Synopsis
+^^^^^^^^
+
+*Properties marked with* **\*** *are required.*
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 40 20
+   :align: left
+
+   * - Property
+     - Type
+     - Origin
+   * - :ref:`Polygon-v1-coordinates` **\***
+     - array of array
+     - *native*
+   * - :ref:`Polygon-v1-timePoint`
+     - integer
+     - *native*
+   * - :ref:`Polygon-v1-timeUnit`
+     - string
+     - :doc:`Region (v1) <../../Region/v1/index>`
+   * - :ref:`Polygon-v1-document`
+     - string
+     - :doc:`Annotation (v2) <../../Annotation/v2/index>`
+   * - :ref:`Polygon-v1-id` **\***
+     - string
+     - :doc:`Thing (v1) <../../Thing/v1/index>`
+
+
+Native
+^^^^^^
+
+
+.. _Polygon-v1-coordinates:
+
+``coordinates``
+"""""""""""""""
+
+- type: *array of array*
+- required: yes
+
+The coordinates of the polygon, taking the top-left of the image as the origin (0,0). Unit used to measure the distance is the number of pixels.
+
+.. raw:: html
+
+   <hr style="border: none; border-top: 1px solid var(--color-background-border);">
+
+
+.. _Polygon-v1-timePoint:
+
+``timePoint``
+"""""""""""""
+
+- type: *integer*
+- required: no
+
+If on a video stream, the TimePoint that the BoundingBox occurs in.
+
+.. raw:: html
+
+   <hr style="border: none; border-top: 1px solid var(--color-background-border);">
+
+
+Inherited from :doc:`Region (v1) <../../Region/v1/index>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. _Polygon-v1-timeUnit:
+
+``timeUnit``
+""""""""""""
+
+- type: *string*
+- required: no
+
+Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*.
+
+.. raw:: html
+
+   <hr style="border: none; border-top: 1px solid var(--color-background-border);">
+
+
+Inherited from :doc:`Annotation (v2) <../../Annotation/v2/index>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. _Polygon-v1-document:
+
+``document``
+""""""""""""
+
+- type: *string*
+- required: no
+
+The identifier of the document that the annotation is over.
+
+.. raw:: html
+
+   <hr style="border: none; border-top: 1px solid var(--color-background-border);">
+
+
+Inherited from :doc:`Thing (v1) <../../Thing/v1/index>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. _Polygon-v1-id:
+
+``id``
+""""""
+
+- type: *string*
+- required: yes
+
+A unique identifier for the annotation or document. Uniqueness is relative to the view the annotation is in or the list of documents at the top level of a MMIF file.
+
+.. raw:: html
+
+   <hr style="border: none; border-top: 1px solid var(--color-background-border);">
+
+
+JSON Schema
+-----------
+
+.. code-block:: json
+
+   {
+     "additionalProperties": true,
+     "properties": {
+       "id": {
+         "description": "A unique identifier for the annotation or document. Uniqueness is relative to the view the annotation is in or the list of documents at the top level of a MMIF file.",
+         "type": "string"
+       },
+       "document": {
+         "type": "string",
+         "description": "The identifier of the document that the annotation is over."
+       },
+       "timeUnit": {
+         "type": "string",
+         "description": "Specifies which unit of time the measurement is based. Can be *seconds* or *milliseconds*, or in case of annotations on a VideoDocument, *frames*."
+       },
+       "coordinates": {
+         "description": "The coordinates of the polygon, taking the top-left of the image as the origin (0,0). Unit used to measure the distance is the number of pixels.",
+         "items": {
+           "items": {
+             "type": "integer"
+           },
+           "type": "array"
+         },
+         "type": "array"
+       },
+       "timePoint": {
+         "type": "integer",
+         "description": "If on a video stream, the TimePoint that the BoundingBox occurs in."
+       }
+     },
+     "required": [
+       "coordinates",
+       "id"
+     ],
+     "type": "object"
+   }

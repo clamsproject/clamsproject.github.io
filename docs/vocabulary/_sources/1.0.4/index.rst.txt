@@ -1,0 +1,36 @@
+:orphan:
+
+Type Hierarchy
+==============
+
+.. warning::
+   This is not the latest version. The latest version is :doc:`1.1.1 <../1.1.1/index>`.
+
+This page shows the inheritance relationships and complete type index for
+CLAMS Vocabulary 1.0.4.
+
+**Previous version:** :doc:`1.0.3 <../1.0.3/index>`
+
+Inheritance Tree
+----------------
+
+.. inheritance-tree::
+
+   └── Thing (v1) | id
+       ├── Alignment (v1) | source, target, sourceType, targetType
+       ├── Annotation (v5) | classification, classifications, document, label, labelset, labelsetUri
+       │   ├── Region (v4) | timeUnit
+       │   │   ├── Interval (v4) | end, start, targets
+       │   │   │   ├── Span (v4) | 
+       │   │   │   └── TimeFrame (v5) | frameType
+       │   │   │       └── Chapter (v5) | title
+       │   │   ├── Polygon (v4) | coordinates, timePoint
+       │   │   │   └── BoundingBox (v4) | boxType
+       │   │   ├── TimePoint (v4) | timePoint
+       │   │   └── VideoObject (v4) | polygons
+       │   └── Relation (v4) | 
+       └── Document (v1) | location, mime
+           ├── AudioDocument (v1) | 
+           ├── ImageDocument (v1) | 
+           ├── TextDocument (v1) | text
+           └── VideoDocument (v1) | 

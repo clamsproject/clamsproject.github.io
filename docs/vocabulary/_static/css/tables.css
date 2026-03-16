@@ -1,0 +1,4 @@
+/* Top-align table cells for readability */
+table.docutils td, table.docutils th {
+    vertical-align: top;
+}

@@ -1,0 +1,108 @@
+:orphan:
+
+Annotation (v2)
+===============
+
+.. warning::
+   This is not the latest version. The latest version is :doc:`v6 <../v6/index>`.
+
+- **Previous Version:** none *(this is the oldest version)*
+- **URI:** `http://clams.ai/vocabulary/type/Annotation/v2 <http://clams.ai/vocabulary/type/Annotation/v2>`_
+- **Shortname:** ``Annotation``
+- **Inherits from:** :doc:`Thing (v1) <../../Thing/v1/index>`
+- **Included in:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`
+- **Also Known As:** This type is also accessible at the following legacy URLs for backward compatibility:
+
+  - `http://mmif.clams.ai/vocabulary/Annotation/v2 <http://mmif.clams.ai/vocabulary/Annotation/v2>`_
+  - `http://mmif.clams.ai/0.4.2/vocabulary/Annotation/ <http://mmif.clams.ai/0.4.2/vocabulary/Annotation/>`_
+
+Description
+-----------
+
+Any kind of information added to a document. If an annotation is specific to a region over the primary data or a relation over such regions, specific sub-types should be used instead of this high-level type.
+
+
+Properties
+----------
+
+Synopsis
+^^^^^^^^
+
+*Properties marked with* **\*** *are required.*
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 40 20
+   :align: left
+
+   * - Property
+     - Type
+     - Origin
+   * - :ref:`Annotation-v2-document`
+     - string
+     - *native*
+   * - :ref:`Annotation-v2-id` **\***
+     - string
+     - :doc:`Thing (v1) <../../Thing/v1/index>`
+
+
+Native
+^^^^^^
+
+
+.. _Annotation-v2-document:
+
+``document``
+""""""""""""
+
+- type: *string*
+- required: no
+
+The identifier of the document that the annotation is over.
+
+.. raw:: html
+
+   <hr style="border: none; border-top: 1px solid var(--color-background-border);">
+
+
+Inherited from :doc:`Thing (v1) <../../Thing/v1/index>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. _Annotation-v2-id:
+
+``id``
+""""""
+
+- type: *string*
+- required: yes
+
+A unique identifier for the annotation or document. Uniqueness is relative to the view the annotation is in or the list of documents at the top level of a MMIF file.
+
+.. raw:: html
+
+   <hr style="border: none; border-top: 1px solid var(--color-background-border);">
+
+
+JSON Schema
+-----------
+
+.. code-block:: json
+
+   {
+     "additionalProperties": true,
+     "properties": {
+       "id": {
+         "description": "A unique identifier for the annotation or document. Uniqueness is relative to the view the annotation is in or the list of documents at the top level of a MMIF file.",
+         "type": "string"
+       },
+       "document": {
+         "type": "string",
+         "description": "The identifier of the document that the annotation is over."
+       }
+     },
+     "required": [
+       "id"
+     ],
+     "type": "object"
+   }
