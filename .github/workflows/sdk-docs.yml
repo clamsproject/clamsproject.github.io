@@ -57,7 +57,7 @@ jobs:
 
       - name: Build documentation
         working-directory: clone-repo
-        run: python3 build-tools/docs.py --build-ver ${{ inputs.version }} --output-dir _docs
+        run: python3 build-tools/docs.py --build-ver "${{ inputs.version }}" --output-dir _docs
 
       - name: Determine target directory
         id: target
