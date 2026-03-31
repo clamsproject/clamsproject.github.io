@@ -7,7 +7,7 @@ Sentence (v1)
 - **URI:** `http://clams.ai/vocabulary/type/Sentence/v1 <http://clams.ai/vocabulary/type/Sentence/v1>`_
 - **Shortname:** ``Sentence``
 - **Inherits from:** :doc:`Span (v5) <../../Span/v5/index>`
-- **Included in:** :doc:`1.1.0 <../../../1.1.0/index>`, :doc:`1.1.1 <../../../1.1.1/index>`
+- **Included in:** :doc:`1.1.2 <../../../1.1.2/index>`
 - **Also Known As:** This type is also accessible at the following legacy URLs for backward compatibility:
 
   - `http://mmif.clams.ai/vocabulary/Sentence/v1 <http://mmif.clams.ai/vocabulary/Sentence/v1>`_

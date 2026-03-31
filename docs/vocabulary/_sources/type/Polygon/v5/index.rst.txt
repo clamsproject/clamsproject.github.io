@@ -7,7 +7,7 @@ Polygon (v5)
 - **URI:** `http://clams.ai/vocabulary/type/Polygon/v5 <http://clams.ai/vocabulary/type/Polygon/v5>`_
 - **Shortname:** ``Polygon``
 - **Inherits from:** :doc:`Region (v5) <../../Region/v5/index>`
-- **Included in:** :doc:`1.1.0 <../../../1.1.0/index>`, :doc:`1.1.1 <../../../1.1.1/index>`
+- **Included in:** :doc:`1.1.2 <../../../1.1.2/index>`
 - **Also Known As:** This type is also accessible at the following legacy URLs for backward compatibility:
 
   - `http://mmif.clams.ai/vocabulary/Polygon/v5 <http://mmif.clams.ai/vocabulary/Polygon/v5>`_

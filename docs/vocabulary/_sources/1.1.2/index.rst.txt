@@ -1,15 +1,13 @@
-:orphan:
-
 Type Hierarchy
 ==============
 
-.. warning::
-   This is not the latest version. The latest version is :doc:`1.1.1 <../1.1.1/index>`.
+.. note::
+   This is the **latest version** of the vocabulary (1.1.2).
 
 This page shows the inheritance relationships and complete type index for
-CLAMS Vocabulary 1.1.0.
+CLAMS Vocabulary 1.1.2.
 
-**Previous version:** :doc:`1.0.4 <../1.0.4/index>`
+**Previous version:** none *(this is the oldest version)*
 
 Inheritance Tree
 ----------------

@@ -10,7 +10,7 @@ Polygon (v4)
 - **URI:** `http://clams.ai/vocabulary/type/Polygon/v4 <http://clams.ai/vocabulary/type/Polygon/v4>`_
 - **Shortname:** ``Polygon``
 - **Inherits from:** :doc:`Region (v4) <../../Region/v4/index>`
-- **Included in:** :doc:`1.0.4 <../../../1.0.4/index>`
+
 - **Also Known As:** This type is also accessible at the following legacy URLs for backward compatibility:
 
   - `http://mmif.clams.ai/vocabulary/Polygon/v4 <http://mmif.clams.ai/vocabulary/Polygon/v4>`_

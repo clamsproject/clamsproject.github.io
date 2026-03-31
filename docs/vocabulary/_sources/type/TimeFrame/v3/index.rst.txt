@@ -10,7 +10,7 @@ TimeFrame (v3)
 - **URI:** `http://clams.ai/vocabulary/type/TimeFrame/v3 <http://clams.ai/vocabulary/type/TimeFrame/v3>`_
 - **Shortname:** ``TimeFrame``
 - **Inherits from:** :doc:`Interval (v2) <../../Interval/v2/index>`
-- **Included in:** :doc:`1.0.2 <../../../1.0.2/index>`
+
 - **Also Known As:** This type is also accessible at the following legacy URLs for backward compatibility:
 
   - `http://mmif.clams.ai/vocabulary/TimeFrame/v3 <http://mmif.clams.ai/vocabulary/TimeFrame/v3>`_

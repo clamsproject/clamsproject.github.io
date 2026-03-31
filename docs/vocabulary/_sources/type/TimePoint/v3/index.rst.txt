@@ -10,7 +10,7 @@ TimePoint (v3)
 - **URI:** `http://clams.ai/vocabulary/type/TimePoint/v3 <http://clams.ai/vocabulary/type/TimePoint/v3>`_
 - **Shortname:** ``TimePoint``
 - **Inherits from:** :doc:`Region (v3) <../../Region/v3/index>`
-- **Included in:** :doc:`1.0.3 <../../../1.0.3/index>`
+
 - **Also Known As:** This type is also accessible at the following legacy URLs for backward compatibility:
 
   - `http://mmif.clams.ai/vocabulary/TimePoint/v3 <http://mmif.clams.ai/vocabulary/TimePoint/v3>`_
