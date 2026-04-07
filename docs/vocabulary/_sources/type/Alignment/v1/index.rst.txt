@@ -7,7 +7,7 @@ Alignment (v1)
 - **URI:** `http://clams.ai/vocabulary/type/Alignment/v1 <http://clams.ai/vocabulary/type/Alignment/v1>`_
 - **Shortname:** ``Alignment``
 - **Inherits from:** :doc:`Thing (v1) <../../Thing/v1/index>`
-- **Included in:** :doc:`1.1.2 <../../../1.1.2/index>`
+- **Included in:** :doc:`1.1.3 <../../../1.1.3/index>`
 - **Also Known As:** This type is also accessible at the following legacy URLs for backward compatibility:
 
   - `http://mmif.clams.ai/vocabulary/Alignment/v1 <http://mmif.clams.ai/vocabulary/Alignment/v1>`_
@@ -96,7 +96,7 @@ The second of the aligned regions or documents.
 - type: *string*
 - required: no
 
-The type of sources of the alignment. When an alignment starts from more that two source types, namely sources can be different types, one should not use this metadata.
+The type of the source of the alignment.
 
 .. raw:: html
 
@@ -111,7 +111,7 @@ The type of sources of the alignment. When an alignment starts from more that tw
 - type: *string*
 - required: no
 
-The type of targets of the alignment. When an alignment goes to more that two target types, namely targets can be different types, one should not use this metadata.
+The type of the target of the alignment.
 
 .. raw:: html
 
@@ -151,11 +151,11 @@ JSON Schema
        },
        "sourceType": {
          "type": "string",
-         "description": "The type of sources of the alignment. When an alignment starts from more that two source types, namely sources can be different types, one should not use this metadata."
+         "description": "The type of the source of the alignment."
        },
        "targetType": {
          "type": "string",
-         "description": "The type of targets of the alignment. When an alignment goes to more that two target types, namely targets can be different types, one should not use this metadata."
+         "description": "The type of the target of the alignment."
        },
        "source": {
          "description": "The first of the aligned regions or documents.",
