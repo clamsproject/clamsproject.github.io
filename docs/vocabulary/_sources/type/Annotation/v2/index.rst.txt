@@ -10,7 +10,7 @@ Annotation (v2)
 - **URI:** `http://clams.ai/vocabulary/type/Annotation/v2 <http://clams.ai/vocabulary/type/Annotation/v2>`_
 - **Shortname:** ``Annotation``
 - **Inherits from:** :doc:`Thing (v1) <../../Thing/v1/index>`
-
+- **Included in:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`
 - **Also Known As:** This type is also accessible at the following legacy URLs for backward compatibility:
 
   - `http://mmif.clams.ai/vocabulary/Annotation/v2 <http://mmif.clams.ai/vocabulary/Annotation/v2>`_

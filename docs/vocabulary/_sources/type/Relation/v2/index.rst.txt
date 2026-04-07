@@ -10,7 +10,7 @@ Relation (v2)
 - **URI:** `http://clams.ai/vocabulary/type/Relation/v2 <http://clams.ai/vocabulary/type/Relation/v2>`_
 - **Shortname:** ``Relation``
 - **Inherits from:** :doc:`Annotation (v3) <../../Annotation/v3/index>`
-
+- **Included in:** :doc:`1.0.2 <../../../1.0.2/index>`
 - **Also Known As:** This type is also accessible at the following legacy URLs for backward compatibility:
 
   - `http://mmif.clams.ai/vocabulary/Relation/v2 <http://mmif.clams.ai/vocabulary/Relation/v2>`_

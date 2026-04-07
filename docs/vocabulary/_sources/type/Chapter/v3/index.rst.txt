@@ -10,7 +10,7 @@ Chapter (v3)
 - **URI:** `http://clams.ai/vocabulary/type/Chapter/v3 <http://clams.ai/vocabulary/type/Chapter/v3>`_
 - **Shortname:** ``Chapter``
 - **Inherits from:** :doc:`TimeFrame (v3) <../../TimeFrame/v3/index>`
-
+- **Included in:** :doc:`1.0.2 <../../../1.0.2/index>`
 - **Also Known As:** This type is also accessible at the following legacy URLs for backward compatibility:
 
   - `http://mmif.clams.ai/vocabulary/Chapter/v3 <http://mmif.clams.ai/vocabulary/Chapter/v3>`_

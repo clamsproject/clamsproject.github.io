@@ -10,7 +10,7 @@ BoundingBox (v4)
 - **URI:** `http://clams.ai/vocabulary/type/BoundingBox/v4 <http://clams.ai/vocabulary/type/BoundingBox/v4>`_
 - **Shortname:** ``BoundingBox``
 - **Inherits from:** :doc:`Polygon (v4) <../../Polygon/v4/index>`
-
+- **Included in:** :doc:`1.0.4 <../../../1.0.4/index>`
 - **Also Known As:** This type is also accessible at the following legacy URLs for backward compatibility:
 
   - `http://mmif.clams.ai/vocabulary/BoundingBox/v4 <http://mmif.clams.ai/vocabulary/BoundingBox/v4>`_
