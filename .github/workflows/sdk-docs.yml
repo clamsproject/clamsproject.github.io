@@ -37,21 +37,22 @@ jobs:
 
     steps:
       - name: Checkout documentation hub
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: clamsproject/clamsproject.github.io
           path: hub
           token: ${{ secrets.GH_CLAMSBOT_TOKEN || github.token }}
 
       - name: Checkout source repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: ${{ inputs.source_repo }}
           ref: ${{ inputs.source_ref }}
           path: clone-repo
+          fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ inputs.python_version }}
 
