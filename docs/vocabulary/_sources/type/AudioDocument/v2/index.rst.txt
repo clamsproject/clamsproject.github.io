@@ -1,0 +1,170 @@
+:orphan:
+
+AudioDocument (v2)
+==================
+
+- **Previous Version:** :doc:`v1 <../v1/index>`
+- **URI:** `http://clams.ai/vocabulary/type/AudioDocument/v2 <http://clams.ai/vocabulary/type/AudioDocument/v2>`_
+- **Shortname:** ``AudioDocument``
+- **Inherits from:** :doc:`Document (v2) <../../Document/v2/index>`
+- **Included in:** :doc:`1.2.0 <../../../1.2.0/index>`
+
+Description
+-----------
+
+An audio document.
+
+
+Properties
+----------
+
+Synopsis
+^^^^^^^^
+
+*Properties marked with* **\*** *are required.*
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 40 20
+   :align: left
+
+   * - Property
+     - Type
+     - Origin
+   * - :ref:`AudioDocument-v2-location`
+     - string
+     - :doc:`Document (v2) <../../Document/v2/index>`
+   * - :ref:`AudioDocument-v2-mime`
+     - string
+     - :doc:`Document (v2) <../../Document/v2/index>`
+   * - :ref:`AudioDocument-v2-origination`
+     - string
+     - :doc:`Document (v2) <../../Document/v2/index>`
+   * - :ref:`AudioDocument-v2-origins`
+     - array of string
+     - :doc:`Document (v2) <../../Document/v2/index>`
+   * - :ref:`AudioDocument-v2-id` **\***
+     - string
+     - :doc:`Thing (v1) <../../Thing/v1/index>`
+
+
+Inherited from :doc:`Document (v2) <../../Document/v2/index>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. _AudioDocument-v2-location:
+
+``location``
+""""""""""""
+
+- type: *string*
+- required: no
+
+The location of an external file.
+
+.. raw:: html
+
+   <hr style="border: none; border-top: 1px solid var(--color-background-border);">
+
+
+.. _AudioDocument-v2-mime:
+
+``mime``
+""""""""
+
+- type: *string*
+- required: no
+
+The MIME type of the document, only used when the ``location`` property is used.
+
+.. raw:: html
+
+   <hr style="border: none; border-top: 1px solid var(--color-background-border);">
+
+
+.. _AudioDocument-v2-origination:
+
+``origination``
+"""""""""""""""
+
+- type: *string*
+- required: no
+
+Describes the nature of the derivation relationship between this document and its ``origins``. Example values include ``derived``, ``transcription``, ``topologically-identical``.
+
+.. raw:: html
+
+   <hr style="border: none; border-top: 1px solid var(--color-background-border);">
+
+
+.. _AudioDocument-v2-origins:
+
+``origins``
+"""""""""""
+
+- type: *array of string*
+- required: no
+
+IDs of annotations or documents that this document was derived or inferred from. For example, a ``TextDocument`` produced by a transcription app points back to its source ``AudioDocument`` via this property. Supports multi-source derivation (e.g., OCR over consecutive video frames producing a single consensus document). When this property is set, an accompanying ``origination`` should also be provided to describe the nature of the derivation.
+
+.. raw:: html
+
+   <hr style="border: none; border-top: 1px solid var(--color-background-border);">
+
+
+Inherited from :doc:`Thing (v1) <../../Thing/v1/index>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. _AudioDocument-v2-id:
+
+``id``
+""""""
+
+- type: *string*
+- required: yes
+
+A unique identifier for the annotation or document. Uniqueness is relative to the view the annotation is in or the list of documents at the top level of a MMIF file.
+
+.. raw:: html
+
+   <hr style="border: none; border-top: 1px solid var(--color-background-border);">
+
+
+JSON Schema
+-----------
+
+.. code-block:: json
+
+   {
+     "additionalProperties": true,
+     "properties": {
+       "id": {
+         "description": "A unique identifier for the annotation or document. Uniqueness is relative to the view the annotation is in or the list of documents at the top level of a MMIF file.",
+         "type": "string"
+       },
+       "location": {
+         "type": "string",
+         "description": "The location of an external file."
+       },
+       "mime": {
+         "type": "string",
+         "description": "The MIME type of the document, only used when the <code>location</code> property is used."
+       },
+       "origins": {
+         "items": {
+           "type": "string"
+         },
+         "type": "array",
+         "description": "IDs of annotations or documents that this document was derived or inferred from. For example, a <code>TextDocument</code> produced by a transcription app points back to its source <code>AudioDocument</code> via this property. Supports multi-source derivation (e.g., OCR over consecutive video frames producing a single consensus document). When this property is set, an accompanying <code>origination</code> should also be provided to describe the nature of the derivation."
+       },
+       "origination": {
+         "type": "string",
+         "description": "Describes the nature of the derivation relationship between this document and its <code>origins</code>. Example values include <code>derived</code>, <code>transcription</code>, <code>topologically-identical</code>."
+       }
+     },
+     "required": [
+       "id"
+     ],
+     "type": "object"
+   }

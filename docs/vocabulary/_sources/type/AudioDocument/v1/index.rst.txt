@@ -3,6 +3,9 @@
 AudioDocument (v1)
 ==================
 
+.. warning::
+   This is not the latest version. The latest version is :doc:`v2 <../v2/index>`.
+
 - **Previous Version:** none *(this is the oldest version)*
 - **URI:** `http://clams.ai/vocabulary/type/AudioDocument/v1 <http://clams.ai/vocabulary/type/AudioDocument/v1>`_
 - **Shortname:** ``AudioDocument``

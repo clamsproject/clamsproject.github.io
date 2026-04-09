@@ -7,7 +7,7 @@ Alignment (v1)
 - **URI:** `http://clams.ai/vocabulary/type/Alignment/v1 <http://clams.ai/vocabulary/type/Alignment/v1>`_
 - **Shortname:** ``Alignment``
 - **Inherits from:** :doc:`Thing (v1) <../../Thing/v1/index>`
-- **Included in:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`, :doc:`1.0.2 <../../../1.0.2/index>`, :doc:`1.0.3 <../../../1.0.3/index>`, :doc:`1.0.4 <../../../1.0.4/index>`, :doc:`1.1.0 <../../../1.1.0/index>`, :doc:`1.1.1 <../../../1.1.1/index>`, :doc:`1.1.2 <../../../1.1.2/index>`, :doc:`1.1.3 <../../../1.1.3/index>`
+- **Included in:** :doc:`1.0.0 <../../../1.0.0/index>`, :doc:`1.0.1 <../../../1.0.1/index>`, :doc:`1.0.2 <../../../1.0.2/index>`, :doc:`1.0.3 <../../../1.0.3/index>`, :doc:`1.0.4 <../../../1.0.4/index>`, :doc:`1.1.0 <../../../1.1.0/index>`, :doc:`1.1.1 <../../../1.1.1/index>`, :doc:`1.1.2 <../../../1.1.2/index>`, :doc:`1.1.3 <../../../1.1.3/index>`, :doc:`1.2.0 <../../../1.2.0/index>`
 - **Also Known As:** This type is also accessible at the following legacy URLs for backward compatibility:
 
   - `http://mmif.clams.ai/vocabulary/Alignment/v1 <http://mmif.clams.ai/vocabulary/Alignment/v1>`_
