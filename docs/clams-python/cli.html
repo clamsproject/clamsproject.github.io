@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Tutorial: Wrapping an NLP Application" href="tutorial.html"><link rel="prev" title="CLAMS App Directory" href="appdirectory.html">
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
-        <title>clams shell command - clams-python documentation</title>
+        <title>clams shell command - clone-repo documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -251,7 +251,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">clams-python  documentation</div></a>
+      <a href="index.html"><div class="brand">clone-repo  documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -272,7 +272,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">clams-python  documentation</span>
+  <span class="sidebar-brand-text">clone-repo  documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -280,9 +280,9 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+  <p class="caption" role="heading"><span class="caption-text">For CLAMS App Developers</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="input-output.html">I/O Specification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="runtime-params.html">Runtime Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu-apps.html">GPU Memory Management for CLAMS Apps</a></li>
@@ -300,6 +300,10 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l2"><a class="reference internal" href="autodoc/clams.mmif_utils.html">clams.mmif_utils package</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For CLAMS App Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="clamsapp.html">Using CLAMS App</a></li>
 </ul>
 
 </div>
@@ -344,12 +348,9 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
         <article role="main" id="furo-main-content">
           <section id="clams-shell-command">
 <span id="cli"></span><h1><code class="docutils literal notranslate"><span class="pre">clams</span></code> shell command<a class="headerlink" href="#clams-shell-command" title="Link to this heading">¶</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">clams-python</span></code> comes with a command line interface (CLI) that allows you to</p>
-<ol class="arabic simple">
-<li><p>create a new CLAMS app from a template</p></li>
-<li><p>create a new MMIF file with selected source documents and an empty view</p></li>
-</ol>
-<p>The CLI is installed as <code class="docutils literal notranslate"><span class="pre">clams</span></code> shell command. To see the available commands, run</p>
+<p><code class="docutils literal notranslate"><span class="pre">clams-python</span></code> comes with a command line interface (CLI) for creating a new CLAMS app from a template (<code class="docutils literal notranslate"><span class="pre">develop</span></code> subcommand).</p>
+<p>The CLI is installed as the <code class="docutils literal notranslate"><span class="pre">clams</span></code> shell command. For backward compatibility, it also exposes all <code class="docutils literal notranslate"><span class="pre">mmif</span></code> subcommands (<code class="docutils literal notranslate"><span class="pre">source</span></code>, <code class="docutils literal notranslate"><span class="pre">rewind</span></code>, <code class="docutils literal notranslate"><span class="pre">describe</span></code>, <code class="docutils literal notranslate"><span class="pre">summarize</span></code>). See the <a class="reference external" href="https://clams.ai/mmif-python/cli">mmif-python CLI documentation</a> for details on those commands.</p>
+<p>To see the available commands, run</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>clams<span class="w"> </span>--help
 </pre></div>
 </div>

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Getting started" href="introduction.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Getting Started" href="introduction.html">
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
-        <title>clams-python documentation</title>
+        <title>clone-repo documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -251,7 +251,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">clams-python  documentation</div></a>
+      <a href="#"><div class="brand">clone-repo  documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -272,7 +272,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   
-  <span class="sidebar-brand-text">clams-python  documentation</span>
+  <span class="sidebar-brand-text">clone-repo  documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -280,9 +280,9 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+  <p class="caption" role="heading"><span class="caption-text">For CLAMS App Developers</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="input-output.html">I/O Specification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="runtime-params.html">Runtime Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu-apps.html">GPU Memory Management for CLAMS Apps</a></li>
@@ -300,6 +300,10 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l2"><a class="reference internal" href="autodoc/clams.mmif_utils.html">clams.mmif_utils package</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For CLAMS App Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="clamsapp.html">Using CLAMS App</a></li>
 </ul>
 
 </div>
@@ -342,8 +346,8 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="welcome-to-clams-python-sdk-documentation">
-<h1>Welcome to CLAMS Python SDK documentation!<a class="headerlink" href="#welcome-to-clams-python-sdk-documentation" title="Link to this heading">¶</a></h1>
+          <section id="clams-python-sdk">
+<h1>CLAMS Python SDK<a class="headerlink" href="#clams-python-sdk" title="Link to this heading">¶</a></h1>
 <section id="clams-project">
 <h2>CLAMS project<a class="headerlink" href="#clams-project" title="Link to this heading">¶</a></h2>
 <p><a class="reference external" href="https://clams.ai">CLAMS project</a> aims at free and open-source software platform for computational analysis and metadata generation applications for multimedia material. We believe free and open AI-based multimedia processing platform can bring many benefits of technical advancement to libraries, archives, and museums. To achieve interoperability between various computational applications developed be different vendors, which is absolutely necessary for using applications together supported by user-friendly workflow engines, we are also developing JSON-based MultiMedia Interchange Format (<a class="reference external" href="https://mmif.clams.ai">MMIF</a>)</p>
@@ -369,35 +373,12 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li><p><a class="reference external" href="https://clamsproject.github.io/mmif-python">MMIF-specific Python API documentation</a></p></li>
 <li><p><a class="reference external" href="https://clamsproject.github.io/apps">Public CLAMS App Directory</a></p></li>
 </ul>
-</section>
 <hr class="docutils" />
-<section id="what-s-new-in-1-5-0">
-<h2>What’s New in 1.5.0<a class="headerlink" href="#what-s-new-in-1-5-0" title="Link to this heading">¶</a></h2>
-<p>(Full changelog available in the <a class="reference external" href="https://github.com/clamsproject/clams-python/blob/main/CHANGELOG.md">CHANGELOG.md</a>)</p>
-<section id="overview">
-<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h3>
-<p>Adds <code class="docutils literal notranslate"><span class="pre">tfSamplingMode</span></code> as a universal runtime parameter and overhauls container image builds with arm64 support and split HuggingFace/transformers versioning.</p>
-</section>
-<section id="additions">
-<h3>Additions<a class="headerlink" href="#additions" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>Add <code class="docutils literal notranslate"><span class="pre">tfSamplingMode</span></code> universal parameter for controlling frame selection from TimeFrame annotations, integrated with mmif-python’s new sampling API (<a class="reference external" href="https://github.com/clamsproject/clams-python/pull/278">https://github.com/clamsproject/clams-python/pull/278</a>, <a class="reference external" href="https://github.com/clamsproject/clams-python/pull/280">https://github.com/clamsproject/clams-python/pull/280</a>)</p></li>
-</ul>
-</section>
-<section id="changes">
-<h3>Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>Fix arm64 container builds and split <code class="docutils literal notranslate"><span class="pre">-hf</span></code> images into <code class="docutils literal notranslate"><span class="pre">-hf4</span></code>/<code class="docutils literal notranslate"><span class="pre">-hf5</span></code> with <code class="docutils literal notranslate"><span class="pre">-hf</span></code> as alias to <code class="docutils literal notranslate"><span class="pre">-hf5</span></code> for backward compat; dropped <code class="docutils literal notranslate"><span class="pre">-tf2-hf</span></code> combined images (<a class="reference external" href="https://github.com/clamsproject/clams-python/pull/276">https://github.com/clamsproject/clams-python/pull/276</a>, <a class="reference external" href="https://github.com/clamsproject/clams-python/pull/281">https://github.com/clamsproject/clams-python/pull/281</a>)</p></li>
-</ul>
-<blockquote>
-<div><p>[!NOTE]
-This release requires <code class="docutils literal notranslate"><span class="pre">mmif-python</span> <span class="pre">&gt;=</span> <span class="pre">1.3.0</span></code> for the sampling mode API.</p>
-</div></blockquote>
 <hr class="docutils" />
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<p class="caption" role="heading"><span class="caption-text">For CLAMS App Developers</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Getting started</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="introduction.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="introduction.html#prerequisites">Prerequisites</a></li>
 <li class="toctree-l2"><a class="reference internal" href="introduction.html#installation">Installation</a></li>
@@ -412,6 +393,7 @@ This release requires <code class="docutils literal notranslate"><span class="pr
 <li class="toctree-l1"><a class="reference internal" href="runtime-params.html">Runtime Configuration</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="runtime-params.html#as-python-api">As Python API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="runtime-params.html#as-http-server">As HTTP Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="runtime-params.html#parameter-types">Parameter Types</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="gpu-apps.html">GPU Memory Management for CLAMS Apps</a><ul>
@@ -449,15 +431,26 @@ This release requires <code class="docutils literal notranslate"><span class="pr
 </li>
 </ul>
 </div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">For CLAMS App Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="clamsapp.html">Using CLAMS App</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="clamsapp.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clamsapp.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clamsapp.html#running-clams-app">Running CLAMS App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clamsapp.html#invoking-the-app-server">Invoking the app server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clamsapp.html#using-clams-app-as-a-cli-program">Using CLAMS App as a CLI program</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 </section>
-</section>
-<section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
+<section id="indices">
+<h1>Indices<a class="headerlink" href="#indices" title="Link to this heading">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
 </section>
 
@@ -471,7 +464,7 @@ This release requires <code class="docutils literal notranslate"><span class="pr
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Getting started</div>
+                <div class="title">Getting Started</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -506,24 +499,18 @@ This release requires <code class="docutils literal notranslate"><span class="pr
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Welcome to CLAMS Python SDK documentation!</a><ul>
+<li><a class="reference internal" href="#">CLAMS Python SDK</a><ul>
 <li><a class="reference internal" href="#clams-project">CLAMS project</a></li>
 <li><a class="reference internal" href="#clams-python">clams-python</a><ul>
 <li><a class="reference internal" href="#start-now-from-getting-started">Start now from Getting Started!</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#for-more">For more …</a></li>
-<li><a class="reference internal" href="#what-s-new-in-1-5-0">What’s New in 1.5.0</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a></li>
-<li><a class="reference internal" href="#additions">Additions</a></li>
-<li><a class="reference internal" href="#changes">Changes</a><ul>
+<li><a class="reference internal" href="#for-more">For more …</a><ul>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#indices">Indices</a></li>
 </ul>
 
           </div>

@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="GPU Memory Management for CLAMS Apps" href="gpu-apps.html"><link rel="prev" title="I/O Specification" href="input-output.html">
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
-        <title>Runtime Configuration - clams-python documentation</title>
+        <title>Runtime Configuration - clone-repo documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -251,7 +251,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">clams-python  documentation</div></a>
+      <a href="index.html"><div class="brand">clone-repo  documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -272,7 +272,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">clams-python  documentation</span>
+  <span class="sidebar-brand-text">clone-repo  documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -280,9 +280,9 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+  <p class="caption" role="heading"><span class="caption-text">For CLAMS App Developers</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="input-output.html">I/O Specification</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Runtime Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu-apps.html">GPU Memory Management for CLAMS Apps</a></li>
@@ -300,6 +300,10 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l2"><a class="reference internal" href="autodoc/clams.mmif_utils.html">clams.mmif_utils package</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For CLAMS App Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="clamsapp.html">Using CLAMS App</a></li>
 </ul>
 
 </div>
@@ -379,7 +383,9 @@ default states), and all the state should be “configured” by the client for 
 request, via the runtime configuration parameters we described above if necessary.
 For HTTP interface, users can enter configuration values via
 <a class="reference external" href="https://en.wikipedia.org/wiki/Query_string">query strings</a> as part of the
-request URL. For example, if the user wants to use the above app as a server
+request URL, or via a JSON envelope in the POST body (see <a class="reference internal" href="clamsapp.html#clamsapp-configuring"><span class="std std-ref">Configuring the app</span></a>
+for user-facing details on all three parameter-passing methods).
+For example, if the user wants to use the above app as a server
 with the <cite>labels</cite> parameter only set to <code class="docutils literal notranslate"><span class="pre">PERSON</span></code> and <code class="docutils literal notranslate"><span class="pre">ORG</span></code>, then the user
 can send a <code class="docutils literal notranslate"><span class="pre">POST</span></code> request to the server with the following URL:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http://app-server:5000?labels<span class="o">=</span>PERSON<span class="p">&amp;</span><span class="nv">labels</span><span class="o">=</span>ORG
@@ -389,6 +395,131 @@ can send a <code class="docutils literal notranslate"><span class="pre">POST</sp
 <code class="docutils literal notranslate"><span class="pre">multivalued=True</span></code> in the app metadata, so that the SDK can collect multiple
 values for the same parameter name in a single python list and pass to the
 <code class="docutils literal notranslate"><span class="pre">annotate()</span></code> method. Otherwise, only the <em>first</em> value will be passed.</p>
+</section>
+<section id="parameter-types">
+<span id="runtime-params-detailed"></span><h2>Parameter Types<a class="headerlink" href="#parameter-types" title="Link to this heading">¶</a></h2>
+<p>Each runtime parameter has a <code class="docutils literal notranslate"><span class="pre">type</span></code> that determines how user-provided string
+values are cast into Python objects before reaching your <code class="docutils literal notranslate"><span class="pre">_annotate()</span></code> method.
+The supported types are: <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">integer</span></code>, <code class="docutils literal notranslate"><span class="pre">number</span></code>, <code class="docutils literal notranslate"><span class="pre">boolean</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">map</span></code>.</p>
+<section id="primitive-types">
+<h3>Primitive types<a class="headerlink" href="#primitive-types" title="Link to this heading">¶</a></h3>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">string</span></code></dt><dd><p>Values are passed through as-is (no casting).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;outputFormat&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;string&#39;</span><span class="p">,</span>
+                       <span class="n">default</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
+                       <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Output format.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">integer</span></code></dt><dd><p>Values are cast to Python <code class="docutils literal notranslate"><span class="pre">int</span></code> via <code class="docutils literal notranslate"><span class="pre">int(value)</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;minFrameCount&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+                       <span class="n">default</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                       <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Minimum number of frames.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number</span></code></dt><dd><p>Values are cast to Python <code class="docutils literal notranslate"><span class="pre">float</span></code> via <code class="docutils literal notranslate"><span class="pre">float(value)</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;threshold&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">,</span>
+                       <span class="n">default</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                       <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Confidence threshold.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">boolean</span></code></dt><dd><p>Values are cast to Python <code class="docutils literal notranslate"><span class="pre">bool</span></code>. The following string values are
+recognized as <code class="docutils literal notranslate"><span class="pre">False</span></code>: <code class="docutils literal notranslate"><span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">false</span></code>, <code class="docutils literal notranslate"><span class="pre">F</span></code>, <code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+Everything else is treated as <code class="docutils literal notranslate"><span class="pre">True</span></code>. Boolean parameters always have
+<code class="docutils literal notranslate"><span class="pre">multivalued=False</span></code> (enforced by the SDK).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;pretty&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;boolean&#39;</span><span class="p">,</span>
+                       <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                       <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Pretty-print JSON output.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</section>
+<section id="multivalued-parameters">
+<h3>Multivalued parameters<a class="headerlink" href="#multivalued-parameters" title="Link to this heading">¶</a></h3>
+<p>When a parameter can accept more than one value, set <code class="docutils literal notranslate"><span class="pre">multivalued=True</span></code>.
+The SDK will always pass a <strong>list</strong> to <code class="docutils literal notranslate"><span class="pre">_annotate()</span></code>, even when the user
+provides only a single value.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;labels&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;string&#39;</span><span class="p">,</span>
+                       <span class="n">multivalued</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PERSON&#39;</span><span class="p">,</span> <span class="s1">&#39;ORG&#39;</span><span class="p">],</span>
+                       <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Annotation labels to use.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To pass multiple values:</p>
+<ul>
+<li><p>via query string: repeat the parameter name</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http://app-server:5000?labels<span class="o">=</span>PERSON<span class="p">&amp;</span><span class="nv">labels</span><span class="o">=</span>ORG
+</pre></div>
+</div>
+</li>
+<li><p>via CLI: list values after the flag</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>cli.py<span class="w"> </span>--labels<span class="w"> </span>PERSON<span class="w"> </span>ORG
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">boolean</span></code> parameters always force <code class="docutils literal notranslate"><span class="pre">multivalued=False</span></code>.</p>
+</div>
+</section>
+<section id="map-type-parameters">
+<h3>Map type parameters<a class="headerlink" href="#map-type-parameters" title="Link to this heading">¶</a></h3>
+<p>Map parameters allow users to pass key-value pairs that arrive in
+<code class="docutils literal notranslate"><span class="pre">_annotate()</span></code> as a Python <code class="docutils literal notranslate"><span class="pre">dict</span></code>. Declaring <code class="docutils literal notranslate"><span class="pre">type='map'</span></code> automatically
+forces <code class="docutils literal notranslate"><span class="pre">multivalued=True</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;labelMap&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;map&#39;</span><span class="p">,</span>
+                       <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;B:bars&#39;</span><span class="p">,</span> <span class="s1">&#39;S:slate&#39;</span><span class="p">],</span>
+                       <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Mapping from source to target labels.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Each value uses a colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>) as the key-value delimiter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KEY</span><span class="p">:</span><span class="n">VALUE</span>
+</pre></div>
+</div>
+<p><strong>Colons are not allowed in keys.</strong> The first colon in the string is always used
+as the delimiter. If colons appear in the value portion (after the first colon),
+the SDK will emit a warning. When the same key is passed more than once, the
+last value wins.</p>
+<p>To pass map values:</p>
+<ul>
+<li><p>via query string: repeat the parameter name with each <code class="docutils literal notranslate"><span class="pre">KEY:VALUE</span></code> pair</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http://app-server:5000?labelMap<span class="o">=</span>B:bars<span class="p">&amp;</span><span class="nv">labelMap</span><span class="o">=</span>S:slate
+</pre></div>
+</div>
+</li>
+<li><p>via CLI: list pairs after the flag</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>cli.py<span class="w"> </span>--labelMap<span class="w"> </span>B:bars<span class="w"> </span>S:slate
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Inside <code class="docutils literal notranslate"><span class="pre">_annotate()</span></code>, the parameter arrives as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="s1">&#39;bars&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">:</span> <span class="s1">&#39;slate&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Default values must be a list of colon-separated strings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;key1:value1&#39;</span><span class="p">,</span> <span class="s1">&#39;key2:value2&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For more complex value structures (e.g., comma-separated lists within values),
+the app developer is responsible for further parsing and should document the
+expected format in the parameter’s <code class="docutils literal notranslate"><span class="pre">description</span></code> field.</p>
+</section>
+<section id="note-on-json-envelope-input">
+<span id="runtime-params-envelope-note"></span><h3>Note on JSON envelope input<a class="headerlink" href="#note-on-json-envelope-input" title="Link to this heading">¶</a></h3>
+<p>Users may also pass parameters via a JSON envelope in the POST body
+(see <a class="reference internal" href="clamsapp.html#clamsapp-configuring"><span class="std std-ref">Configuring the app</span></a> for user-facing documentation).
+App developers do <strong>not</strong> need to handle this case specially.
+The SDK normalizes envelope parameters to the same <code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">List[str]]</span></code>
+format as query strings before they reach <code class="docutils literal notranslate"><span class="pre">_annotate()</span></code>, so all type casting,
+default filling, and view signing work identically regardless of how parameters
+were provided.</p>
+</section>
 </section>
 </section>
 
@@ -450,6 +581,13 @@ values for the same parameter name in a single python list and pass to the
 <li><a class="reference internal" href="#">Runtime Configuration</a><ul>
 <li><a class="reference internal" href="#as-python-api">As Python API</a></li>
 <li><a class="reference internal" href="#as-http-server">As HTTP Server</a></li>
+<li><a class="reference internal" href="#parameter-types">Parameter Types</a><ul>
+<li><a class="reference internal" href="#primitive-types">Primitive types</a></li>
+<li><a class="reference internal" href="#multivalued-parameters">Multivalued parameters</a></li>
+<li><a class="reference internal" href="#map-type-parameters">Map type parameters</a></li>
+<li><a class="reference internal" href="#note-on-json-envelope-input">Note on JSON envelope input</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
