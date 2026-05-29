@@ -285,6 +285,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="input-output.html">I/O Specification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="runtime-params.html">Runtime Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app-baseclasses.html">Specialized App Base Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu-apps.html">GPU Memory Management for CLAMS Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appmetadata.html">CLAMS App Metadata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appdirectory.html">CLAMS App Directory</a></li>
@@ -377,10 +378,41 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp.validate_document_locations"><code class="docutils literal notranslate"><span class="pre">ClamsApp.validate_document_locations()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.DTYPE"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.DTYPE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.MODEL_CLS"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.MODEL_CLS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.MODEL_KWARGS"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.MODEL_KWARGS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.PADDING_SIDE"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.PADDING_SIDE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.PROCESSOR_CLS"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.PROCESSOR_CLS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.PROCESSOR_KWARGS"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.PROCESSOR_KWARGS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp._abc_impl"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp._abc_impl</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp._model_cache"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp._model_cache</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp._refine_params"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp._refine_params()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.build_gen_kwargs"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.build_gen_kwargs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.generate"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.generate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.inject_promptable_parameters"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.inject_promptable_parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.load_model"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.load_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.processor"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.processor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp"><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp._abc_impl"><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp._abc_impl</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp._build_single_turn"><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp._build_single_turn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp._build_turn_taking"><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp._build_turn_taking()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp._build_user_only"><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp._build_user_only()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp._make_user_content"><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp._make_user_content()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.build_conversation"><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp.build_conversation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.generate"><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp.generate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.inject_promptable_parameters"><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp.inject_promptable_parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.promptable_parameters"><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp.promptable_parameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.response_to_grounded_textdocument"><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp.response_to_grounded_textdocument()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="autodoc/clams.appmetadata.html">clams.appmetadata package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="autodoc/clams.appmetadata.html#clams.appmetadata.AppMetadata"><code class="docutils literal notranslate"><span class="pre">AppMetadata</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.appmetadata.html#clams.appmetadata.AppMetadata.add_app_tag"><code class="docutils literal notranslate"><span class="pre">AppMetadata.add_app_tag()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="autodoc/clams.appmetadata.html#clams.appmetadata.AppMetadata.add_input"><code class="docutils literal notranslate"><span class="pre">AppMetadata.add_input()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="autodoc/clams.appmetadata.html#clams.appmetadata.AppMetadata.add_input_oneof"><code class="docutils literal notranslate"><span class="pre">AppMetadata.add_input_oneof()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="autodoc/clams.appmetadata.html#clams.appmetadata.AppMetadata.add_more"><code class="docutils literal notranslate"><span class="pre">AppMetadata.add_more()</span></code></a></li>

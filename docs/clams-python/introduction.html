@@ -285,6 +285,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="input-output.html">I/O Specification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="runtime-params.html">Runtime Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app-baseclasses.html">Specialized App Base Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu-apps.html">GPU Memory Management for CLAMS Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appmetadata.html">CLAMS App Metadata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appdirectory.html">CLAMS App Directory</a></li>
@@ -412,13 +413,17 @@ When you inherit <a class="reference internal" href="autodoc/clams.app.html#clam
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>There are <em>universal</em> parameters defined at the SDK-level that all CLAMS apps commonly use. See <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp.universal_parameters" title="clams.app.ClamsApp.universal_parameters"><code class="xref py py-const docutils literal notranslate"><span class="pre">clams.app.ClamsApp.universal_parameters</span></code></a>.</p>
+<p>Some runtime parameters are managed by the SDK itself rather than declared per-app. The <em>universal</em> parameters in <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp.universal_parameters" title="clams.app.ClamsApp.universal_parameters"><code class="xref py py-const docutils literal notranslate"><span class="pre">clams.app.ClamsApp.universal_parameters</span></code></a> are one such set; they are auto-added to every CLAMS app. Specialized base classes (see below) add their own SDK-managed parameter sets on top.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>All the runtime configurations should be pre-announced in the app metadata.</p>
 </div>
 <p>Also see &lt;<a class="reference internal" href="tutorial.html"><span class="doc">Tutorial: Wrapping an NLP Application</span></a>&gt; for a step-by-step tutorial on how to write the <code class="docutils literal notranslate"><span class="pre">_annotate()</span></code> method with a simple example NLP tool.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Inheriting from <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp" title="clams.app.ClamsApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsApp</span></code></a> directly works for any CLAMS app. For common app categories (e.g. apps wrapping LLM or other multimodal models), the SDK provides specialized base classes that extend <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp" title="clams.app.ClamsApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsApp</span></code></a> with additional SDK-managed parameter sets and helpers. See <a class="reference internal" href="app-baseclasses.html#app-baseclasses"><span class="std std-ref">Specialized App Base Classes</span></a>.</p>
+</div>
 </section>
 <section id="appmetadata">
 <h4>appmetadata()<a class="headerlink" href="#appmetadata" title="Link to this heading">¶</a></h4>

@@ -1,0 +1,963 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="GPU Memory Management for CLAMS Apps" href="gpu-apps.html"><link rel="prev" title="Runtime Configuration" href="runtime-params.html">
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
+        <title>Specialized App Base Classes - clone-repo documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #008AFF;
+  --color-brand-content: #0085A1;
+  --color-link: #008AFF;
+  --color-link-hover: #0085A1;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+<!-- CLAMS Hub Version Header - Injected -->
+<style>
+.clams-version-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 8px 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+@media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) .clams-version-header {
+        background: #1a1a1a;
+        border-bottom-color: #333;
+    }
+    body:not([data-theme="light"]) .clams-version-header a {
+        color: #6cb6ff;
+    }
+    body:not([data-theme="light"]) .clams-version-header .nav-link.active {
+        background: #333;
+    }
+}
+body[data-theme="dark"] .clams-version-header {
+    background: #1a1a1a;
+    border-bottom-color: #333;
+}
+body[data-theme="dark"] .clams-version-header a {
+    color: #6cb6ff;
+}
+body[data-theme="dark"] .clams-version-header .nav-link.active {
+    background: #333;
+}
+.clams-version-header a {
+    color: #008AFF;
+    text-decoration: none;
+}
+.clams-version-header a:hover {
+    text-decoration: underline;
+}
+.clams-version-header .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.clams-version-header .logo {
+    height: 28px;
+    width: auto;
+}
+.clams-version-header .project-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.clams-version-header .nav-link {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+.clams-version-header .nav-link:hover {
+    background: #e9ecef;
+    text-decoration: none;
+}
+.clams-version-header .nav-link.active {
+    background: #e9ecef;
+    font-weight: 600;
+}
+</style>
+<div class="clams-version-header">
+    <div class="header-left">
+        <a href="https://clams.ai/" title="CLAMS Documentation Hub">
+            <img src="https://clams.ai/home/_static/clams-logo.png" alt="CLAMS" class="logo">
+        </a>
+        <nav class="project-nav">
+            <a href="https://clams.ai/home/" class="nav-link">home</a>
+            <a href="https://mmif.clams.ai" class="nav-link" target="_blank" rel="noopener">MMIF</a>
+            <a href="https://apps.clams.ai" class="nav-link" target="_blank" rel="noopener">apps</a>
+            <a href="https://clams.ai/vocabulary/" class="nav-link">vocabulary</a>
+            <a href="https://clams.ai/clams-python/" class="nav-link active">clams-python</a>
+            <a href="https://clams.ai/mmif-python/" class="nav-link">mmif-python</a>
+        </nav>
+    </div>
+</div>
+<!-- End CLAMS Hub Version Header -->
+
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">clone-repo  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">clone-repo  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">For CLAMS App Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input-output.html">I/O Specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="runtime-params.html">Runtime Configuration</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Specialized App Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu-apps.html">GPU Memory Management for CLAMS Apps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appmetadata.html">CLAMS App Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appdirectory.html">CLAMS App Directory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html"><code class="docutils literal notranslate"><span class="pre">clams</span></code> shell command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial: Wrapping an NLP Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation:</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">clams package</a><input aria-label="Toggle navigation of clams package" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/clams.app.html">clams.app package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/clams.appmetadata.html">clams.appmetadata package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/clams.restify.html">clams.restify package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/clams.mmif_utils.html">clams.mmif_utils package</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For CLAMS App Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="clamsapp.html">Using CLAMS App</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/clamsproject/clams-python/blob/main/documentation/app-baseclasses.rst?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/clamsproject/clams-python/edit/main/documentation/app-baseclasses.rst" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="specialized-app-base-classes">
+<span id="app-baseclasses"></span><h1>Specialized App Base Classes<a class="headerlink" href="#specialized-app-base-classes" title="Link to this heading">¶</a></h1>
+<p>Beyond the bare-minimum <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp" title="clams.app.ClamsApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsApp</span></code></a> introduced in
+<a class="reference internal" href="introduction.html#introduction"><span class="std std-ref">Getting Started</span></a>, the SDK provides specialized base classes that capture
+common structural patterns for CLAMS apps. Each specialized base class
+extends <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp" title="clams.app.ClamsApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsApp</span></code></a> with a standardized runtime parameter
+surface and helper methods appropriate to its category of app. App
+developers inherit from the specialized base class that best matches what
+their app does, instead of inheriting from <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp" title="clams.app.ClamsApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsApp</span></code></a>
+directly.</p>
+<p>This page first recaps what every CLAMS app inherits from
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp" title="clams.app.ClamsApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsApp</span></code></a> (the baseline), then documents each
+specialized base class and what it adds on top.</p>
+<section id="what-every-clams-app-inherits">
+<span id="app-baseline"></span><h2>What every CLAMS app inherits<a class="headerlink" href="#what-every-clams-app-inherits" title="Link to this heading">¶</a></h2>
+<p>Every CLAMS app subclasses <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp" title="clams.app.ClamsApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsApp</span></code></a> (directly or via
+a specialized base class such as <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp" title="clams.app.ClamsPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a>)
+and inherits its baseline behaviors: parameter casting and refinement,
+view signing, JSON envelope unwrapping, CUDA memory profiling and
+cleanup, error views, and a set of <em>universal</em> runtime parameters that
+the SDK auto-injects into every app’s metadata.</p>
+<section id="universal-parameters">
+<h3>Universal parameters<a class="headerlink" href="#universal-parameters" title="Link to this heading">¶</a></h3>
+<p>Added automatically by <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> at runtime
+and by the standard <code class="docutils literal notranslate"><span class="pre">metadata.py</span></code> template’s <code class="docutils literal notranslate"><span class="pre">__main__</span></code> block at
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">metadata.py</span></code> time. App developers do not declare them.</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18.0%" />
+<col style="width: 12.0%" />
+<col style="width: 18.0%" />
+<col style="width: 8.0%" />
+<col style="width: 44.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Multi-valued</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pretty</span></code></p></td>
+<td><p>boolean</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p>no</p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">true</span></code>, the response MMIF JSON is re-formatted with
+2-space indentation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">runningTime</span></code></p></td>
+<td><p>boolean</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>no</p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">true</span></code>, the running time of the request is recorded in
+the view metadata.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hwFetch</span></code></p></td>
+<td><p>boolean</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p>no</p></td>
+<td><p>When <code class="docutils literal notranslate"><span class="pre">true</span></code>, host hardware info (architecture, GPU and vRAM)
+is recorded in the view metadata.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tfSamplingMode</span></code></p></td>
+<td><p>string</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'representatives'</span></code></p></td>
+<td><p>no</p></td>
+<td><p>For apps that process <code class="docutils literal notranslate"><span class="pre">TimeFrame</span></code> annotations: how to sample
+frames within each TimeFrame. Choices: <code class="docutils literal notranslate"><span class="pre">'representatives'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'single'</span></code>, <code class="docutils literal notranslate"><span class="pre">'all'</span></code>. No effect on apps that do not process
+TimeFrames.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="sdk-managed-parameter-names-are-reserved">
+<span id="sdk-managed-reserved"></span><h3>SDK-managed parameter names are reserved<a class="headerlink" href="#sdk-managed-parameter-names-are-reserved" title="Link to this heading">¶</a></h3>
+<p>Parameter names added by the SDK (the universal parameters listed
+above, plus any parameters added by a specialized base class) are
+reserved. An app’s <code class="docutils literal notranslate"><span class="pre">appmetadata()</span></code> MUST NOT declare any of these
+names via <code class="xref py py-meth docutils literal notranslate"><span class="pre">AppMetadata.add_parameter()</span></code> directly; doing so trips
+the existing duplicate-name <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> when the SDK tries to add
+its own spec.</p>
+<p>This reservation guarantees a uniform, predictable parameter interface
+across all CLAMS apps. App developers can still customize a reserved
+parameter’s <em>default value</em> (but not its <code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">multivalued</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">choices</span></code>) by mutating the <code class="docutils literal notranslate"><span class="pre">default</span></code> field on the already-injected
+parameter object; see <a class="reference internal" href="#promptable-customizing-defaults"><span class="std std-ref">Customizing default values</span></a> for a
+worked example.</p>
+</section>
+</section>
+<section id="promptable-clams-apps">
+<span id="promptable"></span><h2>Promptable CLAMS Apps<a class="headerlink" href="#promptable-clams-apps" title="Link to this heading">¶</a></h2>
+<p>A <strong>promptable app</strong> is a CLAMS app that wraps a promptable model: a large
+language model (LLM), vision-language model (VLM), audio-language model
+(ALM), large multimodal model (LMM), or remote generative API. The SDK
+provides <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp" title="clams.app.ClamsPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a> as a specialized base class
+for these apps. It standardizes the runtime parameter surface (prompts,
+generation hyperparameters, batch size) and provides helpers for building
+chat conversations and persisting model responses into MMIF.</p>
+<p>This section is the developer guide for writing or migrating a CLAMS app
+that inherits from <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp" title="clams.app.ClamsPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a>. For the general
+CLAMS app development pattern, see the <a class="reference internal" href="introduction.html#introduction"><span class="std std-ref">Getting Started</span></a>,
+<a class="reference internal" href="tutorial.html#tutorial"><span class="std std-ref">Tutorial: Wrapping an NLP Application</span></a>, and <a class="reference internal" href="runtime-params.html#runtime-params"><span class="std std-ref">Runtime Configuration</span></a> pages.</p>
+<section id="when-to-use-clamspromptableapp">
+<h3>When to use <code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code><a class="headerlink" href="#when-to-use-clamspromptableapp" title="Link to this heading">¶</a></h3>
+<p>Choose <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp" title="clams.app.ClamsPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a> over <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp" title="clams.app.ClamsApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsApp</span></code></a>
+when your app’s core operation is “given a prompt and some input
+(image/audio/text/structured data), return generated text.” Concretely:</p>
+<ul class="simple">
+<li><p>Image captioning, VLM-based OCR, scene description</p></li>
+<li><p>Audio captioning, transcription via ALMs</p></li>
+<li><p>Summarization, classification, structured-data extraction via LLMs</p></li>
+<li><p>Tasks driven by an LMM that takes mixed-modality inputs</p></li>
+<li><p>Any app that wraps a remote LLM, VLM, ALM, or LMM API and forwards a prompt</p></li>
+</ul>
+<p>If your app does not call a generative model (e.g. a classical OCR engine,
+a speech-to-text engine that doesn’t take prompts, a classifier wrapping a
+discriminative model), keep using <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp" title="clams.app.ClamsApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsApp</span></code></a> directly.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code> assumes an <strong>instruction- or chat-tuned</strong>
+model with a system/user/assistant role structure. Bare completion
+/ next-token-prediction base models do not fit this base class
+cleanly; use <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp" title="clams.app.ClamsApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsApp</span></code></a> directly for those.</p>
+</div>
+</section>
+<section id="standardized-runtime-parameters">
+<h3>Standardized runtime parameters<a class="headerlink" href="#standardized-runtime-parameters" title="Link to this heading">¶</a></h3>
+<p>Every <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp" title="clams.app.ClamsPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a> exposes the following
+SDK-managed runtime parameters in addition to the universal parameters
+from <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp" title="clams.app.ClamsApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsApp</span></code></a>. These names are reserved; see
+<a class="reference internal" href="#sdk-managed-reserved"><span class="std std-ref">SDK-managed parameter names are reserved</span></a>.</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18.0%" />
+<col style="width: 12.0%" />
+<col style="width: 18.0%" />
+<col style="width: 8.0%" />
+<col style="width: 44.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Multi-valued</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">prompt</span></code></p></td>
+<td><p>string</p></td>
+<td><p><em>(required, no default)</em></p></td>
+<td><p>yes</p></td>
+<td><p>User prompt(s) sent to the model. A single value runs as a one-shot
+generation. A multi-value list is interpreted as a multi-turn static
+prompt; see <a class="reference internal" href="#promptable-multiturn"><span class="std std-ref">Multi-turn handling (promptMode)</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">systemPrompt</span></code></p></td>
+<td><p>string</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p></td>
+<td><p>no</p></td>
+<td><p>Optional system-role text prepended to the conversation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">promptMode</span></code></p></td>
+<td><p>string</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'turn-taking'</span></code></p></td>
+<td><p>no</p></td>
+<td><p>How to interpret a multi-value <code class="docutils literal notranslate"><span class="pre">prompt</span></code> list. Choices:
+<code class="docutils literal notranslate"><span class="pre">'turn-taking'</span></code> or <code class="docutils literal notranslate"><span class="pre">'user-only'</span></code>. See <a class="reference internal" href="#promptable-multiturn"><span class="std std-ref">Multi-turn handling (promptMode)</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">maxNewTokens</span></code></p></td>
+<td><p>integer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">512</span></code></p></td>
+<td><p>no</p></td>
+<td><p>Maximum number of new tokens generated per inference call. Larger values
+grow the KV cache linearly and add to GPU memory usage; reduce if VRAM
+is constrained.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">temperature</span></code></p></td>
+<td><p>number</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.0</span></code></p></td>
+<td><p>no</p></td>
+<td><p>Sampling temperature. <code class="docutils literal notranslate"><span class="pre">0.0</span></code> selects deterministic / greedy decoding
+for maximum reproducibility; override for sampled generation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">topP</span></code></p></td>
+<td><p>number</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1.0</span></code></p></td>
+<td><p>no</p></td>
+<td><p>Nucleus-sampling cumulative probability cutoff. Only meaningful when
+<code class="docutils literal notranslate"><span class="pre">temperature</span></code> &gt; 0.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">topK</span></code></p></td>
+<td><p>integer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">50</span></code></p></td>
+<td><p>no</p></td>
+<td><p>Top-K sampling cutoff. Only meaningful when <code class="docutils literal notranslate"><span class="pre">temperature</span></code> &gt; 0.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">parallelPrompts</span></code></p></td>
+<td><p>integer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p>no</p></td>
+<td><p>Number of independent prompts the app stacks into a single
+forward pass. Per-prompt content size is the app’s
+responsibility; prompt count and per-prompt size combine
+multiplicatively for GPU memory. Keep at <code class="docutils literal notranslate"><span class="pre">1</span></code> on memory-tight
+setups; see the parameter’s own description in
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.promptable_parameters" title="clams.app.ClamsPromptableApp.promptable_parameters"><code class="xref py py-attr docutils literal notranslate"><span class="pre">promptable_parameters</span></code></a>
+for an OOM-risk example.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="customizing-default-values">
+<span id="promptable-customizing-defaults"></span><h4>Customizing default values<a class="headerlink" href="#customizing-default-values" title="Link to this heading">¶</a></h4>
+<p>The SDK ships sensible defaults for most promptable parameters but
+deliberately leaves <code class="docutils literal notranslate"><span class="pre">prompt</span></code> <strong>without</strong> a default; prompts are
+inherently app-specific and no single value is right for all apps.
+Beyond <code class="docutils literal notranslate"><span class="pre">prompt</span></code>, other defaults may also be inappropriate for a given
+app: a model that needs longer outputs wants a higher <code class="docutils literal notranslate"><span class="pre">maxNewTokens</span></code>,
+a small-VRAM deployment wants <code class="docutils literal notranslate"><span class="pre">parallelPrompts</span></code> pinned at <code class="docutils literal notranslate"><span class="pre">1</span></code>, etc.</p>
+<p>Because the reservation rule prevents calling
+<code class="docutils literal notranslate"><span class="pre">metadata.add_parameter('prompt',</span> <span class="pre">...)</span></code> (or any other promptable name)
+directly, the recommended pattern for customizing defaults is to mutate
+the <code class="docutils literal notranslate"><span class="pre">default</span></code> field on the already-injected parameter object right
+after calling <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.inject_promptable_parameters" title="clams.app.ClamsPromptableApp.inject_promptable_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">inject_promptable_parameters()</span></code></a>.
+You’ll see a worked example of this in the <code class="docutils literal notranslate"><span class="pre">metadata.py</span></code> generated
+by the <code class="docutils literal notranslate"><span class="pre">clams</span> <span class="pre">develop</span></code> scaffold.</p>
+<p>This works for any promptable parameter. The parameter spec itself
+(<code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">multivalued</span></code>, <code class="docutils literal notranslate"><span class="pre">choices</span></code>) stays locked by the SDK; only
+the <code class="docutils literal notranslate"><span class="pre">default</span></code> field is meant to be mutated this way, which preserves
+the cross-app uniformity that the reservation rule is designed to
+guarantee.</p>
+<p>If an app <em>wants</em> to require callers to pass a value explicitly (for
+<code class="docutils literal notranslate"><span class="pre">prompt</span></code> or any other parameter), it can simply leave the default
+unchanged. <code class="docutils literal notranslate"><span class="pre">prompt</span></code> already has no default, so the SDK will raise a
+“required parameter” error if the caller omits it; for other params,
+deleting the SDK default and leaving it <code class="docutils literal notranslate"><span class="pre">None</span></code> would have the same
+effect, though that’s rarely useful.</p>
+</section>
+</section>
+<section id="declaring-a-promptable-app">
+<span id="promptable-declaration"></span><h3>Declaring a promptable app<a class="headerlink" href="#declaring-a-promptable-app" title="Link to this heading">¶</a></h3>
+<p>A promptable app requires two paired edits relative to the scaffold
+generated by <code class="docutils literal notranslate"><span class="pre">clams</span> <span class="pre">develop</span></code>:</p>
+<ol class="arabic simple">
+<li><p>In <code class="docutils literal notranslate"><span class="pre">app.py</span></code>, change the app class’s base from
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp" title="clams.app.ClamsApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsApp</span></code></a> to
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp" title="clams.app.ClamsPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a> and implement
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.generate" title="clams.app.ClamsPromptableApp.generate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generate()</span></code></a>. The scaffold file
+already contains a guiding comment at the class declaration line.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">metadata.py</span></code>, call
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.inject_promptable_parameters" title="clams.app.ClamsPromptableApp.inject_promptable_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ClamsPromptableApp.inject_promptable_parameters</span></code></a> at
+the end of <code class="docutils literal notranslate"><span class="pre">appmetadata()</span></code>. The scaffold file already contains
+a commented-out helper-call block; uncomment it.</p></li>
+</ol>
+<p>The <code class="docutils literal notranslate"><span class="pre">__main__</span></code> block in <code class="docutils literal notranslate"><span class="pre">metadata.py</span></code> is unchanged from
+non-promptable apps. The helper call inside <code class="docutils literal notranslate"><span class="pre">appmetadata()</span></code> makes
+the promptable parameters visible to both <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">metadata.py</span></code>
+(build-time discovery) and to
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp._load_appmetadata" title="clams.app.ClamsApp._load_appmetadata"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_load_appmetadata()</span></code></a> (runtime). The base
+class change ensures the app inherits the parameter-presence
+validation, the <code class="docutils literal notranslate"><span class="pre">generate()</span></code> contract, and the helper methods at
+runtime.</p>
+</section>
+<section id="the-generate-contract">
+<h3>The <code class="docutils literal notranslate"><span class="pre">generate()</span></code> contract<a class="headerlink" href="#the-generate-contract" title="Link to this heading">¶</a></h3>
+<p>Subclasses of <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp" title="clams.app.ClamsPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a> that wrap a backend
+without a default SDK implementation (e.g., remote-API or custom local
+backends) MUST implement <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.generate" title="clams.app.ClamsPromptableApp.generate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generate()</span></code></a>.
+Subclasses of <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp" title="clams.app.ClamsHFPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsHFPromptableApp</span></code></a> inherit a concrete
+<code class="docutils literal notranslate"><span class="pre">generate()</span></code> and do not need to override it. See the method’s docstring
+for the full signature, batch semantics, and return value.</p>
+<p>Keep inference logic inside <code class="docutils literal notranslate"><span class="pre">generate()</span></code> distinct from MMIF I/O; the
+latter belongs in <code class="docutils literal notranslate"><span class="pre">_annotate()</span></code> (which calls <code class="docutils literal notranslate"><span class="pre">self.generate()</span></code>).
+This separation lets HF-backed apps inherit the default <code class="docutils literal notranslate"><span class="pre">generate()</span></code>
+without restating backend mechanics, and lets non-HF apps swap in a new
+<code class="docutils literal notranslate"><span class="pre">generate()</span></code> without rewriting their MMIF I/O.</p>
+</section>
+<section id="multi-turn-handling-promptmode">
+<span id="promptable-multiturn"></span><h3>Multi-turn handling (<code class="docutils literal notranslate"><span class="pre">promptMode</span></code>)<a class="headerlink" href="#multi-turn-handling-promptmode" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">prompt</span></code> is always a <code class="docutils literal notranslate"><span class="pre">List[str]</span></code> after parameter casting. When the
+list has a single element, <code class="docutils literal notranslate"><span class="pre">promptMode</span></code> is irrelevant (single-shot
+generation). When the list has multiple elements, <code class="docutils literal notranslate"><span class="pre">promptMode</span></code> selects
+between two multi-element prompting strategies:</p>
+<p><strong>Turn-taking</strong> (default). The list is interpreted as an alternating
+user/assistant conversation: even indices (0, 2, 4, …) are user turns,
+odd indices are assistant turns. The full conversation is sent to the
+model in a single <code class="docutils literal notranslate"><span class="pre">generate</span></code> call. This mode supports any pattern
+that fits an alternating role structure, including few-shot in-context
+learning (where the (user, assistant) pairs are task exemplars and the
+final user turn is the new query), multi-turn dialogue continuation,
+and role-play scaffolding. Example (few-shot ICL): <code class="docutils literal notranslate"><span class="pre">[&quot;Classify</span>
+<span class="pre">sentiment:</span> <span class="pre">'I</span> <span class="pre">love</span> <span class="pre">this.'&quot;,</span> <span class="pre">&quot;positive&quot;,</span> <span class="pre">&quot;Classify</span> <span class="pre">sentiment:</span> <span class="pre">'I</span> <span class="pre">hate</span>
+<span class="pre">this.'&quot;,</span> <span class="pre">&quot;negative&quot;,</span> <span class="pre">&quot;Classify</span> <span class="pre">sentiment:</span> <span class="pre">'It's</span> <span class="pre">okay.'&quot;]</span></code>: two
+exemplar pairs followed by a final query; one inference returns the
+final reply.</p>
+<p><strong>User-only</strong>. Every element is a user turn; the model generates an
+assistant reply between each, in N successive <code class="docutils literal notranslate"><span class="pre">generate</span></code> calls. Only
+the final assistant response is returned per input item. This mode
+implements iterative / scripted multi-step prompting, a manual,
+externally-driven scaffold for stepwise reasoning. (It is distinct
+from in-model zero-shot chain-of-thought, where stepwise reasoning is
+elicited inside a single inference call by a prompt like “let’s think
+step by step”; here, the user-side scaffolding makes the steps
+explicit and feeds each intermediate model output back as context for
+the next user turn.) Example (scripted multi-step reasoning):
+<code class="docutils literal notranslate"><span class="pre">[&quot;Step</span> <span class="pre">1:</span> <span class="pre">identify</span> <span class="pre">objects.&quot;,</span> <span class="pre">&quot;Step</span> <span class="pre">2:</span> <span class="pre">describe</span> <span class="pre">relationships.&quot;,</span>
+<span class="pre">&quot;Step</span> <span class="pre">3:</span> <span class="pre">conclude.&quot;]</span></code>: three sequential user prompts, three
+inferences, final reply returned.</p>
+<p><code class="docutils literal notranslate"><span class="pre">turn-taking</span></code> is the default because it costs a single inference call
+and is the more common multi-element pattern.</p>
+</section>
+<section id="helpers">
+<h3>Helpers<a class="headerlink" href="#helpers" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.inject_promptable_parameters" title="clams.app.ClamsPromptableApp.inject_promptable_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">inject_promptable_parameters()</span></code></a></dt><dd><p>A static method called from your app’s <code class="docutils literal notranslate"><span class="pre">appmetadata()</span></code> (in
+<code class="docutils literal notranslate"><span class="pre">metadata.py</span></code>) to add the SDK-managed promptable parameters.</p>
+</dd>
+<dt><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.build_conversation" title="clams.app.ClamsPromptableApp.build_conversation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">build_conversation()</span></code></a></dt><dd><p>Instance method that constructs a chat-template-compatible message
+list (or a <code class="docutils literal notranslate"><span class="pre">List[List[dict]]</span></code> of progressively-extending prefixes
+for <code class="docutils literal notranslate"><span class="pre">user-only</span></code> mode). Handles string and list prompt forms, the
+two <code class="docutils literal notranslate"><span class="pre">promptMode</span></code> semantics, the optional <code class="docutils literal notranslate"><span class="pre">systemPrompt</span></code>, and
+inlines <code class="docutils literal notranslate"><span class="pre">images</span></code> / <code class="docutils literal notranslate"><span class="pre">audios</span></code> into the (final) user turn. Accepts
+a pre-built <code class="docutils literal notranslate"><span class="pre">List[dict]</span></code> and returns it unchanged. Subclasses
+may override to access model-specific state (e.g.
+<code class="docutils literal notranslate"><span class="pre">self.processor</span></code>) when formatting messages.</p>
+</dd>
+<dt><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.response_to_grounded_textdocument" title="clams.app.ClamsPromptableApp.response_to_grounded_textdocument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">response_to_grounded_textdocument()</span></code></a></dt><dd><p>Writes a <code class="docutils literal notranslate"><span class="pre">TextDocument</span></code> plus an <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> (<code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">-&gt;</span> <span class="pre">TD</span></code>)
+into a view. <code class="docutils literal notranslate"><span class="pre">source</span></code> is the coarse cross-modal anchor; the
+optional <code class="docutils literal notranslate"><span class="pre">origins</span></code> (paired with <code class="docutils literal notranslate"><span class="pre">origination</span></code>) is the finer
+derivation list, written to the TD’s <code class="docutils literal notranslate"><span class="pre">origins</span></code> / <code class="docutils literal notranslate"><span class="pre">origination</span></code>
+properties. See <a class="reference external" href="https://clams.ai/clams-vocabulary/Document">https://clams.ai/clams-vocabulary/Document</a> for
+vocabulary semantics.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="huggingface-promptable-apps">
+<span id="hf-promptable"></span><h2>HuggingFace Promptable Apps<a class="headerlink" href="#huggingface-promptable-apps" title="Link to this heading">¶</a></h2>
+<p>For the very common case of “promptable CLAMS app + local HuggingFace
+<code class="docutils literal notranslate"><span class="pre">transformers</span></code> model,” the SDK provides
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp" title="clams.app.ClamsHFPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsHFPromptableApp</span></code></a>, a specialized subclass of
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp" title="clams.app.ClamsPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a> that absorbs all HF-specific
+inference boilerplate. Concrete apps inheriting from it declare the
+model via a few class attributes and typically only need to implement
+<code class="docutils literal notranslate"><span class="pre">_annotate()</span></code> for their MMIF I/O.</p>
+<section id="when-to-use">
+<h3>When to use<a class="headerlink" href="#when-to-use" title="Link to this heading">¶</a></h3>
+<p>Choose <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp" title="clams.app.ClamsHFPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsHFPromptableApp</span></code></a> over plain
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp" title="clams.app.ClamsPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a> when your app:</p>
+<ul class="simple">
+<li><p>wraps a local HuggingFace <code class="docutils literal notranslate"><span class="pre">transformers</span></code> model loadable via
+<code class="docutils literal notranslate"><span class="pre">from_pretrained()</span></code>, AND</p></li>
+<li><p>runs the standard chat-template -&gt; <code class="docutils literal notranslate"><span class="pre">model.generate</span></code> -&gt;
+<code class="docutils literal notranslate"><span class="pre">batch_decode</span></code> inference pipeline (every modern instruct-tuned
+VLM/LLM in HF), AND</p></li>
+<li><p>doesn’t need bespoke pixel-value preprocessing or vision-token
+stitching at inference time.</p></li>
+</ul>
+<p>If your app uses a remote API instead (OpenAI, Anthropic, etc.), or a
+non-HF local backend, inherit from
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp" title="clams.app.ClamsPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a> directly and implement
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.generate" title="clams.app.ClamsPromptableApp.generate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generate()</span></code></a> yourself.</p>
+</section>
+<section id="declaring-an-hf-promptable-app">
+<span id="hf-promptable-declaring"></span><h3>Declaring an HF promptable app<a class="headerlink" href="#declaring-an-hf-promptable-app" title="Link to this heading">¶</a></h3>
+<p>On top of the baseline declaration shared by every promptable app
+(see <a class="reference internal" href="#promptable-declaration"><span class="std std-ref">Declaring a promptable app</span></a>), a
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp" title="clams.app.ClamsHFPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsHFPromptableApp</span></code></a> subclass:</p>
+<ol class="arabic simple">
+<li><p>Uses <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp" title="clams.app.ClamsHFPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsHFPromptableApp</span></code></a> (not
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp" title="clams.app.ClamsPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a>) as the base class in
+<code class="docutils literal notranslate"><span class="pre">app.py</span></code>.</p></li>
+<li><p>Declares the required class attribute <code class="docutils literal notranslate"><span class="pre">MODEL_CLS</span></code> and any
+optional dtype / padding / kwargs hints (see
+<a class="reference internal" href="#hf-promptable-class-attrs"><span class="std std-ref">Class-attribute hooks</span></a> for the full list).</p></li>
+<li><p>Sets <code class="docutils literal notranslate"><span class="pre">analyzer_versions={&lt;hf-id&gt;:</span> <span class="pre">&lt;commit-hash&gt;,</span> <span class="pre">...}</span></code> on the
+<code class="docutils literal notranslate"><span class="pre">AppMetadata</span></code> constructor call in <code class="docutils literal notranslate"><span class="pre">metadata.py</span></code> (replaces the
+singular <code class="docutils literal notranslate"><span class="pre">analyzer_version</span></code> for HF apps).</p></li>
+<li><p>Calls
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.inject_promptable_parameters" title="clams.app.ClamsHFPromptableApp.inject_promptable_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.inject_promptable_parameters</span></code></a>
+(the HF override of the plain helper) at the end of
+<code class="docutils literal notranslate"><span class="pre">appmetadata()</span></code>. The scaffold <code class="docutils literal notranslate"><span class="pre">metadata.py</span></code> contains a
+commented-out HF block; uncomment it.</p></li>
+<li><p>Inherits the base class’s
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.generate" title="clams.app.ClamsPromptableApp.generate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generate()</span></code></a> implementation;
+no override needed.</p></li>
+</ol>
+<p>For a minimal worked example, see the class docstring on
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp" title="clams.app.ClamsHFPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsHFPromptableApp</span></code></a>.</p>
+</section>
+<section id="class-attribute-hooks">
+<span id="hf-promptable-class-attrs"></span><h3>Class-attribute hooks<a class="headerlink" href="#class-attribute-hooks" title="Link to this heading">¶</a></h3>
+<p>Concrete subclasses declare the model class plus optional dtype /
+padding hints via class attributes, and declare the family of
+supported model variants (with pinned commits) via
+<code class="docutils literal notranslate"><span class="pre">analyzer_versions</span></code> in <code class="docutils literal notranslate"><span class="pre">metadata.py</span></code>:</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 60.0%" />
+<col style="width: 18.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>Required</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MODEL_CLS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">transformers</span></code> model class (e.g.
+<code class="xref py py-class docutils literal notranslate"><span class="pre">AutoModelForImageTextToText</span></code>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">AutoModelForCausalLM</span></code>).</p></td>
+<td><p>yes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PROCESSOR_CLS</span></code></p></td>
+<td><p>Processor / tokenizer / feature-extractor class. Defaults to
+<code class="xref py py-class docutils literal notranslate"><span class="pre">AutoProcessor</span></code>.</p></td>
+<td><p>no</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DTYPE</span></code></p></td>
+<td><p>Torch dtype for the model and for <code class="docutils literal notranslate"><span class="pre">pixel_values</span></code> casting in
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.generate" title="clams.app.ClamsHFPromptableApp.generate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generate()</span></code></a>. E.g.
+<code class="docutils literal notranslate"><span class="pre">torch.bfloat16</span></code> for low-precision LLM inference.</p></td>
+<td><p>no</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PADDING_SIDE</span></code></p></td>
+<td><p>Tokenizer padding side. <code class="docutils literal notranslate"><span class="pre">'left'</span></code> for decoder-only batched
+generation; leave unset otherwise.</p></td>
+<td><p>no</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MODEL_KWARGS</span></code> / <code class="docutils literal notranslate"><span class="pre">PROCESSOR_KWARGS</span></code></p></td>
+<td><p>Extra kwargs forwarded to the respective
+<code class="docutils literal notranslate"><span class="pre">from_pretrained()</span></code> calls (e.g.
+<code class="docutils literal notranslate"><span class="pre">trust_remote_code=True</span></code>).</p></td>
+<td><p>no</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The HF model identifiers themselves are NOT a class attribute. They
+live in <code class="docutils literal notranslate"><span class="pre">metadata.py</span></code> as <code class="docutils literal notranslate"><span class="pre">analyzer_versions</span></code>, a
+<code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">str]</span></code> mapping each supported model id to its pinned
+commit hash. The SDK auto-derives a <code class="docutils literal notranslate"><span class="pre">model</span></code> runtime parameter
+from this dict, with <code class="docutils literal notranslate"><span class="pre">choices</span></code> set to the dict keys.</p>
+</section>
+<section id="family-singleton-handling">
+<h3>Family / singleton handling<a class="headerlink" href="#family-singleton-handling" title="Link to this heading">¶</a></h3>
+<p>When <code class="docutils literal notranslate"><span class="pre">analyzer_versions</span></code> contains a single entry (the typical
+single-model app), the SDK eagerly pre-loads that one model in
+<code class="docutils literal notranslate"><span class="pre">__init__</span></code> and sets <code class="docutils literal notranslate"><span class="pre">model.default</span></code> to the only key so callers
+can omit the parameter. Single-model apps thus preserve warm-start
+semantics: the model is loaded at app startup, not on first request.</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">analyzer_versions</span></code> contains multiple entries (a family app),
+loading is deferred until the first <code class="xref py py-meth docutils literal notranslate"><span class="pre">load_model()</span></code> call inside
+<code class="docutils literal notranslate"><span class="pre">_annotate</span></code>, and <code class="docutils literal notranslate"><span class="pre">model</span></code> has no default by default; callers
+must pick a family member explicitly (or the dev mutates
+<code class="docutils literal notranslate"><span class="pre">model.default</span></code> post-injection to provide a recommended pick).
+Loaded models are cached per <code class="docutils literal notranslate"><span class="pre">(model_id,</span> <span class="pre">revision)</span></code> for the
+lifetime of the app instance; switching models loads on first miss,
+cache-hits on repeat.</p>
+</section>
+<section id="reproducibility-model-refinement-and-view-metadata">
+<h3>Reproducibility: <code class="docutils literal notranslate"><span class="pre">model</span></code> refinement and view metadata<a class="headerlink" href="#reproducibility-model-refinement-and-view-metadata" title="Link to this heading">¶</a></h3>
+<p>The user-facing <code class="docutils literal notranslate"><span class="pre">model</span></code> parameter accepts raw HF model ids
+(<code class="docutils literal notranslate"><span class="pre">org/repo-name</span></code>). The SDK’s
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp._refine_params" title="clams.app.ClamsHFPromptableApp._refine_params"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_refine_params()</span></code></a> expands the
+raw value to <code class="docutils literal notranslate"><span class="pre">org/repo-name&#64;&lt;revision&gt;</span></code> form (using the dict
+lookup) during parameter refinement. The standard <code class="docutils literal notranslate"><span class="pre">sign_view</span></code> flow
+then stamps:</p>
+<ul class="simple">
+<li><p>the <strong>raw</strong> user choice into <code class="docutils literal notranslate"><span class="pre">view.metadata.parameters['model']</span></code>
+(transparency: what the user typed),</p></li>
+<li><p>the <strong>resolved</strong> <code class="docutils literal notranslate"><span class="pre">org/repo-name&#64;&lt;revision&gt;</span></code> into
+<code class="docutils literal notranslate"><span class="pre">view.metadata.appConfiguration['model']</span></code> (reproducibility: the
+exact commit applied).</p></li>
+</ul>
+<p>A consumer of the output MMIF can read the resolved revision directly
+from the view metadata, with no cross-reference to the app metadata
+required.</p>
+</section>
+<section id="what-the-base-class-provides">
+<h3>What the base class provides<a class="headerlink" href="#what-the-base-class-provides" title="Link to this heading">¶</a></h3>
+<p>A subclass typically only writes <code class="docutils literal notranslate"><span class="pre">_annotate()</span></code>. The base class
+supplies:</p>
+<ul class="simple">
+<li><p>model loading and caching via
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.load_model" title="clams.app.ClamsHFPromptableApp.load_model"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load_model()</span></code></a>, which wraps
+<code class="xref py py-func docutils literal notranslate"><span class="pre">clams.backends.hf.load_hf_model()</span></code> (non-promptable HF apps
+can call that loader directly without going through this base
+class);</p></li>
+<li><p>the parameter injector
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.inject_promptable_parameters" title="clams.app.ClamsHFPromptableApp.inject_promptable_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.inject_promptable_parameters</span></code></a>;</p></li>
+<li><p>a concrete batched HF
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.generate" title="clams.app.ClamsHFPromptableApp.generate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generate()</span></code></a>;</p></li>
+<li><p>a default
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.build_gen_kwargs" title="clams.app.ClamsHFPromptableApp.build_gen_kwargs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">build_gen_kwargs()</span></code></a> that
+maps the SDK promptable parameters to HF <code class="docutils literal notranslate"><span class="pre">model.generate()</span></code>
+kwargs.</p></li>
+</ul>
+<p>See each method’s docstring for full details.</p>
+<p>Apps using the HF backend (with or without the promptable wrapper)
+must install the <code class="docutils literal notranslate"><span class="pre">[hf]</span></code> extra: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">clams-python[hf]</span></code>.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="gpu-apps.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">GPU Memory Management for CLAMS Apps</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="runtime-params.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Runtime Configuration</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Brandeis LLC
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Specialized App Base Classes</a><ul>
+<li><a class="reference internal" href="#what-every-clams-app-inherits">What every CLAMS app inherits</a><ul>
+<li><a class="reference internal" href="#universal-parameters">Universal parameters</a></li>
+<li><a class="reference internal" href="#sdk-managed-parameter-names-are-reserved">SDK-managed parameter names are reserved</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#promptable-clams-apps">Promptable CLAMS Apps</a><ul>
+<li><a class="reference internal" href="#when-to-use-clamspromptableapp">When to use <code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a></li>
+<li><a class="reference internal" href="#standardized-runtime-parameters">Standardized runtime parameters</a><ul>
+<li><a class="reference internal" href="#customizing-default-values">Customizing default values</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#declaring-a-promptable-app">Declaring a promptable app</a></li>
+<li><a class="reference internal" href="#the-generate-contract">The <code class="docutils literal notranslate"><span class="pre">generate()</span></code> contract</a></li>
+<li><a class="reference internal" href="#multi-turn-handling-promptmode">Multi-turn handling (<code class="docutils literal notranslate"><span class="pre">promptMode</span></code>)</a></li>
+<li><a class="reference internal" href="#helpers">Helpers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#huggingface-promptable-apps">HuggingFace Promptable Apps</a><ul>
+<li><a class="reference internal" href="#when-to-use">When to use</a></li>
+<li><a class="reference internal" href="#declaring-an-hf-promptable-app">Declaring an HF promptable app</a></li>
+<li><a class="reference internal" href="#class-attribute-hooks">Class-attribute hooks</a></li>
+<li><a class="reference internal" href="#family-singleton-handling">Family / singleton handling</a></li>
+<li><a class="reference internal" href="#reproducibility-model-refinement-and-view-metadata">Reproducibility: <code class="docutils literal notranslate"><span class="pre">model</span></code> refinement and view metadata</a></li>
+<li><a class="reference internal" href="#what-the-base-class-provides">What the base class provides</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=8a448e45"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

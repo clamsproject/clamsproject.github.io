@@ -285,6 +285,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="input-output.html">I/O Specification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="runtime-params.html">Runtime Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app-baseclasses.html">Specialized App Base Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu-apps.html">GPU Memory Management for CLAMS Apps</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">CLAMS App Metadata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appdirectory.html">CLAMS App Directory</a></li>
@@ -812,6 +813,22 @@ SDK.</p>
 </tr>
 <tr class="row-odd"><td><p>type</p></td>
 <td colspan="2"><p><em>null</em></p></td>
+</tr>
+<tr class="row-even"><td rowspan="4"><ul class="simple">
+<li><p>app_tags</p></li>
+</ul>
+</td>
+<td colspan="4"><p>(optional) A list of short string labels that classify what kind of work this app does (e.g. task name, output profile family). Used by downstream consumers as a first-pass filter for selecting views; not a substitute for inspecting actual output types and properties. The values declared here are propagated by the SDK into the <code class="docutils literal notranslate"><span class="pre">appTags</span></code> field of every view the app signs.</p></td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
+<td colspan="3"><p><em>array</em></p></td>
+</tr>
+<tr class="row-even"><td><p>default</p></td>
+<td colspan="3"></td>
+</tr>
+<tr class="row-odd"><td><p>items</p></td>
+<td><p>type</p></td>
+<td colspan="2"><p><em>string</em></p></td>
 </tr>
 <tr class="row-even"><td rowspan="3"><ul class="simple">
 <li><p>est_gpu_mem_min</p></li>

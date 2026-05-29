@@ -285,6 +285,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="input-output.html">I/O Specification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="runtime-params.html">Runtime Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app-baseclasses.html">Specialized App Base Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu-apps.html">GPU Memory Management for CLAMS Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appmetadata.html">CLAMS App Metadata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appdirectory.html">CLAMS App Directory</a></li>
@@ -473,7 +474,7 @@ This means that if the user doesn’t specify the value for these parameters at 
 If you want to make a parameter “optional” by providing a default value, you can do so by adding a <code class="docutils literal notranslate"><span class="pre">default</span></code> argument to the <code class="docutils literal notranslate"><span class="pre">add_parameter()</span></code> method.</p>
 <blockquote>
 <div><p><strong>Note</strong>
-Also refer to <a class="reference external" href="https://sdk.clams.ai/appmetadata.html">CLAMS App Metadata</a> for more details regarding what fields need to be specified.</p>
+Also refer to <a class="reference external" href="https://clams.ai/clams-python/appmetadata.html">CLAMS App Metadata</a> for more details regarding what fields need to be specified.</p>
 </div></blockquote>
 </section>
 <section id="annotate">
@@ -552,19 +553,19 @@ Also refer to <a class="reference external" href="https://sdk.clams.ai/appmetada
 </section>
 <section id="working-with-timeframe-annotations">
 <h2>Working with TimeFrame Annotations<a class="headerlink" href="#working-with-timeframe-annotations" title="Link to this heading">¶</a></h2>
-<p>Many CLAMS apps process video by operating on TimeFrame annotations produced by an upstream app (e.g., scene detection, shot segmentation). A TimeFrame can carry structural members (currently called <code class="docutils literal notranslate"><span class="pre">targets</span></code> — a list of TimePoint IDs covering every frame in the segment), a salient subset of those members (currently called <code class="docutils literal notranslate"><span class="pre">representatives</span></code>), or simply <code class="docutils literal notranslate"><span class="pre">start</span></code>/<code class="docutils literal notranslate"><span class="pre">end</span></code> boundaries.</p>
+<p>Many CLAMS apps process video by operating on TimeFrame annotations produced by an upstream app (e.g., scene detection, shot segmentation). A TimeFrame can carry structural members (currently called <code class="docutils literal notranslate"><span class="pre">targets</span></code>; a list of TimePoint IDs covering every frame in the segment), a salient subset of those members (currently called <code class="docutils literal notranslate"><span class="pre">representatives</span></code>), or simply <code class="docutils literal notranslate"><span class="pre">start</span></code>/<code class="docutils literal notranslate"><span class="pre">end</span></code> boundaries.</p>
 <blockquote>
 <div><p><strong>Note</strong>
 The property names <code class="docutils literal notranslate"><span class="pre">targets</span></code> and <code class="docutils literal notranslate"><span class="pre">representatives</span></code> are under review and may be renamed in a future MMIF spec version. See <a class="reference external" href="https://github.com/clamsproject/mmif/issues/238">mmif#238</a> for the ongoing discussion. The SDK API will be updated accordingly.</p>
 </div></blockquote>
 <section id="frame-sampling-with-tfsamplingmode">
 <h3>Frame sampling with <code class="docutils literal notranslate"><span class="pre">tfSamplingMode</span></code><a class="headerlink" href="#frame-sampling-with-tfsamplingmode" title="Link to this heading">¶</a></h3>
-<p>When your app receives TimeFrame annotations, the caller can control which frames your app processes by setting the <code class="docutils literal notranslate"><span class="pre">tfSamplingMode</span></code> runtime parameter. This is a <strong>universal parameter</strong> — automatically available on every CLAMS app without any per-app configuration.</p>
+<p>When your app receives TimeFrame annotations, the caller can control which frames your app processes by setting the <code class="docutils literal notranslate"><span class="pre">tfSamplingMode</span></code> runtime parameter. This is a <strong>universal parameter</strong>: automatically available on every CLAMS app without any per-app configuration.</p>
 <p>There are three modes:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">representatives</span></code> (default) — use the frames listed in the TimeFrame’s <code class="docutils literal notranslate"><span class="pre">representatives</span></code> property. If no representatives exist, the TimeFrame is skipped.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">single</span></code> — pick one frame: the middle representative if available, otherwise the midpoint of the start/end interval.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">all</span></code> — use every frame in <code class="docutils literal notranslate"><span class="pre">targets</span></code> if present, otherwise generate every frame in the start/end interval.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">representatives</span></code> (default): use the frames listed in the TimeFrame’s <code class="docutils literal notranslate"><span class="pre">representatives</span></code> property. If no representatives exist, the TimeFrame is skipped.</p></li>
+<li><p><cite>single</cite>: pick one frame: the middle representative if available, otherwise the midpoint of the start/end interval.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">all</span></code>: use every frame in <code class="docutils literal notranslate"><span class="pre">targets</span></code> if present, otherwise generate every frame in the start/end interval.</p></li>
 </ul>
 <p>App developers do <strong>not</strong> need to handle this parameter themselves. The SDK intercepts it in <code class="docutils literal notranslate"><span class="pre">annotate()</span></code> and sets a context variable before <code class="docutils literal notranslate"><span class="pre">_annotate()</span></code> runs. Inside <code class="docutils literal notranslate"><span class="pre">_annotate()</span></code>, calls to <code class="docutils literal notranslate"><span class="pre">vdh.extract_frames_by_mode()</span></code> automatically read the active mode and select frames accordingly. The underlying per-mode functions (<code class="docutils literal notranslate"><span class="pre">_sample_representatives()</span></code>, <code class="docutils literal notranslate"><span class="pre">_sample_single()</span></code>, <code class="docutils literal notranslate"><span class="pre">_sample_all()</span></code>) in <code class="docutils literal notranslate"><span class="pre">mmif.utils.video_document_helper</span></code> are also available for apps that need frame numbers without extracting images.</p>
 <p>See the <code class="docutils literal notranslate"><span class="pre">extract_frames_by_mode()</span></code> API documentation for details.</p>

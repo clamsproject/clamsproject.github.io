@@ -283,6 +283,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="input-output.html">I/O Specification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="runtime-params.html">Runtime Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app-baseclasses.html">Specialized App Base Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu-apps.html">GPU Memory Management for CLAMS Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appmetadata.html">CLAMS App Metadata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appdirectory.html">CLAMS App Directory</a></li>
@@ -337,31 +338,47 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
           
 <section class="genindex-section">
   <h1 id="index">Index</h1>
-  <div class="genindex-jumpbox"><a href="#_"><strong>_</strong></a> | <a href="#A"><strong>A</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#J"><strong>J</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a></div>
+  <div class="genindex-jumpbox"><a href="#_"><strong>_</strong></a> | <a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#J"><strong>J</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a></div>
 </section>
 <section id="_" class="genindex-section">
   <h2>_</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="autodoc/clams.app.html#clams.app.ClamsApp._abc_impl">_abc_impl (clams.app.ClamsApp attribute)</a>
+
+        <ul>
+          <li><a href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp._abc_impl">(clams.app.ClamsHFPromptableApp attribute)</a>
 </li>
+          <li><a href="autodoc/clams.app.html#clams.app.ClamsPromptableApp._abc_impl">(clams.app.ClamsPromptableApp attribute)</a>
+</li>
+        </ul></li>
         <li><a href="autodoc/clams.app.html#clams.app.ClamsApp._annotate">_annotate() (clams.app.ClamsApp method)</a>
 </li>
         <li><a href="autodoc/clams.app.html#clams.app.ClamsApp._appmetadata">_appmetadata() (clams.app.ClamsApp method)</a>
+</li>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsPromptableApp._build_single_turn">_build_single_turn() (clams.app.ClamsPromptableApp method)</a>
+</li>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsPromptableApp._build_turn_taking">_build_turn_taking() (clams.app.ClamsPromptableApp method)</a>
+</li>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsPromptableApp._build_user_only">_build_user_only() (clams.app.ClamsPromptableApp method)</a>
 </li>
         <li><a href="autodoc/clams.app.html#clams.app.ClamsApp._check_mmif_compatibility">_check_mmif_compatibility() (clams.app.ClamsApp static method)</a>
 </li>
         <li><a href="autodoc/clams.app.html#clams.app.ClamsApp._cuda_device_name_concat">_cuda_device_name_concat() (clams.app.ClamsApp static method)</a>
 </li>
-        <li><a href="autodoc/clams.app.html#clams.app.ClamsApp._cuda_memory_to_str">_cuda_memory_to_str() (clams.app.ClamsApp static method)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsApp._cuda_memory_to_str">_cuda_memory_to_str() (clams.app.ClamsApp static method)</a>
+</li>
         <li><a href="autodoc/clams.app.html#clams.app.ClamsApp._get_available_vram">_get_available_vram() (clams.app.ClamsApp static method)</a>
 </li>
         <li><a href="autodoc/clams.app.html#clams.app.ClamsApp._get_profile_path">_get_profile_path() (clams.app.ClamsApp method)</a>
 </li>
         <li><a href="autodoc/clams.app.html#clams.app.ClamsApp._load_appmetadata">_load_appmetadata() (clams.app.ClamsApp method)</a>
+</li>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsPromptableApp._make_user_content">_make_user_content() (clams.app.ClamsPromptableApp static method)</a>
+</li>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp._model_cache">_model_cache (clams.app.ClamsHFPromptableApp attribute)</a>
 </li>
         <li><a href="autodoc/clams.app.html#clams.app.ClamsApp._profile_cuda_memory">_profile_cuda_memory() (clams.app.ClamsApp static method)</a>
 </li>
@@ -370,7 +387,11 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
         <li><a href="autodoc/clams.app.html#clams.app.ClamsApp._record_vram_usage">_record_vram_usage() (clams.app.ClamsApp method)</a>
 </li>
         <li><a href="autodoc/clams.app.html#clams.app.ClamsApp._refine_params">_refine_params() (clams.app.ClamsApp method)</a>
+
+        <ul>
+          <li><a href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp._refine_params">(clams.app.ClamsHFPromptableApp method)</a>
 </li>
+        </ul></li>
     </ul></td>
   </tr></table>
 </section>
@@ -379,6 +400,8 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
   <h2>A</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="autodoc/clams.appmetadata.html#clams.appmetadata.AppMetadata.add_app_tag">add_app_tag() (clams.appmetadata.AppMetadata method)</a>
+</li>
         <li><a href="autodoc/clams.appmetadata.html#clams.appmetadata.Input.add_description">add_description() (clams.appmetadata.Input method)</a>
 
         <ul>
@@ -389,10 +412,10 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 </li>
         <li><a href="autodoc/clams.appmetadata.html#clams.appmetadata.AppMetadata.add_input_oneof">add_input_oneof() (clams.appmetadata.AppMetadata method)</a>
 </li>
-        <li><a href="autodoc/clams.appmetadata.html#clams.appmetadata.AppMetadata.add_more">add_more() (clams.appmetadata.AppMetadata method)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="autodoc/clams.appmetadata.html#clams.appmetadata.AppMetadata.add_more">add_more() (clams.appmetadata.AppMetadata method)</a>
+</li>
         <li><a href="autodoc/clams.appmetadata.html#clams.appmetadata.AppMetadata.add_output">add_output() (clams.appmetadata.AppMetadata method)</a>
 </li>
         <li><a href="autodoc/clams.appmetadata.html#clams.appmetadata.AppMetadata.add_parameter">add_parameter() (clams.appmetadata.AppMetadata method)</a>
@@ -402,6 +425,20 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
         <li><a href="autodoc/clams.appmetadata.html#clams.appmetadata.AppMetadata">AppMetadata (class in clams.appmetadata)</a>
 </li>
         <li><a href="autodoc/clams.app.html#clams.app.ClamsApp.appmetadata">appmetadata() (clams.app.ClamsApp method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="B" class="genindex-section">
+  <h2>B</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.build_conversation">build_conversation() (clams.app.ClamsPromptableApp method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.build_gen_kwargs">build_gen_kwargs() (clams.app.ClamsHFPromptableApp static method)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -429,7 +466,21 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="autodoc/clams.app.html#clams.app.ClamsApp">ClamsApp (class in clams.app)</a>
 </li>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp">ClamsHFPromptableApp (class in clams.app)</a>
+</li>
         <li><a href="autodoc/clams.restify.html#clams.restify.ClamsHTTPApi">ClamsHTTPApi (class in clams.restify)</a>
+</li>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsPromptableApp">ClamsPromptableApp (class in clams.app)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="D" class="genindex-section">
+  <h2>D</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.DTYPE">DTYPE (clams.app.ClamsHFPromptableApp attribute)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -439,10 +490,16 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
   <h2>G</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="autodoc/clams.restify.html#clams.restify.ClamsHTTPApi.get">get() (clams.restify.ClamsHTTPApi method)</a>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.generate">generate() (clams.app.ClamsHFPromptableApp method)</a>
+
+        <ul>
+          <li><a href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.generate">(clams.app.ClamsPromptableApp method)</a>
 </li>
+        </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="autodoc/clams.restify.html#clams.restify.ClamsHTTPApi.get">get() (clams.restify.ClamsHTTPApi method)</a>
+</li>
         <li><a href="autodoc/clams.app.html#clams.app.ClamsApp.get_configuration">get_configuration() (clams.app.ClamsApp method)</a>
 </li>
     </ul></td>
@@ -452,6 +509,14 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <section id="I" class="genindex-section">
   <h2>I</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.inject_promptable_parameters">inject_promptable_parameters() (clams.app.ClamsHFPromptableApp static method)</a>
+
+        <ul>
+          <li><a href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.inject_promptable_parameters">(clams.app.ClamsPromptableApp static method)</a>
+</li>
+        </ul></li>
+    </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="autodoc/clams.appmetadata.html#clams.appmetadata.Input">Input (class in clams.appmetadata)</a>
 </li>
@@ -473,11 +538,23 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
   </tr></table>
 </section>
 
+<section id="L" class="genindex-section">
+  <h2>L</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.load_model">load_model() (clams.app.ClamsHFPromptableApp method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
 <section id="M" class="genindex-section">
   <h2>M</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="autodoc/clams.restify.html#clams.restify.ClamsHTTPApi.methods">methods (clams.restify.ClamsHTTPApi attribute)</a>
+</li>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.MODEL_CLS">MODEL_CLS (clams.app.ClamsHFPromptableApp attribute)</a>
 </li>
         <li><a href="autodoc/clams.appmetadata.html#clams.appmetadata.AppMetadata.model_config">model_config (clams.appmetadata.AppMetadata attribute)</a>
 
@@ -491,6 +568,8 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
         </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.MODEL_KWARGS">MODEL_KWARGS (clams.app.ClamsHFPromptableApp attribute)</a>
+</li>
         <li>
     module
 
@@ -522,10 +601,20 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
   <h2>P</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.PADDING_SIDE">PADDING_SIDE (clams.app.ClamsHFPromptableApp attribute)</a>
+</li>
         <li><a href="autodoc/clams.restify.html#clams.restify.ClamsHTTPApi.post">post() (clams.restify.ClamsHTTPApi method)</a>
+</li>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.processor">processor (clams.app.ClamsHFPromptableApp attribute)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.PROCESSOR_CLS">PROCESSOR_CLS (clams.app.ClamsHFPromptableApp attribute)</a>
+</li>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.PROCESSOR_KWARGS">PROCESSOR_KWARGS (clams.app.ClamsHFPromptableApp attribute)</a>
+</li>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.promptable_parameters">promptable_parameters (clams.app.ClamsPromptableApp attribute)</a>
+</li>
         <li><a href="autodoc/clams.restify.html#clams.restify.ClamsHTTPApi.put">put() (clams.restify.ClamsHTTPApi method)</a>
 </li>
     </ul></td>
@@ -538,10 +627,12 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="autodoc/clams.app.html#clams.app.ClamsApp.record_error">record_error() (clams.app.ClamsApp method)</a>
 </li>
-        <li><a href="autodoc/clams.restify.html#clams.restify.Restifier">Restifier (class in clams.restify)</a>
+        <li><a href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.response_to_grounded_textdocument">response_to_grounded_textdocument() (clams.app.ClamsPromptableApp method)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="autodoc/clams.restify.html#clams.restify.Restifier">Restifier (class in clams.restify)</a>
+</li>
         <li><a href="autodoc/clams.restify.html#clams.restify.Restifier.run">run() (clams.restify.Restifier method)</a>
 </li>
         <li><a href="autodoc/clams.appmetadata.html#clams.appmetadata.RuntimeParameter">RuntimeParameter (class in clams.appmetadata)</a>

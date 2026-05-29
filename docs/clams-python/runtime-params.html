@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="GPU Memory Management for CLAMS Apps" href="gpu-apps.html"><link rel="prev" title="I/O Specification" href="input-output.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Specialized App Base Classes" href="app-baseclasses.html"><link rel="prev" title="I/O Specification" href="input-output.html">
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
         <title>Runtime Configuration - clone-repo documentation</title>
@@ -285,6 +285,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="input-output.html">I/O Specification</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Runtime Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app-baseclasses.html">Specialized App Base Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu-apps.html">GPU Memory Management for CLAMS Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appmetadata.html">CLAMS App Metadata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appdirectory.html">CLAMS App Directory</a></li>
@@ -510,6 +511,17 @@ last value wins.</p>
 the app developer is responsible for further parsing and should document the
 expected format in the parameter’s <code class="docutils literal notranslate"><span class="pre">description</span></code> field.</p>
 </section>
+<section id="promptable-apps-an-extra-sdk-managed-parameter-set">
+<span id="runtime-params-promptable-note"></span><h3>Promptable apps: an extra SDK-managed parameter set<a class="headerlink" href="#promptable-apps-an-extra-sdk-managed-parameter-set" title="Link to this heading">¶</a></h3>
+<p>For apps that wrap an <strong>instruction- or chat-tuned</strong> promptable model
+(an LLM or other multimodal model, local or remote), inherit from
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp" title="clams.app.ClamsPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a> instead of
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp" title="clams.app.ClamsApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsApp</span></code></a>. The promptable base class adds a
+standardized SDK-managed parameter set on top of the universal
+parameters; the names are reserved and are added via a single helper
+call inside <code class="docutils literal notranslate"><span class="pre">appmetadata()</span></code>. See <a class="reference internal" href="app-baseclasses.html#promptable"><span class="std std-ref">Promptable CLAMS Apps</span></a> for the full
+developer guide and parameter list.</p>
+</section>
 <section id="note-on-json-envelope-input">
 <span id="runtime-params-envelope-note"></span><h3>Note on JSON envelope input<a class="headerlink" href="#note-on-json-envelope-input" title="Link to this heading">¶</a></h3>
 <p>Users may also pass parameters via a JSON envelope in the POST body
@@ -528,12 +540,12 @@ were provided.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="gpu-apps.html">
+          <a class="next-page" href="app-baseclasses.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">GPU Memory Management for CLAMS Apps</div>
+                <div class="title">Specialized App Base Classes</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -585,6 +597,7 @@ were provided.</p>
 <li><a class="reference internal" href="#primitive-types">Primitive types</a></li>
 <li><a class="reference internal" href="#multivalued-parameters">Multivalued parameters</a></li>
 <li><a class="reference internal" href="#map-type-parameters">Map type parameters</a></li>
+<li><a class="reference internal" href="#promptable-apps-an-extra-sdk-managed-parameter-set">Promptable apps: an extra SDK-managed parameter set</a></li>
 <li><a class="reference internal" href="#note-on-json-envelope-input">Note on JSON envelope input</a></li>
 </ul>
 </li>
