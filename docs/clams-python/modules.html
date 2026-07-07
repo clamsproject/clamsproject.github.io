@@ -297,6 +297,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">clams package</a><input aria-label="Toggle navigation of clams package" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="autodoc/clams.app.html">clams.app package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autodoc/clams.appmetadata.html">clams.appmetadata package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/clams.backends.html">clams.backends package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autodoc/clams.restify.html">clams.restify package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autodoc/clams.mmif_utils.html">clams.mmif_utils package</a></li>
 </ul>
@@ -389,9 +390,11 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp._model_cache"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp._model_cache</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp._refine_params"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp._refine_params()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.build_gen_kwargs"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.build_gen_kwargs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.build_template_kwargs"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.build_template_kwargs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.generate"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.generate()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.inject_promptable_parameters"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.inject_promptable_parameters()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.load_model"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.load_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.model_load_kwargs"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.model_load_kwargs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.processor"><code class="docutils literal notranslate"><span class="pre">ClamsHFPromptableApp.processor</span></code></a></li>
 </ul>
 </li>
@@ -406,6 +409,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.inject_promptable_parameters"><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp.inject_promptable_parameters()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.promptable_parameters"><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp.promptable_parameters</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.response_to_grounded_textdocument"><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp.response_to_grounded_textdocument()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.split_tagged_reasoning_trace"><code class="docutils literal notranslate"><span class="pre">ClamsPromptableApp.split_tagged_reasoning_trace()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -434,6 +438,17 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 </li>
 <li class="toctree-l2"><a class="reference internal" href="autodoc/clams.appmetadata.html#clams.appmetadata.RuntimeParameter"><code class="docutils literal notranslate"><span class="pre">RuntimeParameter</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="autodoc/clams.appmetadata.html#clams.appmetadata.RuntimeParameter.model_config"><code class="docutils literal notranslate"><span class="pre">RuntimeParameter.model_config</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autodoc/clams.backends.html">clams.backends package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autodoc/clams.backends.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autodoc/clams.backends.html#module-clams.backends.hf">clams.backends.hf</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/clams.backends.html#clams.backends.hf.load_hf_model"><code class="docutils literal notranslate"><span class="pre">load_hf_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autodoc/clams.backends.html#clams.backends.hf.load_hf_pipeline"><code class="docutils literal notranslate"><span class="pre">load_hf_pipeline()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
