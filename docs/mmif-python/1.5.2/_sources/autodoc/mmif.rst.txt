@@ -1,0 +1,17 @@
+mmif package
+============
+
+.. automodule:: mmif
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   mmif.serialize
+   mmif.utils
+   mmif.vocabulary
