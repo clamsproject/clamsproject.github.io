@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="GPU Memory Management for CLAMS Apps" href="gpu-apps.html"><link rel="prev" title="Runtime Configuration" href="runtime-params.html">
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
-        <title>Specialized App Base Classes - clone-repo documentation</title>
+        <title>Specialized App Base Classes - clams-python documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -251,7 +251,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">clone-repo  documentation</div></a>
+      <a href="index.html"><div class="brand">clams-python  documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -272,7 +272,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">clone-repo  documentation</span>
+  <span class="sidebar-brand-text">clams-python  documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -531,27 +531,39 @@ prompt; see <a class="reference internal" href="#promptable-multiturn"><span cla
 grow the KV cache linearly and add to GPU memory usage; reduce if VRAM
 is constrained.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">temperature</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">useReasoning</span></code></p></td>
+<td><p>boolean</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p>no</p></td>
+<td><p>Request the model’s reasoning (“thinking”) mode. Off by default;
+honored only by apps whose model has a distinct reasoning mode
+(others ignore it). Much slower and more token-hungry – the trace is
+generated before the answer and drawn from the <code class="docutils literal notranslate"><span class="pre">maxNewTokens</span></code> budget,
+and small models can loop without terminating. When honored, the trace
+is stored in the <code class="docutils literal notranslate"><span class="pre">modelReasoningTrace</span></code> property of the output
+<code class="docutils literal notranslate"><span class="pre">TextDocument</span></code>. See <a class="reference internal" href="#promptable-reasoning"><span class="std std-ref">Reasoning traces (useReasoning)</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">temperature</span></code></p></td>
 <td><p>number</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">0.0</span></code></p></td>
 <td><p>no</p></td>
 <td><p>Sampling temperature. <code class="docutils literal notranslate"><span class="pre">0.0</span></code> selects deterministic / greedy decoding
 for maximum reproducibility; override for sampled generation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">topP</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">topP</span></code></p></td>
 <td><p>number</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">1.0</span></code></p></td>
 <td><p>no</p></td>
 <td><p>Nucleus-sampling cumulative probability cutoff. Only meaningful when
 <code class="docutils literal notranslate"><span class="pre">temperature</span></code> &gt; 0.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">topK</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">topK</span></code></p></td>
 <td><p>integer</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">50</span></code></p></td>
 <td><p>no</p></td>
 <td><p>Top-K sampling cutoff. Only meaningful when <code class="docutils literal notranslate"><span class="pre">temperature</span></code> &gt; 0.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">parallelPrompts</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">parallelPrompts</span></code></p></td>
 <td><p>integer</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
 <td><p>no</p></td>
@@ -665,6 +677,48 @@ the next user turn.) Example (scripted multi-step reasoning):
 inferences, final reply returned.</p>
 <p><code class="docutils literal notranslate"><span class="pre">turn-taking</span></code> is the default because it costs a single inference call
 and is the more common multi-element pattern.</p>
+</section>
+<section id="reasoning-traces-usereasoning">
+<span id="promptable-reasoning"></span><h3>Reasoning traces (<code class="docutils literal notranslate"><span class="pre">useReasoning</span></code>)<a class="headerlink" href="#reasoning-traces-usereasoning" title="Link to this heading">¶</a></h3>
+<p>Some models expose a distinct reasoning (“thinking”) mode that emits an
+intermediate reasoning trace before the answer. <code class="docutils literal notranslate"><span class="pre">useReasoning</span></code> is the
+standard toggle for that mode. It is inert unless the app honors it, and
+honoring is a per-app choice with three wiring points:</p>
+<ul class="simple">
+<li><p>map <code class="docutils literal notranslate"><span class="pre">useReasoning</span></code> onto the backend’s reasoning switch (for HF chat
+templates, typically <code class="docutils literal notranslate"><span class="pre">enable_thinking</span></code>) by overriding
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.build_template_kwargs" title="clams.app.ClamsHFPromptableApp.build_template_kwargs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">build_template_kwargs()</span></code></a>;</p></li>
+<li><p>split the trace from the answer with
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.split_tagged_reasoning_trace" title="clams.app.ClamsPromptableApp.split_tagged_reasoning_trace"><code class="xref py py-meth docutils literal notranslate"><span class="pre">split_tagged_reasoning_trace()</span></code></a>
+(inline <code class="docutils literal notranslate"><span class="pre">&lt;think&gt;...&lt;/think&gt;</span></code>-style traces only; channel-delimited
+formats need app-specific parsing). Many chat templates prefill the
+opening <code class="docutils literal notranslate"><span class="pre">&lt;think&gt;</span></code> into the prompt, so only the closing tag appears in
+the output; pass <code class="docutils literal notranslate"><span class="pre">assume_open=True</span></code> (wired to the reasoning toggle) so
+the trace is still recovered and a missing close tag is read as
+unterminated reasoning (empty answer) rather than a plain answer;</p></li>
+<li><p>pass the trace to
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.response_to_grounded_textdocument" title="clams.app.ClamsPromptableApp.response_to_grounded_textdocument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">response_to_grounded_textdocument()</span></code></a>
+through its <code class="docutils literal notranslate"><span class="pre">reasoning_trace</span></code> argument, which stores it in the
+<code class="docutils literal notranslate"><span class="pre">modelReasoningTrace</span></code> property of the produced <code class="docutils literal notranslate"><span class="pre">TextDocument</span></code>,
+separate from the document text.</p></li>
+</ul>
+<p>An app whose model has no reasoning mode leaves <code class="docutils literal notranslate"><span class="pre">useReasoning</span></code> unwired;
+callers may still set it and it has no effect, like <code class="docutils literal notranslate"><span class="pre">topK</span></code> under greedy
+decoding.</p>
+<section id="cost-and-failure-modes">
+<h4>Cost and failure modes<a class="headerlink" href="#cost-and-failure-modes" title="Link to this heading">¶</a></h4>
+<p>Reasoning is much slower and far more token-hungry than a direct answer:
+the entire trace is generated first, from the same budget capped by
+<code class="docutils literal notranslate"><span class="pre">maxNewTokens</span></code>. Enabling <code class="docutils literal notranslate"><span class="pre">useReasoning</span></code> without raising <code class="docutils literal notranslate"><span class="pre">maxNewTokens</span></code>
+substantially (thousands of tokens, not hundreds) risks the trace consuming
+the whole budget, leaving the answer truncated or empty. Small reasoning
+models (as a rule of thumb, roughly 4B parameters and under) are especially
+prone to non-terminating “thinking loops” that never reach an answer; budget
+generously and validate termination per model. When the trace overruns the
+budget before closing, <code class="docutils literal notranslate"><span class="pre">assume_open=True</span></code> yields an empty answer plus the
+unterminated trace – an app should surface that (e.g. a warning and an empty
+<code class="docutils literal notranslate"><span class="pre">TextDocument</span></code>) rather than emitting the raw reasoning as the answer.</p>
+</section>
 </section>
 <section id="helpers">
 <h3>Helpers<a class="headerlink" href="#helpers" title="Link to this heading">¶</a></h3>
@@ -854,7 +908,10 @@ class);</p></li>
 <li><p>a default
 <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.build_gen_kwargs" title="clams.app.ClamsHFPromptableApp.build_gen_kwargs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">build_gen_kwargs()</span></code></a> that
 maps the SDK promptable parameters to HF <code class="docutils literal notranslate"><span class="pre">model.generate()</span></code>
-kwargs.</p></li>
+kwargs;</p></li>
+<li><p>a <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp.build_template_kwargs" title="clams.app.ClamsHFPromptableApp.build_template_kwargs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">build_template_kwargs()</span></code></a>
+hook for chat-template controls, the override point for honoring
+<code class="docutils literal notranslate"><span class="pre">useReasoning</span></code> (see <a class="reference internal" href="#promptable-reasoning"><span class="std std-ref">Reasoning traces (useReasoning)</span></a>).</p></li>
 </ul>
 <p>See each method’s docstring for full details.</p>
 <p>Apps using the HF backend (with or without the promptable wrapper)
@@ -933,6 +990,10 @@ must install the <code class="docutils literal notranslate"><span class="pre">[h
 <li><a class="reference internal" href="#declaring-a-promptable-app">Declaring a promptable app</a></li>
 <li><a class="reference internal" href="#the-generate-contract">The <code class="docutils literal notranslate"><span class="pre">generate()</span></code> contract</a></li>
 <li><a class="reference internal" href="#multi-turn-handling-promptmode">Multi-turn handling (<code class="docutils literal notranslate"><span class="pre">promptMode</span></code>)</a></li>
+<li><a class="reference internal" href="#reasoning-traces-usereasoning">Reasoning traces (<code class="docutils literal notranslate"><span class="pre">useReasoning</span></code>)</a><ul>
+<li><a class="reference internal" href="#cost-and-failure-modes">Cost and failure modes</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#helpers">Helpers</a></li>
 </ul>
 </li>
