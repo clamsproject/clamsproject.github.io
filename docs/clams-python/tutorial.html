@@ -361,14 +361,14 @@ This may not make a lot of sense without glancing over recent <a class="referenc
 
 import<span class="w"> </span>re
 
-<span class="nv">__VERSION__</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;v1&#39;</span>
+<span class="nv">__VERSION__</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'v1'</span>
 
 def<span class="w"> </span>tokenize<span class="o">(</span>text<span class="o">)</span>:
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span>tok.span<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>tok<span class="w"> </span><span class="k">in</span><span class="w"> </span>re.finditer<span class="o">(</span><span class="s2">&quot;\w+&quot;</span>,<span class="w"> </span>text<span class="o">)]</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span>tok.span<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>tok<span class="w"> </span><span class="k">in</span><span class="w"> </span>re.finditer<span class="o">(</span><span class="s2">"\w+"</span>,<span class="w"> </span>text<span class="o">)]</span>
 </pre></div>
 </div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tokenizer</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="s1">&#39;Fido barks.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="s1">'Fido barks.'</span><span class="p">)</span>
 <span class="go">[(0, 4), (5, 10)]</span>
 </pre></div>
 </div>
@@ -405,9 +405,9 @@ MMIF uses LAPPS vocabulary for linguistic annotation types.</p>
 </div></blockquote>
 <p>Importing <code class="docutils literal notranslate"><span class="pre">lapps.discriminators.Uri</span></code> is for convenience since it gives us easy access to the URIs of annotation types and some of their attributes. The following code prints a list of available variables that point to URIs:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">lapps.discriminators</span><span class="w"> </span><span class="kn">import</span> <span class="n">Uri</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">Uri</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;__&#39;</span><span class="p">)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">attrs</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">Uri</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;org/ns&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">attrs</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">Uri</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'__'</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">attrs</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">Uri</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'org/ns'</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">attrs</span><span class="p">))</span>
 <span class="go">ANNOTATION CHUNK CONSTITUENT COREF DATE DEPENDENCY DEPENDENCY_STRUCTURE DOCUMENT GENERIC_RELATION LEMMA LOCATION LOOKUP MARKABLE MATCHES NCHUNK NE ORGANIZATION PARAGRAPH PERSON PHRASE_STRUCTURE POS RELATION SEMANTIC_ROLE SENTENCE TOKEN VCHUNK</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Uri</span><span class="o">.</span><span class="n">TOKEN</span><span class="p">)</span>
 <span class="go">http://vocab.lappsgrid.org/Token</span>
@@ -428,24 +428,24 @@ MMIF uses LAPPS vocabulary for linguistic annotation types.</p>
 <h4>App Metadata<a class="headerlink" href="#app-metadata" title="Link to this heading">¶</a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">_appmetadata()</span></code> method should return an <code class="docutils literal notranslate"><span class="pre">AppMetadata</span></code> object that defines the relevant metadata for the app:</p>
 <p>(If you are using the app template, use <code class="docutils literal notranslate"><span class="pre">metadata.py</span></code> instead of <code class="docutils literal notranslate"><span class="pre">app.py</span></code> to define the metadata.)</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">APP_LICENSE</span> <span class="o">=</span> <span class="s1">&#39;Apache 2.0&#39;</span>
-<span class="n">TOKENIZER_LICENSE</span> <span class="o">=</span> <span class="s1">&#39;Apache 2.0&#39;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">APP_LICENSE</span> <span class="o">=</span> <span class="s1">'Apache 2.0'</span>
+<span class="n">TOKENIZER_LICENSE</span> <span class="o">=</span> <span class="s1">'Apache 2.0'</span>
 <span class="n">TOKENIZER_VERSION</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">__VERSION__</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_appmetadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">metadata</span> <span class="o">=</span> <span class="n">AppMetadata</span><span class="p">(</span>
-        <span class="n">identifier</span><span class="o">=</span><span class="s1">&#39;tokenizer-wrapper&#39;</span><span class="p">,</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Tokenizer Wrapper&quot;</span><span class="p">,</span>
-        <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://github.com/clamsproject/app-nlp-example&#39;</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Apply simple tokenization to all text documents in a MMIF file.&quot;</span><span class="p">,</span>
+        <span class="n">identifier</span><span class="o">=</span><span class="s1">'tokenizer-wrapper'</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">"Tokenizer Wrapper"</span><span class="p">,</span>
+        <span class="n">url</span><span class="o">=</span><span class="s1">'https://github.com/clamsproject/app-nlp-example'</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Apply simple tokenization to all text documents in a MMIF file."</span><span class="p">,</span>
         <span class="n">app_license</span><span class="o">=</span><span class="n">APP_LICENSE</span><span class="p">,</span>
         <span class="n">analyzer_version</span><span class="o">=</span><span class="n">TOKENIZER_VERSION</span><span class="p">,</span>
         <span class="n">analyzer_license</span><span class="o">=</span><span class="n">TOKENIZER_LICENSE</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">metadata</span><span class="o">.</span><span class="n">add_input</span><span class="p">(</span><span class="n">DocumentTypes</span><span class="o">.</span><span class="n">TextDocument</span><span class="p">)</span>
     <span class="n">metadata</span><span class="o">.</span><span class="n">add_output</span><span class="p">(</span><span class="n">Uri</span><span class="o">.</span><span class="n">TOKEN</span><span class="p">)</span>
-    <span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;Throw error if set to True&#39;</span><span class="p">,</span> <span class="s1">&#39;boolean&#39;</span><span class="p">)</span>
-    <span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="s1">&#39;eol&#39;</span><span class="p">,</span> <span class="s1">&#39;Insert sentence boundaries&#39;</span><span class="p">,</span> <span class="s1">&#39;boolean&#39;</span><span class="p">)</span>
+    <span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="s1">'Throw error if set to True'</span><span class="p">,</span> <span class="s1">'boolean'</span><span class="p">)</span>
+    <span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="s1">'eol'</span><span class="p">,</span> <span class="s1">'Insert sentence boundaries'</span><span class="p">,</span> <span class="s1">'boolean'</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">metadata</span>
 </pre></div>
 </div>
@@ -453,7 +453,7 @@ MMIF uses LAPPS vocabulary for linguistic annotation types.</p>
 <div><p><strong>Warning</strong>
 When using the separately generated <code class="docutils literal notranslate"><span class="pre">metadata.py</span></code> created via <code class="docutils literal notranslate"><span class="pre">clams</span> <span class="pre">develop</span></code>, this method within <code class="docutils literal notranslate"><span class="pre">app.py</span></code> should be left empty with a <code class="docutils literal notranslate"><span class="pre">pass</span></code> statement as shown below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_appmetadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="c1"># When using the ``metadata.py`` leave this do-nothing &quot;pass&quot; method here.</span>
+    <span class="c1"># When using the ``metadata.py`` leave this do-nothing "pass" method here.</span>
         <span class="k">pass</span>
 </pre></div>
 </div>
@@ -490,10 +490,10 @@ Also refer to <a class="reference external" href="https://clams.ai/clams-python/
     <span class="c1"># then, access the parameters: here to just print</span>
     <span class="c1"># them and to willy-nilly throw an error if the caller wants that</span>
     <span class="k">for</span> <span class="n">arg</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parameter </span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parameter </span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="c1"># as we defined this `error` parameter in the app metadata</span>
-        <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;error&#39;</span> <span class="ow">and</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exception - </span><span class="si">{</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">'error'</span> <span class="ow">and</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Exception - </span><span class="si">{</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'error'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="c1"># Initialize the MMIF object from the string if needed</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">mmif</span> <span class="o">=</span> <span class="n">mmif</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mmif</span><span class="p">,</span> <span class="n">Mmif</span><span class="p">)</span> <span class="k">else</span> <span class="n">Mmif</span><span class="p">(</span><span class="n">mmif</span><span class="p">)</span>
     <span class="c1"># process the text documents in the documents list</span>
@@ -515,8 +515,8 @@ Also refer to <a class="reference external" href="https://clams.ai/clams-python/
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_new_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">docid</span><span class="p">,</span> <span class="n">runtime_config</span><span class="p">):</span>
     <span class="n">view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mmif</span><span class="o">.</span><span class="n">new_view</span><span class="p">()</span>
     <span class="n">view</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">identifier</span>
-    <span class="c1"># first thing you need to do after creating a new view is &quot;sign&quot; the view</span>
-    <span class="c1"># the sign_view() method will record the app&#39;s identifier and the timestamp</span>
+    <span class="c1"># first thing you need to do after creating a new view is "sign" the view</span>
+    <span class="c1"># the sign_view() method will record the app's identifier and the timestamp</span>
     <span class="c1"># as well as the user parameter inputs. This is important for reproducibility.</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">sign_view</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">runtime_config</span><span class="p">)</span>
     <span class="c1"># then record what annotations you want to create in this view</span>
@@ -529,21 +529,21 @@ Also refer to <a class="reference external" href="https://clams.ai/clams-python/
 <section id="adding-annotations">
 <h5>Adding annotations:<a class="headerlink" href="#adding-annotations" title="Link to this heading">¶</a></h5>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_run_nlp_tool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">new_view</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Run the NLP tool over the document and add annotations to the view, using the</span>
 <span class="sd">    full document identifier (which may include a view identifier) for the document</span>
 <span class="sd">    property.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">text_value</span>
     <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">new_view</span><span class="o">.</span><span class="n">new_annotation</span><span class="p">(</span><span class="n">Uri</span><span class="o">.</span><span class="n">TOKEN</span><span class="p">)</span>
-        <span class="c1"># `long_id` will give you the annotation object&#39;s ID, prefixed by its parents view&#39;s ID (if it has one)</span>
+        <span class="c1"># `long_id` will give you the annotation object's ID, prefixed by its parents view's ID (if it has one)</span>
         <span class="c1"># so that when the targeting document is in a different view, we can still have back references</span>
-        <span class="n">a</span><span class="o">.</span><span class="n">add_property</span><span class="p">(</span><span class="s1">&#39;document&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">.</span><span class="n">long_id</span><span class="p">)</span>
-        <span class="n">a</span><span class="o">.</span><span class="n">add_property</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="n">p1</span><span class="p">)</span>
-        <span class="n">a</span><span class="o">.</span><span class="n">add_property</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
-        <span class="n">a</span><span class="o">.</span><span class="n">add_property</span><span class="p">(</span><span class="s1">&#39;word&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">[</span><span class="n">p1</span><span class="p">:</span><span class="n">p2</span><span class="p">])</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">add_property</span><span class="p">(</span><span class="s1">'document'</span><span class="p">,</span> <span class="n">doc</span><span class="o">.</span><span class="n">long_id</span><span class="p">)</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">add_property</span><span class="p">(</span><span class="s1">'start'</span><span class="p">,</span> <span class="n">p1</span><span class="p">)</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">add_property</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">add_property</span><span class="p">(</span><span class="s1">'word'</span><span class="p">,</span> <span class="n">text</span><span class="p">[</span><span class="n">p1</span><span class="p">:</span><span class="n">p2</span><span class="p">])</span>
         <span class="c1"># see what properties are required / available in the LAPPS vocabulary https://vocab.lappsgrid.org/Token</span>
 </pre></div>
 </div>
@@ -602,7 +602,7 @@ The property names <code class="docutils literal notranslate"><span class="pre">
 <span class="k">COPY</span><span class="w"> </span>./<span class="w"> </span>/app
 <span class="k">WORKDIR</span><span class="w"> </span><span class="s">./app</span>
 
-<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--production&quot;</span><span class="p">]</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">"python3"</span><span class="p">,</span><span class="w"> </span><span class="s2">"app.py"</span><span class="p">,</span><span class="w"> </span><span class="s2">"--production"</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>This starts from the base CLAMS image which is created from an official Python image (Debian-based) with the clams-python package and the code it depends on added. The Containerfile only needs to be edited if additional installations are required to run the NLP tool. In that case the Containerfile will have a few more lines:</p>
@@ -612,7 +612,7 @@ The property names <code class="docutils literal notranslate"><span class="pre">
 <span class="k">COPY</span><span class="w"> </span>./requirements.txt<span class="w"> </span>.
 <span class="k">RUN</span><span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="w">  </span>#<span class="w"> </span>no-cache-dir<span class="w"> </span>will<span class="w"> </span>save<span class="w"> </span>some<span class="w"> </span>space<span class="w"> </span>and<span class="w"> </span>reduce<span class="w"> </span>final<span class="w"> </span>image<span class="w"> </span>size
 <span class="k">COPY</span><span class="w"> </span>./<span class="w"> </span>./
-<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.py&quot;</span><span class="p">]</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">"python3"</span><span class="p">,</span><span class="w"> </span><span class="s2">"app.py"</span><span class="p">]</span>
 </pre></div>
 </div>
 <blockquote>
@@ -647,21 +647,21 @@ For full details on the <code class="docutils literal notranslate"><span class="
 </div></blockquote>
 <p>Now you can call the server with curl command from your terminal, but first you need an input MMIF file.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;mmif&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://mmif.clams.ai/0.4.0&quot;</span>
+<span class="w">  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"mmif"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://mmif.clams.ai/0.4.0"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;documents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="nt">"documents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://mmif.clams.ai/0.4.0/vocabulary/TextDocument&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;m2&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;@value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello, this is Jim Lehrer with the NewsHour on PBS. In the nineteen eighties, barking dogs have increasingly become a problem in urban areas.&quot;</span>
+<span class="w">      </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://mmif.clams.ai/0.4.0/vocabulary/TextDocument"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m2"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"@value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello, this is Jim Lehrer with the NewsHour on PBS. In the nineteen eighties, barking dogs have increasingly become a problem in urban areas."</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;views&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">  </span><span class="nt">"views"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -678,11 +678,11 @@ $<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>P
 </div>
 <p>We now have specified that the <code class="docutils literal notranslate"><span class="pre">/data</span></code> directory on the container is a mount of the <code class="docutils literal notranslate"><span class="pre">./input/data</span></code> directory in the “host” machine. Given that <code class="docutils literal notranslate"><span class="pre">./input/data</span></code> contains a <code class="docutils literal notranslate"><span class="pre">example.txt</span></code> text file, now you need to make sure that the input MMIF file uses the path on the container:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://mmif.clams.ai/vocabulary/TextDocument/v1&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;m1&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;mime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text/plain&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file:///data/text/example.txt&quot;</span>
+<span class="w">  </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://mmif.clams.ai/vocabulary/TextDocument/v1"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m1"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"mime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text/plain"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file:///data/text/example.txt"</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -690,20 +690,20 @@ $<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>P
 <p>To generate a MMIF file like this, you can use <code class="docutils literal notranslate"><span class="pre">clams</span> <span class="pre">source</span></code> command from your shell.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>clams<span class="w"> </span><span class="nb">source</span><span class="w"> </span>--prefix<span class="w"> </span>/data/input<span class="w"> </span>text:example.txt
 <span class="o">{</span>
-<span class="w">  </span><span class="s2">&quot;metadata&quot;</span>:<span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="s2">&quot;mmif&quot;</span>:<span class="w"> </span><span class="s2">&quot;http://mmif.clams.ai/1.0.0&quot;</span>
+<span class="w">  </span><span class="s2">"metadata"</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s2">"mmif"</span>:<span class="w"> </span><span class="s2">"http://mmif.clams.ai/1.0.0"</span>
 <span class="w">  </span><span class="o">}</span>,
-<span class="w">  </span><span class="s2">&quot;documents&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">  </span><span class="s2">"documents"</span>:<span class="w"> </span><span class="o">[</span>
 <span class="w">    </span><span class="o">{</span>
-<span class="w">      </span><span class="s2">&quot;@type&quot;</span>:<span class="w"> </span><span class="s2">&quot;http://mmif.clams.ai/vocabulary/TextDocument/v1&quot;</span>,
-<span class="w">      </span><span class="s2">&quot;properties&quot;</span>:<span class="w"> </span><span class="o">{</span>
-<span class="w">        </span><span class="s2">&quot;mime&quot;</span>:<span class="w"> </span><span class="s2">&quot;text&quot;</span>,
-<span class="w">        </span><span class="s2">&quot;id&quot;</span>:<span class="w"> </span><span class="s2">&quot;d1&quot;</span>,
-<span class="w">        </span><span class="s2">&quot;location&quot;</span>:<span class="w"> </span><span class="s2">&quot;file:///data/input/example.txt&quot;</span>
+<span class="w">      </span><span class="s2">"@type"</span>:<span class="w"> </span><span class="s2">"http://mmif.clams.ai/vocabulary/TextDocument/v1"</span>,
+<span class="w">      </span><span class="s2">"properties"</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span><span class="s2">"mime"</span>:<span class="w"> </span><span class="s2">"text"</span>,
+<span class="w">        </span><span class="s2">"id"</span>:<span class="w"> </span><span class="s2">"d1"</span>,
+<span class="w">        </span><span class="s2">"location"</span>:<span class="w"> </span><span class="s2">"file:///data/input/example.txt"</span>
 <span class="w">      </span><span class="o">}</span>
 <span class="w">    </span><span class="o">}</span>
 <span class="w">  </span><span class="o">]</span>,
-<span class="w">  </span><span class="s2">&quot;views&quot;</span>:<span class="w"> </span><span class="o">[]</span>
+<span class="w">  </span><span class="s2">"views"</span>:<span class="w"> </span><span class="o">[]</span>
 <span class="o">}</span>
 </pre></div>
 </div>

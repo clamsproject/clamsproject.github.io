@@ -426,7 +426,7 @@ For more information on <em>safe</em> port numbers, see <a class="reference exte
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Another note for users of recent Macs with Apple Silicon (M1, M2, etc) CPU: you might see the following error message when you run the container image.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">requested</span> <span class="n">image</span><span class="s1">&#39;s platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">requested</span> <span class="n">image</span><span class="s1">'s platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested</span>
 </pre></div>
 </div>
 <p>This is because the image you are trying to run is built for Intel/AMD x64 CPUs. To force the container to run on an emulation layer, you can add <code class="docutils literal notranslate"><span class="pre">--platform</span> <span class="pre">linux/amd64</span></code> option to the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> command.</p>
@@ -469,20 +469,20 @@ $<span class="w"> </span>clams<span class="w"> </span><span class="nb">source</s
 </div>
 <p>You will get</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;mmif&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://mmif.clams.ai/X.Y.Z&quot;</span>
+<span class="w">  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"mmif"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://mmif.clams.ai/X.Y.Z"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;documents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="nt">"documents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://mmif.clams.ai/vocabulary/AudioDocument/v1&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;mime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;audio&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;d1&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file:///data/audio/some-audio-file.mp3&quot;</span>
+<span class="w">      </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://mmif.clams.ai/vocabulary/AudioDocument/v1"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"mime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"audio"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d1"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file:///data/audio/some-audio-file.mp3"</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;views&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">  </span><span class="nt">"views"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -497,7 +497,7 @@ So in this example, the file <code class="docutils literal notranslate"><span cl
 <p>When an input MMIF is ready, you can send it to the app server.
 Here’s an example of how to use the <code class="docutils literal notranslate"><span class="pre">curl</span></code> command, and store the response in a file <code class="docutils literal notranslate"><span class="pre">output.mmif</span></code>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>clams<span class="w"> </span><span class="nb">source</span><span class="w"> </span>audio:/data/audio/some-audio-file.mp3<span class="w"> </span>&gt;<span class="w"> </span>input.mmif
-$<span class="w"> </span>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Accept: application/json&quot;</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d@input.mmif<span class="w"> </span>-s<span class="w"> </span>http://localhost:5000<span class="w"> </span>&gt;<span class="w"> </span>output.mmif
+$<span class="w"> </span>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Accept: application/json"</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d@input.mmif<span class="w"> </span>-s<span class="w"> </span>http://localhost:5000<span class="w"> </span>&gt;<span class="w"> </span>output.mmif
 
 <span class="c1"># or using a bash pipeline</span>
 $<span class="w"> </span>clams<span class="w"> </span><span class="nb">source</span><span class="w"> </span>audio:/data/audio/some-audio-file.mp3<span class="w"> </span><span class="p">|</span><span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d@-<span class="w"> </span>-s<span class="w"> </span>http://localhost:5000<span class="w"> </span>&gt;<span class="w"> </span>output.mmif
@@ -521,11 +521,11 @@ parameters, see <a class="reference internal" href="runtime-params.html#runtime-
 <p>When running an app as an HTTP server, you can pass simple parameters as
 <a class="reference external" href="https://en.wikipedia.org/wiki/Query_string">query strings</a> appended to the request URL.</p>
 <p>For example, appending <code class="docutils literal notranslate"><span class="pre">?pretty=True</span></code> to the URL will result in a JSON output with indentation for better readability.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d@input.mmif<span class="w"> </span><span class="s2">&quot;http://app-server:5000\?pretty=True&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d@input.mmif<span class="w"> </span><span class="s2">"http://app-server:5000\?pretty=True"</span>
 </pre></div>
 </div>
 <p>For multivalued parameters, repeat the parameter name:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d@input.mmif<span class="w"> </span><span class="s2">&quot;http://app-server:5000\?labels=PERSON\&amp;labels=ORG&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d@input.mmif<span class="w"> </span><span class="s2">"http://app-server:5000\?labels=PERSON\&amp;labels=ORG"</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -567,26 +567,38 @@ parameter envelope, and the app detects and unwraps the envelope
 automatically (see <a class="reference internal" href="#clamsapp-cli"><span class="std std-ref">Using CLAMS App as a CLI program</span></a>).
 The envelope looks like this:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;prompt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A very long prompt that would not fit in a query string...&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;labelMap&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;B&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bars&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;S&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;slate&quot;</span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pretty&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"prompt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A very long prompt that would not fit in a query string..."</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"labelMap"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"B"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bars"</span><span class="p">,</span><span class="w"> </span><span class="nt">"S"</span><span class="p">:</span><span class="w"> </span><span class="s2">"slate"</span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"temperature"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"pretty"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;mmif&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;mmif&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;documents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="w"> </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;views&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">  </span><span class="nt">"mmif"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"mmif"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"documents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"..."</span><span class="w"> </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"views"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>The output is always raw MMIF, regardless of input format, so downstream
 pipeline steps are unaffected.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The values in the envelope’s <code class="docutils literal notranslate"><span class="pre">parameters</span></code> block (not to be confused with
+<code class="docutils literal notranslate"><span class="pre">view.metadata.parameters</span></code>, the recorded output field) are interpreted as
+native JSON. Use real numbers, booleans, arrays, and objects (e.g. <code class="docutils literal notranslate"><span class="pre">0.7</span></code>, <code class="docutils literal notranslate"><span class="pre">true</span></code>,
+<code class="docutils literal notranslate"><span class="pre">[&quot;a&quot;,</span> <span class="pre">&quot;b&quot;]</span></code>, <code class="docutils literal notranslate"><span class="pre">{&quot;B&quot;:</span> <span class="pre">&quot;bars&quot;}</span></code>), not the URL-encoded string form. To
+reproduce a past run from an existing MMIF, copy the target view’s
+<code class="docutils literal notranslate"><span class="pre">appConfiguration</span></code> into the envelope’s <code class="docutils literal notranslate"><span class="pre">parameters</span></code>; it holds the fully
+resolved, native-JSON configuration. Copying from <code class="docutils literal notranslate"><span class="pre">view.metadata.parameters</span></code>
+is not reliable, since that field is the raw “as typed” transcript and is not
+guaranteed to round-trip.</p>
+</div>
 <p>You can still combine the envelope with query string parameters.
 When the same parameter appears in both, the <strong>query string takes priority</strong>,
 which allows quick overrides without editing the parameter file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d@envelope.json<span class="w"> </span><span class="s2">&quot;http://app-server:5000\?temperature=0.3&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d@envelope.json<span class="w"> </span><span class="s2">"http://app-server:5000\?temperature=0.3"</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">clams</span> <span class="pre">envelop</span></code> CLI tool helps construct envelope JSON from a parameter
@@ -607,7 +619,7 @@ $<span class="w"> </span>cat<span class="w"> </span>input.mmif<span class="w"> <
 
 <span class="c1"># chain apps: first app uses query string, second uses envelope</span>
 $<span class="w"> </span>cat<span class="w"> </span>input.mmif<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="p">|</span><span class="w"> </span>curl<span class="w"> </span>-d@-<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;http://app1:5000\?simple_param=value&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="p">|</span><span class="w"> </span>curl<span class="w"> </span>-d@-<span class="w"> </span>-s<span class="w"> </span><span class="s2">"http://app1:5000\?simple_param=value"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>clams<span class="w"> </span>envelop<span class="w"> </span>params.json<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>curl<span class="w"> </span>-d@-<span class="w"> </span>-s<span class="w"> </span>http://app2:5000<span class="w"> </span>&gt;<span class="w"> </span>output.mmif
 </pre></div>
@@ -615,8 +627,8 @@ $<span class="w"> </span>cat<span class="w"> </span>input.mmif<span class="w"> <
 <p>For programmatic use in Python:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">clams</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_envelope</span>
 
-<span class="n">body</span> <span class="o">=</span> <span class="n">create_envelope</span><span class="p">(</span><span class="n">mmif_obj</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;prompt&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="s2">&quot;labelMap&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="s2">&quot;bars&quot;</span><span class="p">}})</span>
-<span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;http://app-server:5000&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">body</span><span class="p">)</span>
+<span class="n">body</span> <span class="o">=</span> <span class="n">create_envelope</span><span class="p">(</span><span class="n">mmif_obj</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">"prompt"</span><span class="p">:</span> <span class="s2">"..."</span><span class="p">,</span> <span class="s2">"labelMap"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"B"</span><span class="p">:</span> <span class="s2">"bars"</span><span class="p">}})</span>
+<span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">"http://app-server:5000"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">body</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>

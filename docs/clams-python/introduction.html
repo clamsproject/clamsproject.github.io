@@ -410,7 +410,7 @@ When you inherit <a class="reference internal" href="autodoc/clams.app.html#clam
 <p>As a developer you can expose different behaviors of the <code class="docutils literal notranslate"><span class="pre">annotate()</span></code> method by providing configurable parameters as keyword arguments of the method. For example, you can have the user specify a re-sample rate of an audio file to be analyzed by providing a <code class="docutils literal notranslate"><span class="pre">resample_rate</span></code> parameter.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>These runtime configurations are not part of the MMIF input, but for reproducible analysis, you should record these configurations in the output MMIF.</p>
+<p>These runtime configurations are not part of the MMIF input. The SDK records them automatically in the output view metadata for reproducibility: the raw user input in <code class="docutils literal notranslate"><span class="pre">view.metadata.parameters</span></code> and the fully resolved configuration in <code class="docutils literal notranslate"><span class="pre">view.metadata.appConfiguration</span></code>. Both fields are defined in the view-metadata section of the <a class="reference external" href="https://mmif.clams.ai/1.2.0/">MMIF specification</a>.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -445,7 +445,7 @@ When you inherit <a class="reference internal" href="autodoc/clams.app.html#clam
 <span class="k">class</span><span class="w"> </span><span class="nc">AnApp</span><span class="p">(</span><span class="n">ClamsApp</span><span class="p">):</span>
     <span class="c1"># Implements an app that does this and that.</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">app</span> <span class="o">=</span> <span class="n">AnApp</span><span class="p">()</span>
     <span class="n">webapp</span> <span class="o">=</span> <span class="n">Restifier</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
     <span class="n">webapp</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
@@ -465,7 +465,7 @@ When you inherit <a class="reference internal" href="autodoc/clams.app.html#clam
 <p>And poke at it from a new shell session:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># in a new terminal session</span>
 $<span class="w"> </span>curl<span class="w"> </span>http://localhost:5000/
-$<span class="w"> </span>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Accept: application/json&quot;</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d@input/example-1.mmif<span class="w"> </span><span class="s2">&quot;http://0.0.0.0:5000?pretty=True&quot;</span>
+$<span class="w"> </span>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Accept: application/json"</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d@input/example-1.mmif<span class="w"> </span><span class="s2">"http://0.0.0.0:5000?pretty=True"</span>
 </pre></div>
 </div>
 <p>The first command prints the metadata, and the second prints the output MMIF file. Appending <code class="docutils literal notranslate"><span class="pre">?pretty=True</span></code> to the URL will result in a pretty printed output. Note that with the <code class="docutils literal notranslate"><span class="pre">--develop</span></code> option we started a Flask development server. Without this option, a production server will be started. To get more information about the input file format (the contents of <code class="docutils literal notranslate"><span class="pre">input/example-1.mmif</span></code>), please refer to <a class="reference external" href="https://apps.clams.ai/clamsapp">the user manual</a>.</p>

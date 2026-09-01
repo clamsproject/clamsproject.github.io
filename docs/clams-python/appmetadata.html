@@ -413,12 +413,12 @@ defaults to <code class="docutils literal notranslate"><span class="pre">true</s
 input specification can be as simple as the following:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="c1"># other app metadata fields,</span>
-  <span class="s2">&quot;input&quot;</span><span class="p">:</span>
+  <span class="s2">"input"</span><span class="p">:</span>
   <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">&quot;@type&quot;</span><span class="p">:</span> <span class="s2">&quot;http://vocab.lappsgrid.org/Token&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;posTagSet&quot;</span><span class="p">:</span> <span class="s2">&quot;https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html&quot;</span>
+      <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"http://vocab.lappsgrid.org/Token"</span><span class="p">,</span>
+      <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"posTagSet"</span><span class="p">:</span> <span class="s2">"https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html"</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">],</span>
@@ -443,18 +443,18 @@ in the output MMIF when the extra information is available.</p></li>
 <p>For example, here is a more complex example of the simple case:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="c1"># other app metadata fields,</span>
-  <span class="s2">&quot;input&quot;</span><span class="p">:</span>
+  <span class="s2">"input"</span><span class="p">:</span>
   <span class="p">[</span>
     <span class="p">[</span>
-      <span class="p">{</span> <span class="s2">&quot;@type&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mmif.clams.ai/vocabulary/AudioDocument/v1/&quot;</span> <span class="p">},</span>
-      <span class="p">{</span> <span class="s2">&quot;@type&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mmif.clams.ai/vocabulary/VideoDocument/v1/&quot;</span> <span class="p">}</span>
+      <span class="p">{</span> <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"https://mmif.clams.ai/vocabulary/AudioDocument/v1/"</span> <span class="p">},</span>
+      <span class="p">{</span> <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"https://mmif.clams.ai/vocabulary/VideoDocument/v1/"</span> <span class="p">}</span>
     <span class="p">],</span>
     <span class="p">{</span>
-      <span class="s2">&quot;@type&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mmif.clams.ai/vocabulary/TimeFrame/v5&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;speech&quot;</span><span class="p">,</span>
+      <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"https://mmif.clams.ai/vocabulary/TimeFrame/v5"</span><span class="p">,</span>
+      <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"speech"</span><span class="p">,</span>
       <span class="p">}</span>
-      <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="s2">"required"</span><span class="p">:</span> <span class="n">false</span>
     <span class="p">},</span>
   <span class="p">],</span>
   <span class="c1"># and more app metadata fields,</span>
@@ -468,22 +468,22 @@ segments, to save time and compute power.</p>
 <p>Another example with even more complex input specification:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="c1"># other app metadata fields,</span>
-  <span class="s2">&quot;input&quot;</span><span class="p">:</span>
+  <span class="s2">"input"</span><span class="p">:</span>
   <span class="p">[</span>
-    <span class="p">{</span> <span class="s2">&quot;@type&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mmif.clams.ai/vocabulary/VideoDocument/v1/&quot;</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"https://mmif.clams.ai/vocabulary/VideoDocument/v1/"</span> <span class="p">},</span>
     <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;@type&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mmif.clams.ai/vocabulary/TimeFrame/v5&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;timeUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
-          <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;slate&quot;</span><span class="p">,</span>
+        <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"https://mmif.clams.ai/vocabulary/TimeFrame/v5"</span><span class="p">,</span>
+        <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"timeUnit"</span><span class="p">:</span> <span class="s2">"*"</span>
+          <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"slate"</span><span class="p">,</span>
         <span class="p">}</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;@type&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mmif.clams.ai/vocabulary/TimeFrame/v5&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;timeUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
-          <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;chyron&quot;</span><span class="p">,</span>
+        <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"https://mmif.clams.ai/vocabulary/TimeFrame/v5"</span><span class="p">,</span>
+        <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"timeUnit"</span><span class="p">:</span> <span class="s2">"*"</span>
+          <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"chyron"</span><span class="p">,</span>
         <span class="p">}</span>
       <span class="p">}</span>
     <span class="p">]</span>
@@ -502,16 +502,16 @@ but the input time frames must have it.</p>
 <p>Finally, let’s take a look at the <code class="docutils literal notranslate"><span class="pre">output</span></code> specification of a scene recognition CLAMS app:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="c1"># other app metadata fields,</span>
-  <span class="s2">&quot;output&quot;</span><span class="p">:</span>
+  <span class="s2">"output"</span><span class="p">:</span>
   <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;@type&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mmif.clams.ai/vocabulary/TimePoint/v4/&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;An individual </span><span class="se">\&quot;</span><span class="s2">still frame</span><span class="se">\&quot;</span><span class="s2">-level image classification results.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;timeUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;milliseconds&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;labelset&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;slate&quot;</span><span class="p">,</span> <span class="s2">&quot;chyron&quot;</span><span class="p">,</span> <span class="s2">&quot;talking-heads-no-text&quot;</span><span class="p">],</span>
-            <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
+        <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"https://mmif.clams.ai/vocabulary/TimePoint/v4/"</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"An individual </span><span class="se">\"</span><span class="s2">still frame</span><span class="se">\"</span><span class="s2">-level image classification results."</span><span class="p">,</span>
+        <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"timeUnit"</span><span class="p">:</span> <span class="s2">"milliseconds"</span><span class="p">,</span>
+            <span class="s2">"labelset"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"slate"</span><span class="p">,</span> <span class="s2">"chyron"</span><span class="p">,</span> <span class="s2">"talking-heads-no-text"</span><span class="p">],</span>
+            <span class="s2">"classification"</span><span class="p">:</span> <span class="s2">"*"</span><span class="p">,</span>
+            <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"*"</span>
         <span class="p">}</span>
       <span class="p">}</span>
   <span class="p">],</span>

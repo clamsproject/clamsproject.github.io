@@ -363,8 +363,8 @@ annotations. See an example below.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">ner_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_model</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">annotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_mmif</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
-        <span class="o">...</span>  <span class="c1"># preamble to &quot;sign&quot; the view and prepare a new view to use</span>
-        <span class="n">labels_to_use</span> <span class="o">=</span> <span class="n">parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;labels&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;PERSON&#39;</span><span class="p">,</span> <span class="s1">&#39;ORG&#39;</span><span class="p">,</span> <span class="s1">&#39;GPE&#39;</span><span class="p">])</span>
+        <span class="o">...</span>  <span class="c1"># preamble to "sign" the view and prepare a new view to use</span>
+        <span class="n">labels_to_use</span> <span class="o">=</span> <span class="n">parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'labels'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'PERSON'</span><span class="p">,</span> <span class="s1">'ORG'</span><span class="p">,</span> <span class="s1">'GPE'</span><span class="p">])</span>
         <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="n">input_mmif</span><span class="p">)</span>
         <span class="n">ne</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ner_model</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">ne</span><span class="p">:</span>
@@ -377,6 +377,15 @@ annotations. See an example below.</p>
 </div>
 <p>When you use a configuration parameter in your app, you should also expose it
 to the user via the app metadata. See <a class="reference internal" href="appmetadata.html#appmetadata"><span class="std std-ref">CLAMS App Metadata</span></a> section for more details.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Whichever channel supplies them, the SDK records the runtime parameters in the
+output view metadata: the raw user input (as strings) in
+<code class="docutils literal notranslate"><span class="pre">view.metadata.parameters</span></code>, and the fully refined configuration (defaults filled
+and values cast) in <code class="docutils literal notranslate"><span class="pre">view.metadata.appConfiguration</span></code>. See the view-metadata
+section of the <a class="reference external" href="https://mmif.clams.ai/1.2.0/">MMIF specification</a> for the
+authoritative definitions of these two fields.</p>
+</div>
 </section>
 <section id="as-http-server">
 <h2>As HTTP Server<a class="headerlink" href="#as-http-server" title="Link to this heading">¶</a></h2>
@@ -408,23 +417,23 @@ The supported types are: <code class="docutils literal notranslate"><span class=
 <h3>Primitive types<a class="headerlink" href="#primitive-types" title="Link to this heading">¶</a></h3>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">string</span></code></dt><dd><p>Values are passed through as-is (no casting).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;outputFormat&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;string&#39;</span><span class="p">,</span>
-                       <span class="n">default</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
-                       <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Output format.&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'outputFormat'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">'string'</span><span class="p">,</span>
+                       <span class="n">default</span><span class="o">=</span><span class="s1">'json'</span><span class="p">,</span>
+                       <span class="n">description</span><span class="o">=</span><span class="s1">'Output format.'</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">integer</span></code></dt><dd><p>Values are cast to Python <code class="docutils literal notranslate"><span class="pre">int</span></code> via <code class="docutils literal notranslate"><span class="pre">int(value)</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;minFrameCount&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'minFrameCount'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">'integer'</span><span class="p">,</span>
                        <span class="n">default</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                       <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Minimum number of frames.&#39;</span><span class="p">)</span>
+                       <span class="n">description</span><span class="o">=</span><span class="s1">'Minimum number of frames.'</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">number</span></code></dt><dd><p>Values are cast to Python <code class="docutils literal notranslate"><span class="pre">float</span></code> via <code class="docutils literal notranslate"><span class="pre">float(value)</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;threshold&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'threshold'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">'number'</span><span class="p">,</span>
                        <span class="n">default</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-                       <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Confidence threshold.&#39;</span><span class="p">)</span>
+                       <span class="n">description</span><span class="o">=</span><span class="s1">'Confidence threshold.'</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
@@ -432,9 +441,9 @@ The supported types are: <code class="docutils literal notranslate"><span class=
 recognized as <code class="docutils literal notranslate"><span class="pre">False</span></code>: <code class="docutils literal notranslate"><span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">false</span></code>, <code class="docutils literal notranslate"><span class="pre">F</span></code>, <code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code>.
 Everything else is treated as <code class="docutils literal notranslate"><span class="pre">True</span></code>. Boolean parameters always have
 <code class="docutils literal notranslate"><span class="pre">multivalued=False</span></code> (enforced by the SDK).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;pretty&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;boolean&#39;</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'pretty'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">'boolean'</span><span class="p">,</span>
                        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                       <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Pretty-print JSON output.&#39;</span><span class="p">)</span>
+                       <span class="n">description</span><span class="o">=</span><span class="s1">'Pretty-print JSON output.'</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
@@ -445,10 +454,10 @@ Everything else is treated as <code class="docutils literal notranslate"><span c
 <p>When a parameter can accept more than one value, set <code class="docutils literal notranslate"><span class="pre">multivalued=True</span></code>.
 The SDK will always pass a <strong>list</strong> to <code class="docutils literal notranslate"><span class="pre">_annotate()</span></code>, even when the user
 provides only a single value.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;labels&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;string&#39;</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'labels'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">'string'</span><span class="p">,</span>
                        <span class="n">multivalued</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                       <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PERSON&#39;</span><span class="p">,</span> <span class="s1">&#39;ORG&#39;</span><span class="p">],</span>
-                       <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Annotation labels to use.&#39;</span><span class="p">)</span>
+                       <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s1">'PERSON'</span><span class="p">,</span> <span class="s1">'ORG'</span><span class="p">],</span>
+                       <span class="n">description</span><span class="o">=</span><span class="s1">'Annotation labels to use.'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>To pass multiple values:</p>
@@ -474,9 +483,9 @@ provides only a single value.</p>
 <p>Map parameters allow users to pass key-value pairs that arrive in
 <code class="docutils literal notranslate"><span class="pre">_annotate()</span></code> as a Python <code class="docutils literal notranslate"><span class="pre">dict</span></code>. Declaring <code class="docutils literal notranslate"><span class="pre">type='map'</span></code> automatically
 forces <code class="docutils literal notranslate"><span class="pre">multivalued=True</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;labelMap&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;map&#39;</span><span class="p">,</span>
-                       <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;B:bars&#39;</span><span class="p">,</span> <span class="s1">&#39;S:slate&#39;</span><span class="p">],</span>
-                       <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Mapping from source to target labels.&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'labelMap'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">'map'</span><span class="p">,</span>
+                       <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s1">'B:bars'</span><span class="p">,</span> <span class="s1">'S:slate'</span><span class="p">],</span>
+                       <span class="n">description</span><span class="o">=</span><span class="s1">'Mapping from source to target labels.'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Each value uses a colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>) as the key-value delimiter:</p>
@@ -501,11 +510,11 @@ last value wins.</p>
 </li>
 </ul>
 <p>Inside <code class="docutils literal notranslate"><span class="pre">_annotate()</span></code>, the parameter arrives as:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="s1">&#39;bars&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">:</span> <span class="s1">&#39;slate&#39;</span><span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">'B'</span><span class="p">:</span> <span class="s1">'bars'</span><span class="p">,</span> <span class="s1">'S'</span><span class="p">:</span> <span class="s1">'slate'</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>Default values must be a list of colon-separated strings:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;key1:value1&#39;</span><span class="p">,</span> <span class="s1">&#39;key2:value2&#39;</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s1">'key1:value1'</span><span class="p">,</span> <span class="s1">'key2:value2'</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>For more complex value structures (e.g., comma-separated lists within values),
