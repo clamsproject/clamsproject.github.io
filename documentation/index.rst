@@ -3,7 +3,7 @@ CLAMS Project
 
 **Computational Linguistics Applications for Multimedia Services**
 
-The CLAMS project, funded by the Andrew W. Mellon Foundation, is an open-source Artificial Intelligence (AI) and machine learning (ML) platform for cultural heritage institutions. It provides a framework for developing and implementing ML-based tools to analyze multimedia content, such as video, audio, and text. By automating content analysis and information extraction, CLAMS provides archivists with an AI-assisted environment for metadata refinement, which in turn improves access, search, and exploration of archival audiovisual material.
+The CLAMS project, developed at Brandeis University in partnership with GBH Archives and funded by the Mellon Foundation (see :doc:`partners`), is an open-source Artificial Intelligence (AI) and machine learning (ML) platform for cultural heritage institutions. It provides a framework for developing and implementing ML-based tools to analyze multimedia content, such as video, audio, and text. By automating content analysis and information extraction, CLAMS provides archivists with an AI-assisted environment for metadata refinement, which in turn improves access, search, and exploration of archival audiovisual material.
 
 CLAMS tools aim to generate metadata and knowledge from A/V material that may be hidden or invisible to archivists and database indexes. CLAMS is also designed to be used by computer scientists and developers of content analysis tools within an interoperable platform for custom workflows and pipelines.
 
@@ -56,6 +56,7 @@ Primary Components
    :hidden:
 
    team
+   partners
    events
 
 ----

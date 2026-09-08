@@ -3,13 +3,25 @@ Events
 
 CLAMS project events, presentations, and conference appearances.
 
+AmericasNLP 2026
+~~~~~~~~~~~~~~~~
+*2026-07-03* - Our pilot study on spoken language identification for low-resource indigenous languages, surveying how existing systems cover Central Alaskan Yup'ik and Samoan in US public broadcast archives, was published at the `AmericasNLP workshop at ACL 2026 <https://aclanthology.org/2026.americasnlp-6.18/>`_.
+
+SIGUL 2026
+~~~~~~~~~~
+*2026-05-11* - Our paper on structured entity extraction from Hawaiian television chyrons with vision-language models was published at the `SIGUL workshop at LREC 2026 <https://aclanthology.org/2026.sigul-1.17/>`_.
+
+FantasticFutures 2025
+~~~~~~~~~~~~~~~~~~~~~
+*2025-12-04* - Together with GBH Archives, we presented "Surfacing and Tracing Contributors in Large Video Collections" at the `Fantastic Futures 2025 conference <https://sites.google.com/view/ai4lam/fantastic-futures-2025>`_, showing how CLAMS-based chyron extraction feeds a human-in-the-loop cataloging workflow that traces on-screen contributors across decades of public television.
+
 IASA 2025
 ~~~~~~~~~
 *2025-09-10* - We had two presentations at the `IASA 2025 conference <https://2025.iasa-web.org/Programme>`_: one on `spoken language identification for low-resource languages <https://iasa2025.sched.com/event/25iYK/toward-better-discoverability-archival-scale-spoken-language-identification-for-lowresource-languages?iframe=no&w=100%&sidebar=yes&bg=no>`_ and another on `on-screen text understanding <https://iasa2025.sched.com/event/25iY8/understanding-on-screen-text-do-ai-tools-struggle-with-hawaiian-chyrons?iframe=no&w=100%&sidebar=yes&bg=no>`_.
 
 C&C 2025
 ~~~~~~~~
-*2025-06-22* - Our paper is accepted at `C&C 2025 <https://link.springer.com/chapter/10.1007/978-3-031-93160-4_12>`_!
+*2025-06-22* - Our paper `A Platform for AI-assisted Archival Metadata Generation <https://link.springer.com/chapter/10.1007/978-3-031-93160-4_12>`_ was presented at C&C 2025, part of HCI International 2025. It gives an up-to-date account of the CLAMS platform and the MMIF interchange format, and walks through real cataloging workflows and evaluations built with the American Archive of Public Broadcasting.
 
 code4lib 2025
 ~~~~~~~~~~~~~

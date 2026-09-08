@@ -8,7 +8,7 @@ For general contact, please email admin@clams.ai.
 Principal Investigator
 ----------------------
 
-* `James Pustejovsky <https://scholar.google.com/citations?user=56UT_6IAAAAJ&hl=en&oi=ao>`_
+* `James Pustejovsky <https://pusto.com/>`_
 
 Project Manager
 ---------------
@@ -21,12 +21,12 @@ Researcher
 * `Marc Verhagen <https://github.com/marcverhagen>`_
 
 Graduate Student Researchers
----------------------------
+----------------------------
 
-* `Kelley Lynch <https://github.com/kelleyl>`_
 * Yangyang Chen
 * Bohan Jiang
-* Derrick Kim
 
-.. note::
-   The CLAMS project started with collaboration between LLC and `American Archive of Public Broadcasting (AAPB) <http://americanarchive.org/>`_.
+Alumni
+------
+
+* `Kelley Lynch <https://github.com/kelleyl>`_
