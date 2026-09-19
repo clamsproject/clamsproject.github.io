@@ -3,6 +3,20 @@ Events
 
 CLAMS project events, presentations, and conference appearances.
 
+FantasticFutures 2026
+~~~~~~~~~~~~~~~~~~~~~
+*2026-09-15* - We presented three pieces of work with GBH Archives at `Fantastic Futures 2026 <https://ai4lam.org/fantastic-futures/fantastic-futures-2026-trust-in-the-loop/>`_, hosted by the Library of Congress in Washington, DC:
+
+* "Building AI Tools with Communities": how Samoan and Yup'ik language fellows shape the data, tooling, and workflow behind spoken language identification for public media archives.
+* "Smart Segmentation to Support More Transparent Audiovisual Description": three open-source CLAMS apps that split long programs at natural content breaks so that LLM summaries stay small, checkable, and navigable.
+* "On-demand Agents vs. Bulk Processing for RAG": a benchmark of over 1,000 questions on archival video comparing precomputed retrieval against agents that decide at query time which CLAMS tools to run.
+
+The language identification work received the `2026 AI4LAM Innovation Award for Best Research Project <https://ai4lam.org/announcement-of-the-2026-ai4lam-innovation-awardees/>`_. Recordings of the talks will be linked here once they are published.
+
+IASA Journal 2026
+~~~~~~~~~~~~~~~~~
+*2026-09-12* - Our IASA 2025 talk on Hawaiian chyrons is now a journal article. `Understanding On-Screen Text: Do AI Tools Struggle with Hawaiian Chyrons? <https://doi.org/10.35320/ij.207>`_ appears in IASA Journal no. 56 and shows how Hawaiian names, orthography, and visual elements disproportionately trip up OCR and vision-language models.
+
 AmericasNLP 2026
 ~~~~~~~~~~~~~~~~
 *2026-07-03* - Our pilot study on spoken language identification for low-resource indigenous languages, surveying how existing systems cover Central Alaskan Yup'ik and Samoan in US public broadcast archives, was published at the `AmericasNLP workshop at ACL 2026 <https://aclanthology.org/2026.americasnlp-6.18/>`_.
