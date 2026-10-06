@@ -452,12 +452,16 @@ MMIF uses LAPPS vocabulary for linguistic annotation types.</p>
 <blockquote>
 <div><p><strong>Warning</strong>
 When using the separately generated <code class="docutils literal notranslate"><span class="pre">metadata.py</span></code> created via <code class="docutils literal notranslate"><span class="pre">clams</span> <span class="pre">develop</span></code>, this method within <code class="docutils literal notranslate"><span class="pre">app.py</span></code> should be left empty with a <code class="docutils literal notranslate"><span class="pre">pass</span></code> statement as shown below:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_appmetadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</div></blockquote>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_appmetadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="c1"># When using the ``metadata.py`` leave this do-nothing "pass" method here.</span>
         <span class="k">pass</span>
 </pre></div>
 </div>
-<p>And the <code class="docutils literal notranslate"><span class="pre">appmetadata()</span></code> within <code class="docutils literal notranslate"><span class="pre">metadata.py</span></code> should be implemented instead. Follow the instructions in the template.</p>
+</div></blockquote>
+<blockquote>
+<div><p>And the <code class="docutils literal notranslate"><span class="pre">appmetadata()</span></code> within <code class="docutils literal notranslate"><span class="pre">metadata.py</span></code> should be implemented instead. Follow the instructions in the template.</p>
 </div></blockquote>
 <p>As we see in the code above, the <code class="docutils literal notranslate"><span class="pre">AppMetadata</span></code> object is created with the following fields:
 identifier, name, url, description, app_license, analyzer_version, and analyzer_license. If you used <code class="docutils literal notranslate"><span class="pre">clams</span> <span class="pre">develop</span></code> to generate the app template, you’ll also notice that some of these fields are already filled in for you based on the <code class="docutils literal notranslate"><span class="pre">-n</span></code> argument you provided.</p>
@@ -655,9 +659,9 @@ For full details on the <code class="docutils literal notranslate"><span class="
 <span class="w">      </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://mmif.clams.ai/0.4.0/vocabulary/TextDocument"</span><span class="p">,</span>
 <span class="w">      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m2"</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">"@value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello, this is Jim Lehrer with the NewsHour on PBS. In the nineteen eighties, barking dogs have increasingly become a problem in urban areas."</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">     </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="nt">"@value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello, this is Jim Lehrer with the NewsHour on PBS. In the nineteen eighties, barking dogs have increasingly become a problem in urban areas."</span>
+<span class="w">     </span><span class="p">}</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">],</span>

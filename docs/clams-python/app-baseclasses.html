@@ -575,6 +575,26 @@ setups; see the parameter’s own description in
 <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.promptable_parameters" title="clams.app.ClamsPromptableApp.promptable_parameters"><code class="xref py py-attr docutils literal notranslate"><span class="pre">promptable_parameters</span></code></a>
 for an OOM-risk example.</p></td>
 </tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">maxImagesPerPrompt</span></code></p></td>
+<td><p>integer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>no</p></td>
+<td><p>Maximum number of images the app bundles into a single prompt (one
+generation, one output <code class="docutils literal notranslate"><span class="pre">TextDocument</span></code>). <code class="docutils literal notranslate"><span class="pre">0</span></code> means no limit. With a
+positive value, the app splits a TimeFrame with more frames into
+consecutive capped groups, each producing its own <code class="docutils literal notranslate"><span class="pre">TextDocument</span></code>
+aligned to that TimeFrame and grounded via <code class="docutils literal notranslate"><span class="pre">origins</span></code>. Bounds GPU
+memory for long dynamic scenes; composes with <code class="docutils literal notranslate"><span class="pre">parallelPrompts</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">imagesPerPromptMode</span></code></p></td>
+<td><p>string</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">max</span></code></p></td>
+<td><p>no</p></td>
+<td><p>How the images of a TimeFrame over <code class="docutils literal notranslate"><span class="pre">maxImagesPerPrompt</span></code> are spread
+over its prompts; no effect when the cap is <code class="docutils literal notranslate"><span class="pre">0</span></code>. <code class="docutils literal notranslate"><span class="pre">max</span></code> fills each
+prompt to the cap and leaves the remainder last. <code class="docutils literal notranslate"><span class="pre">balanced</span></code> spreads
+the images evenly. Both give the same number of prompts.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -643,6 +663,40 @@ latter belongs in <code class="docutils literal notranslate"><span class="pre">_
 This separation lets HF-backed apps inherit the default <code class="docutils literal notranslate"><span class="pre">generate()</span></code>
 without restating backend mechanics, and lets non-HF apps swap in a new
 <code class="docutils literal notranslate"><span class="pre">generate()</span></code> without rewriting their MMIF I/O.</p>
+</section>
+<section id="from-timeframes-to-forward-passes">
+<span id="promptable-grouping"></span><h3>From TimeFrames to forward passes<a class="headerlink" href="#from-timeframes-to-forward-passes" title="Link to this heading">¶</a></h3>
+<p>Three parameters group the visual input at three different steps. The
+documentation and the helper names use one word for each step.</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 35.0%" />
+<col style="width: 35.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Parameter</p></th>
+<th class="head"><p>Word</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TimeFrame to frames</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tfSamplingMode</span></code></p></td>
+<td><p>sample</p></td>
+</tr>
+<tr class="row-odd"><td><p>One TimeFrame’s frames to prompts</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">maxImagesPerPrompt</span></code>, <code class="docutils literal notranslate"><span class="pre">imagesPerPromptMode</span></code></p></td>
+<td><p>chunk</p></td>
+</tr>
+<tr class="row-even"><td><p>Prompts to forward passes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">parallelPrompts</span></code></p></td>
+<td><p>batch</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="multi-turn-handling-promptmode">
 <span id="promptable-multiturn"></span><h3>Multi-turn handling (<code class="docutils literal notranslate"><span class="pre">promptMode</span></code>)<a class="headerlink" href="#multi-turn-handling-promptmode" title="Link to this heading">¶</a></h3>
@@ -734,6 +788,25 @@ inlines <code class="docutils literal notranslate"><span class="pre">images</spa
 a pre-built <code class="docutils literal notranslate"><span class="pre">List[dict]</span></code> and returns it unchanged. Subclasses
 may override to access model-specific state (e.g.
 <code class="docutils literal notranslate"><span class="pre">self.processor</span></code>) when formatting messages.</p>
+</dd>
+<dt><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.chunk_tasks" title="clams.app.ClamsPromptableApp.chunk_tasks"><code class="xref py py-meth docutils literal notranslate"><span class="pre">chunk_tasks()</span></code></a></dt><dd><p>A static method that applies <code class="docutils literal notranslate"><span class="pre">maxImagesPerPrompt</span></code>: splits each
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.PromptTask" title="clams.app.PromptTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">PromptTask</span></code></a> (images, their <code class="docutils literal notranslate"><span class="pre">origins</span></code>, and the
+anchoring <code class="docutils literal notranslate"><span class="pre">source</span></code>) with more images than the cap into consecutive
+capped tasks. Each task yields one <code class="docutils literal notranslate"><span class="pre">TextDocument</span></code>, so with a cap
+set, one TimeFrame can yield several <code class="docutils literal notranslate"><span class="pre">TextDocument</span></code> annotations
+aligned to it, each grounded to its own <code class="docutils literal notranslate"><span class="pre">origins</span></code>. Consumers of
+promptable-app output must not assume one <code class="docutils literal notranslate"><span class="pre">TextDocument</span></code> per
+TimeFrame. <code class="docutils literal notranslate"><span class="pre">imagesPerPromptMode</span></code>
+(<a class="reference internal" href="autodoc/clams.app.html#clams.app.ImagesPerPromptMode" title="clams.app.ImagesPerPromptMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImagesPerPromptMode</span></code></a>) selects how the images are
+spread over the chunks.</p>
+</dd>
+<dt><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.generate_batched" title="clams.app.ClamsPromptableApp.generate_batched"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generate_batched()</span></code></a></dt><dd><p>Applies <code class="docutils literal notranslate"><span class="pre">parallelPrompts</span></code>: calls <code class="docutils literal notranslate"><span class="pre">generate()</span></code> on batches of at
+most that many prompts and returns one output per prompt, in order.</p>
+</dd>
+<dt><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.report_progress" title="clams.app.ClamsPromptableApp.report_progress"><code class="xref py py-meth docutils literal notranslate"><span class="pre">report_progress()</span></code></a></dt><dd><p>Called by <code class="docutils literal notranslate"><span class="pre">generate_batched()</span></code> before the first batch and after
+each batch with the number of prompts done and the total. The
+default writes one INFO log line; override it to report differently
+or to stay silent.</p>
 </dd>
 <dt><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.response_to_grounded_textdocument" title="clams.app.ClamsPromptableApp.response_to_grounded_textdocument"><code class="xref py py-meth docutils literal notranslate"><span class="pre">response_to_grounded_textdocument()</span></code></a></dt><dd><p>Writes a <code class="docutils literal notranslate"><span class="pre">TextDocument</span></code> plus an <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> (<code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">-&gt;</span> <span class="pre">TD</span></code>)
 into a view. <code class="docutils literal notranslate"><span class="pre">source</span></code> is the coarse cross-modal anchor; the
@@ -993,6 +1066,7 @@ must install the <code class="docutils literal notranslate"><span class="pre">[h
 </li>
 <li><a class="reference internal" href="#declaring-a-promptable-app">Declaring a promptable app</a></li>
 <li><a class="reference internal" href="#the-generate-contract">The <code class="docutils literal notranslate"><span class="pre">generate()</span></code> contract</a></li>
+<li><a class="reference internal" href="#from-timeframes-to-forward-passes">From TimeFrames to forward passes</a></li>
 <li><a class="reference internal" href="#multi-turn-handling-promptmode">Multi-turn handling (<code class="docutils literal notranslate"><span class="pre">promptMode</span></code>)</a></li>
 <li><a class="reference internal" href="#reasoning-traces-usereasoning">Reasoning traces (<code class="docutils literal notranslate"><span class="pre">useReasoning</span></code>)</a><ul>
 <li><a class="reference internal" href="#cost-and-failure-modes">Cost and failure modes</a></li>
