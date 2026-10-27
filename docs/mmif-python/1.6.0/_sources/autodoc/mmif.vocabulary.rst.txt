@@ -1,0 +1,34 @@
+mmif.vocabulary package
+=======================
+
+.. automodule:: mmif.vocabulary
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+mmif.vocabulary.annotation\_types module
+----------------------------------------
+
+.. automodule:: mmif.vocabulary.annotation_types
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mmif.vocabulary.base\_types module
+----------------------------------
+
+.. automodule:: mmif.vocabulary.base_types
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mmif.vocabulary.document\_types module
+--------------------------------------
+
+.. automodule:: mmif.vocabulary.document_types
+   :members:
+   :undoc-members:
+   :show-inheritance:

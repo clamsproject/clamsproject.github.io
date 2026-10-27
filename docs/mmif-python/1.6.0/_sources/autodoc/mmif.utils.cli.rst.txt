@@ -1,0 +1,42 @@
+mmif.utils.cli package
+======================
+
+.. automodule:: mmif.utils.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+mmif.utils.cli.describe module
+------------------------------
+
+.. automodule:: mmif.utils.cli.describe
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mmif.utils.cli.rewind module
+----------------------------
+
+.. automodule:: mmif.utils.cli.rewind
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mmif.utils.cli.source module
+----------------------------
+
+.. automodule:: mmif.utils.cli.source
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mmif.utils.cli.summarize module
+-------------------------------
+
+.. automodule:: mmif.utils.cli.summarize
+   :members:
+   :undoc-members:
+   :show-inheritance:

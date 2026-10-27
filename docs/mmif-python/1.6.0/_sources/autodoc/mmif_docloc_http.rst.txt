@@ -1,0 +1,7 @@
+mmif\_docloc\_http package
+==========================
+
+.. automodule:: mmif_docloc_http
+   :members:
+   :undoc-members:
+   :show-inheritance:
