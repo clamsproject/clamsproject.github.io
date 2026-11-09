@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="GPU Memory Management for CLAMS Apps" href="gpu-apps.html"><link rel="prev" title="Runtime Configuration" href="runtime-params.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="HF and GGUF Promptable Apps" href="promptable-backends.html"><link rel="prev" title="Runtime Configuration" href="runtime-params.html">
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
         <title>Specialized App Base Classes - clams-python documentation</title>
@@ -286,6 +286,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l1"><a class="reference internal" href="input-output.html">I/O Specification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="runtime-params.html">Runtime Configuration</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Specialized App Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="promptable-backends.html">HF and GGUF Promptable Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu-apps.html">GPU Memory Management for CLAMS Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appmetadata.html">CLAMS App Metadata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appdirectory.html">CLAMS App Directory</a></li>
@@ -840,9 +841,10 @@ VLM/LLM in HF), AND</p></li>
 <li><p>doesn’t need bespoke pixel-value preprocessing or vision-token
 stitching at inference time.</p></li>
 </ul>
-<p>If your app uses a remote API instead (OpenAI, Anthropic, etc.), or a
-non-HF local backend, inherit from
-<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp" title="clams.app.ClamsPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a> directly and implement
+<p>For a model in GGUF format run with llama.cpp, see
+<a class="reference internal" href="#gguf-promptable"><span class="std std-ref">GGUF Promptable Apps (experimental)</span></a> (experimental). If your app uses a remote API
+instead (OpenAI, Anthropic, etc.), or another local backend, inherit
+from <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp" title="clams.app.ClamsPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsPromptableApp</span></code></a> directly and implement
 <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp.generate" title="clams.app.ClamsPromptableApp.generate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generate()</span></code></a> yourself.</p>
 </section>
 <section id="declaring-an-hf-promptable-app">
@@ -949,7 +951,7 @@ cache-hits on repeat.</p>
 <h3>Reproducibility: <code class="docutils literal notranslate"><span class="pre">model</span></code> refinement and view metadata<a class="headerlink" href="#reproducibility-model-refinement-and-view-metadata" title="Link to this heading">¶</a></h3>
 <p>The user-facing <code class="docutils literal notranslate"><span class="pre">model</span></code> parameter accepts raw HF model ids
 (<code class="docutils literal notranslate"><span class="pre">org/repo-name</span></code>). The SDK’s
-<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp._refine_params" title="clams.app.ClamsHFPromptableApp._refine_params"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_refine_params()</span></code></a> expands the
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsPromptableApp._refine_params" title="clams.app.ClamsPromptableApp._refine_params"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_refine_params()</span></code></a> expands the
 raw value to <code class="docutils literal notranslate"><span class="pre">org/repo-name&#64;&lt;revision&gt;</span></code> form (using the dict
 lookup) during parameter refinement. The standard <code class="docutils literal notranslate"><span class="pre">sign_view</span></code> flow
 then stamps:</p>
@@ -995,6 +997,143 @@ hook for chat-template controls, the override point for honoring
 must install the <code class="docutils literal notranslate"><span class="pre">[hf]</span></code> extra: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">clams-python[hf]</span></code>.</p>
 </section>
 </section>
+<section id="gguf-promptable-apps-experimental">
+<span id="gguf-promptable"></span><h2>GGUF Promptable Apps (experimental)<a class="headerlink" href="#gguf-promptable-apps-experimental" title="Link to this heading">¶</a></h2>
+<p><a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsGGUFPromptableApp" title="clams.app.ClamsGGUFPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsGGUFPromptableApp</span></code></a> runs a model in GGUF format
+with <a class="reference external" href="https://github.com/ggml-org/llama.cpp">llama.cpp</a> instead of
+<code class="docutils literal notranslate"><span class="pre">transformers</span></code>. The app owns a private <code class="docutils literal notranslate"><span class="pre">llama-server</span></code> process: it
+downloads the pinned GGUF file (and the <code class="docutils literal notranslate"><span class="pre">mmproj</span></code> projector file of a
+vision model) from the Hugging Face Hub, starts the server on a free
+localhost port, sends prompts through the server’s OpenAI-compatible
+chat API, and stops the server when the app exits. The app never
+connects to a server it did not start, so model selection stays with
+the app and is recorded in the output MMIF as for an HF app.</p>
+<p>This backend is experimental. Its class attributes and the container
+image may change between releases.</p>
+<section id="id1">
+<h3>When to use<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<p>Choose <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsGGUFPromptableApp" title="clams.app.ClamsGGUFPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsGGUFPromptableApp</span></code></a> when the app should
+run without <code class="docutils literal notranslate"><span class="pre">torch</span></code>: a quantized model on a small GPU, a GPU that
+current <code class="docutils literal notranslate"><span class="pre">torch</span></code> wheels no longer support, or CPU-only inference. The
+same model in GGUF form gives different output than its <code class="docutils literal notranslate"><span class="pre">transformers</span></code>
+original, so an app that must reproduce an HF app’s output stays with
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsHFPromptableApp" title="clams.app.ClamsHFPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsHFPromptableApp</span></code></a>.</p>
+</section>
+<section id="declaring-a-gguf-promptable-app">
+<h3>Declaring a GGUF promptable app<a class="headerlink" href="#declaring-a-gguf-promptable-app" title="Link to this heading">¶</a></h3>
+<p>The declaration follows <a class="reference internal" href="#hf-promptable-declaring"><span class="std std-ref">Declaring an HF promptable app</span></a>, with these
+differences:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">analyzer_versions</span></code> keys are <code class="docutils literal notranslate"><span class="pre">&lt;hub</span> <span class="pre">repo&gt;</span></code> or
+<code class="docutils literal notranslate"><span class="pre">&lt;hub</span> <span class="pre">repo&gt;:&lt;quantization&gt;</span></code> (e.g.
+<code class="docutils literal notranslate"><span class="pre">ggml-org/gemma-4-E4B-it-GGUF:Q8_0</span></code>), and the values are commit
+hashes of the GGUF repository. The quantization tag picks the model
+file, and the repository’s <code class="docutils literal notranslate"><span class="pre">mmproj</span></code> file is picked for vision
+input.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MODEL_FILES</span></code> names the files explicitly for a repository where the
+tag does not pick exactly one file (several projectors, draft
+models, shards).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metadata.py</span></code> calls
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsGGUFPromptableApp.inject_promptable_parameters" title="clams.app.ClamsGGUFPromptableApp.inject_promptable_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ClamsGGUFPromptableApp.inject_promptable_parameters</span></code></a>.</p></li>
+</ol>
+<p>The <code class="docutils literal notranslate"><span class="pre">model</span></code> parameter, family and singleton handling, and the
+<code class="docutils literal notranslate"><span class="pre">model</span></code> refinement into <code class="docutils literal notranslate"><span class="pre">appConfiguration</span></code> work as for HF apps.
+Audio input is not supported yet.</p>
+<p>GGUF apps have no <code class="docutils literal notranslate"><span class="pre">parallelPrompts</span></code> parameter. <code class="docutils literal notranslate"><span class="pre">llama-server</span></code>
+decodes at most as many requests together as it has slots, a number
+fixed when the server starts, and
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsGGUFPromptableApp.generate_batched" title="clams.app.ClamsGGUFPromptableApp.generate_batched"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generate_batched()</span></code></a> keeps every
+slot busy. The slot count is a server setting (see below), and its
+default, like the way slots share the context, belongs to llama.cpp
+and changes between its releases; see the llama.cpp documentation. The
+startup log reports the slot count and the context of a slot.</p>
+<p>We recommend one slot, set in the app’s <code class="docutils literal notranslate"><span class="pre">LLAMA_ARGS</span></code>. The server
+decodes the prompts in its slots together, so with more slots an
+output can change with the other prompts in flight. In our tests on
+Maxwell and Pascal GPUs, more slots were also no faster.</p>
+</section>
+<section id="id2">
+<h3>Class-attribute hooks<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 60.0%" />
+<col style="width: 18.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>Required</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MODEL_FILES</span></code></p></td>
+<td><p>File names per model id: <code class="docutils literal notranslate"><span class="pre">{'&lt;id&gt;':</span> <span class="pre">{'model':</span> <span class="pre">'&lt;file&gt;'</span> <span class="pre">or</span>
+<span class="pre">[shards],</span> <span class="pre">'mmproj':</span> <span class="pre">'&lt;file&gt;'}}</span></code>. Models not listed are
+resolved from the repository listing.</p></td>
+<td><p>no</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">LLAMA_ARGS</span></code></p></td>
+<td><p>Default values of llama.cpp’s <code class="docutils literal notranslate"><span class="pre">LLAMA_ARG_*</span></code> environment
+variables for what the app’s models need, e.g. a larger batch
+size for the image tokens of a vision model, or the slot count.
+The environment of the app process takes precedence (see
+below).</p></td>
+<td><p>no</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RESTIFIER_PRODUCTION_WORKERS</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RESTIFIER_PRODUCTION_MAX_REQUESTS</span></code></p></td>
+<td><p>Read only by <a class="reference internal" href="autodoc/clams.restify.html#clams.restify.Restifier.serve_production" title="clams.restify.Restifier.serve_production"><code class="xref py py-meth docutils literal notranslate"><span class="pre">serve_production()</span></code></a>
+(no effect in the CLI): one gunicorn worker, never recycled, so
+the server the app owns is neither duplicated nor restarted per
+request. A singleton app starts its server before gunicorn
+forks, so all workers share it; a family app starts one server
+per worker.</p></td>
+<td><p>no</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="server-settings">
+<h3>Server settings<a class="headerlink" href="#server-settings" title="Link to this heading">¶</a></h3>
+<p>The SDK gives <code class="docutils literal notranslate"><span class="pre">llama-server</span></code> only the model files, its address and
+the reasoning output format on the command line. Every other setting
+is one of llama.cpp’s own <code class="docutils literal notranslate"><span class="pre">LLAMA_ARG_*</span></code> environment variables, which
+the server reads for every argument not on its command line. A value
+comes from, in increasing precedence:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">llama-server</span></code>’s defaults, which fit the run to the hardware: GPU
+offload, context size, batch sizes, threads and the split over
+several GPUs. The server places what fits on the GPUs, keeps the
+rest in system memory, and sizes the context to the free memory.</p></li>
+</ol>
+<p>1. The app’s <code class="docutils literal notranslate"><span class="pre">LLAMA_ARGS</span></code>, for what its models need.
+1. The environment of the app process, set by whoever runs the app.</p>
+<p>The variables and their defaults belong to llama.cpp and change
+between its releases; see the llama.cpp documentation. The settings in
+effect are logged with their source when the server starts, and the
+context size and slot count when it is ready.</p>
+<p>One prompt (system and user text, all its images, and the generated
+tokens) must fit in the context of a server slot. A prompt that does
+not fails the request with an error naming the size, so a caller can
+lower <code class="docutils literal notranslate"><span class="pre">maxImagesPerPrompt</span></code> or give the server a larger context.</p>
+</section>
+<section id="installation-and-containers">
+<h3>Installation and containers<a class="headerlink" href="#installation-and-containers" title="Link to this heading">¶</a></h3>
+<p>The python side needs the <code class="docutils literal notranslate"><span class="pre">[llamaserver]</span></code> extra:
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">clams-python[llamaserver]</span></code>. The <code class="docutils literal notranslate"><span class="pre">llama-server</span></code>
+executable is not a python package: outside a container, put it on the
+<code class="docutils literal notranslate"><span class="pre">PATH</span></code> or name it in the <code class="docutils literal notranslate"><span class="pre">LLAMA_SERVER</span></code> environment variable.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">clams-python-llamaserver</span></code> container image provides it. The image
+is built on llama.cpp’s own CUDA server image, so it has no <code class="docutils literal notranslate"><span class="pre">torch</span></code>
+and does not derive from the other <code class="docutils literal notranslate"><span class="pre">clams-python</span></code> images. Mount a
+volume at <code class="docutils literal notranslate"><span class="pre">/cache</span></code> for the downloaded model and for the CUDA kernels
+the driver compiles at the first start on GPUs the image has no machine
+code for.</p>
+</section>
+</section>
 </section>
 
         </article>
@@ -1002,12 +1141,12 @@ must install the <code class="docutils literal notranslate"><span class="pre">[h
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="gpu-apps.html">
+          <a class="next-page" href="promptable-backends.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">GPU Memory Management for CLAMS Apps</div>
+                <div class="title">HF and GGUF Promptable Apps</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -1082,6 +1221,14 @@ must install the <code class="docutils literal notranslate"><span class="pre">[h
 <li><a class="reference internal" href="#family-singleton-handling">Family / singleton handling</a></li>
 <li><a class="reference internal" href="#reproducibility-model-refinement-and-view-metadata">Reproducibility: <code class="docutils literal notranslate"><span class="pre">model</span></code> refinement and view metadata</a></li>
 <li><a class="reference internal" href="#what-the-base-class-provides">What the base class provides</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gguf-promptable-apps-experimental">GGUF Promptable Apps (experimental)</a><ul>
+<li><a class="reference internal" href="#id1">When to use</a></li>
+<li><a class="reference internal" href="#declaring-a-gguf-promptable-app">Declaring a GGUF promptable app</a></li>
+<li><a class="reference internal" href="#id2">Class-attribute hooks</a></li>
+<li><a class="reference internal" href="#server-settings">Server settings</a></li>
+<li><a class="reference internal" href="#installation-and-containers">Installation and containers</a></li>
 </ul>
 </li>
 </ul>

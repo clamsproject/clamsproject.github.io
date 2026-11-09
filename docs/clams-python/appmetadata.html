@@ -286,6 +286,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l1"><a class="reference internal" href="input-output.html">I/O Specification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="runtime-params.html">Runtime Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app-baseclasses.html">Specialized App Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="promptable-backends.html">HF and GGUF Promptable Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu-apps.html">GPU Memory Management for CLAMS Apps</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">CLAMS App Metadata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appdirectory.html">CLAMS App Directory</a></li>
@@ -547,10 +548,60 @@ parameter value parsing works, please refer to the App Metadata json scheme (in 
 section).</p>
 <section id="syntax-for-parameter-specification-in-app-metadata">
 <h4>Syntax for Parameter Specification in App Metadata<a class="headerlink" href="#syntax-for-parameter-specification-in-app-metadata" title="Link to this heading">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">parameters</span></code> field is a list of objects. Each object must include
+<code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">description</span></code>, <code class="docutils literal notranslate"><span class="pre">type</span></code>, and <code class="docutils literal notranslate"><span class="pre">multivalued</span></code>. The <code class="docutils literal notranslate"><span class="pre">type</span></code> must be
+one of <code class="docutils literal notranslate"><span class="pre">integer</span></code>, <code class="docutils literal notranslate"><span class="pre">number</span></code>, <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">boolean</span></code>, or <code class="docutils literal notranslate"><span class="pre">map</span></code>. The
+optional <code class="docutils literal notranslate"><span class="pre">choices</span></code> field lists accepted values, and <code class="docutils literal notranslate"><span class="pre">default</span></code> sets a
+default value (making the parameter optional). Defaults should be JSON values
+of the declared type; use a JSON array for a multivalued parameter.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"minFrameCount"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Minimum number of frames to process."</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"multivalued"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"choices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"labels"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Labels to include in the output."</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"multivalued"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"PERSON"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ORG"</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">boolean</span></code> parameters always use <code class="docutils literal notranslate"><span class="pre">&quot;multivalued&quot;:</span> <span class="pre">false</span></code>; <code class="docutils literal notranslate"><span class="pre">map</span></code> parameters
+always use <code class="docutils literal notranslate"><span class="pre">&quot;multivalued&quot;:</span> <span class="pre">true</span></code> and represent each key-value pair as a
+colon-separated string (for example, <code class="docutils literal notranslate"><span class="pre">&quot;default&quot;:</span> <span class="pre">[&quot;key1:value1&quot;]</span></code>). See
+<a class="reference internal" href="runtime-params.html#runtime-params-detailed"><span class="std std-ref">Parameter Types</span></a> for how parameter values are parsed and passed
+to the app.</p>
 </section>
 </section>
-<section id="metadata-schema">
-<h3>Metadata Schema<a class="headerlink" href="#metadata-schema" title="Link to this heading">¶</a></h3>
+<section id="required-environment-variables">
+<h3>Required Environment Variables<a class="headerlink" href="#required-environment-variables" title="Link to this heading">¶</a></h3>
+<p>Some apps cannot run without a value that comes from the machine they run on.
+Examples are an access token for a gated model on the Hugging Face Hub, which must stay out of the output MMIF, and the address of a model server (such as Ollama or vLLM) that the app sends requests to.
+Declare these with <a class="reference internal" href="autodoc/clams.appmetadata.html#clams.appmetadata.AppMetadata.add_env_requirement" title="clams.appmetadata.AppMetadata.add_env_requirement"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_env_requirement()</span></code></a>, and read the value from the environment in the app code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="o">.</span><span class="n">add_env_requirement</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'HF_TOKEN'</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">'token with access to pyannote/speaker-diarization-3.1'</span><span class="p">)</span>
+<span class="n">metadata</span><span class="o">.</span><span class="n">add_env_requirement</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'OLLAMA_HOST'</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">'URL of the Ollama server that runs the model'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Being listed in <code class="docutils literal notranslate"><span class="pre">env_requirements</span></code> means the variable is required.
+Do not list optional settings, variables that have a usable default, or common system variables such as <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code>.</p>
+<p>Do not take a secret as a runtime parameter: the SDK records runtime parameters in the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> of every view the app signs, so the value ends up in the output MMIF.
+See <a class="reference internal" href="clamsapp.html#clamsapp-envvars"><span class="std std-ref">Passing environment variables</span></a> for how users pass these variables to an app.</p>
+</section>
+<section id="full-metadata-json-schema">
+<h3>Full Metadata JSON Schema<a class="headerlink" href="#full-metadata-json-schema" title="Link to this heading">¶</a></h3>
 <p>The schema for app metadata is as follows.
 (You can also download the schema in <a class="reference external" href="https://json-schema.org/">JSON Schema</a> format from <a class="reference external" href="appmetadata.jsonschema">here</a>.)</p>
 <section id="clams-appmetadata">
@@ -734,13 +785,13 @@ SDK.</p>
 </tr>
 <tr class="row-odd"><td rowspan="3"><p>items</p></td>
 <td rowspan="3"><p>anyOf</p></td>
-<td colspan="2"><p><a class="reference internal" href="#id2">CLAMS Input Specification</a></p></td>
+<td colspan="2"><p><a class="reference internal" href="#id3">CLAMS Input Specification</a></p></td>
 </tr>
 <tr class="row-even"><td><p>type</p></td>
 <td><p><em>array</em></p></td>
 </tr>
 <tr class="row-odd"><td><p>items</p></td>
-<td><p><a class="reference internal" href="#id2">CLAMS Input Specification</a></p></td>
+<td><p><a class="reference internal" href="#id3">CLAMS Input Specification</a></p></td>
 </tr>
 <tr class="row-even"><td rowspan="4"><ul class="simple">
 <li><p>output</p></li>
@@ -755,7 +806,7 @@ SDK.</p>
 <td colspan="3"></td>
 </tr>
 <tr class="row-odd"><td><p>items</p></td>
-<td colspan="3"><p><a class="reference internal" href="#id3">CLAMS Output Specification</a></p></td>
+<td colspan="3"><p><a class="reference internal" href="#id4">CLAMS Output Specification</a></p></td>
 </tr>
 <tr class="row-even"><td rowspan="4"><ul class="simple">
 <li><p>parameters</p></li>
@@ -770,7 +821,7 @@ SDK.</p>
 <td colspan="3"></td>
 </tr>
 <tr class="row-odd"><td><p>items</p></td>
-<td colspan="3"><p><a class="reference internal" href="#id4">CLAMS App Runtime Parameter</a></p></td>
+<td colspan="3"><p><a class="reference internal" href="#id5">CLAMS App Runtime Parameter</a></p></td>
 </tr>
 <tr class="row-even"><td rowspan="5"><ul class="simple">
 <li><p>dependencies</p></li>
@@ -831,6 +882,21 @@ SDK.</p>
 <td><p>type</p></td>
 <td colspan="2"><p><em>string</em></p></td>
 </tr>
+<tr class="row-even"><td rowspan="4"><ul class="simple">
+<li><p>env_requirements</p></li>
+</ul>
+</td>
+<td colspan="4"><p>(optional) List of environment variables that the app cannot run without. Being listed here means the variable is required, so optional settings are left out. Values of these variables are never part of app metadata or output MMIF.</p></td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
+<td colspan="3"><p><em>array</em></p></td>
+</tr>
+<tr class="row-even"><td><p>default</p></td>
+<td colspan="3"></td>
+</tr>
+<tr class="row-odd"><td><p>items</p></td>
+<td colspan="3"><p><a class="reference internal" href="#id2">CLAMS App Environment Requirement</a></p></td>
+</tr>
 <tr class="row-even"><td rowspan="3"><ul class="simple">
 <li><p>est_gpu_mem_min</p></li>
 </ul>
@@ -861,8 +927,49 @@ SDK.</p>
 </tbody>
 </table>
 </div>
+<section id="clams-app-environment-requirement">
+<span id="id2"></span><h5>CLAMS App Environment Requirement<a class="headerlink" href="#clams-app-environment-requirement" title="Link to this heading">¶</a></h5>
+<p>Defines a data model that describes an environment variable that a CLAMS
+app cannot run without, such as an access token for a gated model. Only
+the name of the variable is part of the app metadata, never its value.</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>type</p></td>
+<td colspan="2"><p><em>object</em></p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>properties</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><ul class="simple">
+<li><p><strong>name</strong></p></li>
+</ul>
+</td>
+<td colspan="2"><p>Name of the environment variable.</p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
+<td><p><em>string</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>pattern</p></td>
+<td><p>^[A-Za-z_][A-Za-z0-9_]*$</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><ul class="simple">
+<li><p><strong>description</strong></p></li>
+</ul>
+</td>
+<td colspan="2"><p>Description of what the variable is for and how to obtain its value.</p></td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
+<td><p><em>string</em></p></td>
+</tr>
+<tr class="row-even"><td><p>additionalProperties</p></td>
+<td colspan="2"><p>false</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 <section id="clams-input-specification">
-<span id="id2"></span><h5>CLAMS Input Specification<a class="headerlink" href="#clams-input-specification" title="Link to this heading">¶</a></h5>
+<span id="id3"></span><h5>CLAMS Input Specification<a class="headerlink" href="#clams-input-specification" title="Link to this heading">¶</a></h5>
 <p>Data model that describes input specification of a CLAMS app.</p>
 <p>CLAMS apps are expected to have at least one input type, and each type must
 be defined by a <code class="docutils literal notranslate"><span class="pre">&#64;type</span></code> URI string. If the type has specific properties and values required by the app,
@@ -947,7 +1054,7 @@ verbose description can be provided in the (optional) <code class="docutils lite
 </div>
 </section>
 <section id="clams-output-specification">
-<span id="id3"></span><h5>CLAMS Output Specification<a class="headerlink" href="#clams-output-specification" title="Link to this heading">¶</a></h5>
+<span id="id4"></span><h5>CLAMS Output Specification<a class="headerlink" href="#clams-output-specification" title="Link to this heading">¶</a></h5>
 <p>Data model that describes output specification of a CLAMS app.</p>
 <p>CLAMS apps are expected to have at least one output type, and each type must
 be defined by a <code class="docutils literal notranslate"><span class="pre">&#64;type</span></code> URI string. If the type has common properties and values generated by the app,
@@ -1017,7 +1124,7 @@ specify the property values, developers can use an actual value (for full match)
 </div>
 </section>
 <section id="clams-app-runtime-parameter">
-<span id="id4"></span><h5>CLAMS App Runtime Parameter<a class="headerlink" href="#clams-app-runtime-parameter" title="Link to this heading">¶</a></h5>
+<span id="id5"></span><h5>CLAMS App Runtime Parameter<a class="headerlink" href="#clams-app-runtime-parameter" title="Link to this heading">¶</a></h5>
 <p>Defines a data model that describes a single runtime configuration of a CLAMS app.
 Usually, an app keeps a list of these configuration specifications in the <code class="docutils literal notranslate"><span class="pre">parameters</span></code> field.
 When initializing a RuntimeParameter object in python the value for the default field must be a string.
@@ -1238,8 +1345,10 @@ or their falsy counterpart, instead of <code class="docutils literal notranslate
 <li><a class="reference internal" href="#syntax-for-parameter-specification-in-app-metadata">Syntax for Parameter Specification in App Metadata</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#metadata-schema">Metadata Schema</a><ul>
+<li><a class="reference internal" href="#required-environment-variables">Required Environment Variables</a></li>
+<li><a class="reference internal" href="#full-metadata-json-schema">Full Metadata JSON Schema</a><ul>
 <li><a class="reference internal" href="#clams-appmetadata">CLAMS AppMetadata</a><ul>
+<li><a class="reference internal" href="#clams-app-environment-requirement">CLAMS App Environment Requirement</a></li>
 <li><a class="reference internal" href="#clams-input-specification">CLAMS Input Specification</a></li>
 <li><a class="reference internal" href="#clams-output-specification">CLAMS Output Specification</a></li>
 <li><a class="reference internal" href="#clams-app-runtime-parameter">CLAMS App Runtime Parameter</a></li>

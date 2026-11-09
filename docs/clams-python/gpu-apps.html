@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="CLAMS App Metadata" href="appmetadata.html"><link rel="prev" title="Specialized App Base Classes" href="app-baseclasses.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="CLAMS App Metadata" href="appmetadata.html"><link rel="prev" title="HF and GGUF Promptable Apps" href="promptable-backends.html">
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
         <title>GPU Memory Management for CLAMS Apps - clams-python documentation</title>
@@ -286,6 +286,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l1"><a class="reference internal" href="input-output.html">I/O Specification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="runtime-params.html">Runtime Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app-baseclasses.html">Specialized App Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="promptable-backends.html">HF and GGUF Promptable Apps</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">GPU Memory Management for CLAMS Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appmetadata.html">CLAMS App Metadata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appdirectory.html">CLAMS App Directory</a></li>
@@ -428,6 +429,49 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 </pre></div>
 </div>
 </section>
+<section id="who-sets-the-worker-count-and-recycling">
+<h3>Who sets the worker count and recycling<a class="headerlink" href="#who-sets-the-worker-count-and-recycling" title="Link to this heading">¶</a></h3>
+<p>Three parties can set these two values, and the first match wins:</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 39.0%" />
+<col style="width: 39.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Party</p></th>
+<th class="head"><p>Workers</p></th>
+<th class="head"><p>Recycling (<code class="docutils literal notranslate"><span class="pre">max_requests</span></code>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>The deployment (<code class="docutils literal notranslate"><span class="pre">app.py</span></code>, or whoever starts the server)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">serve_production(workers=N)</span></code>, else the
+<code class="docutils literal notranslate"><span class="pre">CLAMS_GUNICORN_WORKERS</span></code> environment variable</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">serve_production(max_requests=N)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>The app class</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RESTIFIER_PRODUCTION_WORKERS</span></code> class attribute</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RESTIFIER_PRODUCTION_MAX_REQUESTS</span></code> class attribute</p></td>
+</tr>
+<tr class="row-even"><td><p>The SDK default</p></td>
+<td><p>the calculation above</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>An app declares the class attributes when it holds something that must
+not be forked or restarted with the worker. For example,
+<a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsGGUFPromptableApp" title="clams.app.ClamsGGUFPromptableApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsGGUFPromptableApp</span></code></a> loads its model in a
+<code class="docutils literal notranslate"><span class="pre">llama-server</span></code> child process, so it declares one worker and no
+recycling: a fork would duplicate the model, and a worker replacement
+would restart it on every request. Any <a class="reference internal" href="autodoc/clams.app.html#clams.app.ClamsApp" title="clams.app.ClamsApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClamsApp</span></code></a>
+subclass may declare them; only
+<a class="reference internal" href="autodoc/clams.restify.html#clams.restify.Restifier.serve_production" title="clams.restify.Restifier.serve_production"><code class="xref py py-meth docutils literal notranslate"><span class="pre">serve_production()</span></code></a> reads them. The
+attribute names are constants in <a class="reference internal" href="autodoc/clams.restify.html#module-clams.restify" title="clams.restify"><code class="xref py py-mod docutils literal notranslate"><span class="pre">clams.restify</span></code></a>.</p>
+</section>
 </section>
 <section id="nvidia-memory-oversubscription">
 <h2>NVIDIA Memory Oversubscription<a class="headerlink" href="#nvidia-memory-oversubscription" title="Link to this heading">¶</a></h2>
@@ -486,14 +530,14 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="app-baseclasses.html">
+          <a class="prev-page" href="promptable-backends.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Specialized App Base Classes</div>
+                <div class="title">HF and GGUF Promptable Apps</div>
                 
               </div>
             </a>
@@ -533,6 +577,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li><a class="reference internal" href="#gunicorn-integration">Gunicorn Integration</a><ul>
 <li><a class="reference internal" href="#worker-calculation">Worker Calculation</a></li>
 <li><a class="reference internal" href="#worker-recycling">Worker Recycling</a></li>
+<li><a class="reference internal" href="#who-sets-the-worker-count-and-recycling">Who sets the worker count and recycling</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#nvidia-memory-oversubscription">NVIDIA Memory Oversubscription</a><ul>

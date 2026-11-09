@@ -286,6 +286,7 @@ body[data-theme="dark"] .clams-version-header .nav-link.active {
 <li class="toctree-l1"><a class="reference internal" href="input-output.html">I/O Specification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="runtime-params.html">Runtime Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app-baseclasses.html">Specialized App Base Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="promptable-backends.html">HF and GGUF Promptable Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpu-apps.html">GPU Memory Management for CLAMS Apps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appmetadata.html">CLAMS App Metadata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appdirectory.html">CLAMS App Directory</a></li>
@@ -443,6 +444,44 @@ This is particularly handy when the app you are using downloads a fairly large p
 However, doing so will expose all the cached data, not just model files, to the container.
 This can include sensitive information such as browser cache, authentication tokens, etc, hence will pose a great security risk.
 It is recommended to create a separate directory to use as a cache directory for CLAMS containers.</p>
+</div>
+</section>
+<section id="passing-environment-variables">
+<span id="clamsapp-envvars"></span><h3>Passing environment variables<a class="headerlink" href="#passing-environment-variables" title="Link to this heading">¶</a></h3>
+<p>Some apps need environment variables to run, for example an access token for a gated model, or the address of a model server such as Ollama or vLLM.
+These apps list the variables in the <code class="docutils literal notranslate"><span class="pre">env_requirements</span></code> field of their app metadata.
+If one of them is unset or empty, the app stops at startup with an error that names the missing variables.
+To provide them, write a file with one <code class="docutils literal notranslate"><span class="pre">NAME=value</span></code> per line, usually named <code class="docutils literal notranslate"><span class="pre">.env</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">HF_TOKEN</span><span class="o">=</span>&lt;your<span class="w"> </span>token&gt;
+<span class="nv">OLLAMA_HOST</span><span class="o">=</span>http://host.docker.internal:11434
+</pre></div>
+</div>
+<p>Then pass the file with <code class="docutils literal notranslate"><span class="pre">--env-file</span></code> when you start the container.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--env-file<span class="w"> </span>.env<span class="w"> </span>-v<span class="w"> </span>/path/to/data/directory:/data<span class="w"> </span>-p<span class="w"> </span>&lt;PORT&gt;:5000<span class="w"> </span>&lt;IMAGE_NAME&gt;
+</pre></div>
+</div>
+<p>To set a single variable, use <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">NAME=value</span></code> in place of <code class="docutils literal notranslate"><span class="pre">--env-file</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Inside a container, <code class="docutils literal notranslate"><span class="pre">localhost</span></code> is the container itself.
+To reach a model server that runs on the host machine, use <code class="docutils literal notranslate"><span class="pre">host.docker.internal</span></code> as the host name.
+On Linux, Docker also needs <code class="docutils literal notranslate"><span class="pre">--add-host=host.docker.internal:host-gateway</span></code> in the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> command, and Podman uses <code class="docutils literal notranslate"><span class="pre">host.containers.internal</span></code> in its place.</p>
+</div>
+<p>When you run the app without a container, load the file into your shell first.
+<code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">-a</span></code> is needed because <code class="docutils literal notranslate"><span class="pre">source</span></code> alone does not export the variables to the app.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">set</span><span class="w"> </span>-a<span class="p">;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>.env<span class="p">;</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>+a
+$<span class="w"> </span>python<span class="w"> </span>app.py
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Docker and bash read this file differently, so use the plain <code class="docutils literal notranslate"><span class="pre">NAME=value</span></code> form to make one file work for both.
+Do not add an <code class="docutils literal notranslate"><span class="pre">export</span></code> prefix, quotes around the value, or a comment after the value.
+A comment on its own line is fine.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Keep the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file out of version control.</p>
 </div>
 </section>
 </section>
@@ -683,7 +722,7 @@ To run the app as a local HTTP server without containerization, you can run the 
 </tbody>
 </table>
 </div>
-<p>By default, the number of workers is calculated as <code class="docutils literal notranslate"><span class="pre">(CPU</span> <span class="pre">cores</span> <span class="pre">x</span> <span class="pre">2)</span> <span class="pre">+</span> <span class="pre">1</span></code>. For GPU-based apps, see <a class="reference external" href="gpu-apps.html">GPU Memory Management</a> for details on automatic worker scaling and VRAM management.</p>
+<p>By default, the number of workers is calculated as <code class="docutils literal notranslate"><span class="pre">(CPU</span> <span class="pre">cores</span> <span class="pre">x</span> <span class="pre">2)</span> <span class="pre">+</span> <span class="pre">1</span></code>, and each worker is replaced after one request. An app can fix both in code; see <a class="reference external" href="gpu-apps.html">GPU Memory Management</a> for the worker calculation, the recycling and the order of precedence between the environment, the app and the <code class="docutils literal notranslate"><span class="pre">serve_production()</span></code> call.</p>
 </section>
 </section>
 <section id="metadata-py-getting-app-metadata">
@@ -804,6 +843,7 @@ to make host’s STDIN work properly with the container.</p>
 </li>
 <li><a class="reference internal" href="#running-clams-app">Running CLAMS App</a><ul>
 <li><a class="reference internal" href="#starting-the-http-server-as-a-container">Starting the HTTP server as a container</a></li>
+<li><a class="reference internal" href="#passing-environment-variables">Passing environment variables</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#invoking-the-app-server">Invoking the app server</a><ul>
